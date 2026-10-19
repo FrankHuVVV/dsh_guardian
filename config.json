@@ -58,5 +58,11 @@
   "verifyPluginLoad": true,
   "blockOnClientMismatch": true,
   "keepTransactions": 20,
-  "keepLkg": 3
+  "keepLkg": 3,
+  "pruneKeepLabels": [
+    "group3-base",
+    "snap-a",
+    "snap-b",
+    "post-group3-config-20261018-162012"
+  ]
 }

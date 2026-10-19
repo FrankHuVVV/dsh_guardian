@@ -26,7 +26,8 @@ const CONFIG_KEYS = [
   'snapshotMode', 'snapshotStorage', 'storeDir', 'storeGcOnPrune', 'trackedFiles',
   'trackedRuntimePaths', 'trackedSourcePaths', 'sourceInclude', 'sourceExclude',
   'dshHomeTrackedPaths', 'dshHomeExclude', 'storageVolatilePaths', 'sharedDependencyRoots', 'driftPolicy',
-  'crashPolicy', 'verifyPluginLoad', 'blockOnClientMismatch', 'keepTransactions', 'keepLkg'
+  'crashPolicy', 'verifyPluginLoad', 'blockOnClientMismatch', 'keepTransactions', 'keepLkg',
+  'pruneKeepLabels'
 ];
 
 // ---------------------------------------------------------------- json / io
@@ -1816,6 +1817,216 @@ function listCommand(config) {
   return 0;
 }
 
+// ---------------------------------------------------------------- prune（快照保留 + _store 物理回收）
+
+// 事务进入这些状态后不再需要它的 before/after 快照作为回滚依据。
+const TERMINAL_TX_STATES = new Set(['committed', 'rolled-back', 'aborted', 'restore-verified', 'rollback-failed', 'failed']);
+
+function directoryBytes(dir) {
+  let bytes = 0;
+  const stack = [dir];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    let dirents = [];
+    try { dirents = fs.readdirSync(current, { withFileTypes: true }); } catch { continue; }
+    for (const dirent of dirents) {
+      const full = path.join(current, dirent.name);
+      if (dirent.isDirectory()) { stack.push(full); continue; }
+      try { bytes += fs.statSync(full).size; } catch { /* ignore */ }
+    }
+  }
+  return bytes;
+}
+
+/** backups/ 下所有快照目录（含 last-known-good），排除 _store 与 disabled-entries。 */
+function scanSnapshotDirs() {
+  const rows = [];
+  let dirents = [];
+  try { dirents = fs.readdirSync(BACKUPS_DIR, { withFileTypes: true }); } catch { return rows; }
+  for (const dirent of dirents) {
+    if (!dirent.isDirectory()) continue;
+    if (dirent.name === '_store' || dirent.name === 'disabled-entries') continue;
+    const dir = path.join(BACKUPS_DIR, dirent.name);
+    const meta = readJsonSafe(snapshotMetaPath(dir));
+    rows.push({ name: dirent.name, dir, meta, createdAt: meta?.createdAt ?? '', bytes: directoryBytes(dir) });
+  }
+  return rows;
+}
+
+/** 未完成事务引用的快照目录名（basename），必须保留。 */
+function heldSnapshotNames() {
+  const held = new Set();
+  const dir = path.join(ROOT, 'transactions');
+  let entries = [];
+  try { entries = fs.readdirSync(dir); } catch { return held; }
+  for (const entry of entries) {
+    if (!entry.endsWith('.json') || entry.startsWith('drift-')) continue;
+    const tx = readJsonSafe(path.join(dir, entry));
+    if (!tx) continue;
+    const phase = String(tx.state ?? tx.phase ?? '');
+    if (TERMINAL_TX_STATES.has(phase)) continue;
+    for (const ref of [tx.before, tx.after]) {
+      if (typeof ref === 'string' && ref) held.add(path.basename(String(ref).replace(/\\/g, '/')));
+    }
+  }
+  return held;
+}
+
+/** meta 中所有被引用的 blob 哈希（files[].sha256 + entries.*.sha256）。 */
+function collectBlobRefs(meta, refs) {
+  if (!meta) return refs;
+  for (const file of meta.files ?? []) {
+    if (file && typeof file.sha256 === 'string') refs.add(file.sha256);
+  }
+  for (const entry of Object.values(meta.entries ?? {})) {
+    if (entry && typeof entry.sha256 === 'string') refs.add(entry.sha256);
+  }
+  return refs;
+}
+
+/** _store 下所有 blob 文件（排除 .tmp- 残片）。 */
+function listStoreBlobs() {
+  const blobs = [];
+  let shards = [];
+  try { shards = fs.readdirSync(STORE_DIR, { withFileTypes: true }); } catch { return blobs; }
+  for (const shard of shards) {
+    if (!shard.isDirectory()) continue;
+    const shardDir = path.join(STORE_DIR, shard.name);
+    let files = [];
+    try { files = fs.readdirSync(shardDir, { withFileTypes: true }); } catch { continue; }
+    for (const file of files) {
+      if (!file.isFile() || file.name.includes('.tmp-')) continue;
+      const full = path.join(shardDir, file.name);
+      let size = 0;
+      try { size = fs.statSync(full).size; } catch { continue; }
+      blobs.push({ full, hash: file.name, shard: shardDir, size });
+    }
+  }
+  return blobs;
+}
+
+function removeReadonly(file) {
+  try { fs.chmodSync(file, 0o666); } catch { /* 只读位可能已不存在 */ }
+  fs.unlinkSync(file);
+}
+
+function pruneCommand(config, state, args) {
+  const dryRun = args.includes('--dry-run');
+  const strict = args.includes('--strict');
+  const keepTransactions = Number.isFinite(Number(config.keepTransactions)) ? Number(config.keepTransactions) : 20;
+  const keepLkgCount = Number.isFinite(Number(config.keepLkg)) ? Number(config.keepLkg) : 3;
+  const keepArgs = [];
+  for (let index = 0; index < args.length; index += 1) {
+    if (args[index] === '--keep' && args[index + 1]) keepArgs.push(String(args[index + 1]));
+  }
+  // --strict 时忽略配置保护名单，严格按保留规则执行。
+  const keepList = new Set(strict ? keepArgs : [...(config.pruneKeepLabels || []).map(String), ...keepArgs]);
+
+  const rows = scanSnapshotDirs();
+  if (rows.length === 0) {
+    printJson({ status: 'nothing-to-prune', reason: 'no-snapshot-dirs', keepTransactions, keepLkg: keepLkgCount });
+    return 0;
+  }
+  const byNewest = [...rows].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+  const lkgMeta = readJsonSafe(path.join(LKG_DIR, 'meta.json'));
+
+  const keep = new Map(); // name -> reason
+  const keepRow = (row, reason) => { if (!keep.has(row.name)) keep.set(row.name, reason); };
+
+  // 1) 永不清理：last-known-good / manual-baseline-*
+  for (const row of rows) {
+    if (row.name === 'last-known-good') keepRow(row, 'last-known-good');
+    else if (/^manual-baseline-/.test(row.name)) keepRow(row, 'manual-baseline');
+    else if (!row.meta) keepRow(row, 'meta-unreadable'); // 读不懂的目录不删，交人工
+  }
+  // 2) 最新 keepLkg 个 adopted-*
+  byNewest.filter((row) => /^adopted-/.test(row.name) && !keep.has(row.name))
+    .slice(0, keepLkgCount)
+    .forEach((row) => keepRow(row, `adopted-最新${keepLkgCount}`));
+  // 3) 最新 keepTransactions 个 before/after-add-*
+  byNewest.filter((row) => /^(before|after)-add-/.test(row.name) && !keep.has(row.name))
+    .slice(0, keepTransactions)
+    .forEach((row) => keepRow(row, `tx-最新${keepTransactions}`));
+  // 4) 安全持有：未完成事务引用的快照
+  const held = heldSnapshotNames();
+  for (const row of rows) if (held.has(row.name)) keepRow(row, 'unfinished-transaction');
+  // 5) 显式保护名单（config.pruneKeepLabels 或 --keep）
+  for (const row of rows) if (keepList.has(row.name)) keepRow(row, 'keep-list');
+
+  const doomed = rows.filter((row) => !keep.has(row.name));
+  const keptRows = rows.filter((row) => keep.has(row.name));
+
+  const snapshotBytesBefore = rows.reduce((sum, row) => sum + row.bytes, 0);
+  const doomedBytes = doomed.reduce((sum, row) => sum + row.bytes, 0);
+  const storeBefore = storeStats();
+
+  // blob 引用集：只由保留下来的 meta.json 构成
+  const refs = new Set();
+  for (const row of keptRows) collectBlobRefs(row.meta, refs);
+
+  const blobs = listStoreBlobs();
+  const orphans = refs.size === 0 && blobs.length > 0 ? [] : blobs.filter((blob) => !refs.has(blob.hash));
+  const orphanBytes = orphans.reduce((sum, blob) => sum + blob.size, 0);
+
+  const errors = [];
+  if (!dryRun) {
+    for (const row of doomed) {
+      try { fs.rmSync(row.dir, { recursive: true, force: true }); }
+      catch (error) { errors.push(`snapshot-delete-failed:${row.name}:${error.message}`); }
+    }
+    for (const blob of orphans) {
+      try { removeReadonly(blob.full); }
+      catch (error) { errors.push(`blob-delete-failed:${blob.hash}:${error.message}`); }
+    }
+    // 回收空的 2 位分片目录
+    try {
+      for (const shard of fs.readdirSync(STORE_DIR, { withFileTypes: true })) {
+        if (!shard.isDirectory()) continue;
+        const shardDir = path.join(STORE_DIR, shard.name);
+        try { if (fs.readdirSync(shardDir).length === 0) fs.rmdirSync(shardDir); } catch { /* ignore */ }
+      }
+    } catch { /* store 不存在即无需清理 */ }
+  }
+
+  const storeAfter = storeStats();
+  const snapshotBytesAfter = dryRun ? snapshotBytesBefore : directoryBytes(BACKUPS_DIR) - storeAfter.bytes;
+  const freedTotal = (dryRun ? 0 : doomedBytes) + (dryRun ? 0 : orphanBytes);
+  const report = {
+    status: dryRun ? 'dry-run' : 'pruned',
+    strict,
+    dryRun,
+    policy: {
+      keep: ['last-known-good', 'manual-baseline-*', `adopted-* 最新 ${keepLkgCount} 个`, `before/after-add-* 最新 ${keepTransactions} 个`, '未完成事务引用的快照'],
+      keepList: [...keepList]
+    },
+    kept: keptRows.map((row) => ({ dir: row.name, reason: keep.get(row.name), createdAt: row.createdAt, mb: Number((row.bytes / 1048576).toFixed(2)) })),
+    deleted: doomed.map((row) => ({ dir: row.name, createdAt: row.createdAt, mb: Number((row.bytes / 1048576).toFixed(2)) })),
+    store: {
+      blobsBefore: storeBefore.blobs,
+      orphansFound: orphans.length,
+      blobsDeleted: dryRun ? 0 : orphans.length,
+      blobsAfter: storeAfter.blobs,
+      referencedBlobs: refs.size,
+      mbBefore: Number((storeBefore.bytes / 1048576).toFixed(2)),
+      mbAfter: Number((storeAfter.bytes / 1048576).toFixed(2))
+    },
+    freed: {
+      snapshotMb: Number(((dryRun ? doomedBytes : snapshotBytesBefore - snapshotBytesAfter) / 1048576).toFixed(2)),
+      orphanBlobMb: Number((orphanBytes / 1048576).toFixed(2)),
+      totalMb: Number(((freedTotal || orphanBytes) / 1048576).toFixed(2)),
+      totalBytes: freedTotal || orphanBytes
+    },
+    lkg: lkgMeta ? { label: lkgMeta.label, digest: lkgMeta.digest } : null,
+    errors
+  };
+  log(errors.length ? 'WARN' : 'INFO', `prune ${dryRun ? 'dry-run' : '完成'}`, {
+    kept: keptRows.length, deleted: doomed.length, blobRefs: refs.size, blobsDeleted: orphans.length,
+    freedMb: report.freed.totalMb, errors: errors.length
+  });
+  printJson(report);
+  return errors.length === 0 ? 0 : 2;
+}
+
 // ---------------------------------------------------------------- plugin transactions
 
 function transactionId() {
@@ -2833,6 +3044,13 @@ function main() {
     if (command === 'snapshot') {
       transition(state, op, 'snapshotting');
       const result = snapshotCommand(config, state, args);
+      state.activeOperation = null;
+      saveState(state);
+      return result;
+    }
+    if (command === 'prune') {
+      transition(state, op, 'pruning');
+      const result = pruneCommand(config, state, args);
       state.activeOperation = null;
       saveState(state);
       return result;

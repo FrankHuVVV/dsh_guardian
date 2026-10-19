@@ -78,6 +78,22 @@ node bin/guardian.mjs --root ROOT drift
 node bin/guardian.mjs --root ROOT recover
 node bin/guardian.mjs --root ROOT repair
 node bin/guardian.mjs --root ROOT plugin-restore TXID
+node bin/guardian.mjs --root ROOT prune --dry-run
+node bin/guardian.mjs --root ROOT prune
 ```
+
+## Pruning snapshots and the blob store
+
+Git does not track `backups/_store`, so physical space has to be reclaimed by the tool itself. `prune` applies a retention policy, deletes the remaining snapshot directories, then garbage-collects every blob that no kept `meta.json` references:
+
+```text
+kept always : last-known-good, manual-baseline-*
+kept newest : config.keepLkg adopted-*          (default 3)
+kept newest : config.keepTransactions before/after-add-*  (default 20)
+kept always : snapshots referenced by a non-terminal transaction
+kept always : config.pruneKeepLabels / --keep <label>
+```
+
+`--dry-run` prints the plan without touching disk, `--strict` ignores `pruneKeepLabels` so only the four rules above apply. Output lists kept/deleted snapshots, orphan blobs, and reclaimed bytes. Deleting `_store` by hand invalidates every snapshot; always go through `prune`.
 
 For isolated acceptance tests, use `--root fixtures\sandbox\root`; do not point fault-injection tests at a running profile.

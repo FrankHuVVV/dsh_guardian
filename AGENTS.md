@@ -161,9 +161,12 @@ D:\dsh_plugin\dsh_guardian\
   "verifyPluginLoad": true,
   "blockOnClientMismatch": true,
   "keepTransactions": 20,
-  "keepLkg": 3
+  "keepLkg": 3,
+  "pruneKeepLabels": ["group3-base", "snap-a", "snap-b"]
 }
 ```
+
+`pruneKeepLabels` 是 `prune` 的额外保护名单：这些标签的快照不会被删除（`--strict` 时忽略，只用 `--keep` 显式指定）。
 
 `dshHomeExclude` 中的 `.credentials.yaml` 只记录哈希，不复制内容；`sessions`、`attachments` 属用户数据，不纳入回滚。
 
@@ -269,6 +272,7 @@ Electron 安装本体
 | `snapshot <label>` | 手动 exact 快照（写入 `_store`） | 0 / 2 |
 | `list` | 快照与事务（含 drift、LKG 标记） | 0 |
 | `restore <label>` | 恢复快照，自动 pre-restore | 0 / 2 |
+| `prune [--dry-run] [--strict] [--keep <label>]` | 快照保留策略 + `_store` 孤儿 blob 物理回收 | 0 / 2 |
 | `plugin-add <spec>` | 包安装事务 | 0 / 2 / 3 |
 | `plugin-link <path>` | 本地 link 事务 | 0 / 2 / 3 |
 | `plugin-insert <path\|name>` | 纯 patch 插入事务（无包安装） | 0 / 2 / 3 |

@@ -214,6 +214,7 @@
       </select>
       <button class="btn danger" id="btn-restore" title="实际命令：restore &lt;标签&gt;">恢复此快照</button>
       <button class="btn" id="btn-relist" title="重新拉取快照列表">↻ 刷新列表</button>
+      <button class="btn warn" id="btn-prune" title="实际命令：prune（按 keepLkg / keepTransactions 保留策略清理快照，并回收 _store 孤儿 blob）">🧹 清理无用快照 (prune)</button>
     </div>
     <div class="row">
       <span class="row-label">控制</span>
@@ -1013,7 +1014,7 @@ async function runCommand(cmd, args, btn, options = {}) {
 
     // 完成后再刷新状态与快照列表，保证显示一致
     await refreshStatus();
-    if (['snapshot', 'restore', 'plugin-add', 'plugin-remove', 'plugin-link', 'guard', 'recover'].includes(cmd)) {
+    if (['snapshot', 'restore', 'plugin-add', 'plugin-remove', 'plugin-link', 'guard', 'recover', 'prune'].includes(cmd)) {
       await refreshSnapshotList();
       await refreshStatus();
     }
@@ -1161,6 +1162,18 @@ $('btn-relist').addEventListener('click', async () => {
   $('btn-relist').disabled = true;
   try { await refreshSnapshotList(); await refreshStatus(); }
   finally { $('btn-relist').disabled = false; }
+});
+
+/* 物理瘦身：prune 走真实命令 + SSE 流式输出，结束后自动刷新快照列表与体积统计 */
+$('btn-prune').addEventListener('click', () => {
+  runCommand('prune', [], $('btn-prune'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认清理无用快照 (prune)',
+    confirmBody: '按 keepLkg / keepTransactions 保留策略删除其余快照目录，并回收不被任何保留快照引用的 _store blob 与空分片目录。'
+      + 'last-known-good、manual-baseline-*、未完成事务引用的快照、以及 config.pruneKeepLabels 中的标签不会被删除。'
+      + '清理不可撤销；控制台会输出释放的空间。'
+  });
 });
 
 $('btn-safe').addEventListener('click', () => {
