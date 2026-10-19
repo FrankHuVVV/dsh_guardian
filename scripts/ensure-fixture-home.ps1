@@ -10,7 +10,7 @@
   group1~4 等验证脚本在运行前调用本脚本，保证夹具存在且体积最小。
 
 .EXAMPLE
-  & .\scripts\ensure-fixture-home.ps1 -GuardianRoot D:\dsh_plugin\dsh_guardian
+  & .\scripts\ensure-fixture-home.ps1 -GuardianRoot <GUARDIAN_ROOT>
 #>
 [CmdletBinding()]
 param(

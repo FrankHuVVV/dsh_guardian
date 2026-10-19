@@ -60,8 +60,8 @@ C 安装（任意方式）失败或导致异常
 |---|---|
 | 客户端 | DSH 0.2.1-rc.2 |
 | profile | `desktop` |
-| profileDir | `C:\Users\28256\.dsh\profiles\desktop` |
-| 启动方式 | `C:\Users\28256\AppData\Local\Programs\DeepSeek Harness\DeepSeek Harness.exe` |
+| profileDir | `<YOUR_PROFILE_DIR>` |
+| 启动方式 | `<YOUR_DSH_DIR>\DeepSeek Harness.exe` |
 | CLI 限制 | `dsh --profile desktop` 被 Electron 管理模式拒绝 |
 | 端口 | 动态；当前观测 40726 |
 | HTTP 根路径 | 返回 401；任意 HTTP 响应即服务层已响应 |
@@ -70,13 +70,13 @@ C 安装（任意方式）失败或导致异常
 | `~/.dsh/mcp` | 3.03 MB / 38 文件 |
 | `~/.dsh/storages` | 1.77 MB / 59 文件 |
 | `~/.dsh/.agent-presets` | 0.03 MB / 3 文件 |
-| 本地 file 插件 | `C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2` |
-| link 插件 | `D:\Github\novel_assistance` |
+| 本地 file 插件 | `<YOUR_SOURCE_PLUGIN>` |
+| link 插件 | `<YOUR_LINK_PLUGIN>` |
 
 ### 1.2 目录结构
 
 ```text
-D:\dsh_plugin\dsh_guardian\
+<GUARDIAN_ROOT>\
 ├── AGENTS.md
 ├── config.json
 ├── state.json                  # version/activeOperation/safe/culprit/instance/drift
@@ -106,11 +106,11 @@ D:\dsh_plugin\dsh_guardian\
 
 ```json
 {
-  "dshHome": "C:\\Users\\28256\\.dsh",
+  "dshHome": "<YOUR_DSH_HOME>",
   "profile": "desktop",
-  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "profileDir": "<YOUR_PROFILE_DIR>",
   "launchMode": "electron-exe",
-  "launch": ["C:\\Users\\28256\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"],
+  "launch": ["<YOUR_DSH_DIR>\\DeepSeek Harness.exe"],
   "expectedClientVersion": "0.2.1-rc.2",
   "portMode": "dynamic",
   "port": 0,
@@ -135,8 +135,8 @@ D:\dsh_plugin\dsh_guardian\
   ],
   "trackedRuntimePaths": ["node_modules", ".plugin-manager", ".dsh-market"],
   "trackedSourcePaths": [
-    "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2",
-    "D:\\Github\\novel_assistance"
+    "<YOUR_SOURCE_PLUGIN>",
+    "<YOUR_LINK_PLUGIN>"
   ],
   "sourceInclude": ["**/*"],
   "sourceExclude": ["node_modules", ".git", ".cache", ".pnpm-store", "dist", "cache", "*.log"],
@@ -155,7 +155,7 @@ D:\dsh_plugin\dsh_guardian\
     "llm-deepseek",
     ".credentials.yaml"
   ],
-  "sharedDependencyRoots": ["C:\\Users\\28256\\.dsh\\profiles\\node_modules"],
+  "sharedDependencyRoots": ["<YOUR_SHARED_DEPS>"],
   "driftPolicy": "adopt-if-healthy",
   "crashPolicy": "resume",
   "verifyPluginLoad": true,
@@ -167,6 +167,8 @@ D:\dsh_plugin\dsh_guardian\
 ```
 
 `pruneKeepLabels` 是 `prune` 的额外保护名单：这些标签的快照不会被删除（`--strict` 时忽略，只用 `--keep` 显式指定）。
+
+公开仓库只提供本模板（`config.example.json`，占位符形式）；`config.json` 是本机私有文件，已被 `.gitignore` 排除。克隆后复制模板并替换占位符即可。
 
 `dshHomeExclude` 中的 `.credentials.yaml` 只记录哈希，不复制内容；`sessions`、`attachments` 属用户数据，不纳入回滚。
 
@@ -212,7 +214,7 @@ Electron 安装本体
   "createdAt": "2026-10-18T12:00:00+08:00",
   "state": "verified",
   "profile": "desktop",
-  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "profileDir": "<YOUR_PROFILE_DIR>",
   "runtime": {
     "nodeVersion": "v24.19.0",
     "pnpmVersion": "...",
@@ -224,7 +226,7 @@ Electron 安装本体
   "digest": "sha256-of-sorted-entry-list",
   "entries": {
     "profile/package.json": { "kind": "file", "size": 698, "sha256": "..." },
-    "profile/node_modules/novel-agents-md": { "kind": "junction", "target": "D:/Github/novel_assistance" },
+    "profile/node_modules/novel-agents-md": { "kind": "junction", "target": "<YOUR_LINK_PLUGIN>" },
     "profile/node_modules/dsh-infinite-gen-2": { "kind": "directory", "listingSha256": "..." },
     "dshHome/mcp": { "kind": "directory", "listingSha256": "..." },
     "dshHome/.credentials.yaml": { "kind": "file", "sha256": "...", "redacted": true }
@@ -524,7 +526,7 @@ profile/package.json
 profile/pnpm-lock.yaml
 file:dsh-infinite-gen-2
 link:novel-agents-md
-D:/Github/novel_assistance
+<YOUR_LINK_PLUGIN>
 dshHome/mcp
 dshHome/storages
 dshHome/.agent-presets

@@ -1,10 +1,10 @@
 {
-  "dshHome": "C:\\Users\\28256\\.dsh",
+  "dshHome": "<YOUR_DSH_HOME>",
   "profile": "desktop",
-  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "profileDir": "<YOUR_PROFILE_DIR>",
   "launchMode": "electron-exe",
-  "launch": ["C:\\Users\\28256\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"],
-  "expectedClientVersion": "0.2.1-rc.2",
+  "launch": ["<YOUR_DSH_EXE>"],
+  "expectedClientVersion": "<YOUR_CLIENT_VERSION>",
   "portMode": "dynamic",
   "port": 0,
   "startTimeoutMs": 90000,
@@ -27,10 +27,7 @@
     "pnpm-lock.yaml"
   ],
   "trackedRuntimePaths": ["node_modules", ".plugin-manager", ".dsh-market"],
-  "trackedSourcePaths": [
-    "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2",
-    "D:\\Github\\novel_assistance"
-  ],
+  "trackedSourcePaths": ["<YOUR_SOURCE_PLUGIN>", "<YOUR_LINK_PLUGIN>"],
   "sourceInclude": ["**/*"],
   "sourceExclude": ["node_modules", ".git", ".cache", ".pnpm-store", "dist", "cache", "*.log"],
   "dshHomeTrackedPaths": [
@@ -52,17 +49,12 @@
     "session_projcache/sessions",
     "workspace.json"
   ],
-  "sharedDependencyRoots": ["C:\\Users\\28256\\.dsh\\profiles\\node_modules"],
+  "sharedDependencyRoots": ["<YOUR_SHARED_DEPS>"],
   "driftPolicy": "adopt-if-healthy",
   "crashPolicy": "resume",
   "verifyPluginLoad": true,
   "blockOnClientMismatch": true,
   "keepTransactions": 20,
   "keepLkg": 3,
-  "pruneKeepLabels": [
-    "group3-base",
-    "snap-a",
-    "snap-b",
-    "post-group3-config-20261018-162012"
-  ]
+  "pruneKeepLabels": []
 }

@@ -1,3 +1,7 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%E2%89%A522-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)](#)
+
 # DSH Guardian v5 · 使用手册
 
 > DSH Guardian 是 DeepSeek Harness 桌面客户端的**守护与自愈套件**：装插件前自动留快照、装完自动验证、坏了自动回滚，环境起不来时能一条命令回到最近的健康状态。
@@ -5,6 +9,33 @@
 - 适配：DSH 桌面客户端 **0.2.1-rc.2**（Electron 托管的 `desktop` profile）
 - 运行环境：Windows / Node ≥ 22 / guardian 本身**零第三方依赖**
 - 快照模型：内容寻址 `_store` + exact 字节级恢复（默认），`reproducible` 仅作可选的省空间模式
+- 许可：[MIT License](LICENSE) © 2026 FrankHuVVV
+
+---
+
+## 0. 克隆后第一步：生成本机配置
+
+仓库里的 `config.json` 是**本机私有文件，已被 `.gitignore` 排除**；公开仓库只提供带占位符的 `config.example.json`。克隆后必须先复制并改成本机路径，否则 `doctor` 会直接报配置键/路径错误。
+
+```powershell
+git clone https://github.com/FrankHuVVV/dsh_guardian.git
+cd dsh_guardian
+Copy-Item config.example.json config.json
+notepad config.json      # 按下面的表把占位符替换成你的真实路径
+```
+
+| 占位符 | 含义 | 本机示例形态 |
+|---|---|---|
+| `<YOUR_DSH_HOME>` | DSH 数据根目录 | `C:\Users\<you>\.dsh` |
+| `<YOUR_PROFILE_DIR>` | profile 目录 | `<YOUR_DSH_HOME>\profiles\desktop` |
+| `<YOUR_DSH_DIR>` | 客户端安装目录 | `...\Programs\DeepSeek Harness` |
+| `<YOUR_DSH_EXE>` | 客户端可执行文件 | `<YOUR_DSH_DIR>\DeepSeek Harness.exe` |
+| `<YOUR_CLIENT_VERSION>` | 客户端版本 | `0.2.1-rc.2` |
+| `<YOUR_SOURCE_PLUGIN>` | 本地 file: 插件源码目录 | 你的插件仓库路径 |
+| `<YOUR_LINK_PLUGIN>` | link: 插件源码目录 | 你的插件仓库路径 |
+| `<YOUR_SHARED_DEPS>` | 共享依赖根 | `<YOUR_DSH_HOME>\profiles\node_modules` |
+
+> 不知道该填什么？先只改 `dshHome` / `profileDir` / `launch` 三项，然后 `node bin/guardian.mjs doctor` 会逐项告诉你还缺什么。
 
 ---
 
@@ -23,7 +54,7 @@
 
 ```powershell
 # 正确的打开方式：开始菜单搜索 PowerShell / Windows Terminal → 右键「以管理员身份运行」
-cd D:\dsh_plugin\dsh_guardian
+cd <GUARDIAN_ROOT>
 node --version          # 需要 ≥ 22
 node bin/guardian.mjs doctor
 ```
@@ -240,9 +271,10 @@ wscript ui\guardian-tray.vbs
 ## 附录：目录与关键文件
 
 ```text
-D:\dsh_plugin\dsh_guardian\
+<GUARDIAN_ROOT>\
 ├── bin\guardian.mjs            # 全部 CLI（doctor/preflight/snapshot/restore/prune/guard/...）
-├── config.json                 # 环境与策略（profileDir、launch、keepLkg、keepTransactions…）
+├── config.example.json         # 配置模板（占位符，克隆后复制为 config.json 并填本机路径）
+├── config.json                 # 本机私有配置（.gitignore 排除，不入库）
 ├── state.json                  # activeOperation / safe / drift / instance
 ├── backups\
 │   ├── _store\<ab>\<sha256>    # 内容寻址 blob（只读，勿手删）
@@ -264,3 +296,12 @@ prepared → stopped → before-snapshot-created → installing → closure-inve
 失败 → rollback-stopping → restoring-before → restore-verified → restarting-before → rolled-back
      （恢复失败停在 rollback-failed，退出 3，保留现场）
 ```
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 **FrankHuVVV**
+
+任何人都可以自由使用、修改、分发本软件（含商业用途），只需保留版权声明与许可声明。本软件按「现状」提供，不附带任何明示或暗示的担保；用它做环境回滚前，请先确认你已理解快照与恢复的语义（见 §8 三大纪律）。
+

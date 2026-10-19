@@ -14,14 +14,14 @@
     8) 再 restore regress-b → digest 仍为 B，证明两个快照的 blob 都活着
 
   全程只操作 <GuardianRoot>\sandbox，config.launch 为 notepad.exe，
-  不读取也不修改 C:\Users\28256\.dsh 下的任何生产文件。
+  不读取也不修改 <YOUR_DSH_HOME> 下的任何生产文件。
 
 .EXAMPLE
   pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\sandbox-prune-regression.ps1
 #>
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
   [string]$SandboxName = 'sandbox'
 )
 

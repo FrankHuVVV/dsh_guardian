@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从外部 PowerShell / pwsh 运行：
-    pwsh -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group4-verify.ps1
+    pwsh -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group4-verify.ps1
 
   流程：
     a) 写 state.activeOperation={op:'restore',txid:null,phase:'installing'} → recover → 断言 activeOperation 变 null
@@ -17,12 +17,18 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
   [string]$TargetSnap = 'post-group3-config-20261018-162012',
-  [string]$RealAsar = 'C:\Users\28256\AppData\Local\Programs\DeepSeek Harness\resources\app.asar'
+  [string]$RealAsar = ''
 )
 
 $ErrorActionPreference = 'Stop'
+# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
+$__cfgPath = Join-Path $GuardianRoot 'config.json'
+if (Test-Path -LiteralPath $__cfgPath) {
+  $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
+  if (-not $RealAsar -and $__cfg.launch) { $RealAsar = Join-Path (Split-Path -Parent @($__cfg.launch)[0]) 'resources\app.asar' }
+}
 $ProgressPreference = 'SilentlyContinue'
 
 # 夹具按需重建（fixtures\sandbox\home 不入库，曾 69MB）；失败不阻塞主流程

@@ -1,16 +1,20 @@
+# ---------- 依赖与本机运行时产物（不入库） ----------
 node_modules/
-backups/_store/
-fixtures/sandbox/
-logs/*.log
 sandbox/
-ui/*.log
+backups/
+transactions/*.json
+logs/*
+!logs/.gitkeep
 
-# --- 运行时心跳文件：每几秒被进程改写，纳入版本控制会让工作区永远脏 ---
-logs/tray.state.json
-logs/tray.pid
-logs/intent.json
+# ---------- 本机私有配置 / 快照 / 测试产物 ----------
+config.json
+manual-baseline-*/
+fixtures/sandbox/
+fixtures/acceptance/
+prompts/
+
+# ---------- 备份、日志、截图、临时文件 ----------
+*.bak
+*.log
+*.png
 .guardian.lock
-logs/.prune-last
-
-# --- 快照清单：_store 不入库，meta.json 单独入库也无法恢复，只作审计 ---
-backups/*/meta.json

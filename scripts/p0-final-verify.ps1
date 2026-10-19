@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从外部 PowerShell / pwsh 运行：
-    pwsh -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\p0-final-verify.ps1
+    pwsh -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\p0-final-verify.ps1
 
   流程：
     0) 断言无 DeepSeek 进程（有则 ABORT/exit 2，不 kill）
@@ -16,11 +16,17 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
-  [string]$PluginPath = 'C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2'
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
+  [string]$PluginPath = ''
 )
 
 $ErrorActionPreference = 'Stop'
+# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
+$__cfgPath = Join-Path $GuardianRoot 'config.json'
+if (Test-Path -LiteralPath $__cfgPath) {
+  $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
+  if (-not $PluginPath -and $__cfg.trackedSourcePaths) { $PluginPath = @($__cfg.trackedSourcePaths)[0] }
+}
 $ProgressPreference = 'SilentlyContinue'
 
 $ts = Get-Date -Format 'yyyyMMdd-HHmmss'

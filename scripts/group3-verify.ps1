@@ -4,12 +4,12 @@
 
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从外部 PowerShell / pwsh 运行：
-    pwsh -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group3-verify.ps1
+    pwsh -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group3-verify.ps1
 
   行为：
     0) 断言无 DeepSeek 进程，有则 ABORT（exit 2，不 kill）
     1) snapshot group3-base（若不存在）；确认 meta.entries 含 shared/*
-    2) a) 源码保留测试：在 D:\Github\novel_assistance 新建时间戳文件 → restore group3-base → 断言文件仍存在
+    2) a) 源码保留测试：在 <YOUR_LINK_PLUGIN> 新建时间戳文件 → restore group3-base → 断言文件仍存在
     3) b) 共享删除测试：在 profiles\node_modules 新建 guardian-shared-test → restore → 断言被删且无其它条目误删
     4) c) 其他 profile 共享包保留：无此类包则 PRESERVED(none)
     5) d) 清理测试文件与本次 pre-restore 快照；不删 group3-base / snap-a / snap-b / manual-baseline
@@ -19,13 +19,20 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
-  [string]$SourceRoot = 'D:\Github\novel_assistance',
-  [string]$SharedRoot = 'C:\Users\28256\.dsh\profiles\node_modules',
-  [string]$BaselineDir = 'D:\dsh_plugin\dsh_guardian\manual-baseline-20261018-152408'
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
+  [string]$SourceRoot = '',
+  [string]$SharedRoot = '',
+  [string]$BaselineDir = (Join-Path $GuardianRoot 'manual-baseline')
 )
 
 $ErrorActionPreference = 'Stop'
+# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
+$__cfgPath = Join-Path $GuardianRoot 'config.json'
+if (Test-Path -LiteralPath $__cfgPath) {
+  $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
+  if (-not $SourceRoot -and $__cfg.trackedSourcePaths) { $SourceRoot = @($__cfg.trackedSourcePaths)[0] }
+  if (-not $SharedRoot -and $__cfg.sharedDependencyRoots) { $SharedRoot = @($__cfg.sharedDependencyRoots)[0] }
+}
 $ProgressPreference = 'SilentlyContinue'
 
 # 夹具按需重建（fixtures\sandbox\home 不入库，曾 69MB）；失败不阻塞主流程

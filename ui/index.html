@@ -1192,9 +1192,9 @@ const PLUGIN_PROMPTS = {
     label: '输入插件目录或 Git 仓库地址（命令：plugin-add <spec>）',
     note: '本地目录要指向包根；https:// 或 github: 开头走远程安装，需要能访问 GitHub，可能执行仓库的构建脚本。',
     items: [
-      String.raw`C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2`,
+      String.raw`<YOUR_SOURCE_PLUGIN>`,
       'https://github.com/guhanfei-ai/dsh-mindmap',
-      String.raw`D:\Github\novel_assistance`
+      String.raw`<YOUR_LINK_PLUGIN>`
     ]
   },
   'plugin-remove': {
@@ -1205,7 +1205,7 @@ const PLUGIN_PROMPTS = {
   'plugin-link': {
     label: '输入本地插件目录（命令：plugin-link <目录>）',
     note: '必须是已存在的本地目录；建 junction 链接后改源码即时生效。',
-    items: [String.raw`D:\Github\novel_assistance`, String.raw`C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2`]
+    items: [String.raw`<YOUR_LINK_PLUGIN>`, String.raw`<YOUR_SOURCE_PLUGIN>`]
   }
 };
 

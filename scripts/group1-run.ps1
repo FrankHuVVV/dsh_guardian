@@ -5,14 +5,14 @@
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从“外部” PowerShell 运行（不要在 DSH 里跑）：
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group1-run.ps1
-    pwsh      -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group1-run.ps1
+    powershell -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group1-run.ps1
+    pwsh      -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group1-run.ps1
 
   行为：
     1) 断言无 DeepSeek 进程；有则中止（绝不 kill，退出码 2）
     2) runtime-inventory → 记录 digest-at-client-stopped
     3) C2 手工全量基线：package.json / pnpm-lock.yaml / cordis.patch.yml / node_modules / mcp / storages
-       （node_modules、mcp、storages 用 robocopy /E /XJ，跳过 junction，避免跟随到 D:\Github\novel_assistance）
+       （node_modules、mcp、storages 用 robocopy /E /XJ，跳过 junction，避免跟随到 <YOUR_LINK_PLUGIN>）
     4) C3 完整性摘要：总文件数/字节数、node_modules 文件数与 inventory 期望值比对（±50）
     5) D1 校验/写入 SAFE-MODE.md（内容与提示词原文+备注一致）
     6) 输出 RESULT 块（机器可读）与日志路径
@@ -22,10 +22,16 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian'
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot)
 )
 
 $ErrorActionPreference = 'Stop'
+# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
+$__cfgPath = Join-Path $GuardianRoot 'config.json'
+if (Test-Path -LiteralPath $__cfgPath) {
+  $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
+  if (-not $ProfileDir -and $__cfg.profileDir) { $ProfileDir = $__cfg.profileDir }
+}
 $ProgressPreference = 'SilentlyContinue'
 
 # 夹具按需重建（fixtures\sandbox\home 不入库，曾 69MB）；失败不阻塞主流程

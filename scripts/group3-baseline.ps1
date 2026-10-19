@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从外部 PowerShell / pwsh 运行：
-    pwsh -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group3-baseline.ps1
+    pwsh -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group3-baseline.ps1
 
   流程：patch sha 前置校验 → snapshot → 自校验1(meta) → digest 对比 → 写 SAFE-MODE →
         自校验2(读回) → 自校验3(list/历史快照) → RESULT。
@@ -13,13 +13,19 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
-  [string]$ProfileDir = 'C:\Users\28256\.dsh\profiles\desktop',
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
+  [string]$ProfileDir = '',
   [string]$ExpectedPatchSha = 'ac13b1739e768a996f27c03d12376d0d30e19192732a6d690157ff09e068ef7d',
-  [string]$ManualBaseline = 'D:\dsh_plugin\dsh_guardian\manual-baseline-20261018-152408'
+  [string]$ManualBaseline = (Join-Path $GuardianRoot 'manual-baseline')
 )
 
 $ErrorActionPreference = 'Stop'
+# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
+$__cfgPath = Join-Path $GuardianRoot 'config.json'
+if (Test-Path -LiteralPath $__cfgPath) {
+  $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
+  if (-not $ProfileDir -and $__cfg.profileDir) { $ProfileDir = $__cfg.profileDir }
+}
 $ProgressPreference = 'SilentlyContinue'
 
 $ts = Get-Date -Format 'yyyyMMdd-HHmmss'

@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   在 DeepSeek Harness 完全退出后，从外部 PowerShell / pwsh 运行：
-    pwsh -NoProfile -ExecutionPolicy Bypass -File D:\dsh_plugin\dsh_guardian\scripts\group2-verify.ps1
+    pwsh -NoProfile -ExecutionPolicy Bypass -File <GUARDIAN_ROOT>\scripts\group2-verify.ps1
 
   行为：
     0) 断言无 DeepSeek 进程，有则 ABORT 退出码 2（不 kill）
@@ -19,8 +19,8 @@
 
 [CmdletBinding()]
 param(
-  [string]$GuardianRoot = 'D:\dsh_plugin\dsh_guardian',
-  [string]$BaselineDir = 'D:\dsh_plugin\dsh_guardian\manual-baseline-20261018-152408'
+  [string]$GuardianRoot = (Split-Path -Parent $PSScriptRoot),
+  [string]$BaselineDir = (Join-Path $GuardianRoot 'manual-baseline')
 )
 
 $ErrorActionPreference = 'Stop'
