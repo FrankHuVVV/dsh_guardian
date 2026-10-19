@@ -23,8 +23,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
-$__cfgPath = Join-Path $GuardianRoot 'config.json'
+# --- 本地配置推导：优先 config.local.json（本机私有，不入库），回退 config.json（占位符模板）---
+$__cfgPath = Join-Path $GuardianRoot 'config.local.json'
+if (-not (Test-Path -LiteralPath $__cfgPath)) { $__cfgPath = Join-Path $GuardianRoot 'config.json' }
 if (Test-Path -LiteralPath $__cfgPath) {
   $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
   if (-not $RealAsar -and $__cfg.launch) { $RealAsar = Join-Path (Split-Path -Parent @($__cfg.launch)[0]) 'resources\app.asar' }
@@ -44,7 +45,8 @@ $LogPath = Join-Path $LogDir ("group4-verify-$ts.log")
 $GuardianBin = Join-Path $GuardianRoot 'bin\guardian.mjs'
 $Backups = Join-Path $GuardianRoot 'backups'
 $StatePath = Join-Path $GuardianRoot 'state.json'
-$ConfigPath = Join-Path $GuardianRoot 'config.json'
+$ConfigPath = Join-Path $GuardianRoot 'config.local.json'
+if (-not (Test-Path -LiteralPath $ConfigPath)) { $ConfigPath = Join-Path $GuardianRoot 'config.json' }
 $Utf8 = New-Object System.Text.UTF8Encoding($false)
 
 $script:R = [ordered]@{}

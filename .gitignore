@@ -7,7 +7,8 @@ logs/*
 !logs/.gitkeep
 
 # ---------- 本机私有配置 / 快照 / 测试产物 ----------
-config.json
+# config.json 入库（占位符模板）；真实路径写进 config.local.json，永不提交
+config.local.json
 manual-baseline-*/
 fixtures/sandbox/
 fixtures/acceptance/

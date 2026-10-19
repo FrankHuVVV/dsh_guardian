@@ -48,7 +48,17 @@ function readJsonSafe(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
 }
 
-function loadConfig() { return loadJson(CONFIG_PATH); }
+// config.json 是入库模板（占位符）；config.local.json 是本机覆盖（.gitignore 排除）。
+// 两者深合并，本地键优先，这样公开仓库不含个人路径，而本机运行不受影响。
+function loadConfig() {
+  const base = loadJson(CONFIG_PATH);
+  const localPath = path.join(ROOT, 'config.local.json');
+  if (fs.existsSync(localPath)) {
+    const local = readJsonSafe(localPath) || {};
+    return { ...base, ...local };
+  }
+  return base;
+}
 function loadState() {
   const state = loadJson(STATE_PATH);
   if (typeof state.safe !== 'boolean') state.safe = false;

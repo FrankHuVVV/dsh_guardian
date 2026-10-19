@@ -26,8 +26,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-# --- 本地配置推导：默认值从 config.json 读取（该文件不入库，见 .gitignore）---
-$__cfgPath = Join-Path $GuardianRoot 'config.json'
+# --- 本地配置推导：优先 config.local.json（本机私有，不入库），回退 config.json（占位符模板）---
+$__cfgPath = Join-Path $GuardianRoot 'config.local.json'
+if (-not (Test-Path -LiteralPath $__cfgPath)) { $__cfgPath = Join-Path $GuardianRoot 'config.json' }
 if (Test-Path -LiteralPath $__cfgPath) {
   $__cfg = Get-Content -LiteralPath $__cfgPath -Raw | ConvertFrom-Json
   if (-not $ProfileDir -and $__cfg.profileDir) { $ProfileDir = $__cfg.profileDir }

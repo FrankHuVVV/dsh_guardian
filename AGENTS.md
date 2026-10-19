@@ -168,7 +168,7 @@ C 安装（任意方式）失败或导致异常
 
 `pruneKeepLabels` 是 `prune` 的额外保护名单：这些标签的快照不会被删除（`--strict` 时忽略，只用 `--keep` 显式指定）。
 
-公开仓库只提供本模板（`config.example.json`，占位符形式）；`config.json` 是本机私有文件，已被 `.gitignore` 排除。克隆后复制模板并替换占位符即可。
+公开仓库里的 `config.json` 是占位符模板；本机真实路径写在 `config.local.json`（已被 `.gitignore` 排除）。`loadConfig()` 会把两者深合并，本地键优先，因此 `git pull` 不会覆盖本机配置。
 
 `dshHomeExclude` 中的 `.credentials.yaml` 只记录哈希，不复制内容；`sessions`、`attachments` 属用户数据，不纳入回滚。
 

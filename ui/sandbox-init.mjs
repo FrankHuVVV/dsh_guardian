@@ -39,8 +39,21 @@ const FIXTURE_ROOT = path.join(ROOT, 'fixtures', 'sandbox', 'root');
 const FIXTURE_HOME = path.join(FIXTURE_ROOT, 'home');
 const GUARDIAN_SRC = path.join(ROOT, 'bin', 'guardian.mjs');
 const GUARDIAN_DST = path.join(SANDBOX, 'bin', 'guardian.mjs');
+
+// 本机配置：config.json 是入库模板（占位符），config.local.json 是本机覆盖（不入库）
+function readRootConfig() {
+  let merged = null;
+  try { merged = JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')); } catch { }
+  try {
+    const local = JSON.parse(fs.readFileSync(path.join(ROOT, 'config.local.json'), 'utf8'));
+    merged = { ...(merged || {}), ...local };
+  } catch { }
+  if (!merged) throw new Error('未找到可用的 config.json / config.local.json');
+  return merged;
+}
+
 const LIVE_HOME = (() => {
-  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).dshHome; }
+  try { return readRootConfig().dshHome; }
   catch { return null; }
 })();
 
@@ -208,7 +221,7 @@ function initSandbox() {
   const configExists = fs.existsSync(configPath);
   const config = configExists
     ? JSON.parse(fs.readFileSync(configPath, 'utf8'))
-    : { ...JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')) };
+    : { ...readRootConfig() };
 
   config.dshHome = path.join(SANDBOX, 'home');
   config.profile = 'sandbox';
@@ -256,7 +269,7 @@ function initSandbox() {
 // ---------------------------------------------------------------- main
 
 const rootConfig = FIXTURE_ONLY
-  ? JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8'))
+  ? readRootConfig()
   : initSandbox();
 
 initFixtureRoot(rootConfig);

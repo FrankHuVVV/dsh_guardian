@@ -13,15 +13,19 @@
 
 ---
 
-## 0. 克隆后第一步：生成本机配置
+## 0. 克隆后第一步：填本机配置
 
-仓库里的 `config.json` 是**本机私有文件，已被 `.gitignore` 排除**；公开仓库只提供带占位符的 `config.example.json`。克隆后必须先复制并改成本机路径，否则 `doctor` 会直接报配置键/路径错误。
+仓库里的 `config.json` 是**带占位符的模板**（不含任何个人路径），可以安全公开。真实路径写进 `config.local.json`——它被 `.gitignore` 排除，guardian 启动时会把两个文件**深合并、本地键优先**。这样 `git pull` 永远不会和你的本机配置冲突。
 
 ```powershell
 git clone https://github.com/FrankHuVVV/dsh_guardian.git
 cd dsh_guardian
-Copy-Item config.example.json config.json
-notepad config.json      # 按下面的表把占位符替换成你的真实路径
+
+# 方式 A（推荐）：只写本机覆盖，不动入库的模板
+'{"dshHome":"<YOUR_DSH_HOME>","profileDir":"<YOUR_PROFILE_DIR>","launch":["<YOUR_DSH_EXE>"]}' | Set-Content config.local.json -Encoding UTF8
+
+# 方式 B：直接改 config.json（注意 git pull 可能与你冲突）
+notepad config.json
 ```
 
 | 占位符 | 含义 | 本机示例形态 |
@@ -35,7 +39,7 @@ notepad config.json      # 按下面的表把占位符替换成你的真实路�
 | `<YOUR_LINK_PLUGIN>` | link: 插件源码目录 | 你的插件仓库路径 |
 | `<YOUR_SHARED_DEPS>` | 共享依赖根 | `<YOUR_DSH_HOME>\profiles\node_modules` |
 
-> 不知道该填什么？先只改 `dshHome` / `profileDir` / `launch` 三项，然后 `node bin/guardian.mjs doctor` 会逐项告诉你还缺什么。
+> `config.local.json` 只需要写你要覆盖的键；其余沿用模板。填完跑 `node bin/guardian.mjs doctor`，它会逐项告诉你还缺什么。
 
 ---
 
@@ -273,8 +277,8 @@ wscript ui\guardian-tray.vbs
 ```text
 <GUARDIAN_ROOT>\
 ├── bin\guardian.mjs            # 全部 CLI（doctor/preflight/snapshot/restore/prune/guard/...）
-├── config.example.json         # 配置模板（占位符，克隆后复制为 config.json 并填本机路径）
-├── config.json                 # 本机私有配置（.gitignore 排除，不入库）
+├── config.json                 # 配置模板（占位符，入库）
+├── config.local.json           # 本机真实配置覆盖（.gitignore 排除，不入库）
 ├── state.json                  # activeOperation / safe / drift / instance
 ├── backups\
 │   ├── _store\<ab>\<sha256>    # 内容寻址 blob（只读，勿手删）
