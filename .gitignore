@@ -10,6 +10,7 @@ logs/tray.state.json
 logs/tray.pid
 logs/intent.json
 .guardian.lock
+logs/.prune-last
 
 # --- 快照清单：_store 不入库，meta.json 单独入库也无法恢复，只作审计 ---
 backups/*/meta.json

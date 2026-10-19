@@ -1,4 +1,4 @@
-﻿# guardian-tray.ps1 — DSH Guardian 托盘宿主（无窗口）
+# guardian-tray.ps1 — DSH Guardian 托盘宿主（无窗口）
 # 职责：启动/守护后端、托盘图标、右键菜单（打开界面 / 状态窗口 / 退出后端 / 开机自启）。
 # 由 guardian-tray.vbs 以隐藏窗口方式拉起；不依赖第三方组件。
 
@@ -207,6 +207,10 @@ $miRefresh = New-Object System.Windows.Forms.ToolStripMenuItem -ArgumentList '�
 $miRefresh.add_Click({ Update-Tray })
 [void]$menu.Items.Add($miRefresh)
 
+$miPrune = New-Object System.Windows.Forms.ToolStripMenuItem -ArgumentList '清理无用快照（prune --vacuum）'
+$miPrune.add_Click({ try { $null = Invoke-GuardianPrune -Manual } catch { } })
+[void]$menu.Items.Add($miPrune)
+
 [void]$menu.Items.Add((New-Object System.Windows.Forms.ToolStripSeparator))
 
 $miRestart = New-Object System.Windows.Forms.ToolStripMenuItem -ArgumentList '重启后端'
@@ -239,7 +243,14 @@ $notify.add_MouseDoubleClick({ Open-Ui })
 
 $timer = New-Object System.Windows.Forms.Timer
 $timer.Interval = 5000
-$timer.add_Tick({ Update-Tray })
+$timer.add_Tick({
+  Update-Tray
+  # 常驻维护：每天 03:00 起 10 分钟内静默 prune --vacuum。
+  # 与用户操作冲突时 Invoke-GuardianPrune 只写日志并跳过，下一轮（5 秒后）再试。
+  try { $null = Invoke-GuardianPrune } catch {
+    try { Write-PruneLog ('ERROR tick: ' + $_.Exception.Message) 'ERROR' } catch { }
+  }
+})
 $script:Timer = $timer
 
 if ($SelfTestMenu) {
@@ -265,6 +276,9 @@ if ($SelfTest) {
   Write-Host ('menuItems=' + $menu.Items.Count)
   Write-Host ('backendPid=' + (Get-BackendPid))
   Write-Host ('startup=' + (Test-GuardianStartup))
+  Write-Host ('pruneDue=' + (Test-PruneDue))
+  Write-Host ('pruneMarker=' + [string](Get-PruneMarkerDate))
+  Write-Host ('pruneLog=' + $GuardianPaths.PruneLog)
   $notify.Visible = $false
   $notify.Dispose()
   Remove-Item -LiteralPath $GuardianPaths.TrayPidFile -Force -ErrorAction SilentlyContinue
