@@ -1,3 +1,5 @@
+**[English](AGENTS_EN.md) | 简体中文**
+
 # agents.md — 自研 DSH 完整插件运行环境快照与恢复器（v5）
 
 > 适配目标：DSH 桌面客户端 **0.2.1-rc.2**（Electron 托管的 `desktop` profile）

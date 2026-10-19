@@ -12,6 +12,7 @@
 - Runtime: Windows / Node ≥ 22 / guardian itself ships **zero third-party dependencies**
 - Snapshot model: content-addressed `_store` plus exact byte-level restore (default); `reproducible` is an optional space-saving mode
 - License: [MIT](LICENSE) © 2026 FrankHuVVV
+- Docs: [AGENTS_EN.md](AGENTS_EN.md) (design spec) · [SAFE-MODE_EN.md](SAFE-MODE_EN.md) (real-machine constraints)
 
 ---
 

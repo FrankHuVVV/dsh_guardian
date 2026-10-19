@@ -12,6 +12,7 @@
 - 运行环境：Windows / Node ≥ 22 / guardian 本身**零第三方依赖**
 - 快照模型：内容寻址 `_store` + exact 字节级恢复（默认），`reproducible` 仅作可选的省空间模式
 - 许可：[MIT License](LICENSE) © 2026 FrankHuVVV
+- 文档：[AGENTS.md](AGENTS.md)（设计规格） · [SAFE-MODE.md](SAFE-MODE.md)（真机限制）
 
 ---
 
