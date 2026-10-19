@@ -154,6 +154,8 @@ node bin/guardian.mjs plugin-restore <txid>               # 回到该事务之�
 
 固定顺序：**doctor → preflight → recover → restore last-known-good**。
 
+> 两个常见「假故障」已被区分处理：① `dshHome/storages` 与 `profile/.plugin-manager` 是 DSH 运行时会话/日志目录，**不计入 drift digest**（见 `AGENTS.md` 的 `volatileClosurePaths`），它们的日常写入不会让环境变红；② DSH 已经在自己运行时，`guard` 不再 spawn 第二个进程，而是直接采纳现有实例并返回 `restart: already-running`。真正的失败会带 `reason: access-denied`（后端缺管理员令牌，去托盘「重启后端」）或 `no-pid`（单实例/文件占用）。
+
 ```text
 DSH 起不来 / 插件报错 / 页面白屏
 │

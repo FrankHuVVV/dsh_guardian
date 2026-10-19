@@ -49,6 +49,10 @@
     "session_projcache/sessions",
     "workspace.json"
   ],
+  "volatileClosurePaths": [
+    "dshHome/storages",
+    "profile/.plugin-manager"
+  ],
   "sharedDependencyRoots": ["<YOUR_SHARED_DEPS>"],
   "driftPolicy": "adopt-if-healthy",
   "crashPolicy": "resume",

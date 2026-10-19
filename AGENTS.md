@@ -157,6 +157,10 @@ C 安装（任意方式）失败或导致异常
     "llm-deepseek",
     ".credentials.yaml"
   ],
+  "volatileClosurePaths": [
+    "dshHome/storages",
+    "profile/.plugin-manager"
+  ],
   "sharedDependencyRoots": ["<YOUR_SHARED_DEPS>"],
   "driftPolicy": "adopt-if-healthy",
   "crashPolicy": "resume",
@@ -173,6 +177,8 @@ C 安装（任意方式）失败或导致异常
 公开仓库里的 `config.json` 是占位符模板；本机真实路径写在 `config.local.json`（已被 `.gitignore` 排除）。`loadConfig()` 会把两者深合并，本地键优先，因此 `git pull` 不会覆盖本机配置。
 
 `dshHomeExclude` 中的 `.credentials.yaml` 只记录哈希，不复制内容；`sessions`、`attachments` 属用户数据，不纳入回滚。
+
+`volatileClosurePaths` 把运行时会话/日志目录（默认 `dshHome/storages`、`profile/.plugin-manager`）标记为运行时噪音：这些 entry 不参与 digest（不触发 drift），快照不存储其内容，restore 也不会覆盖或删除它们——它们由 DSH 自己持续改写，纳入回滚只会制造假漂移和误删。
 
 ---
 

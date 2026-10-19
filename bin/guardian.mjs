@@ -25,7 +25,7 @@ const CONFIG_KEYS = [
   'probeSettleMs', 'maxBisectMs', 'singleInstance', 'killGraceMs', 'lockTimeoutMs',
   'snapshotMode', 'snapshotStorage', 'storeDir', 'storeGcOnPrune', 'trackedFiles',
   'trackedRuntimePaths', 'trackedSourcePaths', 'sourceInclude', 'sourceExclude',
-  'dshHomeTrackedPaths', 'dshHomeExclude', 'storageVolatilePaths', 'sharedDependencyRoots', 'driftPolicy',
+  'dshHomeTrackedPaths', 'dshHomeExclude', 'storageVolatilePaths', 'volatileClosurePaths', 'sharedDependencyRoots', 'driftPolicy',
   'crashPolicy', 'verifyPluginLoad', 'blockOnClientMismatch', 'keepTransactions', 'keepLkg',
   'pruneKeepLabels'
 ];
@@ -381,6 +381,26 @@ function storageVolatilePrefixes(config) {
   return [...new Set(list)];
 }
 
+// 运行时会话/日志目录（默认 dshHome/storages 与 profile/.plugin-manager）：
+// 它们被 DSH 会话和插件安装流程持续改写，既不该触发 drift，也不该被 restore 覆盖或删除。
+// 以 entry key 前缀配置在 config.volatileClosurePaths 中。
+function volatileClosurePrefixes(config) {
+  const raw = config && Array.isArray(config.volatileClosurePaths) ? config.volatileClosurePaths : [];
+  return [...new Set(raw
+    .map((item) => toPosix(String(item)).replace(/^\/+|\/+$/g, ''))
+    .filter(Boolean))];
+}
+
+function isVolatileClosureKey(config, key) {
+  const target = toPosix(String(key));
+  return volatileClosurePrefixes(config)
+    .some((prefix) => target === prefix || target.startsWith(`${prefix}/`));
+}
+
+function isVolatileRoot(config, rootName) {
+  return volatileClosurePrefixes(config).includes(toPosix(String(rootName)));
+}
+
 function resolveSharedOwners(profilesRoot, name, cache) {
   if (cache.owners.has(name)) return cache.owners.get(name);
   const owners = [];
@@ -633,6 +653,13 @@ function discoverRuntimeClosure(config, { hash = true } = {}) {
 
   tick('dshHome');
 
+  // 运行时目录（会话缓存/插件日志）不参与 digest：它们随使用持续变化，属于噪音而非 drift。
+  for (const key of Object.keys(entries)) {
+    if (!isVolatileClosureKey(config, key)) continue;
+    const entry = entries[key];
+    if (entry && typeof entry === 'object') entry.digestExcluded = true;
+  }
+
   const client = resolveClientFingerprint(config, { hash });
   tick('clientFingerprint');
   const runtime = runtimeInfo(config, client);
@@ -871,12 +898,22 @@ function buildRoots(config) {
 }
 
 function rootExcludes(config, rootName) {
-  if (rootName === 'profile') return [];
-  if (rootName.startsWith('file:') || rootName.startsWith('source:')) return config.sourceExclude || [];
-  return [];
+  const base = rootName === 'profile'
+    ? []
+    : (rootName.startsWith('file:') || rootName.startsWith('source:') ? (config.sourceExclude || []) : []);
+  // 把 config.volatileClosurePaths 里位于该根下的子路径也排除掉（例如 profile/.plugin-manager）
+  const rootKey = toPosix(String(rootName));
+  const relExcludes = volatileClosurePrefixes(config)
+    .filter((prefix) => prefix.startsWith(`${rootKey}/`))
+    .map((prefix) => prefix.slice(rootKey.length + 1));
+  return [...base, ...relExcludes];
 }
 
 function isVolatileRel(config, rootName, rel) {
+  // 1) 配置的运行时目录前缀（如 profile/.plugin-manager、dshHome/storages）
+  const key = `${toPosix(String(rootName))}/${toPosix(String(rel || ''))}`.replace(/\/+$/, '');
+  if (isVolatileClosureKey(config, key)) return true;
+  // 2) 兼容旧配置：~/.dsh/storages 下的会话缓存子路径
   if (rootName !== 'dshHome/storages') return false;
   return storageVolatilePrefixes(config).some((prefix) => rel === prefix || rel.startsWith(`${prefix}/`));
 }
@@ -927,6 +964,11 @@ function createSnapshot(config, label, options = {}) {
   let storedBytes = 0;
   let storedBlobs = 0;
   for (const [rootName, root] of roots) {
+    // 运行时目录整根跳过：不存储、不参与 digest、restore 时也不会被清理
+    if (isVolatileRoot(config, rootName)) {
+      log('INFO', 'snapshot 跳过运行时目录', { root: rootName });
+      continue;
+    }
     const rootPath = root.path;
     const walked = root.kind === 'file'
       ? { files: [{ rel: '', size: fs.statSync(rootPath).size, sha256: sha256File(rootPath) }], links: [], dirs: [] }
@@ -1573,28 +1615,86 @@ function httpProbe(port) {
   }
 }
 
+// 启动失败时给出可执行的解释，而不是只丢一个 reason 字段。
+function clientStartHint(reason) {
+  switch (reason) {
+    case 'access-denied':
+      return '提权失败（EACCES/EPERM）：当前后端没有管理员令牌，无法拉起带 RUNASADMIN 的 DeepSeek Harness。'
+        + '请在管理员托盘里「重启后端」让后端继承提权；若 DSH 已在运行，请先退出该实例再重试。';
+    case 'no-pid':
+      return '客户端进程未能创建：常见原因是单实例冲突（DSH 已在运行）、可执行文件被占用或权限不足。'
+        + '请先确认 DSH 是否已有实例；若已有，请用 guard --no-start 只做体检。';
+    case 'launch-missing':
+      return 'config.launch 指向的可执行文件不存在，请检查 config.json / config.local.json 的 launch。';
+    case 'timeout':
+      return '启动超时且没有发现监听端口：可能是 Electron 单实例把新进程交给了已有实例，或启动被 UAC 拦下。'
+        + '若 DSH 已在运行，请用 guard --no-start。';
+    default:
+      return null;
+  }
+}
+
+function adoptedInstanceResult(context, detected) {
+  log('INFO', '检测到客户端已在运行，直接采纳现有实例（跳过 spawn）', {
+    context, pid: detected.rootPid, port: detected.port, httpStatus: detected.httpStatus, healthy: detected.healthy
+  });
+  return {
+    restart: 'already-running',
+    pid: detected.rootPid,
+    port: detected.port,
+    httpStatus: detected.httpStatus,
+    stable: Boolean(detected.healthy && detected.port),
+    reason: 'already-running',
+    adoptedContext: context
+  };
+}
+
+function spawnFailureResult(context, code, extra = {}) {
+  const reason = (code === 'EACCES' || code === 'EPERM') ? 'access-denied' : 'no-pid';
+  const hint = clientStartHint(reason);
+  log('ERROR', '启动客户端失败', { context, reason, code: code ?? null, hint, ...extra });
+  return { restart: 'spawn-error', pid: null, port: null, httpStatus: null, stable: false, reason, code: code ?? null, hint, ...extra };
+}
+
 function startClient(config) {
   const launch = Array.isArray(config.launch) ? config.launch : [];
   const exe = launch[0];
   const launchArgs = launch.slice(1);
-  if (!exe || !exists(exe)) return { restart: 'launch-missing', pid: null, port: null, httpStatus: null, stable: false, reason: 'launch-missing' };
+  if (!exe || !exists(exe)) {
+    const hint = clientStartHint('launch-missing');
+    log('ERROR', '启动客户端失败：launch 不存在', { exe, hint });
+    return { restart: 'launch-missing', pid: null, port: null, httpStatus: null, stable: false, reason: 'launch-missing', hint };
+  }
+
+  // 1) 单实例优先：DSH 已经在自己跑时，spawn 第二个只会被 Electron 单实例机制吞掉，
+  //    表现成「no-pid / timeout」这类假失败。直接探测并采纳现有实例。
+  const preExisting = detectRunningInstance(config);
+  if (preExisting) return adoptedInstanceResult('pre-spawn', preExisting);
+
   let child;
   try {
     child = spawn(exe, launchArgs, { detached: true, stdio: 'ignore', windowsHide: true });
   } catch (error) {
-    log('ERROR', '启动客户端失败：spawn 同步抛错', { code: error?.code ?? null, message: String(error?.message ?? error) });
-    return { restart: 'spawn-error', pid: null, port: null, httpStatus: null, stable: false, reason: 'spawn-threw', code: error?.code ?? null };
+    const existing = detectRunningInstance(config);
+    if (existing) return adoptedInstanceResult('spawn-threw', existing);
+    return spawnFailureResult('spawn-threw', error?.code, { message: String(error?.message ?? error) });
   }
+
   let spawnError = null;
   child.on('error', (error) => {
     spawnError = error;
-    log('ERROR', '启动客户端失败：spawn error 事件', { code: error?.code ?? null, message: String(error?.message ?? error) });
+    log('WARN', 'spawn 发出 error 事件（稍后按原因分类）', { code: error?.code ?? null, message: String(error?.message ?? error) });
   });
   try { child.unref(); } catch { /* ignore */ }
+
   if (!child.pid) {
-    log('ERROR', '启动客户端失败：spawn 后无 pid', { code: spawnError?.code ?? null });
-    return { restart: 'spawn-error', pid: null, port: null, httpStatus: null, stable: false, reason: 'no-pid', code: spawnError?.code ?? null };
+    // Windows 上 EACCES 常常以 error 事件形式到达，给事件一点时间落地再分类
+    for (let index = 0; index < 10 && !spawnError; index += 1) sleep(100);
+    const existing = detectRunningInstance(config);
+    if (existing) return adoptedInstanceResult('no-pid', existing);
+    return spawnFailureResult('no-pid', spawnError?.code);
   }
+
   const rootPid = child.pid;
   const deadline = Date.now() + Number(config.startTimeoutMs ?? 90000);
   const settleMs = Number(config.settleMs ?? 15000);
@@ -1604,8 +1704,9 @@ function startClient(config) {
   let lastPort = null;
   while (rootPid && Date.now() < deadline) {
     if (spawnError) {
-      log('ERROR', '启动客户端失败：轮询中捕获 spawn error', { code: spawnError.code ?? null });
-      return { restart: 'spawn-error', pid: rootPid, port, httpStatus, stable: false, reason: 'spawn-error', code: spawnError.code ?? null };
+      const existing = detectRunningInstance(config);
+      if (existing) return adoptedInstanceResult('spawn-error-event', existing);
+      return spawnFailureResult('spawn-error-event', spawnError.code, { pid: rootPid });
     }
     const currentPort = findListeningPort(rootPid);
     const currentHttp = currentPort ? httpProbe(currentPort) : null;
@@ -1623,9 +1724,13 @@ function startClient(config) {
     }
     sleep(500);
   }
+  // 超时后再确认一次：可能是 Electron 单实例把请求转给了别的实例，或用户手动启动了客户端
+  const lateExisting = detectRunningInstance(config);
+  if (lateExisting) return adoptedInstanceResult('timeout', lateExisting);
   const cleanup = stopClientAndVerify(config, { rootPid, port, state: loadState() });
-  log('WARN', '启动超时，已清理残留进程', { rootPid, port, cleanup });
-  return { restart: 'timeout', pid: rootPid, port, httpStatus, stable: false, reason: 'timeout', cleanup };
+  const hint = clientStartHint('timeout');
+  log('WARN', '启动超时，已清理残留进程', { rootPid, port, cleanup, hint });
+  return { restart: 'timeout', pid: rootPid, port, httpStatus, stable: false, reason: 'timeout', hint, cleanup };
 }
 
 // 分根闭包校验：managed 根 entries 严格相等；source:/file:/link: 根允许超集，
@@ -2824,7 +2929,7 @@ function bisectProbe(config, state, args, disabledIds, preSnapshotLabel) {
   const load = loadVerifyEnvironment(config);
   let health = { restart: 'skipped', stable: false };
   if (preflightResult.status === 'ok' && load.ok && !args.includes('--no-start')) health = startClient(config);
-  const healthy = load.ok && (args.includes('--no-start') ? preflightResult.status === 'ok' : health.restart === 'started' && health.stable === true);
+  const healthy = load.ok && (args.includes('--no-start') ? preflightResult.status === 'ok' : (health.restart === 'started' || health.restart === 'already-running') && health.stable === true);
   if (health.pid) { try { execFileSync('taskkill', ['/PID', String(health.pid), '/T', '/F'], { timeout: 20000, stdio: 'ignore' }); } catch { /* ignore */ } }
   return { healthy, load, preflight: preflightResult.status, health, disabledIds };
 }
@@ -3063,7 +3168,7 @@ function guardCommand(config, state, args) {
     };
     saveState(state);
   }
-  const healthy = preflightResult.status === 'ok' && load.ok && (noStart ? health.stable === true : (health.restart === 'started' && health.stable === true));
+  const healthy = preflightResult.status === 'ok' && load.ok && (noStart ? health.stable === true : (health.restart === 'started' || health.restart === 'already-running') && health.stable === true);
   if (drift && healthy) {
     const adoptedLabel = `adopted-${Date.now()}`;
     const adopted = createSnapshot(config, adoptedLabel, { dirName: adoptedLabel, state: 'verified', noStop: noStart });

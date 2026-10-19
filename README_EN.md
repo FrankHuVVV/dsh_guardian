@@ -154,6 +154,8 @@ node bin/guardian.mjs plugin-restore <txid>               # go back to before/af
 
 Fixed order: **doctor → preflight → recover → restore last-known-good**.
 
+> Two common "phantom failures" are now handled explicitly: ① `dshHome/storages` and `profile/.plugin-manager` are DSH runtime session/log directories and are **excluded from the drift digest** (see `volatileClosurePaths` in `AGENTS.md`), so their routine writes no longer turn the environment red; ② when DSH is already running, `guard` no longer spawns a second process — it adopts the existing instance and returns `restart: already-running`. Real failures carry `reason: access-denied` (backend lacks an admin token — use "Restart backend" from the elevated tray) or `no-pid` (single-instance/file-in-use).
+
 ```text
 DSH won't start / plugin errors / blank page
 │

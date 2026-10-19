@@ -158,6 +158,10 @@ A snapshot directory stores only `meta.json`; content is shared by hash inside `
     "llm-deepseek",
     ".credentials.yaml"
   ],
+  "volatileClosurePaths": [
+    "dshHome/storages",
+    "profile/.plugin-manager"
+  ],
   "sharedDependencyRoots": ["<YOUR_SHARED_DEPS>"],
   "driftPolicy": "adopt-if-healthy",
   "crashPolicy": "resume",
@@ -174,6 +178,8 @@ A snapshot directory stores only `meta.json`; content is shared by hash inside `
 The published `config.json` is a placeholder template; your real local paths live in `config.local.json`, which is excluded by `.gitignore`. `loadConfig()` deep-merges the two with local keys taking precedence, so `git pull` never overwrites your machine configuration.
 
 `.credentials.yaml` in `dshHomeExclude` has its hash recorded but its content is never copied; `sessions` and `attachments` are user data and are not part of rollback.
+
+`volatileClosurePaths` marks runtime session/log directories (default: `dshHome/storages`, `profile/.plugin-manager`) as runtime noise: those entries are excluded from the digest (so they never trigger drift), their content is not stored in snapshots, and restore neither overwrites nor deletes them — DSH rewrites them continuously, so pulling them into rollback only produces false drift and accidental deletions.
 
 ---
 
