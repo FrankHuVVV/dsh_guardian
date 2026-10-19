@@ -1,0 +1,310 @@
+{
+  "ollama": {
+    "baseURL": "http://127.0.0.1:11434",
+    "model": "hf.co/QuantFactory/Qwen2.5-7B-Instruct-Uncensored-GGUF:Q4_K_M",
+    "device": "cpu",
+    "timeoutMs": 180000,
+    "maxTokens": 900,
+    "temperature": 0.7,
+    "keepAlive": "30m",
+    "unloadAfterPrompt": true
+  },
+  "comfyui": {
+    "baseURL": "http://127.0.0.1:8188",
+    "apiWorkflowFile": "./workflow.api.json",
+    "uiWorkflowFile": "D:/ComfyUI_windows_portable/ComfyUI/user/default/workflows/Qwen-Image-2.1-UC-GGUF-T2I.json",
+    "promptNodeId": "4",
+    "clipNodeId": "2",
+    "seedNodeId": "5",
+    "samplerNode2Id": "11",
+    "loadImageNodeId": "10",
+    "saveNodeId": "7",
+    "latentNodeId": "9",
+    "loraClass": "LoraLoaderModelOnly",
+    "modelSourceNodeId": "1",
+    "loraDir": "D:/ComfyUI_windows_portable/ComfyUI/models/loras",
+    "inputDir": "D:/ComfyUI_windows_portable/ComfyUI/input",
+    "sizeAlign": 32,
+    "sizeMin": 256,
+    "sizeMax": 4096,
+    "clientId": "dsh-comfyui-mcp",
+    "defaultResolution": 1024,
+    "resolutionMin": 512,
+    "resolutionMax": 2048,
+    "defaultSteps": 25,
+    "cfgLow": 1.0,
+    "cfgHigh": 1.0,
+    "cfgSplitRatio": 0.56,
+    "defaultCfg": 1.0,
+    "editDenoise": 1.0,
+    "samplerName": "euler",
+    "scheduler": "simple",
+    "denoise": 1.0,
+    "requestTimeoutMs": 60000,
+    "pollIntervalMs": 1500,
+    "generationTimeoutMs": 1500000,
+    "lifecycle": {
+      "mode": "managed",
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "run_nvidia_gpu.bat"
+      ],
+      "cwd": "D:/ComfyUI_windows_portable",
+      "launchLogFile": "./comfyui-launch.log",
+      "stateFile": "./comfyui-mcp.state.json",
+      "startTimeoutMs": 300000,
+      "shutdownAfterGeneration": true,
+      "shutdownIdleMs": 0,
+      "freeVramAfterGeneration": true
+    }
+  },
+  "inboxDir": "C:/Users/28256/Documents/deepseek-harness/default-workspace/comfy-out",
+  "presets": {
+    "r18_quality": {
+      "label": "R18 质量档（32 步 / cfg 2.5）",
+      "alias": [
+        "r18",
+        "quality"
+      ],
+      "steps": 32,
+      "cfgLow": 2.5,
+      "cfgHigh": 2.5,
+      "width": 832,
+      "height": 1216,
+      "loras": [
+        {
+          "name": "Qwen21R18\\easternfemale_v2.1_split.safetensors",
+          "strength": 0.8
+        },
+        {
+          "name": "Qwen21R18\\nsfw_qwen_21.safetensors",
+          "strength": 0.6
+        }
+      ],
+      "promptPrefix": "nsfw_qwen_lora, ",
+      "promptSuffix": ", natural unretouched skin with visible pores, accurate proportions, realistic hands, no censoring, no fused anatomy, no extra or duplicated limbs",
+      "notes": "32 步 / cfg 2.5（2026-09-30 按用户要求调整）。cfg>1 时负面词开始真正生效，所以两段式实际是单段等效的恒 2.5；改图/出图都走这条。触发词 nsfw_qwen_lora；可用 person_0001~0123 与 _vulva/_anus/_breasts/_nipples 指定身份与细节。"
+    },
+    "r18_fast": {
+      "label": "R18 速度档（turbo8 8 步）",
+      "alias": [
+        "fast"
+      ],
+      "steps": 8,
+      "cfgLow": 1.0,
+      "cfgHigh": 1.0,
+      "width": 832,
+      "height": 1216,
+      "loras": [
+        {
+          "name": "Qwen21R18\\turbo8_lora_step2500.safetensors",
+          "strength": 1.0
+        },
+        {
+          "name": "Qwen21R18\\easternfemale_v2.1_split.safetensors",
+          "strength": 0.8
+        }
+      ],
+      "promptPrefix": "nsfw_qwen_lora, ",
+      "promptSuffix": ", accurate proportions, realistic hands, no censoring, no fused anatomy, no extra or duplicated limbs",
+      "notes": "本机实测约 64s（约质量档一半）。turbo8 会自动插入 ModelSamplingFlux(0.6935/0.5)；纹理更颗粒、发丝与手部更粗，追求速度时用。"
+    },
+    "r18_fast_plus": {
+      "label": "R18 速度档 + NSFW 概念叠加",
+      "alias": [
+        "fastplus"
+      ],
+      "steps": 8,
+      "cfgLow": 1.0,
+      "cfgHigh": 1.0,
+      "width": 832,
+      "height": 1216,
+      "loras": [
+        {
+          "name": "Qwen21R18\\turbo8_lora_step2500.safetensors",
+          "strength": 1.0
+        },
+        {
+          "name": "Qwen21R18\\easternfemale_v2.1_split.safetensors",
+          "strength": 0.8
+        },
+        {
+          "name": "Qwen21R18\\nsfw_qwen_21.safetensors",
+          "strength": 0.6
+        }
+      ],
+      "promptPrefix": "nsfw_qwen_lora, ",
+      "promptSuffix": ", accurate proportions, realistic hands, no censoring, no fused anatomy, no extra or duplicated limbs",
+      "notes": "本机实测约 69s。三 LoRA 时 NSFW 倾向更强，但画质是三者里最糙的。"
+    },
+    "portrait_clean": {
+      "label": "干净人像（不挂 LoRA，25 步）",
+      "alias": [
+        "portrait"
+      ],
+      "steps": 25,
+      "cfgLow": 1.0,
+      "cfgHigh": 1.0,
+      "width": 832,
+      "height": 1216,
+      "loras": [],
+      "notes": "基线对照用。"
+    }
+  },
+  "downloadImages": true,
+  "returnImageBlocks": false,
+  "draftTtlMs": 1800000,
+  "logFile": "./comfyui-mcp.log",
+  "workflows": {
+    "qwen_t2i": {
+      "label": "Qwen-Image 2.1 · R18 文生图",
+      "alias": [
+        "t2i",
+        "qwen",
+        "生图"
+      ],
+      "kind": "image",
+      "mode": "t2i",
+      "apiWorkflowFile": "./workflow.api.json",
+      "imagePreset": "r18_quality",
+      "promptPrefix": "nsfw_qwen_lora, ",
+      "promptSuffix": ", natural unretouched skin with visible pores, accurate proportions, realistic hands, no censoring, no fused anatomy, no extra or duplicated limbs",
+      "defaults": {
+        "width": 832,
+        "height": 1216,
+        "steps": 32,
+        "prompt": "a nude adult woman lying on white sheets, soft window light, close-up on her upper body, natural skin texture"
+      }
+    },
+    "qwen_edit": {
+      "label": "Qwen-Image 2.1 · R18 改图（i2i）",
+      "alias": [
+        "edit",
+        "i2i",
+        "改图"
+      ],
+      "kind": "image",
+      "mode": "edit",
+      "apiWorkflowFile": "./workflow.api.json",
+      "imagePreset": "r18_quality",
+      "promptPrefix": "nsfw_qwen_lora, ",
+      "promptSuffix": "，保留主体外貌、动作、构图与光线",
+      "defaults": {
+        "steps": 25,
+        "denoise": 0.85,
+        "prompt": "把她的衣服去掉，改成全裸，露出胸部，保留姿势、脸部与光线"
+      }
+    },
+    "h3_t2v": {
+      "label": "MiniMax H3 · R18 文生视频（含音频，124帧≈5.17s）",
+      "alias": [
+        "t2v",
+        "h3",
+        "生视频",
+        "video"
+      ],
+      "kind": "video",
+      "apiWorkflowFile": "./workflows/h3_t2v.api.json",
+      "prompt": {
+        "node": "12",
+        "input": "prompt"
+      },
+      "width": {
+        "node": "12",
+        "input": "width"
+      },
+      "height": {
+        "node": "12",
+        "input": "height"
+      },
+      "length": {
+        "node": "12",
+        "input": "length"
+      },
+      "seed": {
+        "node": "13",
+        "input": "noise_seed"
+      },
+      "steps": {
+        "node": "15",
+        "input": "steps"
+      },
+      "prefix": {
+        "node": "21",
+        "input": "filename_prefix"
+      },
+      "loraChain": {
+        "diT": "1",
+        "consumers": [
+          "8"
+        ]
+      },
+      "defaults": {
+        "width": 960,
+        "height": 544,
+        "length": 124,
+        "steps": 8,
+        "filename_prefix": "video/H3_R18",
+        "prompt": "Warm bedroom look, soft key light, sweat and skin detail, realistic adult bodies, 50mm lens, natural color. Timeline: [0s-1s] A nude adult woman lies back on white sheets, one hand sliding down her stomach, lips parted. [1s-2.5s] Two fingers spread her labia and rub slow circles over her clitoris, visible wetness, breathing deepens into short gasps. [2.5s-4s] Pace quickens, hips lift, breasts rise and fall, a sheen of sweat on her collarbone. [4s-5s] She arches and comes in waves, soft broken moans, then rests slick fingers on her thigh. Camera: static medium close-up, 35mm, no cuts. Audio: quiet room tone, sheets rustling, wet rhythmic sounds from 1s, one long moan rising at 4s and settling by 5s. Hard rules: single adult woman, explicit nudity unobstructed, no text, no watermark, no clothing reappearing, no extra limbs or fingers."
+      }
+    },
+    "h3_ref2v": {
+      "label": "MiniMax H3 · R18 参考图生视频（锁人，124帧≈5.17s）",
+      "alias": [
+        "ref2v",
+        "参考图",
+        "ref"
+      ],
+      "kind": "video",
+      "apiWorkflowFile": "./workflows/h3_ref2v.api.json",
+      "prompt": {
+        "node": "13",
+        "input": "prompt"
+      },
+      "width": {
+        "node": "13",
+        "input": "width"
+      },
+      "height": {
+        "node": "13",
+        "input": "height"
+      },
+      "length": {
+        "node": "13",
+        "input": "length"
+      },
+      "seed": {
+        "node": "15",
+        "input": "noise_seed"
+      },
+      "steps": {
+        "node": "17",
+        "input": "steps"
+      },
+      "prefix": {
+        "node": "23",
+        "input": "filename_prefix"
+      },
+      "imageRef": {
+        "node": "14",
+        "consumer": "13",
+        "input": "ref_image_0"
+      },
+      "loraChain": {
+        "diT": "1",
+        "consumers": [
+          "9"
+        ]
+      },
+      "defaults": {
+        "width": 960,
+        "height": 544,
+        "length": 124,
+        "steps": 8,
+        "filename_prefix": "video/H3_R18_ref",
+        "prompt": "The woman in <Picture 1> is the protagonist: keep her exact face, hair, body proportions and skin tone. Warm bedroom look, soft key light, realistic adult bodies, 50mm lens. Timeline: [0s-1.5s] She is nude on white sheets, breathing slowly, hands moving over her breasts. [1.5s-3.5s] She slides one hand between her thighs and starts rubbing slow circles, back arching, lips parted. [3.5s-5s] Movement quickens, soft moans rise, she shivers and settles. Camera: static medium shot, no cuts. Audio: quiet room tone, sheets rustling, breathing and wet rhythmic sounds, one long moan settling at the end. Hard rules: same adult woman as the reference, explicit nudity unobstructed, no text, no watermark, no extra limbs or fingers."
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": 5,
+  "activeOperation": null,
+  "safe": false,
+  "culprit": null,
+  "instance": {
+    "rootPid": 41032,
+    "descendantPids": [
+      41032,
+      40764,
+      39340,
+      26412,
+      41796
+    ],
+    "port": 55452,
+    "httpStatus": 401,
+    "healthy": true
+  },
+  "drift": {
+    "detected": false,
+    "digest": "c4df09c1b36cfc90dafff416f02ebabf5fa11185ee48ff2cd59230fa860fc00a",
+    "lastCommittedDigest": "c4df09c1b36cfc90dafff416f02ebabf5fa11185ee48ff2cd59230fa860fc00a",
+    "addedPaths": [],
+    "changedPaths": [],
+    "removedPaths": []
+  },
+  "probing": false,
+  "disabled": []
+}

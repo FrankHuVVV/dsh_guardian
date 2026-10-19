@@ -1,0 +1,636 @@
+# agents.md — 自研 DSH 完整插件运行环境快照与恢复器（v4）
+
+> 适配目标：DSH 桌面客户端 **0.2.1-rc.2**（Electron 托管的 `desktop` profile）
+> 运行环境：Windows / Node ≥ 22 / guardian 本身零第三方依赖
+> 核心目标：每次插件添加都是一个可提交/可回滚事务；失败时恢复到添加前的**完整可运行环境**，而不是只恢复几个配置文件。
+> 默认恢复模式：`exact`；`reproducible` 仅作可选的空间节省模式。
+
+本版本取代 v3 的“配置与部分源码回滚”模型。v4 的恢复对象是完整 `runtimeClosure`：profile 配置、lockfile、profile 依赖树、共享依赖引用、file/link 插件源、patch 引用插件、插件管理状态及链接类型。
+
+---
+
+## 0. 目标、不变量与变更摘要
+
+### 0.1 成功目标
+
+对于任意一次受 guardian 管理的插件添加：
+
+```text
+添加 A 成功
+添加 B 成功
+添加 C 失败
+```
+
+失败后必须能够恢复为：
+
+```text
+A 保留
+B 保留
+C 的 package.json、lockfile、node_modules、patch、源码、link/junction 不存在
+客户端以添加 C 之前的依赖树与配置启动成功
+```
+
+### 0.2 v3 → v4
+
+| 项 | v3 | v4 |
+|---|---|---|
+| 添加入口 | 手动 snapshot + 手动安装 | `plugin-add` 事务唯一推荐入口 |
+| 快照对象 | 配置文件 + 部分源码 | 完整 `runtimeClosure` |
+| 依赖树 | 不快照 node_modules | exact 模式完整快照 profile 依赖树与 pnpm 元数据 |
+| file/link | 部分源码白名单 | 记录并恢复所有事务发现的 file/link 目标及链接类型 |
+| 回滚点 | before-* / LKG | 当前事务 `before-add-*` 优先，再按父事务链回退 |
+| 事务状态 | 无 | prepared/installing/committed/rolled-back/rollback-failed |
+| 自动安装 | 不执行 | 仅在用户明确执行 `plugin-add` 时执行；恢复默认离线 |
+| 源码删除 | 源码路径不镜像删除 | 事务拥有的新增文件可删除；普通 restore 默认保留未跟踪源码 |
+| 大小限制 | 超限只存哈希 | exact 模式不允许用哈希代替内容；空间不足时事务失败，不生成不可恢复快照 |
+| LKG | 单独健康快照 | 仍保留，但不替代当前插件事务的 before-add 快照 |
+
+### 0.3 硬性不变量
+
+1. **事务优先**：添加插件必须通过 `plugin-add`、`plugin-link` 或 `plugin-remove`；裸 `pnpm add` 不属于可自动回滚操作。
+2. **先停再快照**：插件事务开始前停止 Electron 客户端，避免复制正在变化的 `node_modules` 或链接。
+3. **先备份再写**：任何受管写操作前写 intent、获取锁、创建快照。
+4. **exact 默认**：恢复目标是字节级文件内容、目录清单、符号链接/junction 类型与目标。
+5. **事务前快照不可变**：`before-add-*` 创建后不覆盖、不清理，直到事务提交并完成保留策略。
+6. **恢复先校验后替换**：快照内容、manifest、哈希不一致时停止，不用不完整快照覆盖当前环境。
+7. **失败最多两次启动**：原状态启动一次；回滚后验证一次；不无限重试。
+8. **完整依赖闭包**：不能只恢复 `package.json`；必须恢复 lockfile、profile node_modules、相关共享依赖、file/link 目标与 pnpm 元数据。
+9. **客户端版本锁定**：记录 Electron 客户端版本与 `app.asar` 哈希；版本变化时恢复报告标记 `client-mismatch`，不静默宣称成功。
+10. **源码数据安全**：事务拥有的新增/修改文件可回滚删除；普通手动 restore 默认保留快照后新增的源码，需 `--force-clean` 才删除。
+11. **插件语义分离**：`disable` 写 `disabled: true`；`revert` 删除 override；二者不能混为一谈。
+12. **模型只提醒不切换**：只输出下一步模型提醒，不调用模型切换工具。
+
+---
+
+## 1. 本机环境与目录
+
+### 1.1 本机事实
+
+| 项 | 实测值 |
+|---|---|
+| 客户端 | DSH 0.2.1-rc.2 |
+| profile | `desktop` |
+| profileDir | `C:\Users\28256\.dsh\profiles\desktop` |
+| 启动方式 | `C:\Users\28256\AppData\Local\Programs\DeepSeek Harness\DeepSeek Harness.exe` |
+| CLI 限制 | `dsh --profile desktop` 被 Electron 管理模式拒绝 |
+| 端口 | 动态；当前观测 40726 |
+| HTTP 根路径 | 当前返回 401，任意 HTTP 响应均表示服务层已响应 |
+| Node | v24.19.0 |
+| 本地 file 插件 | `C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2` |
+| link 插件 | `D:\Github\novel_assistance` |
+| 共享风险目录 | profile `node_modules`、`profiles\node_modules`、`.plugin-manager`、`.dsh-market` |
+
+### 1.2 目录结构
+
+```text
+D:\dsh_plugin\dsh_guardian\
+├── AGENTS.md
+├── config.json
+├── state.json
+├── .guardian.lock
+├── bin\guardian.mjs
+├── fixtures\broken-plugin\
+├── transactions\
+│   └── <txid>.json
+├── backups\
+│   ├── <timestamp>-before-add-<plugin>-<txid>\
+│   ├── <timestamp>-after-add-<plugin>-<txid>\
+│   ├── disabled-entries\
+│   └── last-known-good\
+└── logs\
+    ├── guardian-YYYYMMDD.log
+    ├── intent.json
+    └── repair-report-<timestamp>.md
+```
+
+### 1.3 config.json 模板
+
+```json
+{
+  "dshHome": "C:\\Users\\28256\\.dsh",
+  "profile": "desktop",
+  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "launchMode": "electron-exe",
+  "launch": ["C:\\Users\\28256\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"],
+  "expectedClientVersion": "0.2.1-rc.2",
+  "portMode": "dynamic",
+  "port": 0,
+  "startTimeoutMs": 90000,
+  "settleMs": 15000,
+  "probeStartTimeoutMs": 45000,
+  "probeSettleMs": 8000,
+  "maxBisectMs": 300000,
+  "singleInstance": "kill-first",
+  "killGraceMs": 5000,
+  "lockTimeoutMs": 600000,
+  "snapshotMode": "exact",
+  "maxExactSnapshotMB": 0,
+  "offlineRecovery": true,
+  "trackedFiles": [
+    "cordis.patch.yml",
+    "package.json",
+    "cordis.yml",
+    "pnpm-workspace.yaml",
+    "pnpm-lock.yaml"
+  ],
+  "trackedRuntimePaths": [
+    "node_modules",
+    ".plugin-manager",
+    ".dsh-market"
+  ],
+  "trackedSourcePaths": [
+    "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2",
+    "D:\\Github\\novel_assistance"
+  ],
+  "sourceInclude": [
+    "**/*"
+  ],
+  "sourceExclude": [
+    "node_modules",
+    ".git",
+    ".cache",
+    ".pnpm-store",
+    "dist",
+    "cache",
+    "*.log"
+  ],
+  "sharedDependencyRoots": [
+    "C:\\Users\\28256\\.dsh\\profiles\\node_modules"
+  ],
+  "includePnpmMetadata": true,
+  "includePluginManagerState": true,
+  "includeMarketState": true,
+  "includeFileDependencies": true,
+  "includeLinkDependencies": true,
+  "includePatchReferencedPlugins": true,
+  "recordClientAsarHash": true,
+  "keepTransactions": 20,
+  "keepLkg": 3
+}
+```
+
+说明：`maxExactSnapshotMB=0` 表示 exact 模式不以哈希替代内容。磁盘空间不足时事务失败并保留原环境，不创建“看似成功但不可恢复”的快照。
+
+---
+
+## 2. runtimeClosure：完整运行环境定义
+
+`runtimeClosure` 必须由 `discoverRuntimeClosure()` 实际计算，不允许只依赖固定文件列表。
+
+### 2.1 必须纳入的对象
+
+1. **profile 文件**：`trackedFiles` 全部内容。
+2. **profile 依赖树**：`profileDir/node_modules`，包括普通目录、`.pnpm`、`.bin`、`.modules.yaml`、`.pnpm-workspace-state-v1.json` 与所有 package manager 元数据。
+3. **共享依赖**：从 profile 内真实路径、符号链接和 junction 递归解析到的 `sharedDependencyRoots` 下包；每个条目必须记录 `owners`（profile、事务或其他 profile），恢复时只删除本 profile/本事务拥有且 before manifest 中不存在的条目，不能把整个共享目录无条件复制或删除。
+4. **file: 依赖**：解析 package.json 中所有 `file:` specifier 的真实目标目录及其 package.json、入口与依赖闭包。
+5. **link: 依赖**：解析所有 `link:` specifier 的真实目标、链接类型、目标路径及纳入清单的文件。
+6. **patch 引用**：扫描 `cordis.patch.yml` 中 `insert[].name`、行 `name`、相对路径、绝对路径和包名，解析其真实入口。
+7. **插件管理状态**：`.plugin-manager`，包括操作状态和失败记录。
+8. **市场状态**：`.dsh-market`，包括影响插件启用/版本选择的状态文件。
+9. **客户端指纹**：版本、安装路径、`resources/app.asar` SHA-256；不复制 Electron 安装本体。
+10. **运行时版本**：Node、pnpm、平台、架构、启动参数、环境变量白名单摘要。
+
+### 2.2 不纳入内容快照的对象
+
+下列对象只记录路径、存在性、大小、哈希或版本，不复制内容：
+
+```text
+npm/pnpm 下载缓存
+.cache
+.pnpm-store（除非 exact 依赖闭包实际从中引用且恢复需要）
+日志
+临时文件
+session 内容
+凭据与 token
+Electron 安装本体
+```
+
+如果某个运行时包只能从上述缓存恢复，exact snapshot 必须把该事实写入 `externalDependencies`；离线恢复缺少它时必须明确失败，不得报告成功。
+
+### 2.3 manifest 格式
+
+每个 exact 快照必须有 `meta.json`：
+
+```json
+{
+  "format": 4,
+  "mode": "exact",
+  "transactionId": "tx-...",
+  "label": "before-add-plugin-tx-...",
+  "createdAt": "2026-10-18T12:00:00+08:00",
+  "state": "verified",
+  "profile": "desktop",
+  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "runtime": {
+    "nodeVersion": "v24.19.0",
+    "pnpmVersion": "...",
+    "clientVersion": "0.2.1-rc.2",
+    "clientAsarSha256": "...",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "entries": {
+    "profile/package.json": {
+      "kind": "file",
+      "size": 0,
+      "sha256": "...",
+      "content": "files/profile/package.json"
+    },
+    "profile/node_modules/novel-agents-md": {
+      "kind": "junction",
+      "target": "D:/Github/novel_assistance"
+    },
+    "profile/node_modules/dsh-infinite-gen-2": {
+      "kind": "directory",
+      "sha256OfListing": "...",
+      "content": "trees/profile-node_modules/dsh-infinite-gen-2"
+    }
+  },
+  "externalDependencies": [],
+  "health": {
+    "preflight": "ok",
+    "port": 40726,
+    "httpStatus": 401,
+    "settledMs": 15000,
+    "safe": false,
+    "probing": false
+  }
+}
+```
+
+恢复前后必须同时校验：文件哈希、目录清单、链接类型、链接目标、runtimeClosure 集合和客户端版本。
+
+---
+
+## 3. CLI 契约
+
+| 命令 | 作用 | 退出码 |
+|---|---|---|
+| `doctor` | 诊断环境、闭包、事务和状态 | 0 / 1 WARN / 2 FAIL |
+| `preflight` | 不启动客户端，验证闭包可解析性 | 0 / 2 |
+| `runtime-inventory` | 输出当前 runtimeClosure 清单与哈希 | 0 / 2 |
+| `ps` | 输出实例 PID、后代 PID、端口和归属 | 0 / 1 |
+| `snapshot <label>` | 手动 exact/reproducible 快照 | 0 / 2 空间或闭包失败 |
+| `list` | 列快照和事务 | 0 |
+| `restore <label>` | 恢复快照，自动创建 pre-restore 快照 | 0 / 2 |
+| `plugin-add <spec>` | 插件添加事务；成功提交，失败自动完整回滚 | 0 / 2 添加失败但已恢复 / 3 回滚失败 |
+| `plugin-link <path>` | 本地插件 link 事务 | 0 / 2 / 3 |
+| `plugin-remove <id>` | 插件移除事务 | 0 / 2 / 3 |
+| `plugin-restore <txid>` | 恢复某次插件事务的 before/after 快照 | 0 / 2 |
+| `transactions` | 列事务状态、快照和回滚结果 | 0 |
+| `guard [--detach]` | 启动并验证当前环境，不修改插件事务 | 0 / 2 / 3 |
+| `safe on` / `safe off` | 仅改变 patch 层的安全模式 | 0 |
+| `disable <id>` | 写入 `disabled: true` | 0 |
+| `revert <id>` | 移除 override | 0 / 2 |
+| `enable <id>` | 移除 disable 覆盖 | 0 / 2 |
+| `bisect [--fast] [--ids a,b]` | 仅定位 patch 层候选 | 0 / 2 |
+| `repair` | 按事务优先级执行恢复链 | 0 / 2 / 3 |
+| `restart` | 终止当前实例后 guard | 同 guard |
+| `status` | 输出 state.json 摘要 | 0 |
+
+### 3.1 plugin-add 事务状态机
+
+```text
+prepared
+  → stopped
+  → before-snapshot-created
+  → installing
+  → closure-inventoried
+  → preflight-passed
+  → starting
+  → committed
+
+任一阶段失败：
+  installing / closure-inventoried / preflight-passed / starting
+  → rollback-stopping
+  → restoring-before
+  → restore-verified
+  → restarting-before
+  → rolled-back
+
+恢复失败：
+  → rollback-failed
+```
+
+每笔事务写 `transactions/<txid>.json`：
+
+```json
+{
+  "id": "tx-20261018-120000-abcd",
+  "operation": "plugin-add",
+  "spec": "dsh-mindmap@0.14.1",
+  "mode": "exact",
+  "status": "installing",
+  "beforeSnapshot": "before-add-dsh-mindmap-tx-...",
+  "afterSnapshot": null,
+  "parentHealthySnapshot": "last-known-good-...",
+  "changedPaths": [],
+  "addedPaths": [],
+  "createdAt": "2026-10-18T12:00:00+08:00",
+  "error": null
+}
+```
+
+### 3.2 plugin-add 行为
+
+```text
+1) 获取 .guardian.lock，写 intent
+2) 读取当前实例；若运行则优雅停止，超时才杀进程树
+3) preflight 当前环境；当前环境不健康则不允许叠加新插件
+4) 创建不可变 before-add-<plugin>-<txid> exact 快照
+5) 执行用户明确请求的安装/链接操作
+   - registry spec：调用 pnpm，并记录完整 argv、cwd、退出码
+   - file/link spec：建立链接并记录真实目标与链接类型
+6) 重新 discoverRuntimeClosure
+7) preflight 新环境
+8) 启动 Electron，检查进程树端口、HTTP 响应、settleMs
+9) 成功：创建 after-add exact 快照，写 committed，更新 LKG，退出 0
+10) 失败：停止 Electron，恢复 before-add exact 快照，重新启动验证
+    - 恢复成功：写 rolled-back，退出 2（添加失败但原环境恢复）
+    - 恢复失败：写 rollback-failed，生成报告，退出 3
+```
+
+`plugin-add` 失败后**不得**把失败环境写入 LKG，也不得把 safe 状态写入主 LKG。
+
+### 3.3 exact restore
+
+恢复顺序固定：
+
+```text
+1) 获取锁，写 intent
+2) 确认目标快照 format/mode/state/hash
+3) 停止 Electron，并确认进程树与端口已释放
+4) 创建 pre-restore exact 快照
+5) 清理事务拥有的受管路径
+6) 按 manifest 恢复普通文件、目录、symlink、junction
+7) 恢复 package.json、lockfile、pnpm 元数据与插件管理状态
+8) 重新计算 runtimeClosure，与 meta.entries 比对
+9) offline preflight
+10) 启动 Electron 验证
+11) 验证成功才写 restore-verified；失败保留 pre-restore 并退出 3
+```
+
+恢复不能把普通 symlink/junction 当目录复制；Windows 下必须使用正确的链接创建方式并校验目标。
+
+### 3.4 preflight
+
+`preflight` 至少检查：
+
+```text
+profile 文件可读
+package.json / lockfile JSON/YAML 结构可读
+file:/link: 目标存在
+patch insert/name 引用可解析
+runtimeClosure 中每个 required entry 存在
+node_modules/.modules.yaml 与 lockfile/profile importer 可匹配
+客户端版本与 asar hash 符合 config（版本不符为 FAIL，除非 --allow-client-mismatch）
+```
+
+`@deepseek-ai/*` 内置包不能用全局 npx 缓存作为验证依据；解析到 `_npx` 只能 WARN，不得当作客户端内置包的真实来源。
+
+### 3.5 启动判定
+
+```text
+spawn Electron → 记录 rootPid
+每 500ms 用 netstat + CIM 父子图寻找 rootPid 后代持有的 127.0.0.1 LISTENING 端口
+GET /：任意 HTTP 状态（包括 401）代表服务端响应
+继续观察 settleMs；进程树、端口均保持才算 ok
+```
+
+端口必须属于本次 spawn 的进程树；旧实例占用端口不能判成功。
+
+### 3.6 patch 语义
+
+- `- id: X` + `config`：覆盖，不是禁用。
+- `- id: X` + `disabled: true`：禁用。
+- `revert X`：移除 override，插件仍按默认配置加载。
+- `insert`：新增行；移除 insert 子项才是移除该插入项。
+- `bisect` 只覆盖 patch 中可见的 id；bundle 内部行需要 `--ids`，否则报告“不可定位”。
+
+---
+
+## 4. 快照安全与源码策略
+
+### 4.1 exact 与 reproducible
+
+- `exact`：默认；复制完整受管内容和链接信息，恢复不联网。
+- `reproducible`：只保存 manifest、源码、package/lockfile，恢复时使用本地 pnpm store；任何 store 缺失都报告失败，不静默联网。
+
+用户目标是“添加失败必回到原环境”，因此 `plugin-add` 默认只允许 `exact`。
+
+### 4.2 源码目录
+
+对于 Git 仓库或本地插件目录：
+
+1. 事务前记录 `git status --porcelain`（若为 Git 仓库）。
+2. exact 快照复制源码白名单中的内容，并记录未跟踪文件。
+3. 事务回滚只删除该事务明确新增的文件；覆盖事务明确修改的文件。
+4. 普通 `restore` 默认保留快照后新增源码，并在报告列出。
+5. `restore --force-clean` 才删除快照后新增源码，且必须二次确认。
+
+### 4.3 空间策略
+
+- exact 快照不允许“只保存哈希却声称可恢复”。
+- 磁盘空间不足时事务在 before 快照阶段失败，原环境保持不变。
+- 缓存、日志、`.git` 可排除，但如果 runtimeClosure 实际依赖它们，必须提升为受管对象或报告 external dependency。
+
+---
+
+## 5. guard、事务恢复与 repair
+
+### 5.1 guard
+
+`guard` 只验证并启动当前环境，不自动改变插件依赖；插件添加必须走 `plugin-add`。
+
+```text
+preflight
+  FAIL → 若存在最近失败事务，调用 plugin-restore <txid>
+  OK → 启动 Electron
+       成功 → 若非 safe/probing，更新 LKG
+       失败 → 选择 verified 快照恢复后只重试一次
+```
+
+### 5.2 repair
+
+```text
+1) 检查是否存在 status=installing/start-failed/rollback-failed 的未完成事务
+2) 有未完成事务：优先恢复该事务 beforeSnapshot
+3) 无未完成事务：恢复最近 verified LKG
+4) exact restore 后启动验证
+5) exact restore 仍失败：doctor 报告 runtimeClosure 差异，退出 3
+6) 只有在 exact 环境健康、故障明确属于 patch 层时，才执行 safe/bisect
+7) bisect 未定位：保留原环境或进入 safe，但绝不覆盖 before/after 快照
+```
+
+### 5.3 LKG
+
+主 LKG 只能来自：
+
+```text
+完整 runtimeClosure 已验证
+safe=false
+probing=false
+disabled 为空
+preflight 无 FAIL
+Electron 进程与端口稳定
+```
+
+事务 before-add 快照优先级高于 LKG；LKG 不能替代事务快照。
+
+---
+
+## 6. 分步实施与验收
+
+### 第 1 步：骨架、配置与锁
+
+实现 config、state version、`.guardian.lock`、intent、doctor 基础、Electron 环境探测。
+
+验收：Node check 通过；profile=desktop；exe 存在；config 包含 2.2 所有键；并发第二个 guardian 被锁拒绝。
+
+### 第 2 步：runtimeClosure inventory
+
+实现 `runtime-inventory`：解析 trackedFiles、node_modules、file/link、patch 引用、plugin-manager、market 状态、共享依赖和客户端指纹。
+
+验收：输出中必须出现：
+
+```text
+profile/node_modules
+profile/package.json
+profile/pnpm-lock.yaml
+file:dsh-infinite-gen-2
+link:novel-agents-md
+D:/Github/novel_assistance
+clientAsarSha256
+```
+
+### 第 3 步：exact snapshot / restore
+
+实现不可变 exact 快照、manifest、普通文件、目录、symlink、junction、pnpm 元数据恢复。
+
+验收：
+
+1. 快照包含 profile node_modules、lockfile、file/link 目标。
+2. 修改插件入口文件、package.json、lockfile、链接目标后 exact restore 全部恢复。
+3. 恢复后 `runtime-inventory` 与 before manifest 一致。
+4. 恢复全过程离线完成。
+5. 哈希不一致的快照被拒绝。
+
+### 第 4 步：plugin-add / plugin-link / plugin-remove 事务
+
+实现事务状态机、before-add、after-add、changedPaths、addedPaths、事务报告。
+
+验收：
+
+```text
+plugin-add 正常插件 → committed + before + after
+plugin-add 故意抛错插件 → 自动恢复 before + rolled-back
+恢复后 A/B 依赖保留，失败插件 C 的 package/lock/node_modules/link 消失
+```
+
+### 第 5 步：guard 与客户端验证
+
+实现动态端口发现、HTTP 任意响应、settle、Electron 进程树清理、LKG 条件。
+
+验收：健康态 guard 成功；注入失败插件后 guard 能恢复事务 before；旧端口不能伪造成功；safe/probing 不写主 LKG。
+
+### 第 6 步：patch 控制与有限 bisect
+
+实现数组 patch 切分、disable/revert/enable；bisect 仅处理 patch 可见 id，并明确 bundle 内部不可定位。
+
+验收：
+
+```text
+disable = disabled:true
+revert = 删除 override
+broken insert → disable 后可启动，revert 后仍失败
+```
+
+### 第 7 步：repair、报告与 README
+
+实现未完成事务优先恢复、exact restore、报告、事务列表和 README 决策树。
+
+验收：
+
+1. 添加失败自动回滚并退出 2。
+2. 回滚失败退出 3，不覆盖原 before 快照。
+3. 连续 A 成功、B 成功、C 失败后恢复到 A+B。
+4. 报告含 txid、beforeSnapshot、afterSnapshot、changedPaths、restoreVerification、finalHealth。
+5. README 含事务流程、退出码、exact/reproducible 差异和人工处置。
+
+每步完成后只输出下一步模型提醒，不执行模型切换。
+
+---
+
+## 7. 故障决策树
+
+```text
+添加插件
+├─ 必须使用 node bin/guardian.mjs plugin-add <spec>
+│  ├─ committed → after-add 已生成，结束
+│  ├─ rolled-back → before-add 已恢复，检查报告
+│  └─ rollback-failed → 立即停止手工操作，保留 pre-restore，检查报告
+│
+DSH 起不来
+├─ node bin/guardian.mjs transactions
+│  ├─ installing/start-failed → plugin-restore <txid>
+│  ├─ rollback-failed → 不覆盖任何快照，人工处理
+│  └─ 无未完成事务 → 下一步
+├─ node bin/guardian.mjs runtime-inventory
+│  ├─ runtimeClosure 缺路径 → restore 最近 verified exact
+│  └─ 清单一致 → 下一步
+├─ node bin/guardian.mjs preflight
+│  ├─ FAIL → restore verified exact，不跑 bisect
+│  └─ OK → guard
+├─ guard
+│  ├─ 0 → 客户端已恢复
+│  └─ 2/3 → repair
+└─ repair 仍失败 → 人工根据报告恢复 before-add 或检查客户端版本/外部依赖
+```
+
+---
+
+## 8. 日常使用
+
+### 添加插件
+
+```powershell
+node bin/guardian.mjs plugin-add dsh-mindmap@0.14.1
+node bin/guardian.mjs transactions
+node bin/guardian.mjs status
+```
+
+### 添加本地插件
+
+```powershell
+node bin/guardian.mjs plugin-link D:\path\to\plugin
+```
+
+### 失败后恢复指定事务
+
+```powershell
+node bin/guardian.mjs transactions
+node bin/guardian.mjs plugin-restore <txid>
+node bin/guardian.mjs ps
+```
+
+### 手动快照
+
+```powershell
+node bin/guardian.mjs snapshot before-manual-change
+```
+
+手动快照不能替代 `plugin-add` 事务；裸 `pnpm add` 的变化只能由 inventory 发现，不能保证拥有准确的事务边界。
+
+---
+
+## 9. 已知限制
+
+1. Electron 客户端只能通过 exe 启动，CLI 的 `--profile desktop` 不可用。
+2. 客户端更新导致版本或 `app.asar` 哈希变化时，恢复报告为 `client-mismatch`；需要先确认客户端版本，不自动覆盖。
+3. `GET /` 返回 401 仍算服务层响应；页面白屏和业务功能错误需要额外健康端点，当前不自动判定。
+4. exact 模式需要足够磁盘空间；空间不足时事务失败并保持原环境，不退化成不可恢复的哈希快照。
+5. 外部路径若在 `trackedSourcePaths` 之外，不能自动恢复；`runtime-inventory` 必须把它列为 external dependency。
+6. 依赖源目录是 Git 仓库时，普通 restore 不删除新增源码；事务回滚只处理本事务 manifest 明确新增或修改的路径。
+7. `node_modules` 复制可能耗时；这是完整恢复能力的成本，不能用只恢复 package.json 代替。
+8. bundle 内部、未被 patch 引用的 loader 行无法由 desktop CLI 枚举；bisect 只能报告不可定位并回到 exact 快照。
+9. 所有恢复动作均需保留 before、pre-restore 和事务报告，不能因“看起来已启动”而删除证据。

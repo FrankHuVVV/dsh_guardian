@@ -1,0 +1,12 @@
+node_modules/
+backups/_store/
+fixtures/sandbox/
+logs/*.log
+sandbox/
+ui/*.log
+
+# --- 运行时心跳文件：每几秒被进程改写，纳入版本控制会让工作区永远脏 ---
+logs/tray.state.json
+logs/tray.pid
+logs/intent.json
+.guardian.lock

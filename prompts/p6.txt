@@ -1,0 +1,27 @@
+这是 DSH 完整插件运行环境快照与恢复器 v5【第 6 步：patch 控制与有限 bisect】。承接第 5 步已通过。
+
+要做的事：
+1. 读取 AGENTS.md 第 4 节（patch 语义与安全模式）与第 3 节中 safe/disable/revert/enable/bisect 契约。
+2. 实现 patch 数组切分与重组：正确识别 `- id: X` 块、`insert:` 块、缩进与注释归属；重组后保持原顺序。
+3. 实现 `safe on/off`：safe on 时 patch 写入安全模式（按 v5 语义），safe off 撤销；不覆盖事务快照。
+4. 实现 `disable <id>`：写 `disabled: true`；`revert <id>`：删 override；`enable <id>`：撤销两者。三者语义不可互换。
+5. 实现 `bisect [--fast] [--ids a,b]`：只覆盖 patch 可见 id；每轮探测前 restore 到 bisect 前快照，探测后恢复；记录轮次 ≤ 可见 id 数 + 1；bundle 内部不可见 id 报告“不可定位”，不强行覆盖 exact 快照。
+6. 实现 `restart`：kill 后 guard。
+
+完成后逐条执行验收标准：
+1) disable 后 patch 中出现 `disabled: true`，目标 id 仍在但被禁用；revert 后该块被删除；enable 后覆盖被移除。
+2) 构造 broken insert 场景：disable 该 insert 后 guard 可启动；revert 该 insert 后 guard 仍失败（因为 insert 块已被删除但问题在包本身）。说明 patch 语义与包安装问题的边界。
+3) bisect 在一个含 4+ 可见 id 且其中 1 个为元凶的 patch 上：退出码 0，stdout 含 `culprit=<key>`，轮次 ≤ 可见 id 数 + 1。
+4) bisect 后 restore 到 bisect 前快照，环境 digest 一致（bisect 不永久改写现场）。
+5) 不可见 id 场景：bisect 报告不可定位，不覆盖 exact 快照，退出码 2。
+
+输出表格：编号 | 检查命令 | 实际输出摘要（≤2 行）| PASS/FAIL。所有 patch 改动在验收后恢复。
+
+【模型切换提醒（只提醒，不执行切换）】
+- 你不得调用任何模型切换工具、不得修改当前会话模型、不得自动切换；只输出提醒文本。
+- 若全部 PASS：输出表格和“第 6 步通过”；另起一行输出：
+  `下一步：请手动切换到 GPT-6.1 Sol，然后粘贴第 7 步提示词。我不会自动切换模型。`
+  然后停止。
+- 若任一 FAIL：立即停止并向我提问，必须包含失败编号、期望、完整命令输出、patch 切分前后的关键片段、bisect 每轮探测的 id 集合与判定、你选择的测试 id 及理由。末尾输出：
+  `当前不要切换模型；请先回答上述问题，修复后仍在本模型重跑第 6 步。`
+- 不要输出“已切换 / 将自动切换 / 建议自动切换”之类内容。

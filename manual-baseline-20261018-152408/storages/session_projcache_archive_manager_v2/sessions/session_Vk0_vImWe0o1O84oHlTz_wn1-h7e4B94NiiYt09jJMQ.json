@@ -1,0 +1,1296 @@
+{
+  "version": 2,
+  "record": {
+    "sessionId": "session-fdc91dce-94cf-4d5b-99b5-3920bef6b479",
+    "identity": {
+      "createdAt": 1790566245969,
+      "cwd": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 572,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 572,
+        "val": "调整ComfyUI工作流生成图片"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 572,
+        "val": {
+          "first": {
+            "seq": 16,
+            "text": "帮我调整一下comfyui的工作流，qwen-image-2.1-UC-Q4_K_M.gguf已经放入diffusion_models文件夹、qwen3-vl-8b-heretic-1.3.0-Q4_K_M.gguf已经放入text_encoders文件夹、texture_fix_vae_for_qwen_image_2.1_bf16.safetensors已经放入vae文件夹，调整到能成功生图"
+          },
+          "count": 2,
+          "lastSeq": 509
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 572,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 572,
+        "val": "workspace-write"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 572,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 572,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 102850,
+            "outputTokens": 84662,
+            "cacheReadTokens": 7446784,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 2,
+            "step": 9,
+            "buckets": {
+              "uncachedInputTokens": 633,
+              "outputTokens": 3214,
+              "cacheReadTokens": 188800,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 572,
+        "val": {
+          "surfaceTokens": 155824,
+          "contextWindow": 1000000,
+          "pressureTokens": 189433,
+          "sampledSurfaceTokens": 154005
+        }
+      },
+      "contextBreakdown": {
+        "ver": 5,
+        "seq": 572,
+        "val": {
+          "nodes": [
+            {
+              "seq": 14,
+              "heuristicTokens": 4854,
+              "system": true
+            },
+            {
+              "seq": 15,
+              "heuristicTokens": 26,
+              "system": false
+            },
+            {
+              "seq": 16,
+              "heuristicTokens": 58,
+              "system": false
+            },
+            {
+              "seq": 17,
+              "heuristicTokens": 135,
+              "system": false
+            },
+            {
+              "seq": 25,
+              "heuristicTokens": 201,
+              "system": false
+            },
+            {
+              "seq": 27,
+              "heuristicTokens": 71,
+              "system": false
+            },
+            {
+              "seq": 29,
+              "heuristicTokens": 12,
+              "system": false
+            },
+            {
+              "seq": 33,
+              "heuristicTokens": 303,
+              "system": false
+            },
+            {
+              "seq": 35,
+              "heuristicTokens": 16,
+              "system": false
+            },
+            {
+              "seq": 37,
+              "heuristicTokens": 51,
+              "system": false
+            },
+            {
+              "seq": 41,
+              "heuristicTokens": 241,
+              "system": false
+            },
+            {
+              "seq": 43,
+              "heuristicTokens": 222,
+              "system": false
+            },
+            {
+              "seq": 45,
+              "heuristicTokens": 1653,
+              "system": false
+            },
+            {
+              "seq": 49,
+              "heuristicTokens": 415,
+              "system": false
+            },
+            {
+              "seq": 51,
+              "heuristicTokens": 217,
+              "system": false
+            },
+            {
+              "seq": 53,
+              "heuristicTokens": 21,
+              "system": false
+            },
+            {
+              "seq": 57,
+              "heuristicTokens": 268,
+              "system": false
+            },
+            {
+              "seq": 59,
+              "heuristicTokens": 114,
+              "system": false
+            },
+            {
+              "seq": 63,
+              "heuristicTokens": 466,
+              "system": false
+            },
+            {
+              "seq": 65,
+              "heuristicTokens": 69,
+              "system": false
+            },
+            {
+              "seq": 67,
+              "heuristicTokens": 138,
+              "system": false
+            },
+            {
+              "seq": 71,
+              "heuristicTokens": 180,
+              "system": false
+            },
+            {
+              "seq": 73,
+              "heuristicTokens": 2153,
+              "system": false
+            },
+            {
+              "seq": 75,
+              "heuristicTokens": 66,
+              "system": false
+            },
+            {
+              "seq": 79,
+              "heuristicTokens": 693,
+              "system": false
+            },
+            {
+              "seq": 81,
+              "heuristicTokens": 1973,
+              "system": false
+            },
+            {
+              "seq": 83,
+              "heuristicTokens": 357,
+              "system": false
+            },
+            {
+              "seq": 87,
+              "heuristicTokens": 468,
+              "system": false
+            },
+            {
+              "seq": 89,
+              "heuristicTokens": 604,
+              "system": false
+            },
+            {
+              "seq": 91,
+              "heuristicTokens": 1009,
+              "system": false
+            },
+            {
+              "seq": 95,
+              "heuristicTokens": 349,
+              "system": false
+            },
+            {
+              "seq": 97,
+              "heuristicTokens": 2182,
+              "system": false
+            },
+            {
+              "seq": 101,
+              "heuristicTokens": 1095,
+              "system": false
+            },
+            {
+              "seq": 103,
+              "heuristicTokens": 507,
+              "system": false
+            },
+            {
+              "seq": 105,
+              "heuristicTokens": 44,
+              "system": false
+            },
+            {
+              "seq": 109,
+              "heuristicTokens": 340,
+              "system": false
+            },
+            {
+              "seq": 111,
+              "heuristicTokens": 614,
+              "system": false
+            },
+            {
+              "seq": 113,
+              "heuristicTokens": 511,
+              "system": false
+            },
+            {
+              "seq": 117,
+              "heuristicTokens": 541,
+              "system": false
+            },
+            {
+              "seq": 119,
+              "heuristicTokens": 62,
+              "system": false
+            },
+            {
+              "seq": 121,
+              "heuristicTokens": 316,
+              "system": false
+            },
+            {
+              "seq": 125,
+              "heuristicTokens": 296,
+              "system": false
+            },
+            {
+              "seq": 127,
+              "heuristicTokens": 829,
+              "system": false
+            },
+            {
+              "seq": 129,
+              "heuristicTokens": 2222,
+              "system": false
+            },
+            {
+              "seq": 133,
+              "heuristicTokens": 822,
+              "system": false
+            },
+            {
+              "seq": 136,
+              "heuristicTokens": 1347,
+              "system": false
+            },
+            {
+              "seq": 137,
+              "heuristicTokens": 2562,
+              "system": false
+            },
+            {
+              "seq": 141,
+              "heuristicTokens": 1152,
+              "system": false
+            },
+            {
+              "seq": 143,
+              "heuristicTokens": 1484,
+              "system": false
+            },
+            {
+              "seq": 145,
+              "heuristicTokens": 42,
+              "system": false
+            },
+            {
+              "seq": 149,
+              "heuristicTokens": 1480,
+              "system": false
+            },
+            {
+              "seq": 151,
+              "heuristicTokens": 43,
+              "system": false
+            },
+            {
+              "seq": 153,
+              "heuristicTokens": 444,
+              "system": false
+            },
+            {
+              "seq": 157,
+              "heuristicTokens": 1055,
+              "system": false
+            },
+            {
+              "seq": 159,
+              "heuristicTokens": 499,
+              "system": false
+            },
+            {
+              "seq": 161,
+              "heuristicTokens": 733,
+              "system": false
+            },
+            {
+              "seq": 165,
+              "heuristicTokens": 920,
+              "system": false
+            },
+            {
+              "seq": 167,
+              "heuristicTokens": 1451,
+              "system": false
+            },
+            {
+              "seq": 169,
+              "heuristicTokens": 1251,
+              "system": false
+            },
+            {
+              "seq": 173,
+              "heuristicTokens": 978,
+              "system": false
+            },
+            {
+              "seq": 175,
+              "heuristicTokens": 2058,
+              "system": false
+            },
+            {
+              "seq": 177,
+              "heuristicTokens": 43,
+              "system": false
+            },
+            {
+              "seq": 181,
+              "heuristicTokens": 108,
+              "system": false
+            },
+            {
+              "seq": 184,
+              "heuristicTokens": 1012,
+              "system": false
+            },
+            {
+              "seq": 185,
+              "heuristicTokens": 698,
+              "system": false
+            },
+            {
+              "seq": 189,
+              "heuristicTokens": 446,
+              "system": false
+            },
+            {
+              "seq": 191,
+              "heuristicTokens": 1502,
+              "system": false
+            },
+            {
+              "seq": 193,
+              "heuristicTokens": 12,
+              "system": false
+            },
+            {
+              "seq": 197,
+              "heuristicTokens": 176,
+              "system": false
+            },
+            {
+              "seq": 199,
+              "heuristicTokens": 577,
+              "system": false
+            },
+            {
+              "seq": 201,
+              "heuristicTokens": 1805,
+              "system": false
+            },
+            {
+              "seq": 205,
+              "heuristicTokens": 49,
+              "system": false
+            },
+            {
+              "seq": 207,
+              "heuristicTokens": 1119,
+              "system": false
+            },
+            {
+              "seq": 211,
+              "heuristicTokens": 129,
+              "system": false
+            },
+            {
+              "seq": 213,
+              "heuristicTokens": 736,
+              "system": false
+            },
+            {
+              "seq": 217,
+              "heuristicTokens": 1848,
+              "system": false
+            },
+            {
+              "seq": 219,
+              "heuristicTokens": 3316,
+              "system": false
+            },
+            {
+              "seq": 223,
+              "heuristicTokens": 205,
+              "system": false
+            },
+            {
+              "seq": 225,
+              "heuristicTokens": 1893,
+              "system": false
+            },
+            {
+              "seq": 229,
+              "heuristicTokens": 795,
+              "system": false
+            },
+            {
+              "seq": 231,
+              "heuristicTokens": 587,
+              "system": false
+            },
+            {
+              "seq": 233,
+              "heuristicTokens": 84,
+              "system": false
+            },
+            {
+              "seq": 237,
+              "heuristicTokens": 795,
+              "system": false
+            },
+            {
+              "seq": 239,
+              "heuristicTokens": 705,
+              "system": false
+            },
+            {
+              "seq": 241,
+              "heuristicTokens": 1498,
+              "system": false
+            },
+            {
+              "seq": 245,
+              "heuristicTokens": 1112,
+              "system": false
+            },
+            {
+              "seq": 247,
+              "heuristicTokens": 74,
+              "system": false
+            },
+            {
+              "seq": 249,
+              "heuristicTokens": 576,
+              "system": false
+            },
+            {
+              "seq": 253,
+              "heuristicTokens": 919,
+              "system": false
+            },
+            {
+              "seq": 255,
+              "heuristicTokens": 18,
+              "system": false
+            },
+            {
+              "seq": 257,
+              "heuristicTokens": 12,
+              "system": false
+            },
+            {
+              "seq": 261,
+              "heuristicTokens": 263,
+              "system": false
+            },
+            {
+              "seq": 263,
+              "heuristicTokens": 4524,
+              "system": false
+            },
+            {
+              "seq": 267,
+              "heuristicTokens": 1279,
+              "system": false
+            },
+            {
+              "seq": 270,
+              "heuristicTokens": 756,
+              "system": false
+            },
+            {
+              "seq": 271,
+              "heuristicTokens": 434,
+              "system": false
+            },
+            {
+              "seq": 275,
+              "heuristicTokens": 671,
+              "system": false
+            },
+            {
+              "seq": 277,
+              "heuristicTokens": 972,
+              "system": false
+            },
+            {
+              "seq": 281,
+              "heuristicTokens": 5640,
+              "system": false
+            },
+            {
+              "seq": 283,
+              "heuristicTokens": 162,
+              "system": false
+            },
+            {
+              "seq": 285,
+              "heuristicTokens": 1086,
+              "system": false
+            },
+            {
+              "seq": 289,
+              "heuristicTokens": 2316,
+              "system": false
+            },
+            {
+              "seq": 291,
+              "heuristicTokens": 2126,
+              "system": false
+            },
+            {
+              "seq": 293,
+              "heuristicTokens": 252,
+              "system": false
+            },
+            {
+              "seq": 297,
+              "heuristicTokens": 2755,
+              "system": false
+            },
+            {
+              "seq": 299,
+              "heuristicTokens": 45,
+              "system": false
+            },
+            {
+              "seq": 302,
+              "heuristicTokens": 23,
+              "system": false
+            },
+            {
+              "seq": 306,
+              "heuristicTokens": 401,
+              "system": false
+            },
+            {
+              "seq": 308,
+              "heuristicTokens": 58,
+              "system": false
+            },
+            {
+              "seq": 312,
+              "heuristicTokens": 1382,
+              "system": false
+            },
+            {
+              "seq": 316,
+              "heuristicTokens": 259,
+              "system": false
+            },
+            {
+              "seq": 320,
+              "heuristicTokens": 424,
+              "system": false
+            },
+            {
+              "seq": 324,
+              "heuristicTokens": 36,
+              "system": false
+            },
+            {
+              "seq": 328,
+              "heuristicTokens": 860,
+              "system": false
+            },
+            {
+              "seq": 332,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 336,
+              "heuristicTokens": 4135,
+              "system": false
+            },
+            {
+              "seq": 338,
+              "heuristicTokens": 2375,
+              "system": false
+            },
+            {
+              "seq": 342,
+              "heuristicTokens": 120,
+              "system": false
+            },
+            {
+              "seq": 344,
+              "heuristicTokens": 845,
+              "system": false
+            },
+            {
+              "seq": 348,
+              "heuristicTokens": 2775,
+              "system": false
+            },
+            {
+              "seq": 350,
+              "heuristicTokens": 45,
+              "system": false
+            },
+            {
+              "seq": 354,
+              "heuristicTokens": 558,
+              "system": false
+            },
+            {
+              "seq": 356,
+              "heuristicTokens": 203,
+              "system": false
+            },
+            {
+              "seq": 360,
+              "heuristicTokens": 811,
+              "system": false
+            },
+            {
+              "seq": 362,
+              "heuristicTokens": 23,
+              "system": false
+            },
+            {
+              "seq": 364,
+              "heuristicTokens": 632,
+              "system": false
+            },
+            {
+              "seq": 368,
+              "heuristicTokens": 113,
+              "system": false
+            },
+            {
+              "seq": 370,
+              "heuristicTokens": 288,
+              "system": false
+            },
+            {
+              "seq": 374,
+              "heuristicTokens": 703,
+              "system": false
+            },
+            {
+              "seq": 376,
+              "heuristicTokens": 115,
+              "system": false
+            },
+            {
+              "seq": 380,
+              "heuristicTokens": 1018,
+              "system": false
+            },
+            {
+              "seq": 384,
+              "heuristicTokens": 16,
+              "system": false
+            },
+            {
+              "seq": 388,
+              "heuristicTokens": 1805,
+              "system": false
+            },
+            {
+              "seq": 390,
+              "heuristicTokens": 44,
+              "system": false
+            },
+            {
+              "seq": 394,
+              "heuristicTokens": 156,
+              "system": false
+            },
+            {
+              "seq": 396,
+              "heuristicTokens": 613,
+              "system": false
+            },
+            {
+              "seq": 401,
+              "heuristicTokens": 1212,
+              "system": false
+            },
+            {
+              "seq": 403,
+              "heuristicTokens": 78,
+              "system": false
+            },
+            {
+              "seq": 407,
+              "heuristicTokens": 174,
+              "system": false
+            },
+            {
+              "seq": 409,
+              "heuristicTokens": 494,
+              "system": false
+            },
+            {
+              "seq": 411,
+              "heuristicTokens": 1675,
+              "system": false
+            },
+            {
+              "seq": 413,
+              "heuristicTokens": 192,
+              "system": false
+            },
+            {
+              "seq": 417,
+              "heuristicTokens": 638,
+              "system": false
+            },
+            {
+              "seq": 421,
+              "heuristicTokens": 16,
+              "system": false
+            },
+            {
+              "seq": 425,
+              "heuristicTokens": 309,
+              "system": false
+            },
+            {
+              "seq": 427,
+              "heuristicTokens": 364,
+              "system": false
+            },
+            {
+              "seq": 431,
+              "heuristicTokens": 414,
+              "system": false
+            },
+            {
+              "seq": 433,
+              "heuristicTokens": 38,
+              "system": false
+            },
+            {
+              "seq": 437,
+              "heuristicTokens": 103,
+              "system": false
+            },
+            {
+              "seq": 439,
+              "heuristicTokens": 16,
+              "system": false
+            },
+            {
+              "seq": 443,
+              "heuristicTokens": 127,
+              "system": false
+            },
+            {
+              "seq": 445,
+              "heuristicTokens": 307,
+              "system": false
+            },
+            {
+              "seq": 449,
+              "heuristicTokens": 606,
+              "system": false
+            },
+            {
+              "seq": 451,
+              "heuristicTokens": 108,
+              "system": false
+            },
+            {
+              "seq": 453,
+              "heuristicTokens": 16,
+              "system": false
+            },
+            {
+              "seq": 457,
+              "heuristicTokens": 394,
+              "system": false
+            },
+            {
+              "seq": 459,
+              "heuristicTokens": 228,
+              "system": false
+            },
+            {
+              "seq": 463,
+              "heuristicTokens": 1795,
+              "system": false
+            },
+            {
+              "seq": 465,
+              "heuristicTokens": 312,
+              "system": false
+            },
+            {
+              "seq": 467,
+              "heuristicTokens": 19,
+              "system": false
+            },
+            {
+              "seq": 471,
+              "heuristicTokens": 544,
+              "system": false
+            },
+            {
+              "seq": 473,
+              "heuristicTokens": 108,
+              "system": false
+            },
+            {
+              "seq": 475,
+              "heuristicTokens": 62,
+              "system": false
+            },
+            {
+              "seq": 479,
+              "heuristicTokens": 235,
+              "system": false
+            },
+            {
+              "seq": 481,
+              "heuristicTokens": 18,
+              "system": false
+            },
+            {
+              "seq": 484,
+              "heuristicTokens": 23,
+              "system": false
+            },
+            {
+              "seq": 488,
+              "heuristicTokens": 316,
+              "system": false
+            },
+            {
+              "seq": 490,
+              "heuristicTokens": 285,
+              "system": false
+            },
+            {
+              "seq": 494,
+              "heuristicTokens": 1390,
+              "system": false
+            },
+            {
+              "seq": 497,
+              "heuristicTokens": 28,
+              "system": false
+            },
+            {
+              "seq": 501,
+              "heuristicTokens": 79,
+              "system": false
+            },
+            {
+              "seq": 509,
+              "heuristicTokens": 25,
+              "system": false
+            },
+            {
+              "seq": 511,
+              "heuristicTokens": 1707,
+              "system": false
+            },
+            {
+              "seq": 513,
+              "heuristicTokens": 5933,
+              "system": false
+            },
+            {
+              "seq": 515,
+              "heuristicTokens": 1455,
+              "system": false
+            },
+            {
+              "seq": 519,
+              "heuristicTokens": 946,
+              "system": false
+            },
+            {
+              "seq": 521,
+              "heuristicTokens": 1929,
+              "system": false
+            },
+            {
+              "seq": 525,
+              "heuristicTokens": 202,
+              "system": false
+            },
+            {
+              "seq": 527,
+              "heuristicTokens": 999,
+              "system": false
+            },
+            {
+              "seq": 531,
+              "heuristicTokens": 1604,
+              "system": false
+            },
+            {
+              "seq": 534,
+              "heuristicTokens": 1544,
+              "system": false
+            },
+            {
+              "seq": 535,
+              "heuristicTokens": 1421,
+              "system": false
+            },
+            {
+              "seq": 539,
+              "heuristicTokens": 1286,
+              "system": false
+            },
+            {
+              "seq": 541,
+              "heuristicTokens": 1348,
+              "system": false
+            },
+            {
+              "seq": 543,
+              "heuristicTokens": 83,
+              "system": false
+            },
+            {
+              "seq": 547,
+              "heuristicTokens": 2031,
+              "system": false
+            },
+            {
+              "seq": 549,
+              "heuristicTokens": 831,
+              "system": false
+            },
+            {
+              "seq": 551,
+              "heuristicTokens": 447,
+              "system": false
+            },
+            {
+              "seq": 555,
+              "heuristicTokens": 899,
+              "system": false
+            },
+            {
+              "seq": 557,
+              "heuristicTokens": 1312,
+              "system": false
+            },
+            {
+              "seq": 559,
+              "heuristicTokens": 434,
+              "system": false
+            },
+            {
+              "seq": 563,
+              "heuristicTokens": 2065,
+              "system": false
+            },
+            {
+              "seq": 565,
+              "heuristicTokens": 502,
+              "system": false
+            },
+            {
+              "seq": 569,
+              "heuristicTokens": 1819,
+              "system": false
+            }
+          ],
+          "breakdown": {
+            "systemTokens": 4854,
+            "toolsTokens": 6208,
+            "messageTokens": 150970
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 572,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 567,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 570
+          },
+          "lastTurn": 2
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 572,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 572,
+        "val": {
+          "turns": 2,
+          "steps": 75,
+          "llmMs": 399695,
+          "toolMs": 579008,
+          "ttftMs": 65586,
+          "ttftSteps": 75,
+          "decodeMs": 334109,
+          "decodeTokens": 84662,
+          "lastTurn": 2,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 572,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 10,
+              "prompt": "帮我调整一下comfyui的工作流，qwen-image-2.1-UC-Q4_K_M.gguf已经…",
+              "response": "⏵ 交付完成 两份文件已作为卡片附上: - **Qwen-Image-2.1-UC-GGUF-T2I.json** — 工作流本体(已经在你的 ComfyUI workflows 目录里有一份) - **sample_qwen21_30s…"
+            },
+            {
+              "turn": 2,
+              "seq": 506,
+              "prompt": "run_nvidia_gpu.bat脚本能不能设置为把显存放不下的模型权重放到RAM里，先告诉我实…",
+              "response": "⏵ 汇总策略与可行性(未改任何文件) **结论:能,而且你这台机器现在已经就是这个策略——显存放不下的权重本来就全在 RAM 里,不用改任何东西。** 下面是我在你这个版本(v0.37.0,C 盘装了 comfy-aimdo 0.5.5)…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 572,
+        "val": "standard"
+      },
+      "subagentCatalog": {
+        "ver": 3,
+        "seq": 572,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 572,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 572,
+        "val": {}
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 572,
+        "val": {
+          "preset": "workspace-write",
+          "sandbox": "workspace-write",
+          "approval": "ask",
+          "seeded": true
+        }
+      },
+      "workingActivity": {
+        "ver": 6,
+        "seq": 572,
+        "val": {
+          "tracker": {
+            "version": 6,
+            "phase": "done",
+            "phaseStartedAt": 1790572982339,
+            "turnStartedAt": 1790572887620,
+            "thinkingStartedAt": 1790572966931,
+            "thinkingMs": 69180,
+            "toolMs": 16119,
+            "toolCount": 13,
+            "activeTools": [],
+            "doneQueue": [
+              {
+                "action": "干活",
+                "detail": "$py=\"D:\\ComfyUI_windows_portable\\python…",
+                "failed": false,
+                "endedAt": 1790572935070,
+                "durationMs": 3328
+              },
+              {
+                "action": "让我康康",
+                "detail": "D:\\ComfyUI_windows_portable\\ComfyUI\\com…",
+                "failed": false,
+                "endedAt": 1790572946385,
+                "durationMs": 25
+              },
+              {
+                "action": "换条路",
+                "detail": "$py=\"D:\\ComfyUI_windows_portable\\python…",
+                "failed": false,
+                "endedAt": 1790572947101,
+                "durationMs": 715
+              },
+              {
+                "action": "读读看",
+                "detail": "D:\\ComfyUI_windows_portable\\ComfyUI\\com…",
+                "failed": false,
+                "endedAt": 1790572953111,
+                "durationMs": 15
+              },
+              {
+                "action": "整一下",
+                "detail": "$c=\"D:\\ComfyUI_windows_portable\\ComfyUI…",
+                "failed": false,
+                "endedAt": 1790572953623,
+                "durationMs": 511
+              },
+              {
+                "action": "换条路",
+                "detail": "$c=\"D:\\ComfyUI_windows_portable\\ComfyUI…",
+                "failed": false,
+                "endedAt": 1790572966931,
+                "durationMs": 633
+              }
+            ],
+            "thinkingPhases": 13,
+            "firstToolStartedAt": 1790572897055,
+            "waitingFirstToken": false,
+            "firstTokenAt": 1790572897053,
+            "narratedText": "汇总策略与可行性(未改任何文件)",
+            "lastChunkAt": 1790572982336,
+            "recentStream": "",
+            "turnTokens": 1593730,
+            "donePrefix": "拿下",
+            "pendingPhrase": null,
+            "pendingUntil": 0,
+            "gitBranch": null,
+            "model": null,
+            "streak": 1,
+            "lastToolEndAt": 1790572966931,
+            "maxStreak": 8,
+            "subagentCount": 0,
+            "waitingReason": null,
+            "waitingReasonAt": 0,
+            "tokBuf": 0,
+            "tokWindowStart": 1790572887620
+          },
+          "updatedAt": 1790572982339
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 572,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 572,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 572,
+        "val": null
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 572,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-official",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 572,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1790572887677
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 572,
+        "val": null
+      }
+    }
+  }
+}

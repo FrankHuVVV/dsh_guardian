@@ -1,0 +1,139 @@
+{
+  "format": 1,
+  "txid": "tx-2026-10-18T08-48-25-345Z-a90a6f4c",
+  "op": "plugin-add",
+  "args": [
+    "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2"
+  ],
+  "state": "committed",
+  "phase": "committed",
+  "phaseHistory": [
+    {
+      "phase": "prepared",
+      "at": "2026-10-18T08:48:25.346Z"
+    },
+    {
+      "phase": "stopped",
+      "at": "2026-10-18T08:48:25.601Z"
+    },
+    {
+      "phase": "before-snapshot-created",
+      "at": "2026-10-18T08:48:35.206Z"
+    },
+    {
+      "phase": "installing",
+      "at": "2026-10-18T08:48:35.207Z"
+    },
+    {
+      "phase": "closure-inventoried",
+      "at": "2026-10-18T08:48:35.220Z"
+    },
+    {
+      "phase": "preflight-passed",
+      "at": "2026-10-18T08:48:39.444Z"
+    },
+    {
+      "phase": "starting",
+      "at": "2026-10-18T08:48:39.954Z"
+    },
+    {
+      "phase": "load-verified",
+      "at": "2026-10-18T08:48:39.955Z"
+    },
+    {
+      "phase": "committed",
+      "at": "2026-10-18T08:48:49.604Z"
+    }
+  ],
+  "startedAt": "2026-10-18T08:48:25.345Z",
+  "before": "D:/dsh_plugin/dsh_guardian/backups/before-add-tx-2026-10-18T08-48-25-345Z-a90a6f4c",
+  "after": "D:/dsh_plugin/dsh_guardian/backups/after-add-tx-2026-10-18T08-48-25-345Z-a90a6f4c",
+  "addedPaths": [],
+  "changedPaths": [
+    "profile/node_modules",
+    "profile/node_modules/dsh-infinite-gen-2",
+    "profile/pnpm-lock.yaml"
+  ],
+  "removedPaths": [],
+  "install": {
+    "argv": [
+      "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2"
+    ],
+    "cwd": "D:\\dsh_plugin\\dsh_guardian",
+    "exitCode": null,
+    "stdout": "",
+    "stderr": ""
+  },
+  "loadVerification": {
+    "ok": true,
+    "failures": [],
+    "entry": "C:/Users/28256/.dsh/profiles/desktop/node_modules/dsh-infinite-gen-2/index.js"
+  },
+  "rollback": null,
+  "updatedAt": "2026-10-18T08:48:49.604Z",
+  "stop": {
+    "stopped": true,
+    "released": true,
+    "pids": [],
+    "reason": "no-running-instance",
+    "port": null,
+    "graceful": false,
+    "forced": false,
+    "elapsedMs": 254
+  },
+  "beforeDigest": "a490003237ebc56b9d293f9b718c309a5c8f11cb02c165a6bfd2f44cb4b7361a",
+  "plugin": {
+    "name": "dsh-infinite-gen-2",
+    "source": "C:/Users/28256/.dsh/plugins/dsh-infinite-gen-2",
+    "target": "C:/Users/28256/.dsh/profiles/desktop/node_modules/dsh-infinite-gen-2",
+    "package": {
+      "name": "dsh-infinite-gen-2",
+      "version": "0.2.3",
+      "description": "DeepSeek Harness 破甲插件「无限二代」：v5 稳定化破甲提示词（含拒绝对抗增强），客户端在对话框上方显示「破甲已开启」状态条。",
+      "type": "module",
+      "main": "index.js",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/Minglink/dsh-infinite-gen-2.git"
+      },
+      "exports": {
+        ".": "./index.js",
+        "./client": "./client.js",
+        "./package.json": "./package.json"
+      },
+      "files": [
+        "index.js",
+        "client.js",
+        "cordis.patch.yml",
+        "HARNESS_PLUGIN.md",
+        "README.md",
+        "LICENSE",
+        "prompts",
+        "assets"
+      ],
+      "scripts": {
+        "harness:check": "node --check index.js && node --check client.js"
+      },
+      "dsh": {
+        "id": "dsh-infinite-gen-2",
+        "name": "无限二代",
+        "version": "0.2.3",
+        "repo": "Minglink/dsh-infinite-gen-2",
+        "permissions": "系统提示词注入, 客户端状态条",
+        "client": {
+          "platform": "web",
+          "immediately": true
+        },
+        "bundle": {
+          "patch": "./cordis.patch.yml"
+        }
+      }
+    }
+  },
+  "afterInventoryDigest": "7019b7f5e216b54add029d714d2a773027f57855f15b974058039fc2cade3934",
+  "health": {
+    "restart": "skipped",
+    "preflight": "ok"
+  },
+  "afterDigest": "7019b7f5e216b54add029d714d2a773027f57855f15b974058039fc2cade3934"
+}

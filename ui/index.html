@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSH Guardian · 本地界面</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121722; --panel2:#161d2b; --line:#232c3d;
+    --fg:#d9e2f1; --dim:#8b98ad; --accent:#4ea1ff; --ok:#3ecf8e; --warn:#f5b04c; --bad:#ff6b6b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--fg);
+    font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    display:flex;flex-direction:column;
+  }
+  /* ---------- 顶部状态条 ---------- */
+  header.topbar{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:700;letter-spacing:.08em;font-size:13px;color:var(--accent);margin-right:6px}
+  .brand small{color:var(--dim);font-weight:400;letter-spacing:0;margin-left:6px}
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;
+    background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--dim);
+    white-space:nowrap;
+  }
+  .badge b{color:var(--fg);font-weight:600}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--dim);flex:none}
+  .dot.ok{background:var(--ok);box-shadow:0 0 6px var(--ok)}
+  .dot.warn{background:var(--warn);box-shadow:0 0 6px var(--warn)}
+  .dot.bad{background:var(--bad);box-shadow:0 0 6px var(--bad)}
+  .spacer{flex:1}
+  .updated{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+  /* ---------- 主区 ---------- */
+  main{flex:1;display:flex;flex-direction:column;gap:12px;padding:12px 16px;min-height:0;overflow:auto}
+  .banner{display:none;padding:8px 12px;border-radius:8px;font-size:13px;border:1px solid}
+  .banner.show{display:block}
+  .banner.err{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.45);color:#ffb3b3}
+  .banner.warn{background:rgba(245,176,76,.08);border-color:rgba(245,176,76,.45);color:#ffd79a}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+  .card h2{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+  .kv dt{color:var(--dim);white-space:nowrap}
+  .kv dd{margin:0;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .kv dd.mono{font-family:var(--mono);font-size:12px}
+  .big{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+  /* ---------- 操作区 ---------- */
+  .actions{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .actions h2{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+  .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .row:last-child{margin-bottom:0}
+  .row-label{width:52px;flex:none;font-size:12px;color:var(--dim)}
+  .btn{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    padding:6px 12px;border-radius:7px;border:1px solid var(--line);background:var(--panel2);
+    color:var(--fg);font-size:13px;cursor:pointer;transition:border-color .15s,background .15s;
+    min-height:30px;
+  }
+  .btn:hover:not(:disabled){border-color:var(--accent);background:#1b2436}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.primary{border-color:rgba(78,161,255,.5);color:#cfe4ff}
+  .btn.danger{border-color:rgba(255,107,107,.4);color:#ffc9c9}
+  .btn.warn{border-color:rgba(245,176,76,.4);color:#ffdcae}
+  .btn.loading::before{
+    content:"";width:10px;height:10px;border:2px solid currentColor;border-top-color:transparent;
+    border-radius:50%;animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  select.btn{padding-right:8px;max-width:230px}
+  select.btn option{background:var(--panel2);color:var(--fg)}
+  .btn.small{padding:3px 9px;font-size:12px;min-height:24px;border-radius:6px}
+  .btn.small.active{border-color:var(--accent);color:#cfe4ff;background:#1b2436}
+  .filter-group{display:inline-flex;gap:4px;margin-left:2px}
+  .badge.fail{color:#ffb3b3;border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.08)}
+  .badge.sandbox{
+    background:#5a2a00;border-color:#ff9b3d;color:#ffe1a8;font-weight:700;letter-spacing:.02em;
+  }
+  body.sandbox .topbar{box-shadow:inset 0 -2px 0 #ff9b3d}
+  .mock-input{
+    padding:6px 10px;border-radius:7px;border:1px solid var(--line);background:#0a0d14;
+    color:var(--fg);font-family:var(--mono);font-size:12px;min-width:240px;flex:1 1 240px;max-width:380px;
+  }
+  .mock-input:focus{outline:none;border-color:var(--accent)}
+  .mock-input:disabled{opacity:.45}
+  .warn-text{color:#ff9a9a;font-size:12px;line-height:1.4}
+  .phase-line{color:#7cc4ff;font-weight:600}
+  /* ---------- 控制台 ---------- */
+  .console{background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;min-height:260px;flex:1}
+  .console-head{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .console-head h2{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+  .console-head .count{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .console-body{flex:1;overflow:auto;padding:10px 14px;display:flex;flex-direction:column;gap:10px}
+  .empty{color:var(--dim);font-size:13px;padding:24px 0;text-align:center}
+  .entry{border-left:2px solid var(--line);padding-left:10px}
+  .entry.ok{border-left-color:var(--ok)}
+  .entry.bad{border-left-color:var(--bad)}
+  .entry-head{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;font-size:12px}
+  .entry-head .cmd{font-family:var(--mono);color:var(--accent);font-weight:600}
+  .entry-head .meta{color:var(--dim);font-variant-numeric:tabular-nums}
+  .entry pre{
+    margin:6px 0 0;padding:8px 10px;background:#0a0d14;border:1px solid var(--line);border-radius:6px;
+    font-family:var(--mono);font-size:12px;line-height:1.45;white-space:pre-wrap;word-break:break-word;
+    max-height:260px;overflow:auto;
+  }
+  .entry pre.err{border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.06);color:#ffb3b3}
+  .entry pre.out{color:#c9d6ea}
+  .live-notice{color:var(--warn);font-size:12px;margin-top:6px}
+  .muted{color:var(--dim)}
+  footer{padding:6px 16px 10px;font-size:11px;color:var(--dim);display:flex;gap:14px;flex-wrap:wrap}
+  footer code{font-family:var(--mono);color:#9fb3cf}
+  @media (max-width:640px){ .row-label{width:100%} .cards{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">DSH GUARDIAN<small>v5 · 本地界面</small></div>
+  <span class="badge sandbox" id="env-badge" style="display:none" title="沙箱模式：命令只作用于 sandbox 目录">[沙箱演练场 - 不会影响真实环境]</span>
+  <span class="badge" id="b-conn"><i class="dot" id="d-conn"></i><span id="t-conn">连接中…</span></span>
+  <span class="badge" id="b-inst"><i class="dot" id="d-inst"></i>实例 <b id="t-inst">—</b></span>
+  <span class="badge" id="b-safe"><i class="dot" id="d-safe"></i>安全模式 <b id="t-safe">—</b></span>
+  <span class="badge" id="b-drift"><i class="dot" id="d-drift"></i>漂移 <b id="t-drift">—</b></span>
+  <span class="spacer"></span>
+  <span class="updated" id="t-updated">—</span>
+  <button class="btn" id="btn-refresh" title="立即刷新状态">刷新</button>
+</header>
+
+<main>
+  <div class="banner err" id="banner-err"></div>
+  <div class="banner warn" id="banner-active"></div>
+  <div class="banner warn" id="banner-stream"></div>
+
+  <section class="cards">
+    <article class="card">
+      <h2>运行时状态</h2>
+      <dl class="kv">
+        <dt>实例进程</dt><dd id="k-pid">—</dd>
+        <dt>监听端口</dt><dd id="k-port">—</dd>
+        <dt>HTTP 响应状态</dt><dd id="k-http">—</dd>
+        <dt>进程状态</dt><dd id="k-health">—</dd>
+        <dt>状态文件版本</dt><dd id="k-version">—</dd>
+        <dt>故障源</dt><dd id="k-culprit">—</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <h2>最近良好快照</h2>
+      <dl class="kv">
+        <dt>快照标签</dt><dd id="k-lkg-label">—</dd>
+        <dt>内容摘要</dt><dd class="mono" id="k-lkg-digest">—</dd>
+        <dt>最新快照</dt><dd id="k-latest">—</dd>
+        <dt>创建时间</dt><dd id="k-latest-at">—</dd>
+        <dt>是否最近良好</dt><dd id="k-latest-lkg">—</dd>
+      </dl>
+    </article>
+
+    <article class="card">
+      <h2>快照存储与漂移检测</h2>
+      <dl class="kv">
+        <dt>数据块数量</dt><dd id="k-blobs">—</dd>
+        <dt>占用空间</dt><dd id="k-store">—</dd>
+        <dt>事务数</dt><dd id="k-tx">—</dd>
+        <dt>当前摘要</dt><dd class="mono" id="k-digest">—</dd>
+        <dt>最近提交摘要</dt><dd class="mono" id="k-committed">—</dd>
+        <dt>差异路径</dt><dd id="k-driftpaths">—</dd>
+      </dl>
+    </article>
+  </section>
+
+  <section class="actions">
+    <h2>命令（全部经 guardian.mjs 执行）</h2>
+    <div class="row">
+      <span class="row-label">诊断</span>
+      <button class="btn" data-cmd="doctor" title="实际命令：doctor">环境诊断</button>
+      <button class="btn" data-cmd="preflight" title="实际命令：preflight">启动前检查</button>
+      <button class="btn" data-cmd="drift" title="实际命令：drift">漂移检测</button>
+      <button class="btn" data-cmd="status" title="实际命令：status">状态摘要</button>
+      <button class="btn danger" id="btn-real-fail" title="实际命令：guardian-ui-real-fail-probe（未知命令，触发真实 stderr 与退出码 2）">🔴 测试真实失败</button>
+    </div>
+    <div class="row">
+      <span class="row-label">测试</span>
+      <button class="btn" id="btn-mock" title="执行 mock-test">🧪 测试长任务 (Mock)</button>
+      <button class="btn danger" id="btn-mock-fail" title="执行 mock-test --fail">🧪 测试失败 (Mock)</button>
+      <button class="btn warn" id="btn-mock-timeout" title="执行 mock-test --timeout">🧪 测试超时 (Mock)</button>
+      <button class="btn" id="btn-mock-hang" title="执行 mock-test --hang（挂起 60 秒）">🧪 测试挂起 (Mock)</button>
+    </div>
+    <div class="row">
+      <span class="row-label">自定义</span>
+      <input class="mock-input" id="inp-mock-args" type="text" value="--fail-code 3 --fail-at 2 --seconds 4"
+             placeholder="--fail-code 3 --fail-at 2 --seconds 4"
+             title="自定义 mock-test 参数，例如 --fail-code 3 --fail-at 2 --seconds 4">
+      <button class="btn" id="btn-mock-custom" title="按输入框参数执行 mock-test">▶ 运行自定义 Mock</button>
+    </div>
+    <div class="row">
+      <span class="row-label">运行</span>
+      <button class="btn primary" data-cmd="guard" title="实际命令：guard">守护启动</button>
+      <span class="warn-text">⚠️ 执行此操作会重启 DSH 客户端，请确保已保存当前工作。</span>
+      <button class="btn" data-cmd="recover" title="实际命令：recover">恢复未完成事务</button>
+      <button class="btn" data-cmd="transactions" title="实际命令：transactions">事务列表</button>
+      <button class="btn" data-cmd="runtime-inventory" title="实际命令：runtime-inventory">运行时清单</button>
+    </div>
+    <div class="row">
+      <span class="row-label">快照</span>
+      <button class="btn" id="btn-snapshot" title="实际命令：snapshot &lt;标签&gt;">创建快照</button>
+      <span class="warn-text">⚠️ 快照会暂停客户端，请先保存工作。</span>
+      <select class="btn" id="sel-restore" title="选择要恢复的快照">
+        <option value="">（先加载快照列表）</option>
+      </select>
+      <button class="btn danger" id="btn-restore" title="实际命令：restore &lt;标签&gt;">恢复此快照</button>
+      <button class="btn" id="btn-relist" title="重新拉取快照列表">↻ 刷新列表</button>
+    </div>
+    <div class="row">
+      <span class="row-label">控制</span>
+      <button class="btn warn" id="btn-safe" title="实际命令：safe on / safe off">开启安全模式</button>
+      <button class="btn" id="btn-plugin-add" title="实际命令：plugin-add &lt;本地目录&gt;">安装插件</button>
+      <button class="btn" id="btn-plugin-remove" title="实际命令：plugin-remove &lt;依赖名&gt;">移除插件</button>
+      <button class="btn" id="btn-plugin-link" title="实际命令：plugin-link &lt;路径&gt;">链接本地插件</button>
+    </div>
+
+  </section>
+
+  <section class="console">
+    <div class="console-head">
+      <h2>输出控制台</h2>
+      <span class="count" id="t-count">0 条</span>
+      <span class="badge fail" id="t-fail-badge" style="display:none" title="失败或含 stderr 的条目数">
+        <i class="dot bad"></i>失败 <b id="t-fail">0</b>
+      </span>
+      <div class="filter-group">
+        <button class="btn small active" data-filter="all" title="显示全部条目">全部</button>
+        <button class="btn small" data-filter="stdout" title="只显示含标准输出的条目">仅 stdout</button>
+        <button class="btn small" data-filter="stderr" title="只显示含标准错误的条目">仅 stderr</button>
+      </div>
+      <span class="spacer"></span>
+      <button class="btn" id="btn-copy">复制全部</button>
+      <button class="btn" id="btn-clear">清空</button>
+    </div>
+    <div class="console-body" id="console-body">
+      <div class="empty" id="console-empty">尚无输出。点击上方任一命令，结果会按「退出码 / 标准输出 / 标准错误」逐条显示。</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>后端 <code id="t-backend">http://127.0.0.1:3081</code></span>
+  <span>执行器 <code id="t-guardian">bin/guardian.mjs</code></span>
+  <span>自动刷新 5s</span>
+</footer>
+
+<script>
+'use strict';
+
+const MAX_ENTRIES = 200;
+const POLL_MS = 5000;
+
+const $ = (id) => document.getElementById(id);
+const els = {
+  conn: $('d-conn'), connText: $('t-conn'),
+  inst: $('d-inst'), instText: $('t-inst'),
+  safe: $('d-safe'), safeText: $('t-safe'),
+  drift: $('d-drift'), driftText: $('t-drift'),
+  updated: $('t-updated'),
+  bannerErr: $('banner-err'), bannerActive: $('banner-active'),
+  consoleBody: $('console-body'), consoleEmpty: $('console-empty'), count: $('t-count'),
+  restoreSel: $('sel-restore')
+};
+
+let busy = false;
+let runningCmd = null;
+let pollTimer = null;
+let snapshotList = null;
+let lastStatus = null;
+
+/* 命令与状态的中文显示名（实际发送给后端的仍是英文命令） */
+const CMD_LABELS = {
+  doctor: '环境诊断',
+  preflight: '启动前检查',
+  drift: '漂移检测',
+  status: '状态摘要',
+  guard: '守护启动',
+  recover: '恢复未完成事务',
+  transactions: '事务列表',
+  'runtime-inventory': '运行时清单',
+  snapshot: '创建快照',
+  restore: '恢复快照',
+  safe: '安全模式',
+  'plugin-add': '安装插件',
+  'plugin-remove': '移除插件',
+  'plugin-link': '链接本地插件',
+  'mock-test': '测试长任务 (Mock)',
+  'guardian-ui-real-fail-probe': '真实失败探测（未知命令）',
+  list: '快照列表'
+};
+
+const STATE_LABELS = {
+  verified: '已验证',
+  'pre-restore': '恢复前',
+  committed: '已提交',
+  'rolled-back': '已回滚',
+  'rollback-failed': '回滚失败',
+  installing: '安装中',
+  prepared: '已准备',
+  stopped: '已停止',
+  starting: '启动中'
+};
+
+function cmdLabel(cmd) {
+  return CMD_LABELS[cmd] ? `${CMD_LABELS[cmd]}（${cmd}）` : cmd;
+}
+
+/* 快照标签的中文别名（仅影响显示，不影响实际标签值） */
+const LABEL_ALIASES = {
+  'last-known-good': '最近良好'
+};
+
+function labelText(label) {
+  return LABEL_ALIASES[label] || label;
+}
+
+/* ---------------------------------------------------------------- 基础工具 */
+
+function text(node, value) {
+  node.textContent = value === null || value === undefined || value === '' ? '—' : String(value);
+}
+
+function setDot(el, kind) {
+  el.classList.remove('ok', 'warn', 'bad');
+  if (kind) el.classList.add(kind);
+}
+
+function fmtBytes(n) {
+  const v = Number(n);
+  if (!Number.isFinite(v) || v <= 0) return '—';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let i = 0, x = v;
+  while (x >= 1024 && i < units.length - 1) { x /= 1024; i++; }
+  return `${x.toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
+}
+
+function shortDigest(d) {
+  if (!d) return '—';
+  const s = String(d);
+  return s.length > 14 ? s.slice(0, 8) + '…' + s.slice(-4) : s;
+}
+
+function fmtTime(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return String(iso);
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
+function fmtDuration(ms) {
+  const n = Number(ms) || 0;
+  return n >= 1000 ? `${(n / 1000).toFixed(1)}s` : `${n}ms`;
+}
+
+function showBanner(el, html) {
+  el.innerHTML = html;
+  el.classList.add('show');
+}
+function hideBanner(el) {
+  el.classList.remove('show');
+  el.innerHTML = '';
+}
+
+/* 流式任务提示条（30 秒无响应 / 断线 / 页面切回） */
+let streamNoticeTimer = null;
+
+function showStreamNotice(html, kind = 'warn', autoHideMs = 0) {
+  const el = $('banner-stream');
+  if (!el) return;
+  el.className = 'banner show ' + (kind === 'err' ? 'err' : 'warn');
+  el.innerHTML = html;
+  if (streamNoticeTimer) clearTimeout(streamNoticeTimer);
+  streamNoticeTimer = null;
+  if (autoHideMs > 0) {
+    streamNoticeTimer = setTimeout(() => hideStreamNotice(), autoHideMs);
+  }
+}
+
+function hideStreamNotice() {
+  const el = $('banner-stream');
+  if (!el) return;
+  el.className = 'banner warn';
+  el.innerHTML = '';
+  if (streamNoticeTimer) clearTimeout(streamNoticeTimer);
+  streamNoticeTimer = null;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/* ---------------------------------------------------------------- 后端调用 */
+
+async function getStatus() {
+  const res = await fetch('/api/status', { cache: 'no-store' });
+  const json = await res.json().catch(() => null);
+  if (!res.ok || !json) throw new Error(`/api/status 返回 HTTP ${res.status}`);
+  if (!json.ok && json.errors && json.errors.length) {
+    throw new Error(json.errors.map((e) => `${e.source}: ${e.message}`).join('；'));
+  }
+  return json;
+}
+
+async function apiExec(cmd, args = []) {
+  const res = await fetch('/api/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ cmd, args })
+  });
+  let json = null;
+  try { json = await res.json(); } catch { /* 保底 */ }
+  if (!json) throw new Error(`/api/exec 返回 HTTP ${res.status}（非 JSON）`);
+  return json;
+}
+
+/**
+ * 流式执行（SSE）：mock-test / preflight 等。
+ * handlers: { onLog(ev), onActivity() }；onActivity 在任意事件（含 ping）时触发，用于 30 秒无响应看门狗。
+ */
+async function apiExecStream(cmd, args, handlers = {}) {
+  const { onLog, onActivity } = handlers;
+  const touch = (event) => { if (onActivity) onActivity(event); };
+
+  const res = await fetch('/api/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+    body: JSON.stringify({ cmd, args: args || [] })
+  });
+  if (!res.ok) throw new Error(`/api/exec 流式返回 HTTP ${res.status}`);
+
+  const ctype = res.headers.get('content-type') || '';
+  if (!res.body || !ctype.includes('text/event-stream')) {
+    // 服务端未走流式（旧版本/代理降级）→ 退化为一次性 JSON
+    return await res.json();
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let result = null;
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let idx;
+    while ((idx = buffer.indexOf('\n\n')) >= 0) {
+      const chunk = buffer.slice(0, idx);
+      buffer = buffer.slice(idx + 2);
+
+      let event = 'message';
+      let data = '';
+      for (const line of chunk.split('\n')) {
+        if (line.startsWith('event:')) event = line.slice(6).trim();
+        else if (line.startsWith('data:')) data += line.slice(5).trim();
+      }
+
+      touch(); // start / ping / log / result 都算“有数据”
+
+      if (!data) continue;
+      let parsed = null;
+      try { parsed = JSON.parse(data); } catch { continue; }
+
+      if (event === 'log' && onLog) onLog(parsed);
+      else if (event === 'result') result = parsed;
+      else if (event === 'error') throw new Error(parsed.error || '流式执行失败');
+      // event === 'ping' / 'start' / 'done' 不参与渲染
+      touch(event);
+    }
+  }
+
+  if (!result) throw new Error('流式响应中断（未收到最终结果）');
+  return result;
+}
+
+/** 静默拉取 list（不写控制台），用于快照下拉与存储统计。 */
+async function fetchList() {  try {
+    const j = await apiExec('list', []);
+    if (!j || !j.ok || !j.stdout) return null;
+    return JSON.parse(j.stdout);
+  } catch {
+    return null;
+  }
+}
+
+/* ---------------------------------------------------------------- 状态渲染 */
+
+function renderStatus(json) {
+  lastStatus = json;
+  const st = json.status || {};
+  const inst = st.instance || {};
+  const drift = st.drift || {};
+
+  setDot(els.conn, 'ok');
+  text(els.connText, '后端已连接');
+
+  text(els.instText, inst.rootPid ? `${inst.rootPid} : ${inst.port ?? '—'}` : '未运行');
+  if (inst.healthy) setDot(els.inst, 'ok');
+  else if (inst.rootPid) setDot(els.inst, 'warn');
+  else setDot(els.inst, 'bad');
+
+  text(els.safeText, st.safe ? '开启' : '关闭');
+  setDot(els.safe, st.safe ? 'warn' : 'ok');
+
+  text(els.driftText, drift.detected ? '有漂移' : '无漂移');
+  setDot(els.drift, drift.detected ? 'bad' : 'ok');
+
+  text(els.updated, '更新于 ' + fmtTime(json.generatedAt));
+
+  text($('k-pid'), inst.rootPid);
+  text($('k-port'), inst.port);
+  text($('k-http'), inst.httpStatus);
+  text($('k-health'), inst.healthy ? '健康' : (inst.rootPid ? '异常' : '未运行'));
+  text($('k-version'), st.version);
+
+  const culprit = st.culprit;
+  text($('k-culprit'), culprit ? (typeof culprit === 'string' ? culprit : JSON.stringify(culprit)) : '—');
+
+  const lkg = json.lkg;
+  text($('k-lkg-label'), lkg ? labelText(lkg.label) : '（无最近良好快照）');
+  text($('k-lkg-digest'), shortDigest(lkg && lkg.digest));
+
+  const latest = json.latestSnapshot;
+  text($('k-latest'), latest ? latest.label : '—');
+  text($('k-latest-at'), latest ? fmtTime(latest.createdAt) : '—');
+  text($('k-latest-lkg'), latest ? (latest.lkg ? '是' : '否') : '—');
+
+  const store = json.store || {};
+  text($('k-blobs'), store.blobs);
+  text($('k-store'), fmtBytes(store.bytes));
+  text($('k-tx'), json.transactions ? json.transactions.length : '—');
+  text($('k-digest'), shortDigest(drift.digest));
+  text($('k-committed'), shortDigest(drift.lastCommittedDigest));
+
+  const diffCount = (drift.addedPaths || []).length + (drift.changedPaths || []).length + (drift.removedPaths || []).length;
+  text($('k-driftpaths'), drift.detected ? `+${(drift.addedPaths || []).length} ~${(drift.changedPaths || []).length} -${(drift.removedPaths || []).length}` : '无');
+
+  // 未完成事务横幅
+  if (st.activeOperation) {
+    const op = st.activeOperation;
+    showBanner(els.bannerActive,
+      `⚠ 存在未完成操作：<b>${escapeHtml(op.op ?? '?')}</b> · 阶段=<b>${escapeHtml(op.phase ?? '?')}</b> · 事务号=<code>${escapeHtml(op.txid ?? '?')}</code> · 进程号=${escapeHtml(op.pid ?? '?')}。建议先执行 <b>恢复未完成事务（recover）</b>。`);
+  } else {
+    hideBanner(els.bannerActive);
+  }
+
+  // 安全模式切换按钮文字
+  const safeBtn = $('btn-safe');
+  safeBtn.textContent = st.safe ? '关闭安全模式' : '开启安全模式';
+  safeBtn.dataset.next = st.safe ? 'off' : 'on';
+  // 若正处于执行中（label 被临时占用），同步回去，避免结束后恢复成过期文案
+  if (safeBtn.dataset._label !== undefined) safeBtn.dataset._label = safeBtn.textContent;
+}
+
+function renderError(message) {
+  setDot(els.conn, 'bad');
+  text(els.connText, '后端不可达');
+  showBanner(els.bannerErr,
+    `无法获取状态：${escapeHtml(message)}<br>请确认后端已启动：<code>node ui/server.mjs</code>（127.0.0.1:3081）。`);
+  setDot(els.inst, 'bad');
+  setDot(els.safe, 'bad');
+  setDot(els.drift, 'bad');
+}
+
+async function refreshStatus() {
+  try {
+    const json = await getStatus();
+    hideBanner(els.bannerErr);
+    renderStatus(json);
+  } catch (err) {
+    renderError(err.message || String(err));
+  }
+}
+
+/* ---------------------------------------------------------------- 快照列表 */
+
+function renderSnapshotList(list) {
+  snapshotList = list;
+  const sel = els.restoreSel;
+  const prev = sel.value;
+  sel.innerHTML = '';
+  const snaps = list && Array.isArray(list.snapshots) ? list.snapshots : [];
+  if (!snaps.length) {
+    const o = document.createElement('option');
+    o.value = '';
+    o.textContent = '（无快照）';
+    sel.appendChild(o);
+    $('btn-restore').disabled = true;
+    return;
+  }
+  const sorted = snaps.slice().sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+  for (const s of sorted) {
+    const o = document.createElement('option');
+    o.value = s.label;
+    const flags = [STATE_LABELS[s.state] || s.state, s.lkg ? '最近良好' : null].filter(Boolean).join(' · ');
+    o.textContent = `${labelText(s.label)}  [${flags}]`;
+    sel.appendChild(o);
+  }
+  if (prev) sel.value = prev;
+  $('btn-restore').disabled = false;
+}
+
+async function refreshSnapshotList() {
+  const list = await fetchList();
+  if (list) renderSnapshotList(list);
+  else if (!snapshotList) renderSnapshotList(null);
+}
+
+/* ---------------------------------------------------------------- 控制台 */
+
+let entries = [];
+let consoleFilter = 'all';
+
+function entryHasOut(e) { return String(e.stdout || '').trim().length > 0; }
+function entryHasErr(e) { return String(e.stderr || '').trim().length > 0; }
+
+function entryMatchesFilter(e, mode) {
+  if (mode === 'stdout') return entryHasOut(e);
+  if (mode === 'stderr') return entryHasErr(e);
+  return true;
+}
+
+function visibleEntries() {
+  return entries.filter((e) => entryMatchesFilter(e, consoleFilter));
+}
+
+function failedCount() {
+  return entries.filter((e) => !e.ok || entryHasErr(e)).length;
+}
+
+function updateConsoleMeta() {
+  const visible = visibleEntries().length;
+  els.count.textContent = consoleFilter === 'all'
+    ? `${entries.length} 条`
+    : `${entries.length} 条 · 显示 ${visible} 条`;
+
+  const fails = failedCount();
+  const badge = $('t-fail-badge');
+  const num = $('t-fail');
+  if (badge && num) {
+    num.textContent = String(fails);
+    badge.style.display = fails > 0 ? '' : 'none';
+  }
+}
+
+function syncEmptyState() {
+  let empty = document.getElementById('console-empty');
+  const visible = visibleEntries().length;
+  if (visible > 0) {
+    if (empty) empty.style.display = 'none';
+    return;
+  }
+  if (!empty) {
+    empty = document.createElement('div');
+    empty.className = 'empty';
+    empty.id = 'console-empty';
+    els.consoleBody.appendChild(empty);
+  }
+  empty.style.display = '';
+  empty.textContent = entries.length === 0
+    ? '尚无输出。点击上方任一命令，结果会按「退出码 / 标准输出 / 标准错误」逐条显示。'
+    : `当前筛选下没有可见条目（共 ${entries.length} 条被隐藏，点击「全部」查看）。`;
+  els.consoleEmpty = empty;
+}
+
+function applyConsoleFilter(mode) {
+  consoleFilter = mode;
+  document.querySelectorAll('.filter-group .btn').forEach((b) => {
+    b.classList.toggle('active', b.dataset.filter === mode);
+  });
+
+  for (const e of entries) {
+    if (!e.el) continue;
+    const show = entryMatchesFilter(e, mode);
+    e.el.style.display = show ? '' : 'none';
+
+    const preOut = e.el.querySelector('pre.out');
+    const preErr = e.el.querySelector('pre.err');
+    if (preOut) preOut.style.display = (mode === 'stderr' && entryHasErr(e)) ? 'none' : '';
+    if (preErr) preErr.style.display = (entryHasErr(e) && mode !== 'stdout') ? '' : 'none';
+  }
+
+  syncEmptyState();
+  updateConsoleMeta();
+}
+
+/** guard 启动客户端阶段的关键行（[child-out] / phase=）用蓝色高亮。 */
+const PHASE_LINE_RE = /(\[child-out\]|phase=)/i;
+
+function renderLogLines(pre, lines) {
+  pre.innerHTML = lines.map((line) => {
+    const safe = escapeHtml(line);
+    return PHASE_LINE_RE.test(line) ? `<span class="phase-line">${safe}</span>` : safe;
+  }).join('\n');
+}
+
+function addEntry({ cmd, args, code, stdout, stderr, durationMs, ok, timedOut }) {
+  els.consoleEmpty.style.display = 'none';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'entry ' + (ok ? 'ok' : 'bad');
+
+  const head = document.createElement('div');
+  head.className = 'entry-head';
+
+  const cmdEl = document.createElement('span');
+  cmdEl.className = 'cmd';
+  cmdEl.textContent = '▸ ' + cmdLabel(cmd) + (args && args.length ? ' ' + args.join(' ') : '');
+  head.appendChild(cmdEl);
+
+  const meta = document.createElement('span');
+  meta.className = 'meta';
+  meta.textContent = `退出码 ${code}${timedOut ? ' · 超时' : ''} · ${fmtDuration(durationMs)} · ${fmtTime(new Date().toISOString()).slice(11)}`;
+  head.appendChild(meta);
+
+  wrap.appendChild(head);
+
+  const outText = String(stdout || '').replace(/\s+$/, '');
+  if (outText) {
+    const pre = document.createElement('pre');
+    pre.className = 'out';
+    if (PHASE_LINE_RE.test(outText)) renderLogLines(pre, outText.split('\n'));
+    else pre.textContent = outText;
+    wrap.appendChild(pre);
+  }
+
+  const errText = String(stderr || '').replace(/\s+$/, '');
+  if (errText) {
+    const pre = document.createElement('pre');
+    pre.className = 'err';
+    pre.textContent = errText;
+    wrap.appendChild(pre);
+  }
+
+  if (!outText && !errText) {
+    const pre = document.createElement('pre');
+    pre.className = 'out muted';
+    pre.textContent = '(无输出)';
+    wrap.appendChild(pre);
+  }
+
+  els.consoleBody.appendChild(wrap);
+
+  const record = { cmd, args, code, stdout, stderr, durationMs, ok, timedOut, el: wrap };
+  entries.push(record);
+  while (entries.length > MAX_ENTRIES) {
+    const dropped = entries.shift();
+    if (dropped && dropped.el) dropped.el.remove();
+  }
+
+  applyConsoleFilter(consoleFilter);
+  els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+}
+
+function clearConsole() {
+  const keep = [];
+  for (const e of entries) {
+    if (entryMatchesFilter(e, consoleFilter)) {
+      if (e.el) e.el.remove();
+    } else {
+      keep.push(e);
+    }
+  }
+  entries = keep;
+
+  applyConsoleFilter(consoleFilter);
+}
+
+async function copyAll() {
+  const list = visibleEntries();
+  const text = list.map((e) => {
+    const head = `▸ ${cmdLabel(e.cmd)}${(e.args || []).length ? ' ' + e.args.join(' ') : ''}  退出码=${e.code}  ${fmtDuration(e.durationMs)}`;
+    const out = consoleFilter === 'stderr' ? '' : e.stdout;
+    const err = consoleFilter === 'stdout' ? '' : e.stderr;
+    return [head, out ? `[stdout]\n${out}` : '', err ? `[stderr]\n${err}` : ''].filter(Boolean).join('\n');
+  }).join('\n\n---\n\n');
+
+  try {
+    await navigator.clipboard.writeText(text);
+    flash($('btn-copy'), '已复制');
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    flash($('btn-copy'), '已复制');
+  }
+}
+
+function flash(btn, msg) {
+  const old = btn.textContent;
+  btn.textContent = msg;
+  btn.disabled = true;
+  setTimeout(() => { btn.textContent = old; btn.disabled = busy; }, 1200);
+}
+
+/* ---------------------------------------------------------------- 执行命令 */
+
+/* ---------------------------------------------------------------- 流式长任务（Mock） */
+
+function startLiveEntry(cmd, args) {
+  els.consoleEmpty.style.display = 'none';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'entry';
+
+  const head = document.createElement('div');
+  head.className = 'entry-head';
+
+  const cmdEl = document.createElement('span');
+  cmdEl.className = 'cmd';
+  cmdEl.textContent = '▸ ' + cmdLabel(cmd) + (args && args.length ? ' ' + args.join(' ') : '');
+
+  const meta = document.createElement('span');
+  meta.className = 'meta';
+  meta.textContent = '流式接收中 · 0.0s';
+
+  head.append(cmdEl, meta);
+
+  const preOut = document.createElement('pre');
+  preOut.className = 'out';
+  preOut.textContent = '';
+
+  const preErr = document.createElement('pre');
+  preErr.className = 'err';
+  preErr.style.display = 'none';
+  preErr.textContent = '';
+
+  wrap.append(head, preOut, preErr);
+  els.consoleBody.appendChild(wrap);
+  els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+
+  const live = {
+    wrap,
+    meta,
+    preOut,
+    preErr,
+    stdoutLines: [],
+    stderrLines: [],
+    pings: 0,
+    startedAt: Date.now(),
+    timer: null
+  };
+  live.timer = setInterval(() => updateLiveMeta(live), 500);
+  return live;
+}
+
+function updateLiveMeta(live) {
+  if (!live || !live.meta || !live.meta.isConnected) return;
+  const secs = ((Date.now() - live.startedAt) / 1000).toFixed(1);
+  const pingText = live.pings > 0 ? ` · 心跳 ${live.pings}` : '';
+  live.meta.textContent = `流式接收中 · ${secs}s · 输出 ${live.stdoutLines.length} 行 / 错误 ${live.stderrLines.length} 行${pingText}`;
+}
+
+function updateLiveEntry(live, ev) {
+  if (!live) return;
+  const line = String(ev.line ?? '');
+
+  if (ev.stream === 'stderr') {
+    live.stderrLines.push(line);
+    live.preErr.style.display = '';
+    live.preErr.textContent = live.stderrLines.join('\n');
+    live.wrap.classList.add('bad');
+  } else {
+    live.stdoutLines.push(line);
+    renderLogLines(live.preOut, live.stdoutLines);
+  }
+
+  updateLiveMeta(live);
+  els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+}
+
+function finishLiveEntry(live) {
+  if (!live) return;
+  if (live.timer) clearInterval(live.timer);
+  if (live.wrap && live.wrap.parentNode) live.wrap.remove();
+}
+
+/** 在流式条目内追加一条黄色提示（例如 30 秒无响应）。 */
+function addLiveNotice(live, text) {
+  if (!live || !live.wrap) return;
+  if (!live.noticeEl) {
+    live.noticeEl = document.createElement('div');
+    live.noticeEl.className = 'live-notice';
+    live.wrap.appendChild(live.noticeEl);
+  }
+  live.noticeEl.textContent = text;
+  els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+}
+
+/** 合并流式已渲染行与最终结果文本，按行去重，避免日志重复。 */
+function mergeStreamLines(streamed, finalText) {
+  const seen = new Set(streamed.map((s) => String(s).trim()));
+  const extra = String(finalText || '')
+    .split('\n')
+    .map((s) => s.trim())
+    .filter((s) => s && !seen.has(s));
+  return [...streamed, ...extra].join('\n');
+}
+
+function setBusy(state, activeBtn) {
+  busy = state;
+  document.querySelectorAll('.actions .btn, .actions select, .actions input').forEach((b) => {
+    if (b.id === 'btn-relist') { b.disabled = state; return; }
+    b.disabled = state || (b.id === 'btn-restore' && !snapshotList);
+  });
+  const refresh = $('btn-refresh');
+  if (refresh) refresh.disabled = false;
+  document.querySelectorAll('.console-head .btn').forEach((b) => { b.disabled = state; });
+
+  if (state && activeBtn) {
+    activeBtn.classList.add('loading');
+    activeBtn.dataset._label = activeBtn.textContent;
+    activeBtn.textContent = '执行中';
+  }
+  if (!state) {
+    document.querySelectorAll('.actions .btn.loading, .actions .btn[data-_label]').forEach((b) => {
+      if (b.dataset._label) {
+        b.textContent = b.dataset._label;
+        delete b.dataset._label;
+      }
+      b.classList.remove('loading');
+    });
+  }
+}
+
+async function runCommand(cmd, args, btn, options = {}) {
+  if (busy) return;
+  const full = options.commandText || `node bin/guardian.mjs ${[cmd, ...(args || [])].join(' ')}`.trim();
+
+  if (options.confirm && !window.confirm(`${options.confirmTitle || '确认执行'}\n\n${full}\n\n${options.confirmBody || '该操作会修改当前运行环境，请确认当前环境已可回退。'}`)) {
+    return;
+  }
+
+  const useStream = cmd === 'mock-test' || options.stream === true;
+  runningCmd = cmd;
+  setBusy(true, btn);
+
+  let live = null;
+  let watchdog = null;
+  let streamWatch = null;
+
+  try {
+    let res;
+    if (useStream) {
+      // 流式长任务（Mock 或真实只读命令）：逐条接收日志；30 秒无任何事件（含 ping）则提示可能挂起
+      streamWatch = { lastAt: Date.now(), warned: false };
+      watchdog = setInterval(() => {
+        if (!streamWatch || streamWatch.warned) return;
+        if (Date.now() - streamWatch.lastAt < 30000) return;
+        streamWatch.warned = true;
+        if (live) addLiveNotice(live, '30 秒未响应，可能挂起（未收到任何 log/ping）');
+        showStreamNotice('30 秒未响应，可能挂起。可继续等待，或关闭页面（后端会在断开时清理）。', 'warn');
+      }, 1000);
+
+      live = startLiveEntry(cmd, args || []);
+      res = await apiExecStream(cmd, args || [], {
+        onLog: (ev) => updateLiveEntry(live, ev),
+        onActivity: (ev) => {
+          streamWatch.lastAt = Date.now();
+          if (ev === 'ping' && live) {
+            live.pings += 1;
+            updateLiveMeta(live);
+          }
+          if (streamWatch.warned) {
+            streamWatch.warned = false;
+            hideStreamNotice();
+          }
+        }
+      });
+
+      const stdoutText = mergeStreamLines(live.stdoutLines, res.stdout);
+      const stderrText = mergeStreamLines(live.stderrLines, res.stderr);
+      finishLiveEntry(live);
+      live = null;
+
+      addEntry({
+        cmd,
+        args: args || [],
+        code: res.code,
+        stdout: stdoutText,
+        stderr: stderrText,
+        durationMs: res.durationMs,
+        ok: res.ok,
+        timedOut: res.timedOut
+      });
+    } else {
+      res = await apiExec(cmd, args || []);
+      addEntry({
+        cmd,
+        args: args || [],
+        code: res.code,
+        stdout: res.stdout || '',
+        stderr: res.stderr || '',
+        durationMs: res.durationMs,
+        ok: res.ok,
+        timedOut: res.timedOut
+      });
+    }
+
+    // 完成后再刷新状态与快照列表，保证显示一致
+    await refreshStatus();
+    if (['snapshot', 'restore', 'plugin-add', 'plugin-remove', 'plugin-link', 'guard', 'recover'].includes(cmd)) {
+      await refreshSnapshotList();
+      await refreshStatus();
+    }
+  } catch (err) {
+    finishLiveEntry(live);
+    live = null;
+    const detail = err?.message || String(err);
+
+    if (useStream) {
+      const msg = '连接已断开，尝试重连或请检查后端服务';
+      addEntry({
+        cmd,
+        args: args || [],
+        code: -1,
+        stdout: '',
+        stderr: `[ui] ${msg}\n[ui] 细节: ${detail}`,
+        durationMs: 0,
+        ok: false
+      });
+      showStreamNotice(`${msg}（${escapeHtml(detail)}）。`, 'err', 15000);
+      refreshStatus();
+    } else {
+      addEntry({
+        cmd,
+        args: args || [],
+        code: -1,
+        stdout: '',
+        stderr: `[ui] 请求失败: ${detail}`,
+        durationMs: 0,
+        ok: false
+      });
+      renderError(detail);
+    }
+  } finally {
+    if (watchdog) clearInterval(watchdog);
+    runningCmd = null;
+    setBusy(false);
+  }
+}
+
+/* ---------------------------------------------------------------- 事件绑定 */
+
+document.querySelectorAll('.actions .btn[data-cmd]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const cmd = btn.dataset.cmd;
+    const danger = cmd === 'guard' || cmd === 'recover';
+    const options = danger ? {
+      confirm: true,
+      confirmTitle: `确认执行「${CMD_LABELS[cmd] || cmd}」`,
+      confirmBody: cmd === 'guard'
+        ? '守护启动（guard）会停止并重新启动客户端，可能耗时数十秒。'
+        : '恢复未完成事务（recover）会续跑或回滚未完成事务。'
+    } : {};
+    // 只读 preflight 与所有真实写操作统一走 SSE，便于实时看到 stdout/stderr
+    if (cmd === 'preflight' || cmd === 'guard' || cmd === 'recover') options.stream = true;
+    runCommand(cmd, [], btn, options);
+  });
+});
+
+$('btn-mock').addEventListener('click', () => {
+  runCommand('mock-test', [], $('btn-mock'), {
+    confirm: true,
+    confirmTitle: '确认执行测试命令',
+    confirmBody: '即将执行测试命令：mock-test，是否继续？',
+    commandText: 'mock-test'
+  });
+});
+
+$('btn-mock-fail').addEventListener('click', () => {
+  runCommand('mock-test', ['--fail'], $('btn-mock-fail'), {
+    confirm: true,
+    confirmTitle: '确认执行测试命令',
+    confirmBody: '即将执行测试命令：mock-test --fail，是否继续？',
+    commandText: 'mock-test --fail'
+  });
+});
+
+$('btn-mock-timeout').addEventListener('click', () => {
+  runCommand('mock-test', ['--timeout'], $('btn-mock-timeout'), {
+    confirm: true,
+    confirmTitle: '确认执行测试命令',
+    confirmBody: '即将执行测试命令：mock-test --timeout，是否继续？',
+    commandText: 'mock-test --timeout'
+  });
+});
+
+$('btn-real-fail').addEventListener('click', () => {
+  runCommand('guardian-ui-real-fail-probe', [], $('btn-real-fail'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认执行真实失败测试',
+    confirmBody: '即将执行真实只读失败探测命令：guardian-ui-real-fail-probe（未知命令，guardian 会返回退出码 2 与真实 stderr），是否继续？',
+    commandText: 'guardian-ui-real-fail-probe'
+  });
+});
+
+$('btn-mock-hang').addEventListener('click', () => {
+  runCommand('mock-test', ['--hang'], $('btn-mock-hang'), {
+    confirm: true,
+    confirmTitle: '确认执行挂起测试',
+    confirmBody: '即将执行测试命令：mock-test --hang（最长 60 秒，期间仅心跳），是否继续？',
+    commandText: 'mock-test --hang'
+  });
+});
+
+$('btn-mock-custom').addEventListener('click', () => {
+  const raw = $('inp-mock-args').value.trim();
+  const parts = raw ? raw.split(/\s+/) : [];
+  const text = 'mock-test' + (parts.length ? ' ' + parts.join(' ') : '');
+  runCommand('mock-test', parts, $('btn-mock-custom'), {
+    confirm: true,
+    confirmTitle: '确认执行自定义 Mock',
+    confirmBody: `即将执行测试命令：${text}，是否继续？`,
+    commandText: text
+  });
+});
+
+document.querySelectorAll('.filter-group .btn').forEach((b) => {
+  b.addEventListener('click', () => applyConsoleFilter(b.dataset.filter));
+});
+
+applyConsoleFilter('all');
+
+$('btn-snapshot').addEventListener('click', () => {
+  const now = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  const def = `ui-${now.getFullYear()}${p(now.getMonth() + 1)}${p(now.getDate())}-${p(now.getHours())}${p(now.getMinutes())}${p(now.getSeconds())}`;
+  const label = window.prompt('输入快照标签（命令：snapshot <标签>）：', def);
+  if (!label || !label.trim()) return;
+  runCommand('snapshot', [label.trim()], $('btn-snapshot'), { stream: true });
+});
+
+$('btn-restore').addEventListener('click', () => {
+  const label = els.restoreSel.value;
+  if (!label) { window.alert('请先选择快照或点击「↻ 刷新列表」加载。'); return; }
+  runCommand('restore', [label], $('btn-restore'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认恢复快照',
+    confirmBody: `将停止客户端、按精确（exact）模式恢复快照「${label}」并重新启动验证。当前环境会先建立恢复前快照。`
+  });
+});
+
+$('btn-relist').addEventListener('click', async () => {
+  $('btn-relist').disabled = true;
+  try { await refreshSnapshotList(); await refreshStatus(); }
+  finally { $('btn-relist').disabled = false; }
+});
+
+$('btn-safe').addEventListener('click', () => {
+  const next = $('btn-safe').dataset.next || 'on';
+  runCommand('safe', [next], $('btn-safe'), {
+    stream: true,
+    confirm: next === 'on',
+    confirmTitle: '开启安全模式',
+    confirmBody: '开启安全模式（safe on）会给所有补丁行加 disabled 覆盖（可回退）。'
+  });
+});
+
+/* 三个插件操作的示例：prompt 里直接列出正确写法，并预填第一条，回车即用。 */
+const PLUGIN_PROMPTS = {
+  'plugin-add': {
+    label: '输入插件目录或 Git 仓库地址（命令：plugin-add <spec>）',
+    note: '本地目录要指向包根；https:// 或 github: 开头走远程安装，需要能访问 GitHub，可能执行仓库的构建脚本。',
+    items: [
+      String.raw`C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2`,
+      'https://github.com/guhanfei-ai/dsh-mindmap',
+      String.raw`D:\Github\novel_assistance`
+    ]
+  },
+  'plugin-remove': {
+    label: '输入插件 id（命令：plugin-remove <插件 id>）',
+    note: '填 package.json 里的依赖名；精确名最稳，短词可能命中多个包。',
+    items: ['novel-agents-md', 'dsh-infinite-gen-2', '@michengai/dsh-archive-manager']
+  },
+  'plugin-link': {
+    label: '输入本地插件目录（命令：plugin-link <目录>）',
+    note: '必须是已存在的本地目录；建 junction 链接后改源码即时生效。',
+    items: [String.raw`D:\Github\novel_assistance`, String.raw`C:\Users\28256\.dsh\plugins\dsh-infinite-gen-2`]
+  }
+};
+
+function askPluginArg(kind) {
+  const meta = PLUGIN_PROMPTS[kind];
+  const examples = meta.items.map((item, index) => `  ${index + 1}) ${item}`).join('\n');
+  const message = `${meta.label}\n\n示例（已填入第 1 条，回车即用；要换请全选替换）：\n${examples}\n\n${meta.note}`;
+  const value = window.prompt(message, meta.items[0]);
+  if (value === null) return null;
+  const trimmed = value.trim();
+  return trimmed === '' ? null : trimmed;
+}
+
+$('btn-plugin-add').addEventListener('click', () => {
+  const spec = askPluginArg('plugin-add');
+  if (!spec) return;
+  runCommand('plugin-add', [spec], $('btn-plugin-add'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认安装插件',
+    confirmBody: '会先停止客户端、建立安装前快照、安装并验证；远程地址会联网下载并可能执行构建脚本，失败自动回滚。'
+  });
+});
+
+$('btn-plugin-remove').addEventListener('click', () => {
+  const id = askPluginArg('plugin-remove');
+  if (!id) return;
+  runCommand('plugin-remove', [id], $('btn-plugin-remove'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认移除插件',
+    confirmBody: '会停止客户端、建立移除前快照、移除并验证；失败自动回滚。'
+  });
+});
+
+$('btn-plugin-link').addEventListener('click', () => {
+  const p = askPluginArg('plugin-link');
+  if (!p) return;
+  runCommand('plugin-link', [p], $('btn-plugin-link'), {
+    stream: true,
+    confirm: true,
+    confirmTitle: '确认链接本地插件',
+    confirmBody: '会建立链接依赖并验证加载，失败自动回滚。'
+  });
+});
+
+$('btn-refresh').addEventListener('click', async () => {
+  await refreshStatus();
+  await refreshSnapshotList();
+});
+
+$('btn-clear').addEventListener('click', clearConsole);
+$('btn-copy').addEventListener('click', copyAll);
+
+/* ---------------------------------------------------------------- 启动 */
+
+let envInfo = null;
+
+async function loadEnv() {
+  try {
+    const res = await fetch('/api/env', { cache: 'no-store' });
+    envInfo = res.ok ? await res.json() : null;
+  } catch {
+    envInfo = null;
+  }
+  const sandbox = Boolean(envInfo && envInfo.mode === 'sandbox');
+  const badge = $('env-badge');
+  if (badge) {
+    badge.style.display = sandbox ? '' : 'none';
+    badge.title = sandbox && envInfo
+      ? `沙箱模式：${envInfo.guardian}（端口 ${envInfo.port}）`
+      : '沙箱模式：命令只作用于 sandbox 目录';
+  }
+  document.title = sandbox ? '【沙箱】DSH Guardian · 本地界面' : 'DSH Guardian · 本地界面';
+  document.body.classList.toggle('sandbox', sandbox);
+
+  if (envInfo) {
+    const backend = $('t-backend');
+    if (backend) backend.textContent = `http://${envInfo.host}:${envInfo.port}`;
+    const guardian = $('t-guardian');
+    if (guardian) guardian.textContent = sandbox ? 'sandbox/bin/guardian.mjs' : 'bin/guardian.mjs';
+  }
+}
+
+async function tick() {
+  if (busy) return;                 // 长任务期间暂停轮询，避免打断与噪音
+  await refreshStatus();
+}
+
+(async () => {
+  await loadEnv();
+  await refreshStatus();
+  await refreshSnapshotList();
+  pollTimer = setInterval(tick, POLL_MS);
+})();
+
+window.addEventListener('beforeunload', () => { if (pollTimer) clearInterval(pollTimer); });
+
+// 页签切回：刷新状态；若有任务在跑，给出提示（不重复触发命令）
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+  refreshStatus();
+  if (busy) {
+    showStreamNotice(`页面切回：任务仍在运行（${runningCmd || '未知'}），状态已刷新。`, 'warn', 6000);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "status": "drift",
+  "digest": "c4df09c1b36cfc90dafff416f02ebabf5fa11185ee48ff2cd59230fa860fc00a",
+  "lastCommittedDigest": "a07a9612399ef68ecaf943fd454fce0a5a7ff10a3551133f94055fb31e2ddfea",
+  "baseline": "D:/dsh_plugin/dsh_guardian/backups/last-known-good",
+  "addedPaths": [],
+  "changedPaths": [
+    "dshHome/storages"
+  ],
+  "removedPaths": [],
+  "createdAt": "2026-10-18T12:47:12.019Z"
+}

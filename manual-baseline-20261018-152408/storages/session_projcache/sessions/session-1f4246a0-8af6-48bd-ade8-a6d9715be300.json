@@ -1,0 +1,214 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1792225795828,
+      "cwd": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "title": {
+        "ver": 1,
+        "seq": 168,
+        "val": "安装 dsh-purge 插件"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 168,
+        "val": {
+          "first": {
+            "seq": 12,
+            "text": "安装 DeepSeek Harness 插件 dsh-purge，Web 和官方桌面端都要装。不要全盘搜索，不要读或改其它文件，不要应用设置，也不要重启应用。\r\n\r\ndsh 不在 PATH 就告诉用户后停止。当前目录已是本仓库时，把下面两条里的包名都换成 .。npm registry 上不去，把包名换成 https://github.com/YuJunZhiXue/dsh-purge/archive/refs/heads/master.tar.gz。某个 profile 不存在就跳过那一条，另一条照装。"
+          },
+          "count": 1,
+          "lastSeq": 12
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 168,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 168,
+        "val": "danger-full-access"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 168,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 77584,
+            "outputTokens": 6614,
+            "cacheReadTokens": 1091840,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 1,
+            "step": 15,
+            "buckets": {
+              "uncachedInputTokens": 177,
+              "outputTokens": 566,
+              "cacheReadTokens": 82304,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 168,
+        "val": {
+          "surfaceTokens": 12590,
+          "contextWindow": 1048576,
+          "pressureTokens": 82481,
+          "sampledSurfaceTokens": 12264
+        }
+      },
+      "contextBreakdown": {
+        "ver": 6,
+        "seq": 168,
+        "val": {
+          "systems": [
+            {
+              "seq": 11,
+              "tokens": 3863
+            }
+          ],
+          "surfaceTokens": 12590,
+          "breakdown": {
+            "systemTokens": 3863,
+            "toolsTokens": 53148,
+            "messageTokens": 8727
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 154,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 156
+          },
+          "lastTurn": 1
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 168,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 168,
+        "val": {
+          "turns": 1,
+          "steps": 15,
+          "llmMs": 40264,
+          "toolMs": 296762,
+          "ttftMs": 13655,
+          "ttftSteps": 15,
+          "decodeMs": 26609,
+          "decodeTokens": 6614,
+          "lastTurn": 1,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 8,
+              "prompt": "安装 DeepSeek Harness 插件 dsh-purge，Web 和官方桌面端都要装。不要…",
+              "response": "已安装完成，两个 profile 都装上了 `dsh-purge@1.1.71`。 **过程与关键点** 1. `dsh` 在 PATH 上（`C:\\Users\\28256\\AppData\\Roaming\\npm\\dsh.ps1`，0.1…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 168,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "preset": "danger-full-access",
+          "sandbox": "danger-full-access",
+          "approval": "never",
+          "seeded": true
+        }
+      },
+      "timeContext": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "lastMessageTime": 1792226142295,
+          "lastInjectionTime": 1792225804992,
+          "lastTurnInjectionTime": null
+        }
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 168,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-account",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 168,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1792225804991
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 168,
+        "val": null
+      }
+    }
+  }
+}

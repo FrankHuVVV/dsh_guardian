@@ -1,0 +1,257 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1790389740848,
+      "cwd": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 21,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 21,
+        "val": "你好问候"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 21,
+        "val": {
+          "first": {
+            "seq": 9,
+            "text": "你好"
+          },
+          "count": 1,
+          "lastSeq": 9
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 21,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 21,
+        "val": "workspace-write"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 21,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 21,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 6914,
+            "outputTokens": 149,
+            "cacheReadTokens": 0,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 1,
+            "step": 1,
+            "buckets": {
+              "uncachedInputTokens": 6914,
+              "outputTokens": 149,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 21,
+        "val": {
+          "surfaceTokens": 1723,
+          "contextWindow": 1000000,
+          "pressureTokens": 6914,
+          "sampledSurfaceTokens": 1636
+        }
+      },
+      "contextBreakdown": {
+        "ver": 5,
+        "seq": 21,
+        "val": {
+          "nodes": [
+            {
+              "seq": 8,
+              "heuristicTokens": 1492,
+              "system": true
+            },
+            {
+              "seq": 9,
+              "heuristicTokens": 9,
+              "system": false
+            },
+            {
+              "seq": 10,
+              "heuristicTokens": 135,
+              "system": false
+            },
+            {
+              "seq": 18,
+              "heuristicTokens": 87,
+              "system": false
+            }
+          ],
+          "breakdown": {
+            "systemTokens": 1492,
+            "toolsTokens": 5389,
+            "messageTokens": 231
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 21,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 7,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 19
+          },
+          "lastTurn": 1
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 21,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 21,
+        "val": {
+          "turns": 1,
+          "steps": 1,
+          "llmMs": 1401,
+          "toolMs": 0,
+          "ttftMs": 851,
+          "ttftSteps": 1,
+          "decodeMs": 550,
+          "decodeTokens": 149,
+          "lastTurn": 1,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 21,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 5,
+              "prompt": "你好",
+              "response": "你好！👋 我是 DeepSeek Harness 中的编码助手。当前工作目录是： `C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace` 我可以帮你做这些事： - **…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 21,
+        "val": "standard"
+      },
+      "subagentCatalog": {
+        "ver": 3,
+        "seq": 21,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 21,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 21,
+        "val": {}
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 21,
+        "val": {
+          "preset": "workspace-write",
+          "sandbox": "workspace-write",
+          "approval": "ask",
+          "seeded": true
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 21,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 21,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 21,
+        "val": null
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 21,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-official",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 21,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1790389894307
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 21,
+        "val": null
+      }
+    }
+  }
+}

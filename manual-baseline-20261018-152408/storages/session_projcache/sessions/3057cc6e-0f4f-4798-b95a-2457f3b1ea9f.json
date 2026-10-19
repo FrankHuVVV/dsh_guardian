@@ -1,0 +1,282 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1792303322198,
+      "cwd": "D:\\dsh_plugin\\dsh_guardian",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 120,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 120,
+        "val": "Review current guardian.mjs against prom"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 120,
+        "val": {
+          "first": {
+            "seq": 9,
+            "text": "Review current guardian.mjs against prompts/p5.txt. Identify missing guard/drift/LKG functions and propose sandbox-only mock launcher acceptance strategy. Do not modify files.\nYour parent agent id is \"session-0b009b22-5fe1-4a24-a283-9e0d331f04f0\". Before you finish, send your result to that agent with send_message({ agent_id: \"session-0b009b22-5fe1-4a24-a283-9e0d331f04f0\", message: \"<self-contained result>\" }). The parent shares your workspace but does not automatically receive your transcript, tool output, or reasoning. Send earlier messages as well when a finding changes what the parent should do next; sending a message does not end your turn."
+          },
+          "count": 1,
+          "lastSeq": 9
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 120,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 120,
+        "val": "danger-full-access"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 120,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 108028,
+            "outputTokens": 3541,
+            "cacheReadTokens": 660864,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 1,
+            "step": 16,
+            "buckets": {
+              "uncachedInputTokens": 57486,
+              "outputTokens": 518,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 120,
+        "val": {
+          "surfaceTokens": 42234,
+          "contextWindow": 262144,
+          "pressureTokens": 57486,
+          "sampledSurfaceTokens": 41959
+        }
+      },
+      "contextBreakdown": {
+        "ver": 6,
+        "seq": 120,
+        "val": {
+          "systems": [
+            {
+              "seq": 8,
+              "tokens": 3630
+            }
+          ],
+          "surfaceTokens": 42234,
+          "breakdown": {
+            "systemTokens": 3630,
+            "toolsTokens": 7580,
+            "messageTokens": 38604
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 117,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 119
+          },
+          "lastTurn": 1
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 120,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 120,
+        "val": {
+          "turns": 1,
+          "steps": 16,
+          "llmMs": 290929,
+          "toolMs": 293302,
+          "ttftMs": 287645,
+          "ttftSteps": 16,
+          "decodeMs": 3284,
+          "decodeTokens": 3541,
+          "lastTurn": 1,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 5,
+              "prompt": "Review current guardian.mjs against prompts/p5.tx…",
+              "response": "审查结果已发送给父代理，结论如下： - `guard` 与 `drift` 逻辑虽存在于文件末尾，但主命令分发未注册，两者当前都会落入“未知或未实现命令”。 - 启动判定缺少 500ms 轮询、`settleMs` 持续稳定验证、启动参数…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 120,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "preset": "auto",
+          "sandbox": "danger-full-access",
+          "approval": "never",
+          "seeded": false
+        }
+      },
+      "workingDirectory": {
+        "ver": 1,
+        "seq": 120,
+        "val": "D:\\dsh_plugin\\dsh_guardian"
+      },
+      "subagentCatalog": {
+        "ver": 6,
+        "seq": 120,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 120,
+        "val": {
+          "descriptorSeen": true,
+          "settledMs": 540861,
+          "lastTurnCompleted": true
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "identity": {
+            "mode": "continuable",
+            "label": "Review p5 implementation plan",
+            "seq": 0
+          }
+        }
+      },
+      "timeContext": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "lastMessageTime": 1792303863088,
+          "lastInjectionTime": 1792303322287,
+          "lastTurnInjectionTime": null
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 120,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 120,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 120,
+        "val": null
+      },
+      "harnessDevLegacyPrompt": {
+        "ver": 1,
+        "seq": 120,
+        "val": {
+          "source": null,
+          "web": null
+        }
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 120,
+        "val": {
+          "lastUsed": {
+            "provider": "xav1er",
+            "model": "gpt-6.1-sol"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 120,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1792303322287
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 120,
+        "val": null
+      }
+    }
+  }
+}

@@ -1,0 +1,1897 @@
+2026-09-28T06:23:34.424Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:23:34.500Z service_status 完成，用时 71ms
+2026-09-28T06:23:36.893Z generate_prompts 完成，用时 2423ms
+2026-09-28T06:24:37.885Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:24:37.998Z service_status 完成，用时 110ms
+2026-09-28T06:24:39.688Z generate_prompts 完成，用时 1783ms
+2026-09-28T06:24:41.717Z 已提交 ComfyUI 任务 b9b398d9-8f7e-4368-9732-b6d23f4e810c（seed=333846640）
+2026-09-28T06:24:41.741Z 等待出图：运行中 1 / 排队 0
+2026-09-28T06:31:28.402Z describe_and_generate 失败：ComfyUI 执行失败：[Errno 13] Permission denied: 'D:\\ComfyUI_windows_portable\\ComfyUI\\output\\QwenImage21_00004_.png'
+
+2026-09-28T06:33:13.915Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:33:14.039Z service_status 完成，用时 119ms
+2026-09-28T06:33:20.568Z 已提交 ComfyUI 任务 2bcbaf4d-d561-4159-8144-a07803d30016（seed=147790803）
+2026-09-28T06:33:20.574Z 等待出图：运行中 1 / 排队 0
+2026-09-28T06:33:21.879Z generate_prompts 完成，用时 7939ms
+2026-09-28T06:40:36.884Z describe_and_generate 完成，用时 442942ms
+2026-09-28T06:57:48.522Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:57:48.633Z service_status 完成，用时 108ms
+2026-09-28T06:57:52.767Z 已卸载 Ollama 模型（显存移交 ComfyUI）
+2026-09-28T06:57:52.768Z generate_prompts 完成，用时 4225ms
+2026-09-28T06:58:41.715Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:58:41.820Z service_status 完成，用时 102ms
+2026-09-28T06:58:52.544Z generate_prompts 完成，用时 10807ms
+2026-09-28T06:58:58.771Z comfyui-mcp 1.0.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188
+2026-09-28T06:58:58.894Z service_status 完成，用时 120ms
+2026-09-28T06:59:03.263Z generate_prompts 完成，用时 4471ms
+2026-09-28T06:59:09.864Z 已提交 ComfyUI 任务 f61fe5a4-8e6d-4c0f-9e4d-7cc7a9d336f6（seed=1150411131）
+2026-09-28T06:59:09.884Z 等待出图：运行中 1 / 排队 0
+2026-09-28T07:01:47.093Z describe_and_generate 完成，用时 168299ms
+2026-09-28T07:23:26.540Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T07:23:26.649Z service_status 完成，用时 105ms
+2026-09-28T07:23:30.838Z generate_prompts 完成，用时 4276ms
+2026-09-28T07:27:57.670Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T07:27:57.764Z service_status 完成，用时 89ms
+2026-09-28T07:28:04.767Z generate_prompts 完成，用时 7067ms
+2026-09-28T07:29:22.236Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T07:29:22.281Z ComfyUI 已在线（非本服务启动，视为外部实例）
+2026-09-28T07:29:22.281Z comfyui_power 完成，用时 41ms
+2026-09-28T07:32:43.282Z 已从工作流文件读取默认负面提示词
+2026-09-28T07:32:43.286Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T07:32:55.430Z ComfyUI 就绪，用时 12.1s（包装 pid=19544，监听 pid=42928）
+2026-09-28T07:32:55.442Z 已提交 ComfyUI 任务 0737f039-cdd2-4428-acf3-e8a4cebdfcd2（seed=322242131）
+2026-09-28T07:32:55.454Z 等待出图：运行中 1 / 排队 0
+2026-09-28T07:34:15.736Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T07:34:15.737Z generate_image 完成，用时 92465ms
+2026-09-28T07:34:21.563Z comfyui_power 完成，用时 5ms
+2026-09-28T07:37:49.429Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T07:37:49.526Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T07:37:49.564Z 发现上次遗留的 ComfyUI（pid=42928，启动于 2026-09-28T07:32:43.304Z），先结束它
+2026-09-28T07:38:09.174Z 已生成草稿 draft-mukxqys6-1（等待用户过目，30 分钟内有效）
+2026-09-28T07:38:09.175Z prepare_image 完成，用时 5285ms
+2026-09-28T07:38:11.856Z 用户未同意，草稿作废：draft-mukxqys6-1（存在=true）
+2026-09-28T07:38:11.856Z approve_and_generate 完成，用时 0ms
+2026-09-28T07:38:24.536Z 已生成草稿 draft-mukxramw-2（等待用户过目，30 分钟内有效）
+2026-09-28T07:38:24.537Z prepare_image 完成，用时 9104ms
+2026-09-28T07:38:27.756Z 用户已同意草稿 draft-mukxramw-2，提交出图
+2026-09-28T07:38:27.765Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T07:38:39.915Z ComfyUI 就绪，用时 12.1s（包装 pid=29876，监听 pid=36360）
+2026-09-28T07:38:39.929Z 已提交 ComfyUI 任务 6884cedf-4752-4b2a-afb3-b5f9548cce79（seed=114548681）
+2026-09-28T07:38:39.962Z 等待出图：运行中 1 / 排队 0
+2026-09-28T07:40:03.164Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T07:40:03.165Z approve_and_generate 完成，用时 95409ms
+2026-09-28T07:40:05.597Z approve_and_generate 失败：草稿 draft-mukxramw-2 不存在、已过期或已用过。请重新 prepare_image 生成，并再次请用户过目。
+2026-09-28T07:49:49.475Z 已生成草稿 draft-muky5z4z-3（等待用户过目，30 分钟内有效）
+2026-09-28T07:49:49.476Z prepare_image 完成，用时 47548ms
+2026-09-28T07:50:03.578Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T07:50:04.491Z 已关闭 ComfyUI（闲置 10 分钟，pid=29876）
+2026-09-28T07:50:49.770Z 用户已同意草稿 draft-muky5z4z-3，提交出图（提示词有修改）
+2026-09-28T07:50:49.778Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T07:51:01.990Z ComfyUI 就绪，用时 12.2s（包装 pid=15488，监听 pid=40664）
+2026-09-28T07:51:01.996Z 已提交 ComfyUI 任务 284c0b80-8013-4e89-a290-a77acc75a90e（seed=214138114）
+2026-09-28T07:51:02.008Z 等待出图：运行中 1 / 排队 0
+2026-09-28T08:01:19.647Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T08:01:19.649Z approve_and_generate 完成，用时 629879ms
+2026-09-28T08:01:22.657Z service_status 完成，用时 83ms
+2026-09-28T08:01:39.783Z comfyui_power 完成，用时 6ms
+2026-09-28T08:11:19.985Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:11:20.914Z 已关闭 ComfyUI（闲置 10 分钟，pid=15488）
+2026-09-28T08:11:27.648Z comfyui_power 完成，用时 2ms
+2026-09-28T08:11:44.291Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:11:56.399Z ComfyUI 就绪，用时 12.1s（包装 pid=30884，监听 pid=4976）
+2026-09-28T08:11:56.399Z comfyui_power 完成，用时 12109ms
+2026-09-28T08:17:27.748Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:17:28.658Z 已关闭 ComfyUI（手动，pid=30884）
+2026-09-28T08:17:28.658Z comfyui_power 完成，用时 1245ms
+2026-09-28T08:17:29.665Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:17:44.808Z ComfyUI 就绪，用时 15.1s（包装 pid=41380，监听 pid=33160）
+2026-09-28T08:17:44.809Z comfyui_power 完成，用时 15146ms
+2026-09-28T08:18:54.283Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:18:55.200Z 已关闭 ComfyUI（手动，pid=41380）
+2026-09-28T08:18:55.201Z comfyui_power 完成，用时 1302ms
+2026-09-28T08:18:56.153Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:19:11.286Z ComfyUI 就绪，用时 15.1s（包装 pid=42464，监听 pid=4952）
+2026-09-28T08:19:11.286Z comfyui_power 完成，用时 15135ms
+2026-09-28T08:19:27.187Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:19:28.097Z 已关闭 ComfyUI（手动，pid=42464）
+2026-09-28T08:19:28.098Z comfyui_power 完成，用时 1309ms
+2026-09-28T08:19:29.595Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:19:43.222Z ComfyUI 就绪，用时 13.6s（包装 pid=9780，监听 pid=8124）
+2026-09-28T08:19:43.222Z comfyui_power 完成，用时 13629ms
+2026-09-28T08:20:02.808Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:20:03.716Z 已关闭 ComfyUI（手动，pid=9780）
+2026-09-28T08:20:03.716Z comfyui_power 完成，用时 1290ms
+2026-09-28T08:20:04.590Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:20:18.224Z ComfyUI 就绪，用时 13.6s（包装 pid=29304，监听 pid=40232）
+2026-09-28T08:20:18.225Z comfyui_power 完成，用时 13637ms
+2026-09-28T08:30:36.733Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:30:37.640Z 已关闭 ComfyUI（手动，pid=29304）
+2026-09-28T08:30:37.640Z comfyui_power 完成，用时 1262ms
+2026-09-28T08:34:22.743Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:34:34.861Z ComfyUI 就绪，用时 12.1s（包装 pid=16588，监听 pid=12604）
+2026-09-28T08:34:34.862Z comfyui_power 完成，用时 12121ms
+2026-09-28T08:39:42.881Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T08:39:42.986Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T08:39:43.019Z 发现上次遗留的 ComfyUI（pid=12604，启动于 2026-09-28T08:34:22.748Z），先结束它
+2026-09-28T08:39:57.541Z 已从工作流文件读取默认负面提示词
+2026-09-28T08:39:57.556Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:40:15.724Z ComfyUI 就绪，用时 18.1s（包装 pid=40976，监听 pid=28752）
+2026-09-28T08:40:15.746Z 已提交 ComfyUI 任务 8882944d-cb8a-4597-8af3-4405ac07abff（seed=2051858517，1344x768，source=width/height）
+2026-09-28T08:40:15.759Z 等待出图：运行中 1 / 排队 0
+2026-09-28T08:42:05.652Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T08:42:05.653Z generate_image 完成，用时 128118ms
+2026-09-28T08:42:54.641Z prepare_image 失败：Ollama 输出无法解析为 {positive, negative}：{
+  "positive": "古风庭院里的雨夜亭台，亭台被雨水浸湿，灯笼映在水面，水面倒映出灯笼的倒影，灯光昏黄而温暖，亭台的结构精致复杂，亭台前有青石板路，路旁有葱郁的竹子，雨夜中的竹叶被雨水洗得更加清新，青石板路也被雨水润湿，竹叶的倒影也映在水面上，竹子的影子在雨夜中若隐若现，亭台前的灯笼照亮了雨夜中的庭院，灯笼的光晕在水面上形成一个圆形的光斑，亭台的柱子被雨水打湿，显得更加湿润，亭台的瓦片被雨水打湿，显得更加湿润，亭台的门窗被雨水打湿，显得更加湿润，亭台的门窗上的雕花被雨水打湿，显得更加湿润，亭台的门窗上的雕花在雨夜中若隐若现，亭台的门窗上的雕花在雨夜中若隐若现，亭台的门窗上的雕花在…
+2026-09-28T08:43:32.794Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T08:43:32.990Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T08:43:33.058Z 发现上次遗留的 ComfyUI（pid=28752，启动于 2026-09-28T08:39:57.579Z），先结束它
+2026-09-28T08:43:53.583Z 已生成草稿 draft-mul03ib3-1（576x1024，等待用户过目，30 分钟内有效）
+2026-09-28T08:43:53.584Z prepare_image 完成，用时 12303ms
+2026-09-28T08:43:56.388Z 用户已同意草稿 draft-mul03ib3-1，提交出图
+2026-09-28T08:43:56.393Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T08:44:09.999Z ComfyUI 就绪，用时 13.6s（包装 pid=44116，监听 pid=42024）
+2026-09-28T08:44:10.013Z 已提交 ComfyUI 任务 d919da38-03cf-4278-b8db-7fdaab7a34f3（seed=1368379973，576x1024，source=width/height）
+2026-09-28T08:44:10.018Z 等待出图：运行中 1 / 排队 0
+2026-09-28T08:45:34.783Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T08:45:34.784Z approve_and_generate 完成，用时 98396ms
+2026-09-28T08:46:03.234Z service_status 完成，用时 53ms
+2026-09-28T08:55:35.186Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T08:55:36.101Z 已关闭 ComfyUI（闲置 10 分钟，pid=44116）
+2026-09-28T10:27:14.190Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T10:27:17.831Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（闲置 10 分钟后自动关闭）
+2026-09-28T10:30:26.838Z 已生成草稿 draft-mul3wjdi-1（1088x1920，等待用户过目，30 分钟内有效）
+2026-09-28T10:30:26.838Z prepare_image 完成，用时 32354ms
+2026-09-28T10:31:13.386Z 用户已同意草稿 draft-mul3wjdi-1，提交出图（提示词有修改）
+2026-09-28T10:31:13.391Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T10:31:37.587Z ComfyUI 就绪，用时 24.2s（包装 pid=6944，监听 pid=39492）
+2026-09-28T10:31:37.606Z 已提交 ComfyUI 任务 b2f426cf-0d0e-490a-b1eb-0dd6cf96d6f8（seed=182007620，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-28T10:31:37.617Z 等待出图：运行中 1 / 排队 0
+2026-09-28T10:40:01.777Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T10:40:01.779Z approve_and_generate 完成，用时 528393ms
+2026-09-28T10:40:06.357Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T10:40:07.281Z 已关闭 ComfyUI（手动，pid=6944）
+2026-09-28T10:40:07.282Z comfyui_power 完成，用时 1371ms
+2026-09-28T10:45:03.918Z 已生成草稿 draft-mul4fc4u-2（1088x1920，等待用户过目，30 分钟内有效）
+2026-09-28T10:45:03.919Z prepare_image 完成，用时 29770ms
+2026-09-28T10:45:32.725Z 用户已同意草稿 draft-mul4fc4u-2，提交出图（提示词有修改）
+2026-09-28T10:45:32.731Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T10:45:44.809Z ComfyUI 就绪，用时 12.1s（包装 pid=43948，监听 pid=12112）
+2026-09-28T10:45:44.832Z 已提交 ComfyUI 任务 51f4fc0b-e65c-4173-baa8-191a2081881b（seed=182007620，576x1024，source=aspect 9:16 @ 长边 1024）
+2026-09-28T10:45:44.842Z 等待出图：运行中 1 / 排队 0
+2026-09-28T11:00:45.229Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T11:00:45.231Z approve_and_generate 失败：等待出图超时（900s），ComfyUI 可能仍在队列中。
+2026-09-28T11:00:46.723Z service_status 完成，用时 128ms
+2026-09-28T11:10:45.588Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T11:10:46.500Z 已关闭 ComfyUI（闲置 10 分钟，pid=43948）
+2026-09-28T11:16:34.029Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T11:16:34.151Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T11:17:32.337Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T11:17:32.463Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T11:17:42.876Z 已从工作流文件读取默认负面提示词
+2026-09-28T11:17:42.904Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T11:18:14.640Z ComfyUI 就绪，用时 31.7s（包装 pid=33976，监听 pid=40440）
+2026-09-28T11:18:14.657Z 已提交 ComfyUI 任务 84069e1c-9efc-47a4-ba63-71c865b6630e（seed=993053275，768x768，source=resolution（正方形））
+2026-09-28T11:18:14.676Z 等待出图：运行中 1 / 排队 0
+2026-09-28T11:19:30.033Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T11:19:30.443Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T11:19:31.360Z 已关闭 ComfyUI（出图完成，pid=33976）
+2026-09-28T11:19:31.360Z generate_image 完成，用时 108494ms
+2026-09-28T11:22:46.135Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T11:22:58.248Z ComfyUI 就绪，用时 12.1s（包装 pid=40004，监听 pid=43720）
+2026-09-28T11:22:58.249Z comfyui_power 完成，用时 12117ms
+2026-09-28T11:23:01.130Z 发现上次遗留的 ComfyUI（pid=43720，启动于 2026-09-28T11:22:46.143Z），先结束它
+2026-09-28T11:23:01.734Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-28T11:23:02.766Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T11:23:17.884Z ComfyUI 就绪，用时 15.1s（包装 pid=40584，监听 pid=292）
+2026-09-28T11:23:17.897Z 已提交 ComfyUI 任务 8b7a6bda-f564-4345-b149-5ecea252baf0（seed=182007620，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-28T11:23:17.910Z 等待出图：运行中 1 / 排队 0
+2026-09-28T11:31:02.482Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T11:31:02.485Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-09-28T11:31:02.485Z generate_image 完成，用时 481364ms
+2026-09-28T11:31:07.102Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T11:31:08.025Z 已关闭 ComfyUI（手动，pid=40584）
+2026-09-28T11:31:08.025Z comfyui_power 完成，用时 1360ms
+2026-09-28T11:32:51.977Z 已生成草稿 draft-mul64t55-1（1088x1920，等待用户过目，30 分钟内有效）
+2026-09-28T11:32:51.977Z prepare_image 完成，用时 37147ms
+2026-09-28T11:33:18.219Z 用户已同意草稿 draft-mul64t55-1，提交出图（提示词有修改）
+2026-09-28T11:33:18.222Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T11:33:30.315Z ComfyUI 就绪，用时 12.1s（包装 pid=20772，监听 pid=38448）
+2026-09-28T11:33:30.321Z 已提交 ComfyUI 任务 8ca01a98-0193-46ec-a567-87e11f4f97c7（seed=182007620，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-28T11:33:30.324Z 等待出图：运行中 1 / 排队 0
+2026-09-28T11:41:15.362Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T11:41:15.963Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T11:41:16.879Z 已关闭 ComfyUI（出图完成，pid=20772）
+2026-09-28T11:41:16.880Z approve_and_generate 完成，用时 478661ms
+2026-09-28T11:43:55.851Z 已生成草稿 draft-mul6j1e3-2（1088x1920，等待用户过目，30 分钟内有效）
+2026-09-28T11:43:55.852Z prepare_image 完成，用时 21355ms
+2026-09-28T11:44:23.311Z 用户已同意草稿 draft-mul6j1e3-2，提交出图（提示词有修改）
+2026-09-28T11:44:23.316Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T11:44:35.430Z ComfyUI 就绪，用时 12.1s（包装 pid=19592，监听 pid=40308）
+2026-09-28T11:44:35.438Z 已提交 ComfyUI 任务 547756fa-6124-46cc-b595-3f8f02baa59f（seed=182007620，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-28T11:44:35.451Z 等待出图：运行中 1 / 排队 0
+2026-09-28T11:52:30.157Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T11:52:30.574Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T11:52:31.489Z 已关闭 ComfyUI（出图完成，pid=19592）
+2026-09-28T11:52:31.490Z approve_and_generate 完成，用时 488179ms
+2026-09-28T11:59:52.548Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T12:00:06.141Z ComfyUI 就绪，用时 13.6s（包装 pid=36164，监听 pid=45576）
+2026-09-28T12:00:06.141Z comfyui_power 完成，用时 13594ms
+2026-09-28T12:05:42.920Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T12:05:43.837Z 已关闭 ComfyUI（手动，pid=36164）
+2026-09-28T12:05:43.837Z comfyui_power 完成，用时 1331ms
+2026-09-28T13:12:04.303Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:12:04.418Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:12:17.499Z 已从工作流文件读取默认负面提示词
+2026-09-28T13:12:17.533Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T13:13:25.487Z ComfyUI 就绪，用时 67.9s（包装 pid=38084，监听 pid=49740）
+2026-09-28T13:13:25.504Z 已提交 ComfyUI 任务 b103fe54-0801-4b24-bd82-46cf9c17c6ff（seed=594725616，768x768，source=resolution（正方形））
+2026-09-28T13:13:25.528Z 等待出图：运行中 1 / 排队 0
+2026-09-28T13:14:27.291Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T13:14:27.689Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T13:14:28.607Z 已关闭 ComfyUI（出图完成，pid=38084）
+2026-09-28T13:14:28.608Z generate_image 完成，用时 131113ms
+2026-09-28T13:14:53.822Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T13:15:05.934Z ComfyUI 就绪，用时 12.1s（包装 pid=49380，监听 pid=49760）
+2026-09-28T13:15:05.934Z comfyui_power 完成，用时 12114ms
+2026-09-28T13:18:26.292Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T13:18:27.202Z 已关闭 ComfyUI（手动，pid=49380）
+2026-09-28T13:18:27.203Z comfyui_power 完成，用时 1310ms
+2026-09-28T13:24:28.340Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:24:28.479Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:24:51.474Z 已从工作流文件读取默认负面提示词
+2026-09-28T13:24:51.509Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T13:25:05.124Z ComfyUI 就绪，用时 13.6s（包装 pid=50268，监听 pid=40892）
+2026-09-28T13:25:05.136Z 已提交 ComfyUI 任务 47c8e284-2f5b-4e08-8dcf-b5c77c759db9（seed=4242，768x768，source=resolution（正方形））
+2026-09-28T13:25:05.147Z 等待出图：运行中 1 / 排队 0
+2026-09-28T13:26:48.126Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T13:26:48.510Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T13:26:49.425Z 已关闭 ComfyUI（出图完成，pid=50268）
+2026-09-28T13:26:49.426Z generate_image 完成，用时 117956ms
+2026-09-28T13:26:54.011Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T13:27:12.156Z ComfyUI 就绪，用时 18.1s（包装 pid=6056，监听 pid=45272）
+2026-09-28T13:27:12.165Z 已提交 ComfyUI 任务 ba1693a1-e91a-42b6-a982-3fdd9d49eafb（seed=4242，768x768，source=resolution（正方形））
+2026-09-28T13:27:12.177Z 等待出图：运行中 1 / 排队 0
+2026-09-28T13:28:30.551Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T13:28:30.912Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T13:28:31.832Z 已关闭 ComfyUI（出图完成，pid=6056）
+2026-09-28T13:28:31.833Z generate_image 完成，用时 97826ms
+2026-09-28T13:29:15.336Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:29:15.474Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T13:29:26.431Z 参考图已放入 ComfyUI input：dsh_edit_mulaaq3i.png（624 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00012_.png）
+2026-09-28T13:29:42.125Z 已生成草稿 draft-mulab27h-1（edit，1024x1024，参考图 dsh_edit_mulaaq3i.png，等待用户过目，30 分钟内有效）
+2026-09-28T13:29:42.126Z prepare_edit 完成，用时 15698ms
+2026-09-28T13:29:46.516Z 用户已同意草稿 draft-mulab27h-1（edit），提交出图
+2026-09-28T13:29:46.528Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T13:30:00.289Z ComfyUI 就绪，用时 13.7s（包装 pid=49076，监听 pid=38612）
+2026-09-28T13:30:00.297Z 已提交 ComfyUI 任务 658f2210-8f33-4f0a-a941-4a405aa19c43（seed=306606493，1024x1024，source=resolution（正方形））
+2026-09-28T13:30:00.302Z 等待出图：运行中 1 / 排队 0
+2026-09-28T13:32:17.236Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T13:32:17.678Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T13:32:18.601Z 已关闭 ComfyUI（出图完成，pid=49076）
+2026-09-28T13:32:18.602Z approve_and_generate 完成，用时 152087ms
+2026-09-28T14:49:43.530Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T14:49:47.132Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-28T14:52:47.834Z 参考图已放入 ComfyUI input：dsh_edit_muld9x7d.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-09-28T14:52:47.857Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-09-28T14:52:47.859Z prepare_edit 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-09-28T14:53:08.616Z 参考图已放入 ComfyUI input：dsh_edit_muldad8o.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-09-28T14:53:36.448Z 已生成草稿 draft-muldayps-1（edit，1024x1024，参考图 dsh_edit_muldad8o.webp，等待用户过目，30 分钟内有效）
+2026-09-28T14:53:36.448Z prepare_edit 完成，用时 27832ms
+2026-09-28T14:53:53.735Z 用户已同意草稿 draft-muldayps-1（edit），提交出图（提示词有修改）
+2026-09-28T14:53:53.748Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T14:54:55.645Z ComfyUI 就绪，用时 61.9s（包装 pid=62308，监听 pid=59476）
+2026-09-28T14:54:55.657Z 已提交 ComfyUI 任务 a74d88e8-6367-4b9d-84e3-e183e461f233（seed=29538463，1024x1024，source=resolution（正方形））
+2026-09-28T14:54:55.664Z 等待出图：运行中 1 / 排队 0
+2026-09-28T14:57:01.660Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T14:57:02.154Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T14:57:03.089Z 已关闭 ComfyUI（出图完成，pid=62308）
+2026-09-28T14:57:03.090Z approve_and_generate 完成，用时 189355ms
+2026-09-28T14:57:10.933Z 参考图已放入 ComfyUI input：dsh_edit_muldfk7o.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-09-28T14:57:31.184Z 已生成草稿 draft-muldfzu8-2（edit，1024x1024，参考图 dsh_edit_muldfk7o.webp，等待用户过目，30 分钟内有效）
+2026-09-28T14:57:31.185Z prepare_edit 完成，用时 20253ms
+2026-09-28T14:57:56.789Z 用户已同意草稿 draft-muldfzu8-2（edit），提交出图（提示词有修改）
+2026-09-28T14:57:56.793Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T14:58:08.892Z ComfyUI 就绪，用时 12.1s（包装 pid=63672，监听 pid=61948）
+2026-09-28T14:58:08.906Z 已提交 ComfyUI 任务 583a355e-785f-4f04-85c2-9aa2b3812547（seed=1412397898，1024x1024，source=resolution（正方形））
+2026-09-28T14:58:08.931Z 等待出图：运行中 1 / 排队 0
+2026-09-28T14:59:56.410Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T14:59:57.003Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T14:59:57.914Z 已关闭 ComfyUI（出图完成，pid=63672）
+2026-09-28T14:59:57.915Z approve_and_generate 完成，用时 121126ms
+2026-09-28T15:00:49.400Z 参考图已放入 ComfyUI input：dsh_edit_muldk8s7.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-09-28T15:01:04.106Z 已生成草稿 draft-muldkk4q-3（edit，768x768，参考图 dsh_edit_muldk8s7.webp，等待用户过目，30 分钟内有效）
+2026-09-28T15:01:04.107Z prepare_edit 完成，用时 14709ms
+2026-09-28T15:01:47.172Z 用户已同意草稿 draft-muldkk4q-3（edit），提交出图（提示词有修改）
+2026-09-28T15:01:47.178Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T15:02:00.778Z ComfyUI 就绪，用时 13.6s（包装 pid=59076，监听 pid=62044）
+2026-09-28T15:02:00.786Z 已提交 ComfyUI 任务 c9a81896-8c87-4e2d-9000-66e075a9fb89（seed=643629543，768x768，source=resolution（正方形））
+2026-09-28T15:02:00.797Z 等待出图：运行中 1 / 排队 0
+2026-09-28T15:04:40.602Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T15:04:41.030Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T15:04:41.939Z 已关闭 ComfyUI（出图完成，pid=59076）
+2026-09-28T15:04:41.940Z approve_and_generate 完成，用时 174768ms
+2026-09-28T15:06:17.220Z 参考图已放入 ComfyUI input：dsh_edit_muldr9qb.png（461 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_jk_edit_v3_00001_.png）
+2026-09-28T15:06:32.282Z 已生成草稿 draft-muldrlcq-4（edit，768x768，参考图 dsh_edit_muldr9qb.png，等待用户过目，30 分钟内有效）
+2026-09-28T15:06:32.283Z prepare_edit 完成，用时 15064ms
+2026-09-28T15:07:09.122Z 用户已同意草稿 draft-muldrlcq-4（edit），提交出图（提示词有修改）
+2026-09-28T15:07:09.128Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T15:07:21.224Z ComfyUI 就绪，用时 12.1s（包装 pid=61100，监听 pid=64808）
+2026-09-28T15:07:21.234Z 已提交 ComfyUI 任务 ad0db932-323c-4718-b30d-ce5560f6f72b（seed=2075238419，768x768，source=resolution（正方形））
+2026-09-28T15:07:21.251Z 等待出图：运行中 1 / 排队 0
+2026-09-28T15:10:01.032Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T15:10:01.472Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T15:10:02.394Z 已关闭 ComfyUI（出图完成，pid=61100）
+2026-09-28T15:10:02.395Z approve_and_generate 完成，用时 173273ms
+2026-09-28T15:11:54.746Z 参考图已放入 ComfyUI input：dsh_edit_muldyi61.png（529 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_jk_hiddenhand_v1_00001_.png）
+2026-09-28T15:12:13.650Z 已生成草稿 draft-muldywr6-5（edit，768x768，参考图 dsh_edit_muldyi61.png，等待用户过目，30 分钟内有效）
+2026-09-28T15:12:13.650Z prepare_edit 完成，用时 18906ms
+2026-09-28T15:12:38.551Z 用户已同意草稿 draft-muldywr6-5（edit），提交出图（提示词有修改）
+2026-09-28T15:12:38.555Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T15:12:50.641Z ComfyUI 就绪，用时 12.1s（包装 pid=64544，监听 pid=60676）
+2026-09-28T15:12:50.665Z 已提交 ComfyUI 任务 30746e8e-52a9-475e-890c-7bde3e6666d6（seed=1954641746，768x768，source=resolution（正方形））
+2026-09-28T15:12:50.692Z 等待出图：运行中 1 / 排队 0
+2026-09-28T15:15:36.761Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T15:15:37.177Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T15:15:38.093Z 已关闭 ComfyUI（出图完成，pid=64544）
+2026-09-28T15:15:38.093Z approve_and_generate 完成，用时 179542ms
+2026-09-28T15:16:39.009Z 参考图已放入 ComfyUI input：dsh_edit_mule4li8.png（495 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_college_v1_00001_.png）
+2026-09-28T15:16:55.467Z 已生成草稿 draft-mule4y7f-6（edit，768x768，参考图 dsh_edit_mule4li8.png，等待用户过目，30 分钟内有效）
+2026-09-28T15:16:55.468Z prepare_edit 完成，用时 16461ms
+2026-09-28T15:17:17.335Z 用户已同意草稿 draft-mule4y7f-6（edit），提交出图（提示词有修改）
+2026-09-28T15:17:17.338Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T15:17:29.437Z ComfyUI 就绪，用时 12.1s（包装 pid=51244，监听 pid=55900）
+2026-09-28T15:17:29.456Z 已提交 ComfyUI 任务 82ed5c3a-6c5d-48ec-ae70-b3b48d191913（seed=2062890219，768x768，source=resolution（正方形））
+2026-09-28T15:17:29.476Z 等待出图：运行中 1 / 排队 0
+2026-09-28T15:20:09.193Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T15:20:09.626Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T15:20:10.537Z 已关闭 ComfyUI（出图完成，pid=51244）
+2026-09-28T15:20:10.538Z approve_and_generate 完成，用时 173203ms
+2026-09-28T15:21:39.961Z 参考图已放入 ComfyUI input：dsh_edit_muleb1pz.png（464 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_summer_v1_00001_.png）
+2026-09-28T15:21:59.112Z 已生成草稿 draft-mulebgi0-7（edit，768x768，参考图 dsh_edit_muleb1pz.png，等待用户过目，30 分钟内有效）
+2026-09-28T15:21:59.113Z prepare_edit 完成，用时 19155ms
+2026-09-28T15:22:10.323Z 用户已同意草稿 draft-mulebgi0-7（edit），提交出图（提示词有修改）
+2026-09-28T15:22:10.328Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-28T15:22:23.918Z ComfyUI 就绪，用时 13.6s（包装 pid=61872，监听 pid=60060）
+2026-09-28T15:22:23.938Z 已提交 ComfyUI 任务 e05919e2-8166-4137-b203-80c772d4aeb3（seed=122222866，768x768，source=resolution（正方形））
+2026-09-28T15:22:23.949Z 等待出图：运行中 1 / 排队 0
+2026-09-28T15:25:13.003Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-28T15:25:13.449Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-28T15:25:14.360Z 已关闭 ComfyUI（出图完成，pid=61872）
+2026-09-28T15:25:14.360Z approve_and_generate 完成，用时 184037ms
+2026-09-29T06:06:28.169Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T06:06:33.982Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T08:29:47.299Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T08:29:50.756Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T08:30:30.216Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T08:30:31.172Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T08:40:12.589Z 已生成草稿 draft-mumfemgd-1（t2i，864x1536，等待用户过目，30 分钟内有效）
+2026-09-29T08:40:12.590Z prepare_image 完成，用时 39401ms
+2026-09-29T08:41:00.350Z 用户已同意草稿 draft-mumfemgd-1（t2i），提交出图（提示词有修改）
+2026-09-29T08:41:00.357Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T08:41:56.345Z ComfyUI 就绪，用时 56.0s（包装 pid=34724，监听 pid=26316）
+2026-09-29T08:41:56.363Z 已提交 ComfyUI 任务 f1e703c7-ea51-4223-82ce-6f368dc0c0e5（seed=647366571，864x1536，source=aspect 9:16 @ 长边 1536）
+2026-09-29T08:41:56.373Z 等待出图：运行中 1 / 排队 0
+2026-09-29T08:46:47.237Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T08:46:47.516Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T08:46:48.423Z 已关闭 ComfyUI（出图完成，pid=34724）
+2026-09-29T08:46:48.423Z approve_and_generate 完成，用时 348074ms
+2026-09-29T08:49:20.396Z 参考图已放入 ComfyUI input：dsh_edit_mumfqd4z.png（932 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_9x16_00001_.png）
+2026-09-29T08:49:44.942Z 已生成草稿 draft-mumfqw32-2（edit，1440x1440，参考图 dsh_edit_mumfqd4z.png，等待用户过目，30 分钟内有效）
+2026-09-29T08:49:44.942Z prepare_edit 完成，用时 24556ms
+2026-09-29T08:50:08.944Z 用户已同意草稿 draft-mumfqw32-2（edit），提交出图（提示词有修改）
+2026-09-29T08:50:08.947Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T08:50:19.562Z ComfyUI 就绪，用时 10.6s（包装 pid=15452，监听 pid=12592）
+2026-09-29T08:50:19.573Z 已提交 ComfyUI 任务 32900a8c-1d86-436e-97ef-d1b05d89e9df（seed=112450001，1440x1440，source=resolution（正方形））
+2026-09-29T08:50:19.582Z 等待出图：运行中 1 / 排队 0
+2026-09-29T09:03:15.777Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T09:03:16.003Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T09:03:16.917Z 已关闭 ComfyUI（出图完成，pid=15452）
+2026-09-29T09:03:16.918Z approve_and_generate 完成，用时 787974ms
+2026-09-29T09:50:45.612Z 参考图已放入 ComfyUI input：dsh_edit_mumhxcob.png（1434 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_daylight_1088x1920_00001_.png）
+2026-09-29T09:51:17.936Z 已生成草稿 draft-mumhy1m8-3（edit，1440x1440，参考图 dsh_edit_mumhxcob.png，等待用户过目，30 分钟内有效）
+2026-09-29T09:51:17.937Z prepare_edit 完成，用时 32327ms
+2026-09-29T09:53:26.414Z 已生成草稿 draft-mumi0sr2-4（t2i，1088x1920，等待用户过目，30 分钟内有效）
+2026-09-29T09:53:26.414Z prepare_image 完成，用时 33027ms
+2026-09-29T09:53:46.561Z 用户已同意草稿 draft-mumi0sr2-4（t2i），提交出图（提示词有修改）
+2026-09-29T09:53:46.563Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T09:53:57.194Z ComfyUI 就绪，用时 10.6s（包装 pid=37528，监听 pid=29084）
+2026-09-29T09:53:57.212Z 已提交 ComfyUI 任务 3721c09a-5573-492f-b691-d511f4f97ed3（seed=1579708412，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-29T09:53:57.222Z 等待出图：运行中 1 / 排队 0
+2026-09-29T10:02:05.639Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T10:02:05.892Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T10:02:06.800Z 已关闭 ComfyUI（出图完成，pid=37528）
+2026-09-29T10:02:06.800Z approve_and_generate 完成，用时 500239ms
+2026-09-29T10:05:45.104Z 参考图已放入 ComfyUI input：dsh_edit_mumigmq0.png（1926 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_seated_1088x1920_00001_.png）
+2026-09-29T10:06:17.772Z 已生成草稿 draft-mumihbxo-5（edit，1440x1440，参考图 dsh_edit_mumigmq0.png，等待用户过目，30 分钟内有效）
+2026-09-29T10:06:17.772Z prepare_edit 完成，用时 32677ms
+2026-09-29T10:06:45.545Z 用户已同意草稿 draft-mumihbxo-5（edit），提交出图（提示词有修改）
+2026-09-29T10:06:45.547Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T10:06:56.139Z ComfyUI 就绪，用时 10.6s（包装 pid=27580，监听 pid=39528）
+2026-09-29T10:06:56.148Z 已提交 ComfyUI 任务 c23adab5-993d-46f1-aff4-e85d5b723cb3（seed=291465619，1440x1440，source=resolution（正方形））
+2026-09-29T10:06:56.161Z 等待出图：运行中 1 / 排队 0
+2026-09-29T10:19:50.860Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T10:19:51.138Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T10:19:52.057Z 已关闭 ComfyUI（出图完成，pid=27580）
+2026-09-29T10:19:52.058Z approve_and_generate 完成，用时 786513ms
+2026-09-29T10:21:06.487Z 参考图已放入 ComfyUI input：dsh_edit_mumj0dny.png（1926 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_seated_1088x1920_00001_.png）
+2026-09-29T10:21:35.292Z 已生成草稿 draft-mumj0zwc-6（edit，1440x1440，参考图 dsh_edit_mumj0dny.png，等待用户过目，30 分钟内有效）
+2026-09-29T10:21:35.293Z prepare_edit 完成，用时 28816ms
+2026-09-29T10:22:01.929Z 已生成草稿 draft-mumj1kg9-7（t2i，1152x1536，等待用户过目，30 分钟内有效）
+2026-09-29T10:22:01.929Z prepare_image 完成，用时 26631ms
+2026-09-29T10:23:04.936Z 用户已同意草稿 draft-mumj0zwc-6（edit），提交出图（提示词有修改）
+2026-09-29T10:23:04.938Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T10:23:15.521Z ComfyUI 就绪，用时 10.6s（包装 pid=8108，监听 pid=37532）
+2026-09-29T10:23:15.531Z 已提交 ComfyUI 任务 3061c45b-6bfc-4873-a0f1-5dee84b33ebe（seed=203385478，1440x1440，source=resolution（正方形））
+2026-09-29T10:23:15.543Z 等待出图：运行中 1 / 排队 0
+2026-09-29T10:37:07.244Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T10:37:07.578Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T10:37:08.485Z 已关闭 ComfyUI（出图完成，pid=8108）
+2026-09-29T10:37:08.485Z approve_and_generate 完成，用时 843549ms
+2026-09-29T10:37:15.311Z 用户已同意草稿 draft-mumj1kg9-7（t2i），提交出图（提示词有修改）
+2026-09-29T10:37:15.313Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T10:37:25.957Z ComfyUI 就绪，用时 10.6s（包装 pid=43704，监听 pid=43336）
+2026-09-29T10:37:25.964Z 已提交 ComfyUI 任务 ada7e2cf-23e8-46be-b528-afe64aa068bb（seed=2086671810，1152x1536，source=aspect 3:4 @ 长边 1536）
+2026-09-29T10:37:25.967Z 等待出图：运行中 1 / 排队 0
+2026-09-29T10:43:32.798Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T10:43:33.041Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T10:43:33.955Z 已关闭 ComfyUI（出图完成，pid=43704）
+2026-09-29T10:43:33.955Z approve_and_generate 完成，用时 378644ms
+2026-09-29T13:01:38.702Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:01:38.829Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:06:13.652Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:06:16.996Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:07:00.381Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:07:01.156Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:18:25.828Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:18:25.972Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:22:25.498Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:22:25.636Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-29T13:28:52.705Z 参考图已放入 ComfyUI input：dsh_edit_mumppuqo.png（2172 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_fixed_1088x1920_00001_.png）
+2026-09-29T13:28:52.728Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-09-29T13:28:52.730Z prepare_edit 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-09-29T13:29:06.802Z 参考图已放入 ComfyUI input：dsh_edit_mumpq5m9.png（2172 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_fixed_1088x1920_00001_.png）
+2026-09-29T13:29:47.471Z 已生成草稿 draft-mumpr0zz-1（edit，1440x1440，参考图 dsh_edit_mumpq5m9.png，等待用户过目，30 分钟内有效）
+2026-09-29T13:29:47.472Z prepare_edit 完成，用时 40671ms
+2026-09-29T13:30:29.388Z 用户已同意草稿 draft-mumpr0zz-1（edit），提交出图（提示词有修改）
+2026-09-29T13:30:29.391Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T13:30:41.486Z ComfyUI 就绪，用时 12.1s（包装 pid=71464，监听 pid=71488）
+2026-09-29T13:30:41.513Z 已提交 ComfyUI 任务 9e0bddde-51a4-4e50-9a33-a381ec60631d（seed=926518229，1440x1440，source=resolution（正方形））
+2026-09-29T13:30:41.709Z 等待出图：运行中 1 / 排队 0
+2026-09-29T13:51:30.540Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T13:51:30.959Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T13:51:31.870Z 已关闭 ComfyUI（出图完成，pid=71464）
+2026-09-29T13:51:31.871Z approve_and_generate 完成，用时 1262483ms
+2026-09-29T13:51:40.548Z 参考图已放入 ComfyUI input：dsh_edit_mumqj664.png（2336 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\red_gown_fingers_1088x1920_00001_.png）
+2026-09-29T13:51:55.364Z 已生成草稿 draft-mumqjhlw-2（edit，1440x1440，参考图 dsh_edit_mumqj664.png，等待用户过目，30 分钟内有效）
+2026-09-29T13:51:55.364Z prepare_edit 完成，用时 14825ms
+2026-09-29T13:51:58.821Z 用户已同意草稿 draft-mumqjhlw-2（edit），提交出图（提示词有修改）
+2026-09-29T13:51:58.823Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T13:52:09.451Z ComfyUI 就绪，用时 10.6s（包装 pid=66708，监听 pid=70388）
+2026-09-29T13:52:09.461Z 已提交 ComfyUI 任务 46b1ef2e-b114-4caf-b11b-2dbb93afbcb3（seed=191121359，1440x1440，source=resolution（正方形））
+2026-09-29T13:52:09.485Z 等待出图：运行中 1 / 排队 0
+2026-09-29T14:14:48.669Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T14:14:48.997Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T14:14:49.902Z 已关闭 ComfyUI（出图完成，pid=66708）
+2026-09-29T14:14:49.902Z approve_and_generate 完成，用时 1371081ms
+2026-09-29T14:16:50.975Z 已生成草稿 draft-mumrfjmn-3（t2i，1088x1920，等待用户过目，30 分钟内有效）
+2026-09-29T14:16:50.975Z prepare_image 完成，用时 40311ms
+2026-09-29T14:17:08.958Z 已生成草稿 draft-mumrfxi6-4（t2i，1152x1536，等待用户过目，30 分钟内有效）
+2026-09-29T14:17:08.959Z prepare_image 完成，用时 17980ms
+2026-09-29T14:19:46.526Z 用户已同意草稿 draft-mumrfjmn-3（t2i），提交出图（提示词有修改）
+2026-09-29T14:19:46.529Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T14:19:57.144Z ComfyUI 就绪，用时 10.6s（包装 pid=62736，监听 pid=64004）
+2026-09-29T14:19:57.149Z 已提交 ComfyUI 任务 7cdb116d-d91d-4cc0-8795-d4ae0fc8df7f（seed=1447838164，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-29T14:19:57.168Z 等待出图：运行中 1 / 排队 0
+2026-09-29T14:27:12.891Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T14:27:13.213Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T14:27:14.129Z 已关闭 ComfyUI（出图完成，pid=62736）
+2026-09-29T14:27:14.129Z approve_and_generate 完成，用时 447603ms
+2026-09-29T14:27:22.581Z 用户已同意草稿 draft-mumrfxi6-4（t2i），提交出图（提示词有修改）
+2026-09-29T14:27:22.584Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T14:27:34.692Z ComfyUI 就绪，用时 12.1s（包装 pid=71672，监听 pid=71916）
+2026-09-29T14:27:34.699Z 已提交 ComfyUI 任务 dfe8dbda-712f-4be4-b10a-9c248dc062db（seed=1215445802，1152x1536，source=aspect 3:4 @ 长边 1536）
+2026-09-29T14:27:34.713Z 等待出图：运行中 1 / 排队 0
+2026-09-29T14:33:41.244Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T14:33:41.557Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T14:33:42.468Z 已关闭 ComfyUI（出图完成，pid=71672）
+2026-09-29T14:33:42.469Z approve_and_generate 完成，用时 379888ms
+2026-09-29T14:41:32.099Z 已生成草稿 draft-mumsbagz-5（t2i，1088x1920，等待用户过目，30 分钟内有效）
+2026-09-29T14:41:32.100Z prepare_image 完成，用时 36203ms
+2026-09-29T14:42:51.837Z 用户已同意草稿 draft-mumsbagz-5（t2i），提交出图（提示词有修改）
+2026-09-29T14:42:51.840Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T14:43:02.445Z ComfyUI 就绪，用时 10.6s（包装 pid=73044，监听 pid=73332）
+2026-09-29T14:43:02.454Z 已提交 ComfyUI 任务 a8ba8a30-f652-4031-b9a4-ce4cd215d663（seed=173878824，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-29T14:43:02.476Z 等待出图：运行中 1 / 排队 0
+2026-09-29T14:50:25.684Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T14:50:26.016Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T14:50:26.923Z 已关闭 ComfyUI（出图完成，pid=73044）
+2026-09-29T14:50:26.923Z approve_and_generate 完成，用时 455086ms
+2026-09-29T14:53:41.877Z 已生成草稿 draft-mumsqxkl-6（t2i，1088x1920，等待用户过目，30 分钟内有效）
+2026-09-29T14:53:41.877Z prepare_image 完成，用时 41947ms
+2026-09-29T14:54:32.855Z 用户已同意草稿 draft-mumsqxkl-6（t2i），提交出图（提示词有修改）
+2026-09-29T14:54:32.858Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-29T14:54:43.456Z ComfyUI 就绪，用时 10.6s（包装 pid=70844，监听 pid=73692）
+2026-09-29T14:54:43.461Z 已提交 ComfyUI 任务 134c58f9-9180-439d-8889-8f676d52f394（seed=1901239398，1088x1920，source=aspect 9:16 @ 长边 1920）
+2026-09-29T14:54:43.474Z 等待出图：运行中 1 / 排队 0
+2026-09-29T15:02:06.637Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-29T15:02:06.966Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-29T15:02:07.875Z 已关闭 ComfyUI（出图完成，pid=70844）
+2026-09-29T15:02:07.876Z approve_and_generate 完成，用时 455021ms
+2026-09-30T01:09:34.896Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T01:09:35.308Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T01:11:39.513Z service_status 完成，用时 24ms
+2026-09-30T01:34:17.192Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T01:34:17.474Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T04:00:15.899Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T04:00:16.311Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T04:04:01.593Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T04:04:01.664Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T04:06:03.084Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:06:45.399Z ComfyUI 就绪，用时 42.3s（包装 pid=16784，监听 pid=4040）
+2026-09-30T04:06:45.399Z comfyui_power 完成，用时 42337ms
+2026-09-30T04:06:48.645Z service_status 完成，用时 41ms
+2026-09-30T04:08:34.383Z 已从工作流文件读取默认负面提示词
+2026-09-30T04:08:34.398Z 发现上次遗留的 ComfyUI（pid=4040，启动于 2026-09-30T04:06:03.101Z），先结束它
+2026-09-30T04:08:35.433Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-30T04:08:35.900Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:09:30.324Z ComfyUI 就绪，用时 54.4s（包装 pid=30316，监听 pid=7348）
+2026-09-30T04:09:30.344Z 已提交 ComfyUI 任务 4867cbc0-c6de-4dd8-b929-56e7105d034b（seed=9999，768x768，source=resolution（正方形））
+2026-09-30T04:09:30.354Z 等待出图：运行中 1 / 排队 0
+2026-09-30T04:10:24.178Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T04:10:24.180Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-09-30T04:10:24.181Z generate_image 完成，用时 109809ms
+2026-09-30T04:10:27.415Z 发现上次遗留的 ComfyUI（pid=7348，启动于 2026-09-30T04:08:35.908Z），先结束它
+2026-09-30T04:10:27.917Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-30T04:10:28.930Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:10:39.541Z ComfyUI 就绪，用时 10.6s（包装 pid=29824，监听 pid=36260）
+2026-09-30T04:10:39.542Z 应用 LoRA：RadianceChromeVoluptuous_QwenImage2.1_v1.0.safetensors@0.8
+2026-09-30T04:10:39.559Z 已提交 ComfyUI 任务 2358f7ca-c79f-43d6-a090-6dbc5688b982（seed=9999，768x768，source=resolution（正方形））
+2026-09-30T04:10:39.570Z 等待出图：运行中 1 / 排队 0
+2026-09-30T04:11:55.015Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T04:11:55.326Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T04:11:56.248Z 已关闭 ComfyUI（出图完成，pid=29824）
+2026-09-30T04:11:56.248Z generate_image 完成，用时 88851ms
+2026-09-30T04:14:21.776Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:14:32.396Z ComfyUI 就绪，用时 10.6s（包装 pid=10776，监听 pid=20384）
+2026-09-30T04:14:32.397Z comfyui_power 完成，用时 10623ms
+2026-09-30T04:17:07.029Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T04:17:07.945Z 已关闭 ComfyUI（手动，pid=10776）
+2026-09-30T04:17:07.945Z comfyui_power 完成，用时 1168ms
+2026-09-30T04:19:07.520Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:19:18.141Z ComfyUI 就绪，用时 10.6s（包装 pid=16168，监听 pid=17516）
+2026-09-30T04:19:18.141Z comfyui_power 完成，用时 10622ms
+2026-09-30T04:19:58.072Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T04:19:58.991Z 已关闭 ComfyUI（手动，pid=16168）
+2026-09-30T04:19:58.991Z comfyui_power 完成，用时 1164ms
+2026-09-30T04:22:21.561Z service_status 完成，用时 67ms
+2026-09-30T04:22:25.633Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:22:36.225Z ComfyUI 就绪，用时 10.6s（包装 pid=16524，监听 pid=37532）
+2026-09-30T04:22:36.225Z comfyui_power 完成，用时 10593ms
+2026-09-30T04:22:46.907Z service_status 完成，用时 44ms
+2026-09-30T04:23:25.205Z 已生成草稿 draft-munlo8ph-1（t2i，1152x1536，等待用户过目，30 分钟内有效）
+2026-09-30T04:23:25.205Z prepare_image 完成，用时 31303ms
+2026-09-30T04:25:07.348Z 用户已同意草稿 draft-munlo8ph-1（t2i），提交出图（提示词有修改）
+2026-09-30T04:25:07.352Z 发现上次遗留的 ComfyUI（pid=37532，启动于 2026-09-30T04:22:25.637Z），先结束它
+2026-09-30T04:25:07.727Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-30T04:25:08.841Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T04:25:17.932Z ComfyUI 就绪，用时 9.1s（包装 pid=24336，监听 pid=30212）
+2026-09-30T04:25:17.933Z approve_and_generate 失败：LoRA 不存在：nsfw_qwen_21_split.safetensors、Pornmaster_QI2.1_Breasts_Slider_V1_split.safetensors、Qwen2.1_Anything2RealCharacters_split.safetensors。
+ComfyUI 当前可用：Pornmaster_QI2.1_Breasts_Slider_V1.safetensors | Qwen-Image-2.1-Natural-Exposure-LoRA-4000.safetensors | Qwen-Image-2.1_20NSFW_20Image_20Edit.safetensors | Qwen2.1_Anything2RealCharacters.safetensors | RadianceChromeVoluptuous_QwenImage2.1_v1.0.safetensors | nsfw_qwen_21.safetensors | qwen-image-2.1-uncensored-lora.safetensors | turbo8_lora_step2500.safetensors
+2026-09-30T14:16:12.306Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:16:12.706Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:17:23.664Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:18:11.988Z ComfyUI 就绪，用时 48.3s（包装 pid=10920，监听 pid=9304）
+2026-09-30T14:18:11.988Z comfyui_power 完成，用时 48345ms
+2026-09-30T14:34:52.099Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:34:53.011Z 已关闭 ComfyUI（手动，pid=10920）
+2026-09-30T14:34:53.012Z comfyui_power 完成，用时 1183ms
+2026-09-30T14:39:28.971Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:40:06.775Z ComfyUI 就绪，用时 37.8s（包装 pid=5808，监听 pid=34144）
+2026-09-30T14:40:06.776Z comfyui_power 完成，用时 37806ms
+2026-09-30T14:40:48.398Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:40:48.484Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:40:48.511Z 发现上次遗留的 ComfyUI（pid=34144，启动于 2026-09-30T14:39:28.985Z），先结束它
+2026-09-30T14:41:07.571Z 已从工作流文件读取默认负面提示词
+2026-09-30T14:41:07.575Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:41:18.168Z ComfyUI 就绪，用时 10.6s（包装 pid=13564，监听 pid=26172）
+2026-09-30T14:41:18.176Z 应用 LoRA：turbo8_lora_step2500.safetensors@1 + nsfw_qwen_21.safetensors@0.8
+2026-09-30T14:41:18.186Z 已提交 ComfyUI 任务 fdd3691b-69a6-4ce5-bf8c-02d0cf1fea2e（seed=8801，832x1216，source=width/height）
+2026-09-30T14:41:18.206Z 等待出图：运行中 1 / 排队 0
+2026-09-30T14:42:15.129Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T14:42:15.415Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:42:16.336Z 已关闭 ComfyUI（出图完成，pid=13564）
+2026-09-30T14:42:16.336Z generate_image 完成，用时 68775ms
+2026-09-30T14:42:22.298Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:42:31.531Z ComfyUI 就绪，用时 9.2s（包装 pid=12372，监听 pid=15596）
+2026-09-30T14:42:31.531Z 应用 LoRA：nsfw_qwen_21.safetensors@0.8
+2026-09-30T14:42:31.542Z 已提交 ComfyUI 任务 f86ee5dd-770e-4f99-b936-e796e813a231（seed=8801，832x1216，source=width/height）
+2026-09-30T14:42:31.555Z 等待出图：运行中 1 / 排队 0
+2026-09-30T14:44:24.043Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T14:44:24.332Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:44:25.251Z 已关闭 ComfyUI（出图完成，pid=12372）
+2026-09-30T14:44:25.251Z generate_image 完成，用时 122956ms
+2026-09-30T14:45:18.415Z comfyui_power 完成，用时 903ms
+2026-09-30T14:52:15.484Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:52:26.103Z ComfyUI 就绪，用时 10.6s（包装 pid=33500，监听 pid=19388）
+2026-09-30T14:52:26.103Z comfyui_power 完成，用时 10620ms
+2026-09-30T14:53:48.125Z 发现上次遗留的 ComfyUI（pid=19388，启动于 2026-09-30T14:52:15.487Z），先结束它
+2026-09-30T14:53:49.191Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-30T14:53:49.598Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:54:00.204Z ComfyUI 就绪，用时 10.6s（包装 pid=15584，监听 pid=15548）
+2026-09-30T14:54:00.205Z generate_image 失败：LoRA 不存在：easternfemale_v2.1_split.safetensors。
+ComfyUI 当前可用：Pornmaster_QI2.1_Breasts_Slider_V1.safetensors | Pornmaster_QI2.1_Breasts_Slider_V1_split.safetensors | Qwen-Image-2.1-Natural-Exposure-LoRA-4000.safetensors | Qwen-Image-2.1_20NSFW_20Image_20Edit.safetensors | Qwen2.1_Anything2RealCharacters.safetensors | Qwen2.1_Anything2RealCharacters_split.safetensors | RadianceChromeVoluptuous_QwenImage2.1_v1.0.safetensors | nsfw_qwen_21.safetensors | nsfw_qwen_21_split.safetensors | qwen-image-2.1-uncensored-lora.safetensors | turbo8_lora_step2500.safetensors
+2026-09-30T14:54:28.264Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:54:28.351Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T14:54:28.378Z 发现上次遗留的 ComfyUI（pid=15548，启动于 2026-09-30T14:53:49.602Z），先结束它
+2026-09-30T14:54:38.216Z 已从工作流文件读取默认负面提示词
+2026-09-30T14:54:38.220Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:54:47.339Z ComfyUI 就绪，用时 9.1s（包装 pid=37260，监听 pid=34660）
+2026-09-30T14:54:47.344Z 应用 LoRA：turbo8_lora_step2500.safetensors@1 + easternfemale_v2.1_split.safetensors@0.8 + nsfw_qwen_21.safetensors@0.6
+2026-09-30T14:54:47.360Z 已提交 ComfyUI 任务 c6aab6f3-a767-4e21-87ca-8fd7e5cab078（seed=7701，832x1216，source=width/height）
+2026-09-30T14:54:47.387Z 等待出图：运行中 1 / 排队 0
+2026-09-30T14:55:55.091Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T14:55:55.377Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:55:56.289Z 已关闭 ComfyUI（出图完成，pid=37260）
+2026-09-30T14:55:56.290Z generate_image 完成，用时 78084ms
+2026-09-30T14:56:00.436Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:56:11.037Z ComfyUI 就绪，用时 10.6s（包装 pid=19828，监听 pid=12544）
+2026-09-30T14:56:11.042Z 应用 LoRA：easternfemale_v2.1_split.safetensors@0.8 + nsfw_qwen_21.safetensors@0.6
+2026-09-30T14:56:11.052Z 已提交 ComfyUI 任务 3c908278-be7c-4938-b9fa-f9a827c4cf88（seed=7701，832x1216，source=width/height）
+2026-09-30T14:56:11.063Z 等待出图：运行中 1 / 排队 0
+2026-09-30T14:58:25.039Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T14:58:25.309Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:58:26.219Z 已关闭 ComfyUI（出图完成，pid=19828）
+2026-09-30T14:58:26.219Z generate_image 完成，用时 145786ms
+2026-09-30T14:58:43.222Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T14:58:53.817Z ComfyUI 就绪，用时 10.6s（包装 pid=3288，监听 pid=32692）
+2026-09-30T14:58:53.821Z 应用 LoRA：turbo8_lora_step2500.safetensors@1 + easternfemale_v2.1_split.safetensors@0.8
+2026-09-30T14:58:53.827Z 已提交 ComfyUI 任务 d7930b85-2aca-4bcc-a5e9-2ec8e01970f4（seed=7701，832x1216，source=width/height）
+2026-09-30T14:58:53.837Z 等待出图：运行中 1 / 排队 0
+2026-09-30T14:59:56.965Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T14:59:57.263Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T14:59:58.178Z 已关闭 ComfyUI（出图完成，pid=3288）
+2026-09-30T14:59:58.179Z generate_image 完成，用时 74959ms
+2026-09-30T15:07:30.833Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:07:30.905Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:07:46.612Z generate_image 失败：未知预设 "r18_fast"。可用预设：（未配置）
+2026-09-30T15:08:51.342Z service_status 完成，用时 22ms
+2026-09-30T15:09:53.510Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:09:53.580Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:10:04.586Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T15:10:13.711Z ComfyUI 就绪，用时 9.1s（包装 pid=25624，监听 pid=23632）
+2026-09-30T15:10:13.711Z comfyui_power 完成，用时 9145ms
+2026-09-30T15:10:17.848Z service_status 完成，用时 40ms
+2026-09-30T15:10:21.440Z 已从工作流文件读取默认负面提示词
+2026-09-30T15:10:21.463Z 发现上次遗留的 ComfyUI（pid=23632，启动于 2026-09-30T15:10:04.597Z），先结束它
+2026-09-30T15:10:21.839Z ComfyUI 进程退出（code=0 signal=null）
+2026-09-30T15:10:22.949Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T15:10:35.039Z ComfyUI 就绪，用时 12.1s（包装 pid=17624，监听 pid=20168）
+2026-09-30T15:10:35.040Z 应用 LoRA：turbo8_lora_step2500.safetensors@1 + easternfemale_v2.1_split.safetensors@0.8
+2026-09-30T15:10:35.056Z 已提交 ComfyUI 任务 98a1aa4e-d87f-49a0-ac80-de9f94d26757（seed=5501，832x1216，source=width/height）
+2026-09-30T15:10:35.091Z 等待出图：运行中 1 / 排队 0
+2026-09-30T15:11:36.735Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T15:11:36.736Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-09-30T15:11:36.737Z generate_image 完成，用时 75308ms
+2026-09-30T15:12:36.877Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T15:12:37.795Z 已关闭 ComfyUI（手动，pid=17624）
+2026-09-30T15:12:37.795Z comfyui_power 完成，用时 1196ms
+2026-09-30T15:24:56.583Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:24:56.719Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T15:26:47.020Z 已生成草稿 draft-muo9dbzf-1（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-09-30T15:26:47.020Z prepare_image 完成，用时 60077ms
+2026-09-30T15:27:59.927Z 用户已同意草稿 draft-muo9dbzf-1（t2i），提交出图（提示词有修改）
+2026-09-30T15:27:59.933Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T15:28:39.224Z ComfyUI 就绪，用时 39.3s（包装 pid=30480，监听 pid=33584）
+2026-09-30T15:28:39.239Z 应用 LoRA：nsfw_qwen_21.safetensors@0.6 + qwen-image-2.1-uncensored-lora.safetensors@0.6
+2026-09-30T15:28:39.244Z 已提交 ComfyUI 任务 212aa650-ada7-401e-9136-79801320ef08（seed=2008893244，832x1216，source=width/height）
+2026-09-30T15:28:39.253Z 等待出图：运行中 1 / 排队 0
+2026-09-30T15:30:27.034Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T15:30:27.250Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T15:30:28.164Z 已关闭 ComfyUI（出图完成，pid=30480）
+2026-09-30T15:30:28.164Z approve_and_generate 完成，用时 148238ms
+2026-09-30T15:37:52.749Z 已生成草稿 draft-muo9rlnx-2（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-09-30T15:37:52.749Z prepare_image 完成，用时 59752ms
+2026-09-30T15:37:58.247Z service_status 完成，用时 45ms
+2026-09-30T15:38:45.632Z 用户已同意草稿 draft-muo9rlnx-2（t2i），提交出图（提示词有修改）
+2026-09-30T15:38:45.634Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T15:38:56.265Z ComfyUI 就绪，用时 10.6s（包装 pid=8128，监听 pid=8232）
+2026-09-30T15:38:56.275Z 应用 LoRA：easternfemale_v2.1_split.safetensors@0.8 + nsfw_qwen_21_split.safetensors@0.6
+2026-09-30T15:38:56.290Z 已提交 ComfyUI 任务 fe06fdf7-fc41-4e81-ad40-12d55506c042（seed=421299617，832x1216，source=width/height）
+2026-09-30T15:38:56.321Z 等待出图：运行中 1 / 排队 0
+2026-09-30T15:41:07.036Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T15:41:07.300Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T15:41:08.218Z 已关闭 ComfyUI（出图完成，pid=8128）
+2026-09-30T15:41:08.218Z approve_and_generate 完成，用时 142586ms
+2026-09-30T15:44:55.882Z 已生成草稿 draft-muoa0o5m-3（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-09-30T15:44:55.883Z prepare_image 完成，用时 42656ms
+2026-09-30T15:45:46.543Z 用户已同意草稿 draft-muoa0o5m-3（t2i），提交出图（提示词有修改）
+2026-09-30T15:45:46.546Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T15:45:57.131Z ComfyUI 就绪，用时 10.6s（包装 pid=33848，监听 pid=29876）
+2026-09-30T15:45:57.135Z 应用 LoRA：easternfemale_v2.1_split.safetensors@0.8 + nsfw_qwen_21_split.safetensors@0.6
+2026-09-30T15:45:57.142Z 已提交 ComfyUI 任务 ea1ed3cd-277d-4610-a132-0712ce36b599（seed=1768203791，832x1216，source=width/height）
+2026-09-30T15:45:57.172Z 等待出图：运行中 1 / 排队 0
+2026-09-30T15:51:03.325Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T15:51:03.603Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T15:51:04.518Z 已关闭 ComfyUI（出图完成，pid=33848）
+2026-09-30T15:51:04.518Z approve_and_generate 完成，用时 317975ms
+2026-09-30T16:04:37.092Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T16:04:37.160Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-09-30T16:04:56.715Z 已从工作流文件读取默认负面提示词
+2026-09-30T16:04:56.737Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-09-30T16:05:07.365Z ComfyUI 就绪，用时 10.6s（包装 pid=10492，监听 pid=30800）
+2026-09-30T16:05:07.368Z 应用 LoRA：easternfemale_v2.1_split.safetensors@0.8 + nsfw_qwen_21.safetensors@0.6
+2026-09-30T16:05:07.379Z 已提交 ComfyUI 任务 9c1d1387-6d63-41dc-9123-f2b757d263fd（seed=7701，832x1216，source=width/height）
+2026-09-30T16:05:07.411Z 等待出图：运行中 1 / 排队 0
+2026-09-30T16:09:48.953Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-09-30T16:09:49.210Z ComfyUI 进程退出（code=1 signal=null）
+2026-09-30T16:09:50.116Z 已关闭 ComfyUI（出图完成，pid=10492）
+2026-09-30T16:09:50.117Z generate_image 完成，用时 293404ms
+2026-10-01T02:19:27.629Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T02:19:28.024Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T04:26:04.048Z service_status 完成，用时 53ms
+2026-10-01T04:52:26.789Z service_status 完成，用时 4ms
+2026-10-01T04:55:00.512Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T04:55:00.637Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T09:29:19.986Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T09:29:20.463Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T09:30:58.760Z service_status 完成，用时 23ms
+2026-10-01T09:30:58.774Z run_workflow 完成，用时 2ms
+2026-10-01T09:32:11.759Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T09:32:58.625Z ComfyUI 就绪，用时 46.9s（包装 pid=29904，监听 pid=3012）
+2026-10-01T09:32:58.637Z run_workflow 失败：LoRA 不存在：H3R18\\minimax_h3_turbo_v4_step600_ema_pruned_comfyui.safetensors、H3R18\\minimax-h3-facial-realism-closeup-cp2000.safetensors、H3R18\\Vagina_minimax-h3_epoch20.safetensors、H3R18\\HMBreastsV2.safetensors、H3R18\\HMNSFW-AIO-V2.5.safetensors、H3R18\\hmmasturbation_v2.safetensors、H3R18\\fingering_pussy_v11.safetensors、H3R18\\breastplayjiggle_h3_v1.safetensors。ComfyUI 当前可用：H3R18\AfterMidnight_ref2va_h3_sexytime_rank64-v1.2.safetensors | H3R18\H3-reveals_minimaxh3_3313271_epoch_3.safetensors | H3R18\H3_Mis_Insrt_v07.safetensors | H3R18\H3_Motion_BoosterV2.safetensors | H3R18\HMBreastsV2.safetensors | H3R18\HMCumshot_V2.safetensors | H3R18\HMInnie_v1_e50.safetensors | H3R18\HMNSFW-AIO-V2.5.safetensors | H3R18\HMPenis_v2_e35.safetensors | H3R18\HMSquirtV0.1.safetensors | H3R18\Minimax_H3_Unlocked_V2.safetensors | H3R18\Pussy4nus_Epoch80.safetensors | H3R18\Vagina_minimax-h3_epoch20.safetensors | H3R18\breastplayjiggle_h3_v1.safetensors | H3R18\fingering_pussy_v11.safetensors | H3R18\h3_realism_slider.safetensors | H3R18\hmmasturbation_v2.safetensors | H3R18\hmpussy_v6_epoch30.safetensors | H3R18\minimax-h3-facial-realism-closeup-cp2000.safetensors | H3R18\minimax_h3_turbo_v4_step600_ema_pruned_comfyui.safetensors | H3R18\mystic_xxx_v4.safetensors | H3R18\ref2VA_Motion_v2.safetensors | Qwen21R18\Pornmaster_QI2.1_Breasts_Slider_V1.safetensors | Qwen21R18\Pornmaster_QI2.1_Breasts_Slider_V1_split.safetensors | Qwen21R18\Qwen-Image-2.1-Natural-Exposure-LoRA-4000.safetensors | Qwen21R18\Qwen-Image-2.1_20NSFW_20Image_20Edit.safetensors | Qwen21R18\Qwen2.1_Anything2RealCharacters.safetensors | Qwen21R18\Qwen2.1_Anything2RealCharacters_split.safetensors | Qwen21R18\RadianceChromeVoluptuous_QwenImage2.1_v1.0.safetensors | Qwen21R18\easternfemale_v2.1.safetensors | Qwen21R18\easternfemale_v2.1_split.safetensors | Qwen21R18\nsfw_qwen_21.safetensors | Qwen21R18\nsfw_qwen_21_split.safetensors | Qwen21R18\qwen-image-2.1-uncensored-lora.safetensors | Qwen21R18\turbo8_lora_step2500.safetensors
+2026-10-01T09:33:05.828Z 发现上次遗留的 ComfyUI（pid=3012，启动于 2026-10-01T09:32:11.774Z），先结束它
+2026-10-01T09:33:06.216Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-01T09:33:07.331Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T09:33:19.426Z ComfyUI 就绪，用时 12.1s（包装 pid=6612，监听 pid=20312）
+2026-10-01T09:33:19.454Z [run_workflow:h3_t2v] 已提交 eb99e886-9025-4563-af6b-2ece7e17b15f（seed=341822669）
+2026-10-01T09:33:19.474Z 等待出图：运行中 1 / 排队 0
+2026-10-01T09:43:29.301Z run_workflow 失败：ComfyUI 执行失败：SaveVideo.execute() missing 1 required positional argument: 'format'
+
+2026-10-01T12:50:34.921Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T12:50:35.329Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T12:55:09.729Z run_workflow 完成，用时 1ms
+2026-10-01T12:58:41.697Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T12:59:43.723Z ComfyUI 就绪，用时 62.0s（包装 pid=14856，监听 pid=22676）
+2026-10-01T12:59:43.756Z [run_workflow:h3_t2v] 已提交 949ae390-5f99-4802-883f-e97c3bfe8d22（seed=1946048644）
+2026-10-01T12:59:43.849Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:17:48.698Z 等待出图：运行中 0 / 排队 0
+2026-10-01T13:17:50.285Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:17:50.594Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:17:51.499Z 已关闭 ComfyUI（出图完成，pid=14856）
+2026-10-01T13:17:51.500Z run_workflow 完成，用时 1149825ms
+2026-10-01T13:22:04.474Z service_status 完成，用时 3ms
+2026-10-01T13:24:41.906Z run_workflow 完成，用时 1ms
+2026-10-01T13:26:07.085Z 参考图已放入 ComfyUI input：dsh_edit_mupki0a4.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:26:07.090Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T13:26:47.887Z ComfyUI 就绪，用时 40.8s（包装 pid=40048，监听 pid=26388）
+2026-10-01T13:26:47.902Z 应用 LoRA：Qwen21R18\Qwen2.1_Anything2RealCharacters_split.safetensors@0.7 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.6 + Qwen21R18\qwen-image-2.1-uncensored-lora.safetensors@0.4
+2026-10-01T13:26:47.920Z 已提交 ComfyUI 任务 002df637-1e5e-405e-aaca-7c1e17dc6f4c（seed=1246002262，1024x1024，source=resolution（正方形））
+2026-10-01T13:26:47.946Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:34:02.004Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:34:02.256Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:34:03.174Z 已关闭 ComfyUI（出图完成，pid=40048）
+2026-10-01T13:34:03.175Z run_workflow 完成，用时 476092ms
+2026-10-01T13:34:20.544Z 参考图已放入 ComfyUI input：dsh_edit_mupksl1b.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:34:20.545Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-10-01T13:34:20.546Z prepare_edit 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-10-01T13:34:31.310Z 参考图已放入 ComfyUI input：dsh_edit_mupkstce.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:34:31.311Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-10-01T13:34:31.312Z prepare_edit 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-10-01T13:34:56.904Z 参考图已放入 ComfyUI input：dsh_edit_mupktd34.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:35:23.459Z 已生成草稿 draft-mupktxkz-1（edit，1024x1024，参考图 dsh_edit_mupktd34.webp，等待用户过目，30 分钟内有效）
+2026-10-01T13:35:23.459Z prepare_edit 完成，用时 26563ms
+2026-10-01T13:36:06.634Z 用户已同意草稿 draft-mupktxkz-1（edit），提交出图（提示词有修改）
+2026-10-01T13:36:06.636Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T13:36:17.320Z ComfyUI 就绪，用时 10.7s（包装 pid=39396，监听 pid=9748）
+2026-10-01T13:36:17.328Z 应用 LoRA：Qwen21R18\Qwen2.1_Anything2RealCharacters_split.safetensors@0.5 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.4
+2026-10-01T13:36:17.340Z 已提交 ComfyUI 任务 4657935f-867d-4d56-be4f-37cda09ea8ef（seed=1192065789，1024x1024，source=resolution（正方形））
+2026-10-01T13:36:17.376Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:42:02.304Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:42:02.552Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:42:03.457Z 已关闭 ComfyUI（出图完成，pid=39396）
+2026-10-01T13:42:03.457Z approve_and_generate 完成，用时 356824ms
+2026-10-01T13:42:16.826Z 参考图已放入 ComfyUI input：dsh_edit_mupl2sjd.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:42:39.231Z 已生成草稿 draft-mupl39tr-2（edit，1024x1024，参考图 dsh_edit_mupl2sjd.webp，等待用户过目，30 分钟内有效）
+2026-10-01T13:42:39.231Z prepare_edit 完成，用时 22407ms
+2026-10-01T13:42:43.568Z 用户已同意草稿 draft-mupl39tr-2（edit），提交出图（提示词有修改）
+2026-10-01T13:42:43.572Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T13:42:54.193Z ComfyUI 就绪，用时 10.6s（包装 pid=39572，监听 pid=18684）
+2026-10-01T13:42:54.203Z 已提交 ComfyUI 任务 07a58d80-c92d-4c03-893e-7ca1c849b210（seed=799427653，1024x1024，source=resolution（正方形））
+2026-10-01T13:42:54.215Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:47:05.100Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:47:05.416Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:47:06.335Z 已关闭 ComfyUI（出图完成，pid=39572）
+2026-10-01T13:47:06.335Z approve_and_generate 完成，用时 262767ms
+2026-10-01T13:47:18.172Z 参考图已放入 ComfyUI input：dsh_edit_mupl9924.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:47:38.548Z 已生成草稿 draft-mupl9os4-3（edit，1024x1024，参考图 dsh_edit_mupl9924.webp，等待用户过目，30 分钟内有效）
+2026-10-01T13:47:38.549Z prepare_edit 完成，用时 20377ms
+2026-10-01T13:47:44.065Z 用户已同意草稿 draft-mupl9os4-3（edit），提交出图（提示词有修改）
+2026-10-01T13:47:44.067Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T13:47:53.230Z ComfyUI 就绪，用时 9.2s（包装 pid=40708，监听 pid=40780）
+2026-10-01T13:47:53.239Z 已提交 ComfyUI 任务 a73b40c3-3948-4ddb-b6c3-ac45229516e6（seed=1494957155，1024x1024，source=resolution（正方形））
+2026-10-01T13:47:53.251Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:51:44.298Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:51:44.555Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:51:45.474Z 已关闭 ComfyUI（出图完成，pid=40708）
+2026-10-01T13:51:45.474Z approve_and_generate 完成，用时 241409ms
+2026-10-01T13:52:05.260Z 参考图已放入 ComfyUI input：dsh_edit_muplfekr.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T13:52:29.371Z 已生成草稿 draft-muplfx6j-4（edit，1024x1024，参考图 dsh_edit_muplfekr.webp，等待用户过目，30 分钟内有效）
+2026-10-01T13:52:29.372Z prepare_edit 完成，用时 24113ms
+2026-10-01T13:52:34.039Z 用户已同意草稿 draft-muplfx6j-4（edit），提交出图（提示词有修改）
+2026-10-01T13:52:34.041Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T13:52:44.625Z ComfyUI 就绪，用时 10.6s（包装 pid=30848，监听 pid=29160）
+2026-10-01T13:52:44.653Z 已提交 ComfyUI 任务 3ec30d12-992f-4ab3-b5e1-3bd36a13a980（seed=595543467，1024x1024，source=resolution（正方形））
+2026-10-01T13:52:44.676Z 等待出图：运行中 1 / 排队 0
+2026-10-01T13:56:06.383Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T13:56:06.712Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T13:56:07.640Z 已关闭 ComfyUI（出图完成，pid=30848）
+2026-10-01T13:56:07.641Z approve_and_generate 完成，用时 213602ms
+2026-10-01T14:01:52.151Z service_status 完成，用时 49ms
+2026-10-01T14:03:36.288Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T14:03:46.864Z ComfyUI 就绪，用时 10.6s（包装 pid=12368，监听 pid=16212）
+2026-10-01T14:03:46.865Z comfyui_power 完成，用时 10578ms
+2026-10-01T14:04:07.188Z run_workflow 完成，用时 0ms
+2026-10-01T14:05:43.817Z 已从工作流文件读取默认负面提示词
+2026-10-01T14:05:43.821Z 发现上次遗留的 ComfyUI（pid=16212，启动于 2026-10-01T14:03:36.292Z），先结束它
+2026-10-01T14:05:44.215Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-01T14:05:45.333Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T14:05:54.400Z ComfyUI 就绪，用时 9.1s（包装 pid=32900，监听 pid=3352）
+2026-10-01T14:05:54.409Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T14:05:54.416Z 已提交 ComfyUI 任务 c2be1148-8370-403d-af72-6121c16fad40（seed=61001，832x1216，source=width/height）
+2026-10-01T14:05:54.424Z 等待出图：运行中 1 / 排队 0
+2026-10-01T14:12:23.916Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T14:12:23.917Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-10-01T14:12:23.917Z run_workflow 完成，用时 400101ms
+2026-10-01T14:12:29.666Z run_workflow 完成，用时 0ms
+2026-10-01T14:12:29.673Z run_workflow 完成，用时 3ms
+2026-10-01T14:14:49.245Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:14:49.334Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:14:49.362Z 发现上次遗留的 ComfyUI（pid=3352，启动于 2026-10-01T14:05:45.336Z），先结束它
+2026-10-01T14:15:00.487Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T14:15:11.083Z ComfyUI 就绪，用时 10.6s（包装 pid=40080，监听 pid=13548）
+2026-10-01T14:15:11.242Z [run_workflow:h3_t2v] 已提交 cc732829-2154-44a7-a623-c99d83111679（seed=62001）
+2026-10-01T14:15:11.255Z 等待出图：运行中 1 / 排队 0
+2026-10-01T14:40:12.050Z run_workflow 失败：等待出图超时（1500s）。任务 cc732829-2154-44a7-a623-c99d83111679 可能仍在 ComfyUI 里跑——本服务没有关它、也没有释放它的显存；成品会出现在 ComfyUI 的 output/ 目录。画布越大越慢（8 GB 显存下 1088×1920 实测约 8.8 分钟），需要更久请调大 config.json 的 generationTimeoutMs。
+2026-10-01T14:40:27.738Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T14:40:28.654Z 已关闭 ComfyUI（手动，pid=40080）
+2026-10-01T14:40:28.654Z comfyui_power 完成，用时 1220ms
+2026-10-01T14:40:31.681Z 参考图已放入 ComfyUI input：dsh_edit_mupn5p6n.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T14:40:31.687Z 已从工作流文件读取默认负面提示词
+2026-10-01T14:40:31.693Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T14:40:48.331Z ComfyUI 就绪，用时 16.6s（包装 pid=8892，监听 pid=38992）
+2026-10-01T14:40:48.353Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T14:40:48.370Z 已提交 ComfyUI 任务 1a68ed5c-77dd-42c5-95a3-f6717729e0d1（seed=63001，832x1216，source=width/height）
+2026-10-01T14:40:48.384Z 等待出图：运行中 1 / 排队 0
+2026-10-01T14:44:51.629Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T14:44:51.838Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T14:44:52.758Z 已关闭 ComfyUI（出图完成，pid=8892）
+2026-10-01T14:44:52.759Z run_workflow 完成，用时 261084ms
+2026-10-01T14:45:06.647Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T14:45:18.933Z ComfyUI 就绪，用时 12.3s（包装 pid=35300，监听 pid=21360）
+2026-10-01T14:45:18.933Z comfyui_power 完成，用时 12287ms
+2026-10-01T14:51:30.139Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:51:30.225Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:51:30.253Z 发现上次遗留的 ComfyUI（pid=21360，启动于 2026-10-01T14:45:06.653Z），先结束它
+2026-10-01T14:53:26.621Z comfyui_power 完成，用时 917ms
+2026-10-01T14:53:35.970Z comfyui_power 完成，用时 903ms
+2026-10-01T14:58:48.172Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:58:48.238Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:59:05.263Z run_workflow 失败：未知提示词预设 "explicit_closeup"。可用：（未配置）
+2026-10-01T14:59:05.266Z run_workflow 失败：未知提示词预设 "edit_lingerie"。可用：（未配置）
+2026-10-01T14:59:34.225Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:59:34.302Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T14:59:44.449Z run_workflow 完成，用时 0ms
+2026-10-01T14:59:44.453Z run_workflow 完成，用时 0ms
+2026-10-01T15:00:04.978Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:00:05.052Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:04:04.090Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:04:04.178Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:04:20.223Z 参考图已放入 ComfyUI input：dsh_edit_mupo0bg6.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:04:33.662Z 已生成草稿 draft-mupo0ltq-1（edit，832x832，参考图 dsh_edit_mupo0bg6.png，等待用户过目，30 分钟内有效）
+2026-10-01T15:04:33.662Z prepare_edit 完成，用时 13449ms
+2026-10-01T15:04:36.993Z 用户已同意草稿 draft-mupo0ltq-1（edit），提交出图
+2026-10-01T15:04:36.998Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:04:46.085Z ComfyUI 就绪，用时 9.1s（包装 pid=18068，监听 pid=16908）
+2026-10-01T15:04:46.094Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T15:04:46.102Z 已提交 ComfyUI 任务 48a7be57-51ec-487e-b95b-9aa24de6d90c（seed=1074401086，832x832，source=resolution（正方形））
+2026-10-01T15:04:46.112Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:10:01.222Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:10:01.466Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T15:10:02.373Z 已关闭 ComfyUI（出图完成，pid=18068）
+2026-10-01T15:10:02.373Z approve_and_generate 完成，用时 325381ms
+2026-10-01T15:10:47.915Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:11:00.028Z ComfyUI 就绪，用时 12.1s（包装 pid=39276，监听 pid=15592）
+2026-10-01T15:11:00.029Z comfyui_power 完成，用时 12116ms
+2026-10-01T15:22:21.074Z 参考图已放入 ComfyUI input：dsh_edit_muponhfu.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:22:21.077Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:22:21.082Z 发现上次遗留的 ComfyUI（pid=15592，启动于 2026-10-01T15:10:47.922Z），先结束它
+2026-10-01T15:22:21.959Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-01T15:22:22.581Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:22:34.683Z ComfyUI 就绪，用时 12.1s（包装 pid=33980，监听 pid=35164）
+2026-10-01T15:22:34.687Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T15:22:34.702Z 已提交 ComfyUI 任务 ee4603ac-56d5-4f3a-b2af-be91d74b3588（seed=7001，832x1216，source=width/height）
+2026-10-01T15:22:34.719Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:25:20.994Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:25:20.995Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-10-01T15:25:20.996Z run_workflow 完成，用时 179932ms
+2026-10-01T15:26:00.961Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:26:01.058Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:26:01.088Z 发现上次遗留的 ComfyUI（pid=35164，启动于 2026-10-01T15:22:22.585Z），先结束它
+2026-10-01T15:26:12.355Z 参考图已放入 ComfyUI input：dsh_edit_muposfwb.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:26:12.358Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:26:12.362Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:26:22.979Z ComfyUI 就绪，用时 10.6s（包装 pid=37696，监听 pid=34332）
+2026-10-01T15:26:22.990Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T15:26:23.010Z 已提交 ComfyUI 任务 0b524561-31ca-4e3e-a540-a6f2f896a73c（seed=7001，832x1216，source=width/height）
+2026-10-01T15:26:23.022Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:31:30.794Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:31:31.056Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T15:31:31.963Z 已关闭 ComfyUI（出图完成，pid=37696）
+2026-10-01T15:31:31.964Z run_workflow 完成，用时 319619ms
+2026-10-01T15:32:33.740Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:32:33.815Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:32:44.859Z 参考图已放入 ComfyUI input：dsh_edit_mupp0ur7.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:32:44.862Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:32:44.885Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:32:55.527Z ComfyUI 就绪，用时 10.6s（包装 pid=26016，监听 pid=22924）
+2026-10-01T15:32:55.531Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T15:32:55.560Z 已提交 ComfyUI 任务 4a651afc-7dfa-4cc7-9dbc-4dcbf93f1acd（seed=7001，832x1216，source=width/height）
+2026-10-01T15:32:55.593Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:39:03.306Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:39:03.552Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T15:39:04.471Z 已关闭 ComfyUI（出图完成，pid=26016）
+2026-10-01T15:39:04.472Z run_workflow 完成，用时 379623ms
+2026-10-01T15:39:29.140Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:39:29.212Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:40:53.146Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:40:53.240Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:41:04.630Z 参考图已放入 ComfyUI input：dsh_edit_muppbkdx.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:41:04.632Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:41:04.654Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:41:15.277Z ComfyUI 就绪，用时 10.6s（包装 pid=28116，监听 pid=40384）
+2026-10-01T15:41:15.296Z 应用 LoRA：Qwen21R18\turbo8_lora_step2500.safetensors@1 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.8
+2026-10-01T15:41:15.314Z 已提交 ComfyUI 任务 1c7d0787-3cee-4ea3-ad27-e9afaadc102a（seed=7001，832x1216，source=width/height）
+2026-10-01T15:41:15.341Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:44:55.328Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:44:55.574Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T15:44:56.492Z 已关闭 ComfyUI（出图完成，pid=28116）
+2026-10-01T15:44:56.493Z run_workflow 完成，用时 231867ms
+2026-10-01T15:49:12.203Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:49:12.276Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:49:22.275Z run_workflow 完成，用时 0ms
+2026-10-01T15:50:12.844Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:50:12.925Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:50:22.751Z 参考图已放入 ComfyUI input：dsh_edit_muppnj12.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:50:22.752Z run_workflow 失败：pv is not defined
+2026-10-01T15:50:33.080Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:50:33.152Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:50:42.907Z 参考图已放入 ComfyUI input：dsh_edit_muppnyl6.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-01T15:50:42.909Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:50:42.936Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:50:53.568Z ComfyUI 就绪，用时 10.6s（包装 pid=4704，监听 pid=29756）
+2026-10-01T15:50:53.587Z 应用 LoRA：Qwen21R18\turbo8_lora_step2500.safetensors@1 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.8
+2026-10-01T15:50:53.612Z 已提交 ComfyUI 任务 87477ee0-fe53-45c7-a0a5-069613e09989（seed=7001，832x1216，source=width/height）
+2026-10-01T15:50:53.642Z 等待出图：运行中 1 / 排队 0
+2026-10-01T15:52:24.539Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T15:52:24.776Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T15:52:25.686Z 已关闭 ComfyUI（出图完成，pid=4704）
+2026-10-01T15:52:25.686Z run_workflow 完成，用时 102781ms
+2026-10-01T15:55:57.895Z run_workflow 完成，用时 0ms
+2026-10-01T15:55:57.898Z run_workflow 完成，用时 0ms
+2026-10-01T15:55:57.901Z run_workflow 完成，用时 0ms
+2026-10-01T15:55:57.904Z run_workflow 完成，用时 0ms
+2026-10-01T15:55:57.906Z run_workflow 完成，用时 0ms
+2026-10-01T15:55:57.910Z run_workflow 完成，用时 0ms
+2026-10-01T15:56:07.966Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:56:08.047Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-01T15:56:18.744Z 已从工作流文件读取默认负面提示词
+2026-10-01T15:56:18.768Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T15:56:29.426Z ComfyUI 就绪，用时 10.6s（包装 pid=30860，监听 pid=20932）
+2026-10-01T15:56:29.441Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T15:56:29.462Z 已提交 ComfyUI 任务 b378b228-abb5-4164-b7f8-9f41f507b338（seed=88001，832x1216，source=width/height）
+2026-10-01T15:56:29.488Z 等待出图：运行中 1 / 排队 0
+2026-10-01T16:04:54.424Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T16:04:54.677Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T16:04:55.592Z 已关闭 ComfyUI（出图完成，pid=30860）
+2026-10-01T16:04:55.593Z run_workflow 完成，用时 516852ms
+2026-10-01T16:06:32.463Z 参考图已放入 ComfyUI input：dsh_edit_mupq8b9i.png（2272 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime2real_cosplay_nolora_00001_.png）
+2026-10-01T16:06:59.015Z 已生成草稿 draft-mupq8vrb-1（edit，1024x1024，参考图 dsh_edit_mupq8b9i.png，等待用户过目，30 分钟内有效）
+2026-10-01T16:06:59.016Z prepare_edit 完成，用时 26564ms
+2026-10-01T16:08:13.960Z run_workflow 完成，用时 0ms
+2026-10-01T16:08:19.850Z 参考图已放入 ComfyUI input：dsh_edit_mupqam4q.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-01T16:08:19.852Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T16:08:30.448Z ComfyUI 就绪，用时 10.6s（包装 pid=40172，监听 pid=18256）
+2026-10-01T16:08:30.470Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T16:08:30.485Z 已提交 ComfyUI 任务 f4b12ab7-4660-49f0-963f-d402bee20195（seed=1420822540，832x1216，source=width/height）
+2026-10-01T16:08:30.514Z 等待出图：运行中 1 / 排队 0
+2026-10-01T16:13:24.396Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T16:13:24.633Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T16:13:25.549Z 已关闭 ComfyUI（出图完成，pid=40172）
+2026-10-01T16:13:25.549Z run_workflow 完成，用时 305700ms
+2026-10-01T16:15:46.577Z run_workflow 完成，用时 0ms
+2026-10-01T16:15:53.513Z 参考图已放入 ComfyUI input：dsh_edit_mupqkc6e.png（712 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\cosplay_r18quality_edit_00001_.png）
+2026-10-01T16:15:53.516Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-01T16:16:02.689Z ComfyUI 就绪，用时 9.2s（包装 pid=29624，监听 pid=22596）
+2026-10-01T16:16:02.691Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-01T16:16:02.700Z 已提交 ComfyUI 任务 cfd1d312-46c1-41fd-817a-500e892b602e（seed=602999969，832x1216，source=width/height）
+2026-10-01T16:16:02.725Z 等待出图：运行中 1 / 排队 0
+2026-10-01T16:20:52.167Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-01T16:20:52.403Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-01T16:20:53.317Z 已关闭 ComfyUI（出图完成，pid=29624）
+2026-10-01T16:20:53.318Z run_workflow 完成，用时 299809ms
+2026-10-02T03:00:59.528Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-02T03:00:59.901Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-02T03:15:17.485Z run_workflow 完成，用时 1ms
+2026-10-02T03:15:21.910Z 参考图已放入 ComfyUI input：dsh_edit_muqe4fce.png（712 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\cosplay_r18quality_edit_00001_.png）
+2026-10-02T03:15:21.914Z 已从工作流文件读取默认负面提示词
+2026-10-02T03:15:21.938Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T03:16:04.258Z ComfyUI 就绪，用时 42.3s（包装 pid=27756，监听 pid=39148）
+2026-10-02T03:16:04.262Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T03:16:04.286Z 已提交 ComfyUI 任务 934241ed-4500-4736-99be-83e0a07b11be（seed=592362301，832x1216，source=width/height）
+2026-10-02T03:16:04.314Z 等待出图：运行中 1 / 排队 0
+2026-10-02T03:20:33.864Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T03:20:34.230Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T03:20:35.145Z 已关闭 ComfyUI（出图完成，pid=27756）
+2026-10-02T03:20:35.146Z run_workflow 完成，用时 313245ms
+2026-10-02T03:23:20.074Z run_workflow 完成，用时 0ms
+2026-10-02T03:23:26.141Z 参考图已放入 ComfyUI input：dsh_edit_muqeeszg.png（671 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\cosplay_refine_slim_00001_.png）
+2026-10-02T03:23:26.144Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T03:24:06.939Z ComfyUI 就绪，用时 40.8s（包装 pid=39116，监听 pid=37816）
+2026-10-02T03:24:06.943Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T03:24:06.963Z 已提交 ComfyUI 任务 2dfa535d-1578-45b4-a327-d3e38f903712（seed=19500301，832x1216，source=width/height）
+2026-10-02T03:24:06.987Z 等待出图：运行中 1 / 排队 0
+2026-10-02T03:30:20.663Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T03:30:20.990Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T03:30:21.901Z 已关闭 ComfyUI（出图完成，pid=39116）
+2026-10-02T03:30:21.902Z run_workflow 完成，用时 415763ms
+2026-10-02T03:32:27.211Z run_workflow 完成，用时 0ms
+2026-10-02T03:32:32.086Z 参考图已放入 ComfyUI input：dsh_edit_muqeqi7l.png（684 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\cosplay_lightblue_heels_00001_.png）
+2026-10-02T03:32:32.089Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T03:32:42.683Z ComfyUI 就绪，用时 10.6s（包装 pid=15768，监听 pid=13712）
+2026-10-02T03:32:42.686Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T03:32:42.709Z 已提交 ComfyUI 任务 57dc432b-fd9d-41a3-a4b3-3941714175ad（seed=299061095，832x1216，source=width/height）
+2026-10-02T03:32:42.717Z 等待出图：运行中 1 / 排队 0
+2026-10-02T03:38:58.288Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T03:38:58.584Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T03:38:59.500Z 已关闭 ComfyUI（出图完成，pid=15768）
+2026-10-02T03:38:59.500Z run_workflow 完成，用时 387451ms
+2026-10-02T03:44:31.160Z run_workflow 完成，用时 0ms
+2026-10-02T03:44:35.693Z 参考图已放入 ComfyUI input：dsh_edit_muqf60kr.png（641 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\cosplay_frontpose_nosword_00001_.png）
+2026-10-02T03:44:35.695Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T03:44:46.301Z ComfyUI 就绪，用时 10.6s（包装 pid=26512，监听 pid=36160）
+2026-10-02T03:44:46.316Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T03:44:46.336Z 已提交 ComfyUI 任务 b947f879-0bb6-4f2f-8cba-1c0e5abc7f29（seed=796504447，832x1216，source=width/height）
+2026-10-02T03:44:46.358Z 等待出图：运行中 1 / 排队 0
+2026-10-02T03:50:55.773Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T03:50:56.032Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T03:50:56.944Z 已关闭 ComfyUI（出图完成，pid=26512）
+2026-10-02T03:50:56.945Z run_workflow 完成，用时 381255ms
+2026-10-02T03:54:49.407Z run_workflow 完成，用时 0ms
+2026-10-02T03:55:31.451Z run_workflow 完成，用时 0ms
+2026-10-02T03:55:36.486Z 参考图已放入 ComfyUI input：dsh_edit_muqfk6ex.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-02T03:55:36.489Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T03:55:45.615Z ComfyUI 就绪，用时 9.1s（包装 pid=39460，监听 pid=2536）
+2026-10-02T03:55:45.620Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T03:55:45.635Z 已提交 ComfyUI 任务 2b48cb11-b1f4-4d75-9567-0b862bfad8fb（seed=1451144657，832x1216，source=width/height）
+2026-10-02T03:55:45.668Z 等待出图：运行中 1 / 排队 0
+2026-10-02T04:00:38.471Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T04:00:38.772Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T04:00:39.688Z 已关闭 ComfyUI（出图完成，pid=39460）
+2026-10-02T04:00:39.689Z run_workflow 完成，用时 303249ms
+2026-10-02T04:02:00.734Z run_workflow 完成，用时 0ms
+2026-10-02T04:02:06.630Z 参考图已放入 ComfyUI input：dsh_edit_muqfsjha.png（663 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_lightblue_heels_frontpose_00001_.png）
+2026-10-02T04:02:06.632Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T04:02:17.307Z ComfyUI 就绪，用时 10.7s（包装 pid=6996，监听 pid=3348）
+2026-10-02T04:02:17.317Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T04:02:17.333Z 已提交 ComfyUI 任务 e983b2c9-8a5e-4c04-961f-2d01b016a3c8（seed=1344409426，832x1216，source=width/height）
+2026-10-02T04:02:17.365Z 等待出图：运行中 1 / 排队 0
+2026-10-02T04:07:12.960Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T04:07:13.200Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T04:07:14.111Z 已关闭 ComfyUI（出图完成，pid=6996）
+2026-10-02T04:07:14.112Z run_workflow 完成，用时 307490ms
+2026-10-02T04:41:16.464Z run_workflow 完成，用时 0ms
+2026-10-02T04:41:21.876Z 参考图已放入 ComfyUI input：dsh_edit_muqh70sy.webp（236 KB，源 C:\Users\28256\.dsh\attachments\v1\objects\5f\5fa80596776a08de73c313ac372455fde67d2a4843df961f112a3b5ddb59b008）
+2026-10-02T04:41:21.878Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T04:41:32.468Z ComfyUI 就绪，用时 10.6s（包装 pid=28880，监听 pid=17124）
+2026-10-02T04:41:32.471Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T04:41:32.487Z 已提交 ComfyUI 任务 6859ba40-f89a-494a-9dbc-fe0a5b609ca5（seed=1740092867，832x1216，source=width/height）
+2026-10-02T04:41:32.515Z 等待出图：运行中 1 / 排队 0
+2026-10-02T04:46:21.887Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T04:46:22.206Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T04:46:23.115Z 已关闭 ComfyUI（出图完成，pid=28880）
+2026-10-02T04:46:23.116Z run_workflow 完成，用时 301243ms
+2026-10-02T04:47:29.047Z run_workflow 完成，用时 0ms
+2026-10-02T04:47:34.212Z 参考图已放入 ComfyUI input：dsh_edit_muqhf02o.png（705 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_gown_blackstocking_00001_.png）
+2026-10-02T04:47:34.214Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T04:47:44.924Z ComfyUI 就绪，用时 10.7s（包装 pid=24092，监听 pid=34504）
+2026-10-02T04:47:44.939Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T04:47:44.957Z 已提交 ComfyUI 任务 61da6877-49b2-4b82-90a5-9b89aa58678d（seed=379362370，832x1216，source=width/height）
+2026-10-02T04:47:44.974Z 等待出图：运行中 1 / 排队 0
+2026-10-02T04:48:40.369Z 出图未成功完成，保留 ComfyUI 原样不动（任务可能仍在执行）
+2026-10-02T04:48:40.372Z run_workflow 失败：ComfyUI 执行失败：见 ComfyUI 控制台
+2026-10-02T04:49:08.823Z run_workflow 完成，用时 0ms
+2026-10-02T04:49:14.353Z 参考图已放入 ComfyUI input：dsh_edit_muqhh5db.png（705 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\anime_gown_blackstocking_00001_.png）
+2026-10-02T04:49:14.357Z 发现上次遗留的 ComfyUI（pid=34504，启动于 2026-10-02T04:47:34.218Z），先结束它
+2026-10-02T04:49:15.334Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-02T04:49:15.869Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T04:49:26.468Z ComfyUI 就绪，用时 10.6s（包装 pid=14964，监听 pid=31516）
+2026-10-02T04:49:26.471Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T04:49:26.482Z 已提交 ComfyUI 任务 9ef6df39-4e14-46f0-aa24-d0c2a7cb3cbb（seed=1039112089，832x1216，source=width/height）
+2026-10-02T04:49:26.489Z 等待出图：运行中 1 / 排队 0
+2026-10-02T04:54:19.034Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T04:54:19.275Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T04:54:20.188Z 已关闭 ComfyUI（出图完成，pid=14964）
+2026-10-02T04:54:20.188Z run_workflow 完成，用时 305838ms
+2026-10-02T04:59:31.769Z run_workflow 完成，用时 1ms
+2026-10-02T04:59:37.300Z 参考图已放入 ComfyUI input：dsh_edit_muqhuhzw.png（597 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\real_gown_lilac_front_v2_00001_.png）
+2026-10-02T04:59:37.302Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-02T04:59:46.380Z ComfyUI 就绪，用时 9.1s（包装 pid=4048，监听 pid=10624）
+2026-10-02T04:59:46.389Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-02T04:59:46.412Z 已提交 ComfyUI 任务 157f9b6a-dde0-4497-b5d6-883824616515（seed=230689869，832x1216，source=width/height）
+2026-10-02T04:59:46.435Z 等待出图：运行中 1 / 排队 0
+2026-10-02T05:04:40.469Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-02T05:04:40.686Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-02T05:04:41.591Z 已关闭 ComfyUI（出图完成，pid=4048）
+2026-10-02T05:04:41.592Z run_workflow 完成，用时 304348ms
+2026-10-02T14:24:15.449Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-02T14:24:15.815Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-02T14:28:25.743Z service_status 完成，用时 26ms
+2026-10-03T03:09:06.221Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:09:06.367Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:22:32.308Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:22:32.397Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:51:39.653Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:51:39.732Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T03:55:21.103Z run_workflow 完成，用时 0ms
+2026-10-03T03:55:27.332Z 参考图已放入 ComfyUI input：dsh_edit_muruzu1m.png（597 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\real_gown_lilac_front_v2_00001_.png）
+2026-10-03T03:55:27.357Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T03:56:20.398Z ComfyUI 就绪，用时 52.9s（包装 pid=27752，监听 pid=29492）
+2026-10-03T03:56:20.412Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T03:56:20.437Z 已提交 ComfyUI 任务 55b3e73b-184c-414d-8181-19509354838a（seed=763383250，832x1216，source=width/height）
+2026-10-03T03:56:20.456Z 等待出图：运行中 1 / 排队 0
+2026-10-03T04:01:06.885Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T04:01:07.257Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T04:01:08.177Z 已关闭 ComfyUI（出图完成，pid=27752）
+2026-10-03T04:01:08.178Z run_workflow 完成，用时 340859ms
+2026-10-03T07:05:53.947Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T07:05:54.028Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T07:10:43.180Z run_workflow 完成，用时 1ms
+2026-10-03T07:10:48.462Z 参考图已放入 ComfyUI input：dsh_edit_mus1z24l.png（849 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\real_gown_indoor_mirror_00001_.png）
+2026-10-03T07:10:48.486Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T07:11:06.628Z ComfyUI 就绪，用时 18.1s（包装 pid=21432，监听 pid=25580）
+2026-10-03T07:11:06.642Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T07:11:06.655Z 已提交 ComfyUI 任务 964b76d3-5be7-4429-945e-c418a78174ee（seed=1068644225，832x1216，source=width/height）
+2026-10-03T07:11:06.673Z 等待出图：运行中 1 / 排队 0
+2026-10-03T07:15:59.376Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T07:15:59.621Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T07:16:00.531Z 已关闭 ComfyUI（出图完成，pid=21432）
+2026-10-03T07:16:00.532Z run_workflow 完成，用时 312081ms
+2026-10-03T07:19:46.492Z run_workflow 完成，用时 0ms
+2026-10-03T07:19:52.257Z 参考图已放入 ComfyUI input：dsh_edit_mus2apq9.png（810 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\office_casual_contrast_00001_.png）
+2026-10-03T07:19:52.259Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T07:20:08.894Z ComfyUI 就绪，用时 16.6s（包装 pid=16652，监听 pid=40208）
+2026-10-03T07:20:08.899Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T07:20:08.918Z 已提交 ComfyUI 任务 6b30ca58-5716-4b4f-8274-01f8512d39b1（seed=593290500，832x1216，source=width/height）
+2026-10-03T07:20:08.937Z 等待出图：运行中 1 / 排队 0
+2026-10-03T07:24:55.449Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T07:24:55.768Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T07:24:56.674Z 已关闭 ComfyUI（出图完成，pid=16652）
+2026-10-03T07:24:56.675Z run_workflow 完成，用时 304419ms
+2026-10-03T07:25:09.060Z 参考图已放入 ComfyUI input：dsh_edit_mus2hi6c.png（887 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\office_desk_sitting_00001_.png）
+2026-10-03T07:25:09.062Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T07:25:18.161Z ComfyUI 就绪，用时 9.1s（包装 pid=26360，监听 pid=39876）
+2026-10-03T07:25:18.175Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T07:25:18.197Z 已提交 ComfyUI 任务 cb037f94-9d07-40bb-9c3e-350318aa66f8（seed=148642600，1024x1024，source=resolution（正方形））
+2026-10-03T07:25:18.220Z 等待出图：运行中 1 / 排队 0
+2026-10-03T07:32:15.576Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T07:32:15.821Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T07:32:16.735Z 已关闭 ComfyUI（出图完成，pid=26360）
+2026-10-03T07:32:16.735Z run_workflow 完成，用时 427676ms
+2026-10-03T07:32:44.132Z 参考图已放入 ComfyUI input：dsh_edit_mus2r9b6.png（1289 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\office_desk_sitting_hd_00001_.png）
+2026-10-03T07:32:44.134Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T07:32:54.766Z ComfyUI 就绪，用时 10.6s（包装 pid=23472，监听 pid=5944）
+2026-10-03T07:32:54.774Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T07:32:54.796Z 已提交 ComfyUI 任务 1b1c2b35-edb2-44fc-ac61-984761cbd515（seed=1147683295，1024x1024，source=resolution（正方形））
+2026-10-03T07:32:54.824Z 等待出图：运行中 1 / 排队 0
+2026-10-03T07:39:23.013Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T07:39:23.352Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T07:39:24.263Z 已关闭 ComfyUI（出图完成，pid=23472）
+2026-10-03T07:39:24.263Z run_workflow 完成，用时 400133ms
+2026-10-03T10:24:49.889Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:24:49.969Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:25:06.481Z service_status 完成，用时 28ms
+2026-10-03T10:25:06.497Z 参考图已就位：input/dsh_edit_mus8wxj3.png；存档 C:\Users\28256\Documents\deepseek-harness\default-workspace\referring\ref_QwenImage21_00025__20261003-1025.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\comfy-out\QwenImage21_00025_.png）
+2026-10-03T10:25:06.498Z 已生成草稿 draft-mus8wxj6-1（edit，832x832，参考图 dsh_edit_mus8wxj3.png，等待用户过目，30 分钟内有效）
+2026-10-03T10:25:06.498Z prepare_edit 完成，用时 13ms
+2026-10-03T10:26:31.170Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:26:31.239Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:26:42.391Z 已从工作流文件读取默认负面提示词
+2026-10-03T10:26:42.411Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T10:27:38.383Z ComfyUI 就绪，用时 56.0s（包装 pid=5020，监听 pid=35444）
+2026-10-03T10:27:38.395Z 应用 LoRA：Qwen21R18\turbo8_lora_step2500.safetensors@1 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.8
+2026-10-03T10:27:38.415Z 已提交 ComfyUI 任务 07b5341b-1a35-482a-8280-7db3b602d78b（seed=90001，832x1216，source=width/height）
+2026-10-03T10:27:38.439Z 等待出图：运行中 1 / 排队 0
+2026-10-03T10:28:54.008Z 出图已落到工作区：C:\Users\28256\Documents\deepseek-harness\default-workspace\t2i_solo_portrait_r18f_832x1216_s90001_20261003-1028.png
+2026-10-03T10:28:54.012Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T10:28:54.382Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T10:28:55.303Z 已关闭 ComfyUI（出图完成，pid=5020）
+2026-10-03T10:28:55.303Z generate_image 完成，用时 132929ms
+2026-10-03T10:29:10.271Z 用户判断「不留存」：t2i_solo_portrait_r18f_832x1216_s90001_20261003-1028.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:29:10.272Z judge_image 完成，用时 2ms
+2026-10-03T10:29:13.660Z 用户判断「可留存」：t2i_solo_portrait_r18f_832x1216_s90001_20261003-1028.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:29:13.660Z judge_image 完成，用时 1ms
+2026-10-03T10:30:51.378Z 用户判断「可留存」：sample_qwen21_8steps.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.379Z 用户判断「可留存」：sample_qwen21_30steps.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.380Z 用户判断「可留存」：QwenImage21_00004_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.380Z 用户判断「可留存」：QwenImage21_00008_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.380Z 用户判断「可留存」：QwenImage21_00009_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.381Z 用户判断「可留存」：QwenImage21_00010_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.381Z 用户判断「可留存」：QwenImage21_00011_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.381Z 用户判断「可留存」：QwenImage21_00012_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.382Z 用户判断「可留存」：gufeng_yeting_tingyuan_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.382Z 用户判断「可留存」：gufeng_yeting_vertical_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.383Z 用户判断「可留存」：QwenImage21_00013_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.383Z 用户判断「可留存」：QwenImage21_00014_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.383Z 用户判断「可留存」：beach_pink_bikini_9x16_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.384Z 用户判断「可留存」：QwenImage21_00015_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.384Z 用户判断「可留存」：beach_jk_wet_9x16_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.385Z 用户判断「可留存」：beach_jk_wet_open_9x16_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.385Z 用户判断「可留存」：beach_jk_wet_longlegs_9x16_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.386Z 用户判断「可留存」：DSH_EDIT_ref_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.386Z 用户判断「可留存」：QwenImage21_00016_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.387Z 用户判断「可留存」：DSH_FP8_bg_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.387Z 用户判断「可留存」：DSH_FP8_color_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.387Z 用户判断「可留存」：QwenImage21_00017_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.388Z 用户判断「可留存」：QwenImage21_00018_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.388Z 用户判断「可留存」：QwenImage21_00019_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.388Z 用户判断「可留存」：anime_jk_edit_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.389Z 用户判断「可留存」：anime_jk_edit_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.390Z 用户判断「可留存」：anime_jk_edit_v3_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.390Z 用户判断「可留存」：anime_jk_hiddenhand_v1_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.391Z 用户判断「可留存」：anime_college_v1_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.391Z 用户判断「可留存」：anime_summer_v1_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.392Z 用户判断「可留存」：anime_summer_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.393Z 用户判断「可留存」：red_gown_9x16_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.393Z 用户判断「可留存」：red_gown_daylight_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.394Z 用户判断「可留存」：red_gown_seated_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.394Z 用户判断「可留存」：red_gown_bare_silver_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.394Z 用户判断「可留存」：red_gown_fixed_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.395Z 用户判断「可留存」：red_gown_lower_closeup_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.396Z 用户判断「可留存」：red_gown_fingers_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.396Z 用户判断「可留存」：red_gown_fingers_closeup_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.396Z 用户判断「可留存」：red_gown_air_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.397Z 用户判断「可留存」：red_gown_air_closeup_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.397Z 用户判断「可留存」：jk_dildo_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.398Z 用户判断「可留存」：jk_seated_strap_1088x1920_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.398Z 用户判断「可留存」：QwenImage21_00020_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.399Z 用户判断「可留存」：QwenImage21_00021_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.399Z 用户判断「可留存」：QwenImage21_00022_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.400Z 用户判断「可留存」：QwenImage21_00023_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.400Z 用户判断「可留存」：QwenImage21_00024_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.401Z 用户判断「可留存」：QwenImage21_00025_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.401Z 用户判断「可留存」：QwenImage21_00026_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.401Z 用户判断「可留存」：QwenImage21_00027_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.402Z 用户判断「可留存」：jk_beach_euro_r18q_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.402Z 用户判断「可留存」：jk_classroom_east_r18q_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.403Z 用户判断「可留存」：jk_classroom_east_fix_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.403Z 用户判断「可留存」：QwenImage21_00028_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.404Z 用户判断「可留存」：H3_R18_00001_.mp4 → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.404Z 用户判断「可留存」：anime2real_cosplay_edit_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.405Z 用户判断「可留存」：anime2real_cosplay_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.406Z 用户判断「可留存」：anime2real_cosplay_nolora_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.406Z 用户判断「可留存」：anime2real_cosplay_whitebg_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.407Z 用户判断「可留存」：anime2real_cosplay_white_keep_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.408Z 用户判断「可留存」：QwenImage21_00029_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.408Z 用户判断「可留存」：QwenImage21_00032_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.409Z 用户判断「可留存」：QwenImage21_00034_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.409Z 用户判断「可留存」：QwenImage21_00035_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.410Z 用户判断「可留存」：QwenImage21_00036_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.410Z 用户判断「可留存」：QwenImage21_00037_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.411Z 用户判断「可留存」：cosplay_r18quality_edit_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.412Z 用户判断「可留存」：cosplay_undress_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.412Z 用户判断「可留存」：cosplay_refine_slim_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.412Z 用户判断「可留存」：cosplay_lightblue_heels_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.413Z 用户判断「可留存」：cosplay_frontpose_nosword_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.413Z 用户判断「可留存」：cosplay_sit_finger_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.413Z 用户判断「可留存」：anime_lightblue_heels_frontpose_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.414Z 用户判断「可留存」：anime_sit_finger_whitesole_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.414Z 用户判断「可留存」：anime_gown_blackstocking_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.415Z 用户判断「可留存」：real_gown_lilac_front_v2_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.415Z 用户判断「可留存」：real_gown_double_recline_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.416Z 用户判断「可留存」：real_gown_indoor_mirror_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.416Z 用户判断「可留存」：office_casual_contrast_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.417Z 用户判断「可留存」：office_desk_sitting_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.417Z 用户判断「可留存」：office_desk_sitting_hd_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.417Z 用户判断「可留存」：office_lowerbody_closeup_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/output
+2026-10-03T10:30:51.417Z judge_image 完成，用时 40ms
+2026-10-03T10:30:55.656Z 用户判断「不留存」：lora_ab_compare.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.657Z 用户判断「不留存」：lora_stack_compare.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.657Z 用户判断「不留存」：turbo_vs_25step.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.658Z 用户判断「不留存」：cfg_ab_25v32.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.658Z 用户判断「不留存」：edit_diag_abcd.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.659Z 用户判断「不留存」：DSH_EDIT_bg_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.659Z 用户判断「不留存」：DSH_EDIT_img2img_00001_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.659Z 用户判断「不留存」：QwenImage21_00030_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.660Z 用户判断「不留存」：QwenImage21_00031_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.660Z 用户判断「不留存」：QwenImage21_00033_.png → C:/Users/28256/Documents/deepseek-harness/default-workspace/bad_output
+2026-10-03T10:30:55.660Z judge_image 完成，用时 4ms
+2026-10-03T10:34:37.592Z service_status 完成，用时 3ms
+2026-10-03T10:35:10.620Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:35:10.692Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T10:35:30.794Z 已从工作流文件读取默认负面提示词
+2026-10-03T10:35:30.821Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T10:35:39.938Z ComfyUI 就绪，用时 9.1s（包装 pid=18268，监听 pid=34848）
+2026-10-03T10:35:39.951Z 应用 LoRA：Qwen21R18\turbo8_lora_step2500.safetensors@1 + Qwen21R18\easternfemale_v2.1_split.safetensors@0.8
+2026-10-03T10:35:39.965Z 已提交 ComfyUI 任务 16dc7d72-c2b0-4ffc-a069-534346ead33d（seed=91001，832x1216，source=width/height）
+2026-10-03T10:35:39.982Z 等待出图：运行中 1 / 排队 0
+2026-10-03T10:36:50.740Z 出图已落到工作区：C:\Users\28256\Documents\deepseek-harness\conv2-workspace\t2i_window_light_nude_r18f_832x1216_s91001_20261003-1036.png
+2026-10-03T10:36:50.743Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T10:36:50.994Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T10:36:51.901Z 已关闭 ComfyUI（出图完成，pid=18268）
+2026-10-03T10:36:51.902Z generate_image 完成，用时 81117ms
+2026-10-03T10:36:56.158Z 用户判断「可留存」：t2i_window_light_nude_r18f_832x1216_s91001_20261003-1036.png → C:\Users\28256\Documents\deepseek-harness\conv2-workspace\output
+2026-10-03T10:36:56.158Z judge_image 完成，用时 2ms
+2026-10-03T11:05:18.810Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T11:05:18.942Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T11:42:14.440Z run_workflow 完成，用时 1ms
+2026-10-03T11:42:20.449Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T11:42:35.620Z ComfyUI 就绪，用时 15.2s（包装 pid=26172，监听 pid=34664）
+2026-10-03T11:42:35.633Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T11:42:35.647Z 已提交 ComfyUI 任务 be42cb61-19e3-4e70-9d57-8e009919ccb8（seed=2020849941，832x1216，source=width/height）
+2026-10-03T11:42:35.664Z 等待出图：运行中 1 / 排队 0
+2026-10-03T11:50:24.592Z 出图已落到工作区：C:\Users\28256\Documents\deepseek-harness\default-workspace\t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s2020849941_20261003-1150.png
+2026-10-03T11:50:24.610Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T11:50:24.951Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T11:50:25.868Z 已关闭 ComfyUI（出图完成，pid=26172）
+2026-10-03T11:50:25.868Z run_workflow 完成，用时 485443ms
+2026-10-03T11:51:33.336Z 用户判断「不留存」：t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s2020849941_20261003-1150.png → C:\Users\28256\Documents\deepseek-harness\default-workspace\bad_output
+2026-10-03T11:51:33.336Z judge_image 完成，用时 2ms
+2026-10-03T11:55:52.783Z run_workflow 完成，用时 0ms
+2026-10-03T11:56:00.591Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T11:56:11.217Z ComfyUI 就绪，用时 10.6s（包装 pid=41396，监听 pid=4176）
+2026-10-03T11:56:11.231Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T11:56:11.241Z 已提交 ComfyUI 任务 11a0fd26-8b0a-4816-89ee-f7485fe87677（seed=1585201548，832x1216，source=width/height）
+2026-10-03T11:56:11.260Z 等待出图：运行中 1 / 排队 0
+2026-10-03T12:03:40.181Z 出图已落到工作区：C:\Users\28256\Documents\deepseek-harness\default-workspace\t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s1585201548_20261003-1203.png
+2026-10-03T12:03:40.188Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T12:03:40.517Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T12:03:41.432Z 已关闭 ComfyUI（出图完成，pid=41396）
+2026-10-03T12:03:41.432Z run_workflow 完成，用时 460844ms
+2026-10-03T12:04:40.439Z 用户判断「不留存」：t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s1585201548_20261003-1203.png → C:\Users\28256\Documents\deepseek-harness\default-workspace\bad_output
+2026-10-03T12:04:40.439Z judge_image 完成，用时 1ms
+2026-10-03T12:06:25.230Z run_workflow 完成，用时 0ms
+2026-10-03T12:06:32.058Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T12:06:41.222Z ComfyUI 就绪，用时 9.1s（包装 pid=4076，监听 pid=10136）
+2026-10-03T12:06:41.232Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T12:06:41.237Z 已提交 ComfyUI 任务 e139b106-4d63-47cc-87a9-5b75cb266970（seed=1886501548，832x1216，source=width/height）
+2026-10-03T12:06:41.263Z 等待出图：运行中 1 / 排队 0
+2026-10-03T12:14:40.685Z 出图已落到工作区：C:\Users\28256\Documents\deepseek-harness\default-workspace\t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s1886501548_20261003-1214.png
+2026-10-03T12:14:40.696Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T12:14:40.979Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T12:14:41.891Z 已关闭 ComfyUI（出图完成，pid=4076）
+2026-10-03T12:14:41.891Z run_workflow 完成，用时 489835ms
+2026-10-03T12:15:22.465Z 用户判断「不留存」：t2i_nsfw_qwen_lora-夜晚马路边-站在一_r18q_832x1216_s1886501548_20261003-1214.png → C:\Users\28256\Documents\deepseek-harness\default-workspace\bad_output
+2026-10-03T12:15:22.466Z judge_image 完成，用时 1ms
+2026-10-03T12:17:40.723Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:17:40.801Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:17:53.141Z judge_image 失败：没找到可归档的文件：t2i_probe_no-workspace-arg_r18f_832x1216_s77777_20261003-1900.png
+（找过：显式 workspace 或已知对话工作区 C:\Users\28256\Documents\deepseek-harness\default-workspace）
+2026-10-03T12:18:35.166Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:18:35.238Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:18:44.132Z 用户判断「不留存」：t2i_probe_no-workspace-arg_r18f_832x1216_s77777_20261003-1900.png → D:\DSH Workspace\3\bad_output
+2026-10-03T12:18:44.133Z judge_image 完成，用时 11ms
+2026-10-03T12:23:48.447Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:23:48.524Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T12:23:57.507Z service_status 完成，用时 33ms
+2026-10-03T12:24:27.897Z 参考图已就位：input/dsh_edit_musd6fan.png；存档 C:\Users\28256\Documents\deepseek-harness\default-workspace\referring\ref_QwenImage21_00025__20261003-1224.png（1423 KB，源 C:\Users\28256\Documents\deepseek-harness\default-workspace\output\QwenImage21_00025_.png）
+2026-10-03T12:24:27.897Z 已生成草稿 draft-musd6fax-1（edit，832x832，参考图 dsh_edit_musd6fan.png，等待用户过目，30 分钟内有效）
+2026-10-03T12:24:27.897Z prepare_edit 完成，用时 11ms
+2026-10-03T12:24:32.831Z 用户未同意，草稿作废：draft-musd6fax-1（存在=true）
+2026-10-03T12:24:32.832Z approve_and_generate 完成，用时 1ms
+2026-10-03T12:29:49.842Z run_workflow 完成，用时 0ms
+2026-10-03T12:29:56.503Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T12:30:07.274Z ComfyUI 就绪，用时 10.8s（包装 pid=41096，监听 pid=31932）
+2026-10-03T12:30:07.295Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T12:30:07.306Z 已提交 ComfyUI 任务 0e8d01ed-126a-4c54-a7c8-f66c817ccf14（seed=1225878141，832x1216，source=width/height）
+2026-10-03T12:30:07.342Z 等待出图：运行中 1 / 排队 0
+2026-10-03T12:38:13.327Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-室内居家风格-木地_r18q_832x1216_s1225878141_20261003-1238.png
+2026-10-03T12:38:13.333Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T12:38:13.701Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T12:38:14.614Z 已关闭 ComfyUI（出图完成，pid=41096）
+2026-10-03T12:38:14.615Z run_workflow 完成，用时 498115ms
+2026-10-03T12:42:39.159Z run_workflow 完成，用时 0ms
+2026-10-03T12:42:45.238Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T12:42:55.850Z ComfyUI 就绪，用时 10.6s（包装 pid=41976，监听 pid=22728）
+2026-10-03T12:42:55.998Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T12:42:56.006Z 已提交 ComfyUI 任务 3e1caaa8-80a0-495a-811f-14a48f248df4（seed=1291334967，832x1216，source=width/height）
+2026-10-03T12:42:56.028Z 等待出图：运行中 1 / 排队 0
+2026-10-03T12:51:00.211Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-室内居家风格-浅色_r18q_832x1216_s1291334967_20261003-1251.png
+2026-10-03T12:51:00.224Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T12:51:00.610Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T12:51:01.530Z 已关闭 ComfyUI（出图完成，pid=41976）
+2026-10-03T12:51:01.531Z run_workflow 完成，用时 496295ms
+2026-10-03T12:52:02.004Z 用户判断「可留存」：t2i_nsfw_qwen_lora-室内居家风格-浅色_r18q_832x1216_s1291334967_20261003-1251.png → D:\DSH Workspace\3\output
+2026-10-03T12:52:02.004Z judge_image 完成，用时 2ms
+2026-10-03T12:52:06.245Z 用户判断「不留存」：t2i_nsfw_qwen_lora-室内居家风格-木地_r18q_832x1216_s1225878141_20261003-1238.png → D:\DSH Workspace\3\bad_output
+2026-10-03T12:52:06.245Z judge_image 完成，用时 1ms
+2026-10-03T14:21:44.932Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T14:21:45.022Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-03T14:38:43.080Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T14:38:55.225Z ComfyUI 就绪，用时 12.1s（包装 pid=51292，监听 pid=52736）
+2026-10-03T14:38:55.226Z comfyui_power 完成，用时 12168ms
+2026-10-03T14:39:13.644Z service_status 完成，用时 54ms
+2026-10-03T15:00:17.824Z service_status 完成，用时 87ms
+2026-10-03T15:00:17.833Z comfyui_power 完成，用时 4ms
+2026-10-03T15:00:57.780Z 已生成草稿 draft-musirol0-1（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-03T15:00:57.781Z prepare_image 完成，用时 28633ms
+2026-10-03T15:01:21.352Z 已生成草稿 draft-musis6rs-2（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-03T15:01:21.353Z prepare_image 完成，用时 23569ms
+2026-10-03T15:01:43.229Z 已生成草稿 draft-musisnnh-3（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-03T15:01:43.229Z prepare_image 完成，用时 21870ms
+2026-10-03T15:02:20.937Z 用户已同意草稿 draft-musirol0-1（t2i），提交出图（提示词有修改）
+2026-10-03T15:02:20.941Z 发现上次遗留的 ComfyUI（pid=52736，启动于 2026-10-03T14:38:43.096Z），先结束它
+2026-10-03T15:02:21.423Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-03T15:02:22.555Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T15:02:30.151Z ComfyUI 就绪，用时 7.6s（包装 pid=54740，监听 pid=54220）
+2026-10-03T15:02:30.158Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T15:02:30.169Z 已提交 ComfyUI 任务 e12f8a5b-1c73-42fa-9e57-c66bfa8f12d9（seed=282513495，1216x832，source=width/height）
+2026-10-03T15:02:30.190Z 等待出图：运行中 1 / 排队 0
+2026-10-03T15:09:07.026Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s282513495_20261003-1509.png
+2026-10-03T15:09:07.029Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T15:09:07.029Z 你刚手动拉起过 ComfyUI，这次不自动关；下次出图完成后照常关
+2026-10-03T15:09:07.030Z approve_and_generate 完成，用时 406093ms
+2026-10-03T15:09:10.500Z 用户已同意草稿 draft-musis6rs-2（t2i），提交出图（提示词有修改）
+2026-10-03T15:09:10.505Z 发现上次遗留的 ComfyUI（pid=54220，启动于 2026-10-03T15:02:22.571Z），先结束它
+2026-10-03T15:09:11.106Z ComfyUI 进程退出（code=0 signal=null）
+2026-10-03T15:09:12.156Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T15:09:21.261Z ComfyUI 就绪，用时 9.1s（包装 pid=56008，监听 pid=41812）
+2026-10-03T15:09:21.275Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T15:09:21.291Z 已提交 ComfyUI 任务 5319cc9d-be34-4b68-89c3-77fbdb8101c3（seed=85695082，1216x832，source=width/height）
+2026-10-03T15:09:21.320Z 等待出图：运行中 1 / 排队 0
+2026-10-03T15:15:53.716Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s85695082_20261003-1515.png
+2026-10-03T15:15:53.720Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T15:15:54.047Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T15:15:54.956Z 已关闭 ComfyUI（出图完成，pid=56008）
+2026-10-03T15:15:54.956Z approve_and_generate 完成，用时 404456ms
+2026-10-03T15:15:59.072Z 用户已同意草稿 draft-musisnnh-3（t2i），提交出图（提示词有修改）
+2026-10-03T15:15:59.075Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-03T15:16:09.736Z ComfyUI 就绪，用时 10.6s（包装 pid=51964，监听 pid=52836）
+2026-10-03T15:16:09.751Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-03T15:16:09.757Z 已提交 ComfyUI 任务 e2ae190e-c460-4bae-999f-2aeca44e1140（seed=1908739016，1216x832，source=width/height）
+2026-10-03T15:16:09.782Z 等待出图：运行中 1 / 排队 0
+2026-10-03T15:22:42.115Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s1908739016_20261003-1522.png
+2026-10-03T15:22:42.124Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-03T15:22:42.478Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-03T15:22:43.387Z 已关闭 ComfyUI（出图完成，pid=51964）
+2026-10-03T15:22:43.387Z approve_and_generate 完成，用时 404315ms
+2026-10-03T15:24:23.403Z 用户判断「不留存」：t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s282513495_20261003-1509.png → D:\DSH Workspace\3\bad_output
+2026-10-03T15:24:23.404Z 用户判断「不留存」：t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s85695082_20261003-1515.png → D:\DSH Workspace\3\bad_output
+2026-10-03T15:24:23.404Z 用户判断「不留存」：t2i_nsfw_qwen_lora-写实成人摄影-现代_r18q_1216x832_s1908739016_20261003-1522.png → D:\DSH Workspace\3\bad_output
+2026-10-03T15:24:23.405Z judge_image 完成，用时 12ms
+2026-10-04T06:27:39.877Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-04T06:27:39.966Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-04T06:38:53.756Z 已生成草稿 draft-mutg9vek-1（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T06:38:53.757Z prepare_image 完成，用时 38153ms
+2026-10-04T06:39:15.759Z 已生成草稿 draft-mutgacdr-2（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T06:39:15.760Z prepare_image 完成，用时 21992ms
+2026-10-04T06:39:41.204Z 已生成草稿 draft-mutgaw0k-3（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T06:39:41.204Z prepare_image 完成，用时 25438ms
+2026-10-04T06:40:07.477Z 已生成草稿 draft-mutgbgad-4（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T06:40:07.477Z prepare_image 完成，用时 26267ms
+2026-10-04T06:40:26.750Z 已生成草稿 draft-mutgbv5q-5（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T06:40:26.751Z prepare_image 完成，用时 19267ms
+2026-10-04T06:40:58.443Z 用户已同意草稿 draft-mutg9vek-1（t2i），提交出图（提示词有修改）
+2026-10-04T06:40:58.455Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T06:41:54.295Z ComfyUI 就绪，用时 55.8s（包装 pid=28796，监听 pid=42888）
+2026-10-04T06:41:54.305Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T06:41:54.319Z 已提交 ComfyUI 任务 6ecb4e3f-7e08-45c6-a17e-eaf379e9f4cd（seed=8812345，832x1216，source=width/height）
+2026-10-04T06:41:54.336Z 等待出图：运行中 1 / 排队 0
+2026-10-04T06:50:18.083Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0650.png
+2026-10-04T06:50:18.100Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T06:50:18.429Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T06:50:19.335Z 已关闭 ComfyUI（出图完成，pid=28796）
+2026-10-04T06:50:19.336Z approve_and_generate 完成，用时 560894ms
+2026-10-04T06:50:22.622Z 用户已同意草稿 draft-mutgacdr-2（t2i），提交出图（提示词有修改）
+2026-10-04T06:50:22.624Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T06:50:34.747Z ComfyUI 就绪，用时 12.1s（包装 pid=32348，监听 pid=26416）
+2026-10-04T06:50:34.765Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T06:50:34.779Z 已提交 ComfyUI 任务 99aab454-79ca-41a1-8a18-b8dd825ac14d（seed=8812345，832x1216，source=width/height）
+2026-10-04T06:50:34.807Z 等待出图：运行中 1 / 排队 0
+2026-10-04T06:58:08.502Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0658.png
+2026-10-04T06:58:08.516Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T06:58:08.797Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T06:58:09.712Z 已关闭 ComfyUI（出图完成，pid=32348）
+2026-10-04T06:58:09.712Z approve_and_generate 完成，用时 467090ms
+2026-10-04T06:58:13.216Z 用户已同意草稿 draft-mutgaw0k-3（t2i），提交出图（提示词有修改）
+2026-10-04T06:58:13.219Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T06:58:28.355Z ComfyUI 就绪，用时 15.1s（包装 pid=45792，监听 pid=43020）
+2026-10-04T06:58:28.368Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T06:58:28.379Z 已提交 ComfyUI 任务 f546a010-3311-4925-8b7d-3d1bee4f3944（seed=8812345，832x1216，source=width/height）
+2026-10-04T06:58:28.399Z 等待出图：运行中 1 / 排队 0
+2026-10-04T07:05:05.267Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0705.png
+2026-10-04T07:05:05.269Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T07:05:05.709Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T07:05:06.626Z 已关闭 ComfyUI（出图完成，pid=45792）
+2026-10-04T07:05:06.626Z approve_and_generate 完成，用时 413410ms
+2026-10-04T07:05:10.337Z 用户已同意草稿 draft-mutgbgad-4（t2i），提交出图（提示词有修改）
+2026-10-04T07:05:10.339Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T07:05:19.494Z ComfyUI 就绪，用时 9.1s（包装 pid=13908，监听 pid=46316）
+2026-10-04T07:05:19.497Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T07:05:19.509Z 已提交 ComfyUI 任务 8faa9b4a-786c-44bb-b63f-193e9f42641e（seed=8812345，832x1216，source=width/height）
+2026-10-04T07:05:19.527Z 等待出图：运行中 1 / 排队 0
+2026-10-04T07:11:57.744Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0711.png
+2026-10-04T07:11:57.748Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T07:11:58.089Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T07:11:59.009Z 已关闭 ComfyUI（出图完成，pid=13908）
+2026-10-04T07:11:59.010Z approve_and_generate 完成，用时 408673ms
+2026-10-04T07:12:02.600Z approve_and_generate 失败：草稿 draft-mutgbv5q-5 不存在、已过期或已用过。请重新 prepare_image 生成，并再次请用户过目。
+2026-10-04T07:12:32.022Z 已生成草稿 draft-muthh4pi-6（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T07:12:32.023Z prepare_image 完成，用时 24340ms
+2026-10-04T08:34:10.145Z approve_and_generate 失败：草稿 draft-muthh4pi-6 不存在、已过期或已用过。请重新 prepare_image 生成，并再次请用户过目。
+2026-10-04T08:34:37.782Z 已生成草稿 draft-mutkepg6-7（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T08:34:37.782Z prepare_image 完成，用时 27634ms
+2026-10-04T08:35:05.617Z 已生成草稿 draft-mutkfaxd-8（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T08:35:05.617Z prepare_image 完成，用时 20782ms
+2026-10-04T08:35:08.386Z 用户已同意草稿 draft-mutkfaxd-8（t2i），提交出图（提示词有修改）
+2026-10-04T08:35:08.388Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T08:35:23.535Z ComfyUI 就绪，用时 15.1s（包装 pid=5924，监听 pid=44448）
+2026-10-04T08:35:23.551Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T08:35:23.561Z 已提交 ComfyUI 任务 7df2b63d-be76-45bf-95f9-c97038ebdda3（seed=8812345，832x1216，source=width/height）
+2026-10-04T08:35:23.594Z 等待出图：运行中 1 / 排队 0
+2026-10-04T08:41:35.650Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0841.png
+2026-10-04T08:41:35.653Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T08:41:35.982Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T08:41:36.895Z 已关闭 ComfyUI（出图完成，pid=5924）
+2026-10-04T08:41:36.896Z approve_and_generate 完成，用时 388510ms
+2026-10-04T09:09:01.904Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0650.png → D:\DSH Workspace\3\output
+2026-10-04T09:09:01.905Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0658.png → D:\DSH Workspace\3\output
+2026-10-04T09:09:01.905Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0705.png → D:\DSH Workspace\3\output
+2026-10-04T09:09:01.906Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0841.png → D:\DSH Workspace\3\output
+2026-10-04T09:09:01.906Z judge_image 完成，用时 6ms
+2026-10-04T09:09:01.910Z approve_and_generate 失败：草稿 draft-mutkepg6-7 不存在、已过期或已用过。请重新 prepare_image 生成，并再次请用户过目。
+2026-10-04T09:09:41.383Z 已生成草稿 draft-mutlnslj-9（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T09:09:41.383Z prepare_image 完成，用时 35354ms
+2026-10-04T09:09:44.075Z 用户已同意草稿 draft-mutlnslj-9（t2i），提交出图（提示词有修改）
+2026-10-04T09:09:44.076Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T09:09:54.697Z ComfyUI 就绪，用时 10.6s（包装 pid=34952，监听 pid=42208）
+2026-10-04T09:09:54.716Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T09:09:54.726Z 已提交 ComfyUI 任务 390741c9-018d-43a4-a11b-5102eb5521ea（seed=8812345，832x1216，source=width/height）
+2026-10-04T09:09:54.748Z 等待出图：运行中 1 / 排队 0
+2026-10-04T09:16:01.835Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0916.png
+2026-10-04T09:16:01.845Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T09:16:02.145Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T09:16:03.072Z 已关闭 ComfyUI（出图完成，pid=34952）
+2026-10-04T09:16:03.072Z approve_and_generate 完成，用时 378997ms
+2026-10-04T09:17:28.829Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-全身竖_r18q_832x1216_s8812345_20261004-0916.png → D:\DSH Workspace\3\output
+2026-10-04T09:17:28.830Z judge_image 完成，用时 39ms
+2026-10-04T11:50:49.098Z 已生成草稿 draft-mutrf094-a（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T11:50:49.103Z prepare_image 完成，用时 41339ms
+2026-10-04T11:51:11.030Z 已生成草稿 draft-mutrfh6e-b（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T11:51:11.031Z prepare_image 完成，用时 21921ms
+2026-10-04T11:51:40.366Z 已生成草稿 draft-mutrg3ta-c（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T11:51:40.367Z prepare_image 完成，用时 29328ms
+2026-10-04T11:52:09.476Z 已生成草稿 draft-mutrgq9w-d（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T11:52:09.477Z prepare_image 完成，用时 29103ms
+2026-10-04T11:52:41.110Z 已生成草稿 draft-mutrheom-e（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T11:52:41.111Z prepare_image 完成，用时 31618ms
+2026-10-04T11:53:05.555Z 已生成草稿 draft-mutrhxjn-f（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T11:53:05.556Z prepare_image 完成，用时 24440ms
+2026-10-04T11:54:33.669Z 已生成草稿 draft-mutrjtj9-g（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T11:54:33.669Z prepare_image 完成，用时 88107ms
+2026-10-04T11:55:20.370Z 用户已同意草稿 draft-mutrf094-a（t2i），提交出图（提示词有修改）
+2026-10-04T11:55:20.388Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T11:55:37.125Z ComfyUI 就绪，用时 16.7s（包装 pid=16912，监听 pid=28792）
+2026-10-04T11:55:37.141Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T11:55:37.152Z 已提交 ComfyUI 任务 8d5b0f24-776b-4f70-b660-c6f6988dec1c（seed=6600123，832x1216，source=width/height）
+2026-10-04T11:55:37.186Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:03:46.114Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1203.png
+2026-10-04T12:03:46.118Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:03:46.505Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:03:47.422Z 已关闭 ComfyUI（出图完成，pid=16912）
+2026-10-04T12:03:47.422Z approve_and_generate 完成，用时 507052ms
+2026-10-04T12:03:51.868Z 用户已同意草稿 draft-mutrfh6e-b（t2i），提交出图（提示词有修改）
+2026-10-04T12:03:51.870Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:04:07.040Z ComfyUI 就绪，用时 15.1s（包装 pid=20460，监听 pid=22048）
+2026-10-04T12:04:07.046Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:04:07.056Z 已提交 ComfyUI 任务 279f526a-273e-4553-ab70-a7dd63b6055d（seed=6600123，832x1216，source=width/height）
+2026-10-04T12:04:07.088Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:12:12.950Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1212.png
+2026-10-04T12:12:12.960Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:12:13.396Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:12:14.312Z 已关闭 ComfyUI（出图完成，pid=20460）
+2026-10-04T12:12:14.312Z approve_and_generate 完成，用时 502444ms
+2026-10-04T12:12:18.673Z 用户已同意草稿 draft-mutrg3ta-c（t2i），提交出图（提示词有修改）
+2026-10-04T12:12:18.675Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:12:30.793Z ComfyUI 就绪，用时 12.1s（包装 pid=47116，监听 pid=45600）
+2026-10-04T12:12:30.798Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:12:30.815Z 已提交 ComfyUI 任务 5b10416e-cecd-4fb9-9623-a647ef167c5b（seed=6600123，1216x832，source=width/height）
+2026-10-04T12:12:30.846Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:13:10.880Z 出图未成功完成，保留 ComfyUI 原样不动（任务可能仍在执行）
+2026-10-04T12:13:10.880Z approve_and_generate 失败：ComfyUI 执行失败：见 ComfyUI 控制台
+2026-10-04T12:13:35.829Z comfyui_power 完成，用时 6ms
+2026-10-04T12:15:44.133Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:15:45.047Z 已关闭 ComfyUI（手动，pid=47116）
+2026-10-04T12:15:45.048Z comfyui_power 完成，用时 1304ms
+2026-10-04T12:16:24.466Z 已生成草稿 draft-mutsbwya-h（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T12:16:24.467Z prepare_image 完成，用时 39416ms
+2026-10-04T12:16:44.750Z 已生成草稿 draft-mutscclq-i（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T12:16:44.750Z prepare_image 完成，用时 20278ms
+2026-10-04T12:17:21.108Z 已生成草稿 draft-mutsd4no-j（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T12:17:21.108Z prepare_image 完成，用时 36352ms
+2026-10-04T12:17:51.799Z 已生成草稿 draft-mutsdsc7-k（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T12:17:51.800Z prepare_image 完成，用时 30671ms
+2026-10-04T12:18:18.187Z 已生成草稿 draft-mutsecp7-l（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T12:18:18.188Z prepare_image 完成，用时 26381ms
+2026-10-04T12:18:45.074Z 已生成草稿 draft-mutsexg2-m（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T12:18:45.075Z prepare_image 完成，用时 26880ms
+2026-10-04T12:19:08.881Z 已生成草稿 draft-mutsfftd-n（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-04T12:19:08.882Z prepare_image 完成，用时 23801ms
+2026-10-04T12:19:33.757Z 用户已同意草稿 draft-mutscclq-i（t2i），提交出图（提示词有修改）
+2026-10-04T12:19:33.760Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:19:44.371Z ComfyUI 就绪，用时 10.6s（包装 pid=48708，监听 pid=19876）
+2026-10-04T12:19:44.387Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:19:44.400Z 已提交 ComfyUI 任务 1364e158-1b04-437d-b221-92f11af674e4（seed=6600123，832x1216，source=width/height）
+2026-10-04T12:19:44.428Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:27:58.112Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1227.png
+2026-10-04T12:27:58.124Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:27:58.521Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:27:59.432Z 已关闭 ComfyUI（出图完成，pid=48708）
+2026-10-04T12:27:59.433Z approve_and_generate 完成，用时 505676ms
+2026-10-04T12:28:03.815Z 用户已同意草稿 draft-mutsbwya-h（t2i），提交出图（提示词有修改）
+2026-10-04T12:28:03.818Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:28:14.393Z ComfyUI 就绪，用时 10.6s（包装 pid=47392，监听 pid=19516）
+2026-10-04T12:28:14.407Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:28:14.420Z 已提交 ComfyUI 任务 0012aa06-d829-488f-8d36-8818e0ef3a2a（seed=6600123，832x1216，source=width/height）
+2026-10-04T12:28:14.438Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:36:32.660Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1236.png
+2026-10-04T12:36:32.662Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:36:33.009Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:36:33.922Z 已关闭 ComfyUI（出图完成，pid=47392）
+2026-10-04T12:36:33.922Z approve_and_generate 完成，用时 510107ms
+2026-10-04T12:44:12.430Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1227.png → D:\DSH Workspace\3\output
+2026-10-04T12:44:12.431Z judge_image 完成，用时 8ms
+2026-10-04T12:44:12.436Z 用户判断「不留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1236.png → D:\DSH Workspace\3\bad_output
+2026-10-04T12:44:12.437Z judge_image 完成，用时 2ms
+2026-10-04T12:44:50.947Z 已生成草稿 draft-muttchoj-o（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T12:44:50.948Z prepare_image 完成，用时 38507ms
+2026-10-04T12:45:29.542Z 已生成草稿 draft-muttdbgm-p（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T12:45:29.543Z prepare_image 完成，用时 38590ms
+2026-10-04T12:45:34.040Z 用户已同意草稿 draft-muttchoj-o（t2i），提交出图（提示词有修改）
+2026-10-04T12:45:34.042Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:45:46.170Z ComfyUI 就绪，用时 12.1s（包装 pid=30396，监听 pid=17724）
+2026-10-04T12:45:46.176Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:45:46.193Z 已提交 ComfyUI 任务 66fada0f-ba9b-4927-8a9b-5dcfc12666c5（seed=6600123，832x1216，source=width/height）
+2026-10-04T12:45:46.221Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:52:51.924Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1252.png
+2026-10-04T12:52:51.928Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:52:52.270Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:52:53.174Z 已关闭 ComfyUI（出图完成，pid=30396）
+2026-10-04T12:52:53.175Z approve_and_generate 完成，用时 439135ms
+2026-10-04T12:52:57.882Z 用户已同意草稿 draft-muttdbgm-p（t2i），提交出图（提示词有修改）
+2026-10-04T12:52:57.884Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T12:53:19.056Z ComfyUI 就绪，用时 21.1s（包装 pid=47292，监听 pid=47968）
+2026-10-04T12:53:19.068Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T12:53:19.077Z 已提交 ComfyUI 任务 90f7f98a-858f-4997-95eb-8c5ff270a679（seed=6600123，832x1216，source=width/height）
+2026-10-04T12:53:19.098Z 等待出图：运行中 1 / 排队 0
+2026-10-04T12:59:51.337Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1259.png
+2026-10-04T12:59:51.339Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T12:59:51.692Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T12:59:52.599Z 已关闭 ComfyUI（出图完成，pid=47292）
+2026-10-04T12:59:52.599Z approve_and_generate 完成，用时 414717ms
+2026-10-04T13:03:10.992Z 已生成草稿 draft-mutu02hc-q（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T13:03:10.992Z prepare_image 完成，用时 38725ms
+2026-10-04T13:03:25.130Z 已生成草稿 draft-mutu0de2-r（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T13:03:25.130Z prepare_image 完成，用时 14132ms
+2026-10-04T13:03:30.190Z 用户已同意草稿 draft-mutu02hc-q（t2i），提交出图（提示词有修改）
+2026-10-04T13:03:30.191Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T13:03:39.266Z ComfyUI 就绪，用时 9.1s（包装 pid=38364，监听 pid=48316）
+2026-10-04T13:03:39.270Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T13:03:39.282Z 已提交 ComfyUI 任务 cbc346cc-903e-4f74-8db9-4cdb03496a6d（seed=6600123，832x1216，source=width/height）
+2026-10-04T13:03:39.301Z 等待出图：运行中 1 / 排队 0
+2026-10-04T13:10:23.758Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1310.png
+2026-10-04T13:10:23.776Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T13:10:24.077Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T13:10:24.987Z 已关闭 ComfyUI（出图完成，pid=38364）
+2026-10-04T13:10:24.988Z approve_and_generate 完成，用时 414798ms
+2026-10-04T13:10:29.847Z 用户已同意草稿 draft-mutu0de2-r（t2i），提交出图（提示词有修改）
+2026-10-04T13:10:29.850Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T13:10:40.484Z ComfyUI 就绪，用时 10.6s（包装 pid=6048，监听 pid=6932）
+2026-10-04T13:10:40.486Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T13:10:40.498Z 已提交 ComfyUI 任务 5e31ba14-d02a-42d8-9c93-a2bf3ed308da（seed=6600123，832x1216，source=width/height）
+2026-10-04T13:10:40.522Z 等待出图：运行中 1 / 排队 0
+2026-10-04T13:17:55.588Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1317.png
+2026-10-04T13:17:55.593Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T13:17:55.881Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T13:17:56.790Z 已关闭 ComfyUI（出图完成，pid=6048）
+2026-10-04T13:17:56.791Z approve_and_generate 完成，用时 446944ms
+2026-10-04T15:36:50.175Z 已生成草稿 draft-mutzho1r-s（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T15:36:50.177Z prepare_image 完成，用时 34386ms
+2026-10-04T15:38:19.284Z 已生成草稿 draft-mutzjkt0-t（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T15:38:19.284Z prepare_image 完成，用时 26672ms
+2026-10-04T15:40:22.381Z 已生成草稿 draft-mutzm7sd-u（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T15:40:22.381Z prepare_image 完成，用时 27940ms
+2026-10-04T15:40:27.943Z 用户已同意草稿 draft-mutzm7sd-u（t2i），提交出图（提示词有修改）
+2026-10-04T15:40:27.945Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T15:40:40.079Z ComfyUI 就绪，用时 12.1s（包装 pid=50372，监听 pid=50172）
+2026-10-04T15:40:40.081Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T15:40:40.087Z 已提交 ComfyUI 任务 fcfcf740-f805-4506-82ad-95c0e17ad989（seed=3141592，832x1216，source=width/height）
+2026-10-04T15:40:40.110Z 等待出图：运行中 1 / 排队 0
+2026-10-04T15:48:47.157Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s3141592_20261004-1548.png
+2026-10-04T15:48:47.161Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T15:48:47.506Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T15:48:48.421Z 已关闭 ComfyUI（出图完成，pid=50372）
+2026-10-04T15:48:48.421Z approve_and_generate 完成，用时 500478ms
+2026-10-04T15:52:51.291Z 已生成草稿 draft-muu029nf-v（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-04T15:52:51.291Z prepare_image 完成，用时 24200ms
+2026-10-04T15:52:57.772Z 用户已同意草稿 draft-muu029nf-v（t2i），提交出图（提示词有修改）
+2026-10-04T15:52:57.774Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-04T15:53:08.420Z ComfyUI 就绪，用时 10.6s（包装 pid=19248，监听 pid=54104）
+2026-10-04T15:53:08.435Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-04T15:53:08.454Z 已提交 ComfyUI 任务 ff426e3b-8640-4348-8925-d5bb6d0a0beb（seed=3141592，832x1216，source=width/height）
+2026-10-04T15:53:08.481Z 等待出图：运行中 1 / 排队 0
+2026-10-04T16:01:18.810Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s3141592_20261004-1601.png
+2026-10-04T16:01:18.814Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-04T16:01:19.180Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-04T16:01:20.092Z 已关闭 ComfyUI（出图完成，pid=19248）
+2026-10-04T16:01:20.093Z approve_and_generate 完成，用时 502321ms
+2026-10-04T16:02:44.852Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s3141592_20261004-1601.png → D:\DSH Workspace\3\output
+2026-10-04T16:02:44.853Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1310.png → D:\DSH Workspace\3\output
+2026-10-04T16:02:44.853Z judge_image 完成，用时 4ms
+2026-10-04T16:02:44.857Z 用户判断「不留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s6600123_20261004-1317.png → D:\DSH Workspace\3\bad_output
+2026-10-04T16:02:44.857Z judge_image 完成，用时 1ms
+2026-10-05T01:26:04.005Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-05T01:26:04.091Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-05T01:29:09.878Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-10-05T01:29:09.879Z prepare_image 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-10-05T01:29:13.790Z service_status 完成，用时 20ms
+2026-10-05T01:33:37.600Z 已生成草稿 draft-muukt58g-1（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-05T01:33:37.601Z prepare_image 完成，用时 31351ms
+2026-10-05T01:35:33.294Z 已生成草稿 draft-muukvmi6-2（t2i，832x1216，等待用户过目，30 分钟内有效）
+2026-10-05T01:35:33.295Z prepare_image 完成，用时 25127ms
+2026-10-05T01:35:36.760Z 用户已同意草稿 draft-muukvmi6-2（t2i），提交出图（提示词有修改）
+2026-10-05T01:35:36.762Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-05T01:36:32.691Z ComfyUI 就绪，用时 55.9s（包装 pid=20244，监听 pid=33280）
+2026-10-05T01:36:32.693Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-05T01:36:32.707Z 已提交 ComfyUI 任务 a030dad7-1d39-46a0-b1d1-78f1d66063b0（seed=3141592，832x1216，source=width/height）
+2026-10-05T01:36:32.739Z 等待出图：运行中 1 / 排队 0
+2026-10-05T01:43:10.831Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s3141592_20261005-0143.png
+2026-10-05T01:43:10.834Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-05T01:43:11.092Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-05T01:43:12.002Z 已关闭 ComfyUI（出图完成，pid=20244）
+2026-10-05T01:43:12.003Z approve_and_generate 完成，用时 455244ms
+2026-10-05T01:43:40.031Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-竖构图_r18q_832x1216_s3141592_20261005-0143.png → D:\DSH Workspace\3\output
+2026-10-05T01:43:40.031Z judge_image 完成，用时 9ms
+2026-10-05T01:45:42.693Z 已生成草稿 draft-muul8opx-3（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-05T01:45:42.694Z prepare_image 完成，用时 22129ms
+2026-10-05T01:45:46.657Z 用户已同意草稿 draft-muul8opx-3（t2i），提交出图（提示词有修改）
+2026-10-05T01:45:46.659Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-05T01:45:57.257Z ComfyUI 就绪，用时 10.6s（包装 pid=29272，监听 pid=16396）
+2026-10-05T01:45:57.399Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-05T01:45:57.406Z 已提交 ComfyUI 任务 40e9a179-72d8-447d-8126-520b6806e30c（seed=3141592，1216x832，source=width/height）
+2026-10-05T01:45:57.436Z 等待出图：运行中 1 / 排队 0
+2026-10-05T01:52:24.881Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0152.png
+2026-10-05T01:52:24.890Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-05T01:52:25.220Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-05T01:52:26.149Z 已关闭 ComfyUI（出图完成，pid=29272）
+2026-10-05T01:52:26.149Z approve_and_generate 完成，用时 399492ms
+2026-10-05T01:55:21.302Z 用户判断「不留存」：t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0152.png → D:\DSH Workspace\3\bad_output
+2026-10-05T01:55:21.303Z judge_image 完成，用时 51ms
+2026-10-05T01:55:53.299Z 已生成草稿 draft-muullrv7-4（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-05T01:55:53.299Z prepare_image 完成，用时 31993ms
+2026-10-05T01:55:57.632Z 用户已同意草稿 draft-muullrv7-4（t2i），提交出图（提示词有修改）
+2026-10-05T01:55:57.634Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-05T01:56:06.730Z ComfyUI 就绪，用时 9.1s（包装 pid=28992，监听 pid=33372）
+2026-10-05T01:56:06.743Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-05T01:56:06.755Z 已提交 ComfyUI 任务 0c5b2d7e-993f-4045-8864-4eb0c6135070（seed=3141592，1216x832，source=width/height）
+2026-10-05T01:56:06.787Z 等待出图：运行中 1 / 排队 0
+2026-10-05T02:02:57.147Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0202.png
+2026-10-05T02:02:57.165Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-05T02:02:57.425Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-05T02:02:58.330Z 已关闭 ComfyUI（出图完成，pid=28992）
+2026-10-05T02:02:58.331Z approve_and_generate 完成，用时 420699ms
+2026-10-05T02:05:50.763Z 用户判断「不留存」：t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0202.png → D:\DSH Workspace\3\bad_output
+2026-10-05T02:05:50.763Z judge_image 完成，用时 9ms
+2026-10-05T02:06:14.726Z 已生成草稿 draft-muulz3d2-5（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-05T02:06:14.727Z prepare_image 完成，用时 23961ms
+2026-10-05T02:06:19.656Z 用户已同意草稿 draft-muulz3d2-5（t2i），提交出图（提示词有修改）
+2026-10-05T02:06:19.658Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-05T02:06:30.265Z ComfyUI 就绪，用时 10.6s（包装 pid=5816，监听 pid=24668）
+2026-10-05T02:06:30.279Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-05T02:06:30.289Z 已提交 ComfyUI 任务 cf318afe-5c52-4ed6-82b1-09821d2d834d（seed=3141592，1216x832，source=width/height）
+2026-10-05T02:06:30.308Z 等待出图：运行中 1 / 排队 0
+2026-10-05T02:13:16.096Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0213.png
+2026-10-05T02:13:16.105Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-05T02:13:16.370Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-05T02:13:17.283Z 已关闭 ComfyUI（出图完成，pid=5816）
+2026-10-05T02:13:17.283Z approve_and_generate 完成，用时 417627ms
+2026-10-05T02:16:40.908Z 用户判断「不留存」：t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0213.png → D:\DSH Workspace\3\bad_output
+2026-10-05T02:16:40.908Z judge_image 完成，用时 9ms
+2026-10-05T02:17:02.650Z 已生成草稿 draft-muumczay-6（t2i，1216x832，等待用户过目，30 分钟内有效）
+2026-10-05T02:17:02.651Z prepare_image 完成，用时 21740ms
+2026-10-05T02:17:07.827Z 用户已同意草稿 draft-muumczay-6（t2i），提交出图（提示词有修改）
+2026-10-05T02:17:07.829Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-05T02:17:16.910Z ComfyUI 就绪，用时 9.1s（包装 pid=33672，监听 pid=6664）
+2026-10-05T02:17:16.928Z 应用 LoRA：Qwen21R18\easternfemale_v2.1_split.safetensors@0.8 + Qwen21R18\nsfw_qwen_21.safetensors@0.6
+2026-10-05T02:17:16.942Z 已提交 ComfyUI 任务 410297b6-417f-4503-82d6-10f983b9159d（seed=3141592，1216x832，source=width/height）
+2026-10-05T02:17:16.974Z 等待出图：运行中 1 / 排队 0
+2026-10-05T02:23:53.506Z 出图已落到工作区：D:\DSH Workspace\3\t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0223.png
+2026-10-05T02:23:53.516Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-05T02:23:53.772Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-05T02:23:54.680Z 已关闭 ComfyUI（出图完成，pid=33672）
+2026-10-05T02:23:54.680Z approve_and_generate 完成，用时 406853ms
+2026-10-05T02:26:21.299Z 用户判断「可留存」：t2i_nsfw_qwen_lora-摄影棚写真-横构图_r18q_1216x832_s3141592_20261005-0223.png → D:\DSH Workspace\3\output
+2026-10-05T02:26:21.300Z judge_image 完成，用时 2ms
+2026-10-05T16:45:59.845Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-05T16:45:59.944Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-10T14:43:24.933Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-10T14:43:25.022Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-10T15:23:17.118Z comfyui_power 完成，用时 22ms
+2026-10-14T11:43:45.310Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-14T11:43:45.406Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T07:16:44.531Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T07:16:44.620Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T10:51:27.781Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T10:51:27.923Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T11:52:35.884Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T11:52:36.019Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T11:57:16.439Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-15T11:57:16.572Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T04:45:09.767Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T04:45:09.882Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T05:50:07.762Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T05:50:07.900Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T05:53:55.525Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T05:53:55.677Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T07:05:11.335Z service_status 完成，用时 49ms
+2026-10-16T07:05:25.766Z 提示词生成失败（连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。），改用严格指令重试一次
+2026-10-16T07:05:25.767Z generate_prompts 失败：连不上 Ollama（http://127.0.0.1:11434）：fetch failed。请确认 ollama 已在运行（ollama list）。
+2026-10-16T07:07:04.624Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-16T07:07:56.067Z ComfyUI 就绪，用时 51.4s（包装 pid=31828，监听 pid=42360）
+2026-10-16T07:07:56.090Z 已提交 ComfyUI 任务 748ab7d2-c4d4-4c61-8317-236dd17baf2c（seed=1126313741，288x288，source=width/height）
+2026-10-16T07:07:56.112Z 等待出图：运行中 1 / 排队 0
+2026-10-16T07:08:42.372Z 出图已落到工作区：D:\MusicUnlock\t2i_简洁的-App-图标设计-扁平矢量风格-纯白色音_288x288_s1126313741_20261016-0708.png
+2026-10-16T07:08:42.377Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-16T07:08:42.728Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-16T07:08:43.635Z 已关闭 ComfyUI（出图完成，pid=31828）
+2026-10-16T07:08:43.635Z generate_image 完成，用时 99016ms
+2026-10-16T07:09:35.583Z 按需启动 ComfyUI：cmd.exe /c run_nvidia_gpu.bat（cwd=D:/ComfyUI_windows_portable）
+2026-10-16T07:09:46.228Z ComfyUI 就绪，用时 10.6s（包装 pid=4260，监听 pid=44156）
+2026-10-16T07:09:46.242Z 已提交 ComfyUI 任务 7dc06acf-f91c-44cc-89ad-1b725eddb6fa（seed=1614194897，288x288，source=width/height）
+2026-10-16T07:09:46.273Z 等待出图：运行中 1 / 排队 0
+2026-10-16T07:10:35.532Z 出图已落到工作区：D:\MusicUnlock\t2i_极简扁平矢量图标-一个纯白色的四分音符-音符头部_288x288_s1614194897_20261016-0710.png
+2026-10-16T07:10:35.538Z 已释放 ComfyUI 显存（unload_models + free_memory）
+2026-10-16T07:10:35.863Z ComfyUI 进程退出（code=1 signal=null）
+2026-10-16T07:10:36.769Z 已关闭 ComfyUI（出图完成，pid=4260）
+2026-10-16T07:10:36.770Z generate_image 完成，用时 61188ms
+2026-10-16T07:11:55.854Z 用户判断「可留存」：t2i_极简扁平矢量图标-一个纯白色的四分音符-音符头部_288x288_s1614194897_20261016-0710.png → D:\MusicUnlock\output
+2026-10-16T07:11:55.855Z judge_image 完成，用时 4ms
+2026-10-16T07:12:04.137Z 用户判断「不留存」：t2i_简洁的-App-图标设计-扁平矢量风格-纯白色音_288x288_s1126313741_20261016-0708.png → D:\MusicUnlock\bad_output
+2026-10-16T07:12:04.137Z judge_image 完成，用时 9ms
+2026-10-16T10:41:22.294Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-16T10:41:22.664Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T06:44:14.379Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T06:44:14.821Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T06:46:42.848Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T06:46:42.985Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:36:46.277Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:36:46.419Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:38:12.288Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:38:12.421Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:41:02.793Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:41:02.970Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:43:23.009Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T08:43:23.138Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:00:43.811Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:00:43.903Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:28:40.952Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:28:41.252Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:30:02.189Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:30:02.733Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:33:43.343Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:33:43.437Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:33:56.847Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:33:56.984Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:41:54.549Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:41:54.679Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:43:06.341Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）
+2026-10-17T12:43:06.469Z comfyui-mcp 1.1.0 启动：ollama=http://127.0.0.1:11434 comfyui=http://127.0.0.1:8188 lifecycle=managed（出图完成即关闭）

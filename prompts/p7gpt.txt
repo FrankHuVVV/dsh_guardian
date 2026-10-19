@@ -1,0 +1,35 @@
+这是 DSH 完整插件运行环境快照与恢复器 v5【第 7 步：recover、repair、报告与 README】。承接第 6 步已通过。
+
+要做的事：
+1. 读取 AGENTS.md 第 3.7 节（崩溃恢复）、第 5.3 节（repair）、第 3 节中 recover/repair/transactions 契约。
+2. 完善 `recover`：按 3.7 的 phase 表逐项处理——
+   prepared/stopped → aborted；before-snapshot-created → aborted；
+   installing → exact 恢复 before → 重启验证；
+   closure-inventoried/preflight-passed → 可启动则 committed，否则恢复 before；
+   starting → 检查实例，健康则 committed，否则恢复 before；
+   restoring-before → 用 before manifest 重做恢复（幂等）；
+   restarting-before → 重新启动验证，失败则 rollback-failed；
+   committed（after 缺失）→ 补写 after-add。
+   恢复过程同样写 activeOperation，保证再次崩溃仍可续。
+3. 实现 `repair`：严格按 5.3——有未完成事务 → plugin-restore；有 drift → 按 3.8 处理；否则恢复最近 verified committed → 启动验证；仍失败 → doctor 输出闭包差异 → 退出 3。仅当 exact 环境健康且故障明确属 patch 层，才进入 safe/bisect。
+4. 生成 repair-report-<ts>.md：必须含 txid、before、after、changedPaths、restoreVerification、finalHealth。
+5. 编写 README.md：事务流程、drift、recover、退出码表、exact/reproducible 差异、日常使用命令（§8）。
+6. 实现 `transactions` 的完整列表：事务、drift、恢复结果。
+
+完成后逐条执行验收标准：
+1) 在 installing 阶段人为 kill guardian → 下次启动任意 guardian 命令时自动 recover，恢复 before 并启动成功。
+2) 在 restoring-before 阶段人为 kill guardian → 下次 recover 续做恢复，完成后 digest 与 before manifest 一致。
+3) 恢复失败场景（人为破坏一个 blob）→ repair 退出码 3，不覆盖 before 快照，报告含 doctor [FAIL] 摘录与人工建议。
+4) repair-report 含 txid、before、after、changedPaths、restoreVerification、finalHealth 六项。
+5) README 存在，含事务流程、drift、recover、退出码表、exact/reproducible 差异。
+
+输出表格：编号 | 检查命令 | 实际输出摘要（≤2 行）| PASS/FAIL。所有测试改动在验收后恢复或通过 plugin-restore 清理。
+
+【模型切换提醒（只提醒，不执行切换）】
+- 你不得调用任何模型切换工具、不得修改当前会话模型、不得自动切换；只输出提醒文本。
+- 若全部 PASS：先输出表格和“第 7 步通过，v5 套件就绪”；另起一行输出：
+  `下一步：无。套件已完成，无需切换模型；后续维护建议复杂事务/repair 用 GPT-6.1 Sol，日常 snapshot/inventory/patch 操作用 DeepSeek V4.1-Flash-1017。我不会自动切换模型。`
+  然后停止，等待我后续指令。
+- 若任一 FAIL：立即停止并向我提问，必须包含失败编号、期望、完整命令输出、recover 的 phase 识别与处理动作、repair-report 全文（若已生成）、你排查的点。末尾输出：
+  `当前不要切换模型；请先回答上述问题，修复后仍在本模型重跑第 7 步。`
+- 不要输出“已切换 / 将自动切换 / 建议自动切换”之类内容。

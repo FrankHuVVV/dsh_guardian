@@ -1,0 +1,334 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1792226263014,
+      "cwd": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 679,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 679,
+        "val": "你好问候"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 679,
+        "val": {
+          "first": {
+            "seq": 40,
+            "text": "你好"
+          },
+          "count": 5,
+          "lastSeq": 465
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 679,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 679,
+        "val": "danger-full-access"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 679,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 208137,
+            "outputTokens": 49065,
+            "cacheReadTokens": 9306240,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 10,
+            "step": 30,
+            "buckets": {
+              "uncachedInputTokens": 165,
+              "outputTokens": 1131,
+              "cacheReadTokens": 186880,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 679,
+        "val": {
+          "surfaceTokens": 90927,
+          "contextWindow": 1048576,
+          "pressureTokens": 187045,
+          "sampledSurfaceTokens": 90235
+        }
+      },
+      "contextBreakdown": {
+        "ver": 6,
+        "seq": 679,
+        "val": {
+          "systems": [
+            {
+              "seq": 39,
+              "tokens": 3863
+            },
+            {
+              "seq": 463,
+              "tokens": 1681
+            }
+          ],
+          "surfaceTokens": 90927,
+          "breakdown": {
+            "systemTokens": 1681,
+            "toolsTokens": 53094,
+            "messageTokens": 89246
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 672,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 674
+          },
+          "lastTurn": 10
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 679,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 679,
+        "val": {
+          "turns": 10,
+          "steps": 77,
+          "llmMs": 293126,
+          "toolMs": 856240,
+          "ttftMs": 78220,
+          "ttftSteps": 72,
+          "decodeMs": 214906,
+          "decodeTokens": 49065,
+          "lastTurn": 10,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 15,
+              "prompt": "",
+              "response": ""
+            },
+            {
+              "turn": 2,
+              "seq": 22,
+              "prompt": "",
+              "response": ""
+            },
+            {
+              "turn": 3,
+              "seq": 29,
+              "prompt": "",
+              "response": ""
+            },
+            {
+              "turn": 4,
+              "seq": 36,
+              "prompt": "你好",
+              "response": "你好！有什么可以帮你的？ 我可以协助代码编写与调试、文件处理（Word/Excel/PPT/PDF）、文档整理、COMSOL 仿真建模与分析、图片生成等任务。直接说需求就行。"
+            },
+            {
+              "turn": 5,
+              "seq": 61,
+              "prompt": "安装https://github.com/YuJunZhiXue/dsh-purge.git仓库内…",
+              "response": "安装完成：只装了桌面端。 **执行内容** 1. 克隆仓库到 `C:\\Users\\28256\\.dsh\\plugins\\dsh-purge`（版本 1.1.71，commit `6c1d638`）。仓库提供的 tarball 和 npm…"
+            },
+            {
+              "turn": 6,
+              "seq": 241,
+              "prompt": "安装的dsh-purge插件与https://github.com/xuanmingguo/dsh…",
+              "response": "## 结论 **安装层面不会冲突，运行层面会叠加，表现为语义层面的隐性冲突，不会导致崩溃。** 两者可以同时装入 `desktop` profile，都能加载；但同时生效后，系统提示词会出现两套“破甲”规则争抢优先级。 （已核对：上游 `…"
+            },
+            {
+              "turn": 7,
+              "seq": 368,
+              "prompt": "infinite-gen-2的功能dsh-purge能否完美替代，如何验证，dsh-purge是怎…",
+              "response": "## 一、能否完美替代：不能 核心目标（让模型不拒答）可以覆盖，但 ig2 的三项功能在 purge 里没有对应实现： | 功能 | infinite-gen-2 | dsh-purge 1.1.71 | 等价性 | |---|---|-…"
+            },
+            {
+              "turn": 8,
+              "seq": 438,
+              "prompt": "",
+              "response": ""
+            },
+            {
+              "turn": 9,
+              "seq": 445,
+              "prompt": "",
+              "response": ""
+            },
+            {
+              "turn": 10,
+              "seq": 459,
+              "prompt": "dsh-purge清洗时点击应用后选择现在重启报错：“失败: 清洗没有写进全部宿主，已取消重启”",
+              "response": "## 原因 报错来自 `ensureHostClean()` 的最后一道校验（[core.js:2274](C:\\Users\\28256\\.dsh\\plugins\\dsh-purge\\lib\\core.js:2274)）：补丁都写完了，但…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 679,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "preset": "danger-full-access",
+          "sandbox": "danger-full-access",
+          "approval": "never",
+          "seeded": true
+        }
+      },
+      "workingDirectory": {
+        "ver": 1,
+        "seq": 679,
+        "val": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace"
+      },
+      "subagentCatalog": {
+        "ver": 6,
+        "seq": 679,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 679,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 679,
+        "val": {}
+      },
+      "timeContext": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "lastMessageTime": 1792240701741,
+          "lastInjectionTime": 1792240600601,
+          "lastTurnInjectionTime": null
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 679,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 679,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 679,
+        "val": null
+      },
+      "harnessDevLegacyPrompt": {
+        "ver": 1,
+        "seq": 679,
+        "val": {
+          "source": null,
+          "web": null
+        }
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 679,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-account",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 679,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1792240481985
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 679,
+        "val": null
+      }
+    }
+  }
+}

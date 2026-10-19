@@ -1,0 +1,565 @@
+# agents.md — 自研 DSH 守护与自愈套件（v3 · 桌面客户端兜底版）
+
+> 适配目标：DSH 桌面客户端 **0.2.1-rc.2**（Electron 托管的 `desktop` profile）
+> 运行环境：Windows / Node ≥ 22 / **零第三方依赖**（仅 Node 标准库）
+> 守护模型：外部进程守护 + 事务前快照 + verified 回滚点 + 有限重试 + 有序降级
+
+v2 修对了环境（profile / 端口 / 数组 patch），但把 patch 的 `- id:` 当成插件开关——它其实是**覆盖行**，删掉不等于禁用。v3 的核心改动是把这个语义连根换掉，并补齐回滚点、LKG、repair 状态机与工程约束。
+
+---
+
+## 0. 变更摘要
+
+### 0.1 v1 → v2（环境适配）
+
+| # | v1 | v2 | 原因（实测） |
+|---|---|---|---|
+| 1 | `profile=web`、`npx dsh --profile web` | `profile=desktop`、直接 spawn 客户端 exe | `dsh --profile desktop` 报 `managed exclusively by the Electron application` |
+| 2 | 端口写死 3080 | 按「本进程树持有」发现端口 | 实际端口 40726，3080 无监听 |
+| 3 | 端口监听即成功 | preflight → 端口归属 → HTTP 任意响应 → settleMs | 旧实例占端口会误判成功；`GET /` 返回 401 |
+| 4 | patch 顶层映射 `key:` | patch 顶层数组 `- id:` / `- insert:` | 两个 profile 的 patch 都是数组 |
+| 5 | 跟踪 4 个文本文件 | + `pnpm-lock.yaml` + 源码路径 | 插件安装真正改坏的是 lockfile 与源码目录 |
+| 6 | LKG 单点覆盖 | LKG 滚动 + 健康条件 | 端口起来但前端挂了会被写进 LKG |
+| 7 | 快照只增不删 | restore 支持镜像删除 | 半装残留会被 loader 扫到 |
+
+### 0.2 v2 → v3（语义修正）
+
+| # | v2 | v3 | 原因 |
+|---|---|---|---|
+| H1 | `disable` = 删除 patch 元素；bisect 逐块删 | `disable` = 写入 `disabled: true`；新增 `revert`；bisect 逐 id 置 disabled | Cordis 方言：`- id: X` 是覆盖行，删除只是撤销自定义配置，插件仍加载 |
+| H2 | 回滚点要求 `before-*` 且 `verified=true`（永不成立） | 快照打 `state` 三态，按 verified 重排优先级 | v2 的规则 1 永不命中，实际永远回退到 LKG |
+| H3 | LKG 只判端口/HTTP | 追加排除 safe、probing、bisect 探测轮 | 空 patch 启动成功会把退化态写成 LKG |
+| H4 | safe off 之后才 bisect，未定位又要"保持 safe on" | safe off 挪到 bisect 有结论之后 | 状态机自相矛盾 |
+| E1 | `createRequire` 直接判 bundles | 三级判定 + npx 缓存降 WARN + 内置包 external-ok + 新增 patch 目标解析 | 实测 `@deepseek-ai/dsh-base` 解析到 `npm-cache\_npx\…`，两个内置包直接 MODULE_NOT_FOUND |
+| E2 | 源码目录整目录快照 + 镜像删除 | 白名单 + 排除 `.cache`/`.pnpm-store` + 体积上限 + 源码目录只回写不删除 | 实测 novel_assistance 排除后仍有 116MB（`.cache` 26.5 + `.pnpm-store` 89.1） |
+| E3 | bisect 宇宙未声明 | 明确「只覆盖 patch 中出现过的 id」，支持 `--ids` | desktop 拒绝 `--dump-config`，bundle 内部行不可枚举 |
+| E4 | 无锁、无 intent、无状态版本 | 新增 §3.6 | 并发互杀、崩溃后状态错位 |
+| E5 | safe 语义未验证 | 保留启动验证，明确只去 patch 层 | safe 失败被误判为环境级 |
+| E6 | 每轮 90s + 15s | 探测轮 45s + 8s，总预算 5 分钟 | 一轮 bisect 可能 10 分钟起 |
+
+---
+
+## 0.3 设计原则（实现时必须遵守）
+
+1. **外部守护**：`guardian.mjs` 是独立进程，不经 DSH 加载；客户端崩溃不影响它。
+2. **先备份再写**：任何对 profile 目录的写操作（restore/safe/disable/enable/revert/bisect）之前，自动 snapshot。
+3. **有限重试**：失败 → 回滚 → 再启动一次。**最多两次 spawn**。
+4. **有序降级**：`preflight` → `guard` → `restore(verified)` → `safe on` → `bisect` → 人工。
+5. **离线可用**：不联网、不装包。
+6. **零依赖**：只用 Node 标准库；不解析 YAML 值，只做结构与键级处理（profileDir 内已有 `js-yaml` 可选用于只读校验，**不得安装**）。
+7. **判据可复现**：启动成功 = preflight 无 FAIL + 端口由本次进程树持有 + HTTP 有任意响应 + settleMs 内存活。
+8. **端口动态发现**：不写死端口，不假设端口等于配置值。
+9. **回滚点语义**：只用 `state=verified` 的快照；优先 `before-*`，其次 LKG；LKG 只在完全健康且非 safe/非探测时写入。
+10. **模型只提醒不切换**：只输出「下一步请手动切换到 <模型>」的提醒文本。
+11. **patch 语义**：`- id:` 是覆盖不是开关；**禁用用 `disabled: true`，撤销配置用 `revert`，两者不可混用**。
+12. **数据安全**：源码目录只回写、不删除；镜像删除仅限 profile 内 `trackedFiles`；单快照设有体积上限。
+13. **单实例与可追溯**：guardian 自身加锁；所有写操作先落 intent 日志。
+
+---
+
+## 1. 目录结构
+
+```
+D:\dsh_plugin\dsh_guardian\
+├── AGENTS.md
+├── config.json               # 环境探测结果，可手改
+├── state.json                # version/safe/disabled/culprit/lastKnownGood/instance/probing
+├── .guardian.lock            # 单实例锁（pid, ts, op）
+├── bin/
+│   └── guardian.mjs
+├── fixtures/
+│   └── broken-plugin/        # 第 4/5 步验收用的"会抛错的插件"
+├── backups/
+│   ├── <ISO时间戳>-<label>/
+│   │   ├── meta.json         # 含 state: verified|unverified|degraded
+│   │   └── files/…
+│   ├── disabled-entries/
+│   └── last-known-good/      # 滚动保留 keepLkg 份
+└── logs/
+    ├── guardian-<YYYYMMDD>.log
+    ├── intent.json           # 写操作意图，完成后删除；启动时残留 = 上次中断
+    └── repair-report-<ts>.md
+```
+
+---
+
+## 2. 环境约定
+
+### 2.1 探测规则
+
+| 项 | 默认值 | 覆盖方式 |
+|---|---|---|
+| `DSH_HOME` | `C:\Users\<user>\.dsh` | config.json `dshHome` |
+| `profile` | `desktop` | config.json `profile`；`DSH_PROFILE` 仅用于 doctor 校验 |
+| `profileDir` | `$DSH_HOME/profiles/$profile` | config.json `profileDir` |
+| 启动方式 | `electron-exe` | config.json `launchMode` |
+| 启动命令 | `DeepSeek Harness.exe` 绝对路径 | config.json `launch`（数组） |
+| 期望版本 | `0.2.1-rc.2` | config.json `expectedClientVersion` |
+| 端口 | 动态 | `portMode`（`dynamic`/`fixed`） |
+| 启动超时 | `90000` ms | `startTimeoutMs` |
+| 稳定观察 | `15000` ms | `settleMs` |
+| 探测轮超时 | `45000` / `8000` ms | `probeStartTimeoutMs` / `probeSettleMs` |
+| bisect 总预算 | `300000` ms | `maxBisectMs` |
+| 单实例策略 | `kill-first` | `singleInstance` |
+| 锁超时 | `600000` ms | `lockTimeoutMs` |
+| 跟踪文件 | 5 个 | `trackedFiles` |
+| 源码路径 | 2 个 | `trackedSourcePaths` + `sourceInclude` |
+| 快照上限 | `20` MB | `maxSnapshotMB` |
+| 镜像删除域 | `["trackedFiles"]` | `mirrorDelete` |
+| LKG 保留 | `3` | `keepLkg` |
+
+### 2.2 config.json 模板（本机实测值）
+
+```json
+{
+  "dshHome": "C:\\Users\\28256\\.dsh",
+  "profile": "desktop",
+  "profileDir": "C:\\Users\\28256\\.dsh\\profiles\\desktop",
+  "launchMode": "electron-exe",
+  "launch": ["C:\\Users\\28256\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"],
+  "expectedClientVersion": "0.2.1-rc.2",
+  "portMode": "dynamic",
+  "port": 0,
+  "startTimeoutMs": 90000,
+  "settleMs": 15000,
+  "probeStartTimeoutMs": 45000,
+  "probeSettleMs": 8000,
+  "maxBisectMs": 300000,
+  "singleInstance": "kill-first",
+  "killGraceMs": 5000,
+  "lockTimeoutMs": 600000,
+  "preflight": ["patchParses", "bundlesResolvable", "patchTargetsResolvable", "depsResolvable", "lockfileMatches"],
+  "trackedFiles": ["cordis.patch.yml", "package.json", "cordis.yml", "pnpm-workspace.yaml", "pnpm-lock.yaml"],
+  "trackedSourcePaths": [
+    "C:\\Users\\28256\\.dsh\\plugins\\dsh-infinite-gen-2",
+    "D:\\Github\\novel_assistance"
+  ],
+  "sourceInclude": ["src/**", "lib/**", "prompts/**", "tests/**", "package.json", "*.yml", "*.mjs"],
+  "exclude": ["node_modules", ".git", ".cache", ".pnpm-store", "cache", "dist", "*.log"],
+  "maxSnapshotMB": 20,
+  "mirrorDelete": ["trackedFiles"],
+  "keepLkg": 3,
+  "rollbackPriority": ["before-*", "last-known-good", "any"]
+}
+```
+
+### 2.3 启动方式矩阵（不可混用）
+
+| profile | launchMode | 可用启动方式 | 说明 |
+|---|---|---|---|
+| `desktop` | `electron-exe` | spawn `DeepSeek Harness.exe` | CLI **拒绝**该 profile；用户实际使用的客户端 |
+| `web` | `cli` | `node <dsh>/lib/bin.js --profile web` | 本机全局 `dsh` 为 0.1.5-rc.3，与客户端版本不符，**不得**用于本机 |
+
+### 2.4 禁止事项
+
+- **禁止**用 `npx dsh` / 全局 `dsh` 启动 `desktop`。
+- **禁止**把已存在实例占用的端口当作本次启动成功。
+- **禁止**把「删除 patch 元素」当作禁用插件（那只是撤销 override）。
+- **禁止**对 `trackedSourcePaths` 执行镜像删除。
+- **禁止**在 `singleInstance=kill-first` 下杀非「端口归属 + 进程树」确认过的进程。
+
+---
+
+## 3. CLI 契约
+
+| 命令 | 作用 | 退出码 |
+|---|---|---|
+| `doctor` | 离线诊断（六节） | 0 / 1 WARN / 2 FAIL |
+| `preflight` | 只跑启动前检查 | 0 / 2 |
+| `ps` | 打印实例 pid/port/是否本套件启动 | 0 运行中 / 1 未运行 |
+| `snapshot <label>` | 打快照（含 state 标记） | 0 |
+| `list` | 列快照（时间倒序，含 state） | 0 |
+| `restore <label\|latest\|last-known-good>` | 还原（自动 pre-restore 快照） | 0 / 2 不存在 |
+| `guard [--detach] [--since <label>]` | 守护启动 + 回滚 + 重试 | 0 / 2 / 3 |
+| `safe on` / `safe off` | 安全模式（patch 置空） | 0 |
+| `disable <id>` | **禁用**：写入 `disabled: true`（id 不在 patch 时追加新元素） | 0 |
+| `revert <id>` | **撤销 override**：移除该 id 的配置块（插件仍加载） | 0 / 2 无此块 |
+| `enable <id>` | 移除 disable 记录（含追加的元素） | 0 / 2 无记录 |
+| `bisect [--fast] [--ids a,b]` | 定位元凶（逐 id 置 disabled） | 0 / 2 |
+| `repair` | 一键修复链 | 0 / 2 / 3 |
+| `restart` | kill 当前实例后 `guard --detach` | 同 guard |
+| `status` | state.json 摘要 | 0 |
+
+### 3.1 preflight（目标 < 2 秒，只做快速失败）
+
+```
+patchParses             结构校验：Tab 缩进、未闭合引号、顶层 - 与 key: 混用、重复顶层 id；
+                        profileDir 内可解析到 js-yaml 时做一次完整 parse
+bundlesResolvable       三级：
+                          a. 解析成功且路径不含 npm-cache\_npx  → OK
+                          b. 解析到 npm-cache\_npx\…            → WARN shadowed-by-npx
+                          c. name 以 @deepseek-ai/ 开头且失败    → WARN external-builtin
+                          d. 其余失败                            → FAIL
+patchTargetsResolvable  扫描 patch 的 insert[].name 与行 name；
+                        非 @deepseek-ai/* 的必须可解析（相对 patch 文件锚定）
+depsResolvable          dependencies 每项可解析；file:/link: 检查目标目录与 package.json
+lockfileMatches         pnpm-lock.yaml importer 依赖集合 ⊆ package.json 依赖集合
+                        （允许 lock 多出 peer）；不一致 → FAIL 并提示 pnpm install
+```
+
+任一 FAIL → `preflight` 退出 2；`guard` 跳过 spawn 直接回滚。**WARN 不阻断**——preflight 只做快速失败，最终判据仍是 spawn。
+
+### 3.2 judgeStart
+
+```
+0) 取 .guardian.lock；已有实例按 singleInstance 处理（kill-first → 杀进程树并等端口释放）
+1) spawn(launch)；记录 rootPid
+2) 每 500ms：
+   a. netstat -ano -p tcp 取所有 LISTENING 端点及其 PID
+   b. Get-CimInstance Win32_Process 取 ProcessId/ParentProcessId，求 rootPid 后代集合 D
+   c. port = PID ∈ D 的 127.0.0.1 监听端口
+      · 子进程在端口出现前退出 → fail(exit)
+      · 超时无 D 持有端口      → fail(timeout)
+3) GET http://127.0.0.1:<port>/（3s 超时）：任意状态码（含 401）视为在跑；连接失败 → fail(http)
+4) 观察 settleMs（探测轮用 probeSettleMs）：进程树存活且端口仍在 → ok(port)
+```
+
+### 3.3 patch 语义与切分
+
+| patch 写法 | 语义 | 能否用于修复 |
+|---|---|---|
+| `- id: X` + `config` | **覆盖**已有行的配置（`config` 整体替换，不深合并） | 只修「配置值写坏」 |
+| `- insert: [...]` | 追加新行（给 `group` 可用 id 插入组内） | 删除该子项才能停用被插入插件 |
+| `- id: X` + `disabled: true` | **禁用**该行 | 这才是插件开关 |
+| 非 insert 且 id 匹配不到行 | 警告并跳过，不是错误 | 无害但无效 |
+
+切分规则（`splitEntries` / `joinEntries`）：
+
+- 行首无空白且匹配 `^-(\s|$)` 的行是新顶层元素起点；元素块含该行及其后缩进行，直到下一个起点或 EOF。
+- 空行与 `#` 注释归属当前元素；文件开头注释组成匿名前缀块。
+- key 提取：块内首个 `^  id:\s*(.+)$`；无 `id` 但有 `insert:` 时取 `insert` 内每个 `- id:` 子元素，记作 `insert:<id>`。
+- 无 id 的元素记 `anon:<序号>`，不参与 disable。
+- 映射格式（`^key:`）保留兼容分支。
+
+命令语义：
+
+```
+disable <id>   若 id 已在 patch：在块内插入或改写 disabled: true（保留原 config）
+               若 id 不在 patch：追加元素
+                 - id: <id>
+                   disabled: true
+               （需实机验证同文件内同 id 两次出现时后者生效）
+revert <id>    移除该 id 的 override 块（撤销自定义配置，插件仍按默认加载）
+enable <id>    删除 disable 覆盖；若为 disable 时追加的元素则整块删除
+state.disabled 记录 {id, kind: "disable"|"revert", file, originalIndex, appended}
+```
+
+**bisect 的宇宙**：只覆盖 patch 中出现过的 id（`--ids` 可追加 bundle 行 id）。bundle 内部未被 patch 命中的行不可枚举（desktop 拒绝 `--dump-config`）。
+
+### 3.4 快照状态与回滚点
+
+快照时写 `meta.state`：
+
+| state | 判定 |
+|---|---|
+| `verified` | 当前实例由本套件启动、preflight 无 FAIL、非 safe、非 probing |
+| `degraded` | safe 状态下拍的，或 `state.disabled` 非空时拍的 |
+| `unverified` | 其余（人工随手拍的、客户端没在跑） |
+
+`resolveRollbackPoint`（`--since` 优先）：
+
+```
+1) 最新 verified 的 before-*
+2) 最新 verified 的 last-known-good
+3) 最新 verified 的普通快照
+4) 都没有 → 退出 2，提示先 snapshot before-<插件名>
+unverified / degraded 默认不用；--force <label> 可强制
+```
+
+### 3.5 LKG 写入条件
+
+四项全过 **且额外满足**：`state.safe === false`、`state.probing !== true`、本次不是 bisect 探测轮、preflight 无 FAIL。
+
+- preflight 有 WARN → 写 `last-known-good-degraded`，不进主 LKG。
+- 写前把现有 LKG 改名 `last-known-good-<ts>`，保留 `keepLkg` 份。
+- `meta.health = { preflight, port, http, settledMs }`。
+
+### 3.6 工程保障
+
+```
+lock       任何写操作前取 .guardian.lock（pid, ts, op）；超 lockTimeoutMs 无心跳自动失效；
+           获取失败 → exit 2 并提示已有实例在跑
+intent     写操作前写 logs/intent.json（op, target, ts）；完成后删除；
+           启动时残留 → doctor [WARN] 且 repair 拒绝自动执行
+state      state.json 含 version: 3 与 probing: false
+ps         端口归属探测 + state.instance.pid 交叉验证
+restart    先打印「将终止运行中的会话」
+探测定级   bisect 单轮 probeStartTimeoutMs/probeSettleMs；总耗时超 maxBisectMs 即中止
+```
+
+---
+
+## 4. 分步实施
+
+### 第 1 步：骨架、配置探测与 doctor 基础
+
+**操作**
+
+1. 创建 `bin/`、`fixtures/`、`backups/`、`backups/disabled-entries/`、`logs/`。
+2. 写 `bin/guardian.mjs`：参数解析、config 加载（缺失时按 2.2 生成并探测）、`doctor` 的 `[env]` 与 `[files]`。
+3. `[env]` 输出 `node= os= profile= profileDir= launchMode= launch= portMode= expectedClientVersion= clientVersion=`（扫 `resources\app.asar` 首个 `"version":"x.y.z"`，失败记 WARN）。
+4. `[files]` 输出 `trackedFiles` 的存在与大小、`trackedSourcePaths` 是否存在、`profileDir` 是否存在。
+5. 退出码：全在且 Node ≥ 22 → 0；profileDir 在但文件缺 → 1；profileDir/exe 缺失或 Node < 22 → 2。
+
+**验收标准**
+
+1. `bin/`、`fixtures/`、`backups/`、`backups/disabled-entries/`、`logs/` 全部存在。
+2. `node --check bin/guardian.mjs` 退出码 0。
+3. `doctor` 含 `[env]`、`[files]`，`[env]` 内有 `profile=desktop`、`launchMode=electron-exe`、`portMode=dynamic`、`expectedClientVersion=0.2.1-rc.2`。
+4. `config.json` 含 2.2 模板的全部 25 个键。
+5. 把 `profileDir` 指向不存在路径 → 至少一条 `[FAIL]` 且退出 2；改回恢复 0。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 1 步：骨架与配置探测】。严格按 AGENTS.md（v3）第 1/2/3.1 节执行。
+创建目录与 fixtures；实现 guardian.mjs 骨架 + config 加载 + doctor 的 [env]/[files]；node --check；跑 doctor。
+逐条跑验收标准 1-5，输出「编号 | 检查命令 | 输出摘要 | PASS/FAIL」。
+全 PASS 后另起一行：下一步：请手动切换到 DeepSeek V4.1-Flash-1017（若已是则保持），然后粘贴第 2 步提示词。我不会自动切换模型。
+任一 FAIL：停止，输出失败编号、期望、完整输出、初步排查与提问，并提示「当前不要切换模型，先修复后重跑第 1 步」。
+```
+
+### 第 2 步：快照 / 列表 / 还原
+
+**操作**
+
+1. `snapshot <label>`：`backups/<ISO无冒号>-<label>/`；复制 `trackedFiles` 与 `trackedSourcePaths` 中匹配 `sourceInclude` 的文件（排除 `exclude`）；写 `meta.json`：`{ label, createdAt, source, state, health, files: { relPath: {size, sha256} }, dirs: { relPath: {files, sha256OfListing} }, externalized }`。
+2. 体积超 `maxSnapshotMB`：只存清单与哈希，内容标 `externalized=true`；restore 时拒绝自动还原并提示人工/git。
+3. `list`：时间倒序，`时间 | label | 文件数 | state | LKG`。
+4. `restore`：先校验快照内 sha256（不符拒绝并退出 2）→ 自动 `snapshot("pre-restore-<ts>")` → **镜像删除仅限 `trackedFiles`**（受管但快照中不存在者删除）→ 回写 → 逐个复核 sha256；源码路径只回写，并打印快照后新增文件清单（不删除）。
+5. 日志 `[ISO] [LEVEL] [phase] msg`。
+
+**验收标准**
+
+1. `snapshot base` 退出码 0；新目录含 `meta.json`；files 至少 5 项；`meta.state` 为三态之一。
+2. `list` 有 label=`base` 的行，时间与目录名一致，state 列可见。
+3. 向 `cordis.patch.yml` 追加 `# tamper-test` 后 `restore base`：退出码 0，sha256 与 meta 一致。
+4. `list` 出现 `pre-restore-` 快照。
+5. `restore no-such-label` 退出码 2，信息含该 label。
+6. 数据安全：在 `D:\Github\novel_assistance\src` 建 `_probe.tmp` → `restore base` → 该文件**仍存在**，且报告列出它。
+7. 镜像删除限域：手工从某快照目录删掉 `cordis.yml` 副本并同步 meta → `restore` 后 `profileDir\cordis.yml` 被删除（可再由 `pre-restore-*` 恢复）。
+8. 体积上限：构造 > `maxSnapshotMB` 的快照 → 该快照 `externalized=true` 且 restore 拒绝并给出提示。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 2 步：快照/列表/还原】。承接第 1 步。按 AGENTS.md 第 3.4 节与第 4 步第 2 节。
+实现 snapshot/list/restore：state 标记、体积上限、镜像删除限域、源码只回写、pre-restore 自动快照、日志。
+逐条跑验收标准 1-8，输出表格。全 PASS 后另起一行：下一步：请手动切换到 GPT-6.1 Sol，然后粘贴第 3 步提示词。我不会自动切换模型。
+任一 FAIL：停止并按提问规则报告。
+```
+
+### 第 3 步：守护启动、端口发现与自动回滚
+
+**操作**
+
+1. 实现 `preflight`（3.1）与 `judgeStart`（3.2）。
+2. 实现 `ps`（端口归属 + state.pid 交叉验证）。
+3. 实现 `guard [--detach] [--since <label>]`：
+
+   ```
+   取锁 → preflight
+     FAIL → 不 spawn，直接进回滚
+     OK   → snapshot("pre-guard-<ts>")
+            spawn → judgeStart
+            ok   → 写 LKG（3.5）→ start-ok → exit 0
+            fail → fail-1 → resolveRollbackPoint(--since 优先)
+                     无 → fail-no-lkg → exit 2（提示 repair）
+                     有 → restore → spawn → judgeStart
+                            ok   → retry-start-ok → 写 LKG → exit 0
+                            fail → fail-2 → exit 2（提示 repair）
+   ```
+
+4. `--detach`：`detached:true` + `unref()`，guardian 退出 0；前台模式子进程退出则同码退出。
+5. 子进程输出写日志（`[child-out]` / `[child-err]`）。
+6. 失败路径 `taskkill /T /F` 清进程树并等端口释放（≤ `killGraceMs`）。
+
+**验收标准**
+
+1. 无实例时 `ps` 退出码 1。
+2. 健康态 `preflight` 退出 0（不得因 npx 缓存或内置包误报 FAIL）。
+3. `guard --detach` 退出码 0；日志含 `start-ok`；`ps` 的端口属于该进程树。
+4. 注入 bundle 名 `__bad-bundle__` → `preflight` 退出 2 且 < 2s；`guard --detach` 回滚后退出 0；`package.json` sha256 与 LKG 一致。
+5. 注入 `:::not-yaml` → `guard --detach` 回滚后退出 0，patch sha256 与 LKG 一致。
+6. 删除 LKG 与所有 verified `before-*` 后再注入 → `guard` 退出 2，日志含 `fail-no-lkg`。
+7. 单实例：客户端在跑时再 `guard --detach` → 旧实例被 kill、新实例起来、pid 变化、退出 0。
+8. 并发：同时起两个 `guard` → 第二个因锁退出 2。
+9. `--detach` 后 guardian 退出而客户端在跑；前台模式 kill 子进程 → guardian 同码退出。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 3 步：守护启动与自动回滚】。承接第 2 步。按 AGENTS.md 第 3.1/3.2/3.4/3.5/3.6 节。
+实现 preflight、judgeStart、lock、ps、guard（--detach/--since）、进程树清理。
+逐条跑验收标准 1-9（故障注入后必须 restore 还原），输出表格。全 PASS 后另起一行：下一步：请手动切换到 DeepSeek V4.1-Flash-1017，然后粘贴第 4 步提示词。我不会自动切换模型。
+任一 FAIL：停止并按提问规则报告。
+```
+
+### 第 4 步：patch 语义、安全模式与单元素开关
+
+**操作**
+
+1. 实现 `splitEntries` / `joinEntries`（3.3，数组 + 映射兼容）。
+2. `safe on`：`snapshot("pre-safe-<ts>")` → patch 备份到 `disabled-entries/<ts>-safe-original.yml` → 0 字节覆盖 → `state.safe=true` → 跑 preflight + judgeStart 验证空 patch 能启动；失败自动 `safe off` 并报错。
+3. `safe off`：优先从 `*-safe-original.yml` 恢复，其次 `pre-safe-*`；`state.safe=false`。
+4. `disable <id>`：在块内写 `disabled: true`（保留原 config）；id 不在 patch 时追加新元素。
+5. `revert <id>`：移除该 id 的 override 块；`enable <id>`：移除 disable 覆盖（含追加元素）。
+6. 建立 `fixtures/broken-plugin/`：`index.js` 在 `apply()` 抛错，`package.json` 名 `@fixture/broken-plugin`。验收时复制到 `profileDir\.guardian-fixture\`，patch 用 `insert: [{ id: broken-fixture, name: './.guardian-fixture/index.js' }]`。
+
+**验收标准**
+
+1. `doctor` 的 `[patch]` 列出 desktop 的五个 id（`ui-settings-account/ui-chat/ui-settings/llm-pi-ai/session-log-deepseek`）。
+2. `safe on` 后 patch 大小 0；`disabled-entries/` 有 `*-safe-original.yml` 且 sha256 等于操作前；`status` 显示 `safe=true`。
+3. `safe on` 下 `guard --detach` 退出 0，且**该次成功不写主 LKG**（LKG 时间不变）。
+4. `safe off` 后 patch sha256 还原；`status` 显示 `safe=false`。
+5. `disable ui-chat` → 该块内出现 `disabled: true` 且原 `config` 仍在；`guard` 能启动；`enable ui-chat` → 该行消失、sha256 还原。
+6. `revert ui-chat` → override 块消失；用快照还原。
+7. 语义对照：插入 broken-plugin 后客户端起不来 → `disable broken-fixture` 后能启动，而 `revert broken-fixture` 仍起不来（证明两种命令不可互换）。
+8. `enable no-such-id` 与 `revert no-such-id` 退出码 2。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 4 步：patch 语义与单元素开关】。承接第 3 步。按 AGENTS.md 第 3.3 节。
+实现 splitEntries/joinEntries、safe on/off、disable/revert/enable，并建立 fixtures/broken-plugin。
+逐条跑验收标准 1-8（safe 必须 safe off 还原；disable 必须 enable 还原；修改前先 snapshot），输出表格。
+全 PASS 后另起一行：下一步：请手动切换到 GPT-6.1 Sol，然后粘贴第 5 步提示词。我不会自动切换模型。
+任一 FAIL：停止并按提问规则报告。
+```
+
+### 第 5 步：自动定位（bisect）与 doctor 六节
+
+**操作**
+
+1. `bisect [--fast] [--ids a,b]`：
+
+   ```
+   前置：取锁；snapshot("pre-bisect-<ts>")；preflight 必须通过；
+         有实例先 kill；候选集 = patch 中的 id ∪ --ids
+   全量 patch 下能启动 → 退出 0「当前可启动，无需定位」
+   线性：逐个 id 置 disabled → judgeStart（探测轮超时）→ 成功即定位；失败则撤掉该覆盖
+   --fast：二分，其余置 disabled，日志标 mode=fast
+   每轮前后 restore 到 pre-bisect
+   定位：disable <key>（insert 子元素则移除该子项）→ 恢复其余 → 启动验证 → 写 LKG → exit 0
+   未定位：exit 2，日志 bisect-none，并提示「故障可能在 bundle 内部，走整体回滚」
+   总耗时超 maxBisectMs → 中止并 exit 2
+   ```
+
+2. `doctor` 六节：`[env]` `[files]` `[patch]` `[deps]` `[logs]` `[state]`。
+   - `[patch]`：能否切分、id 列表、重复 id、是否为空。
+   - `[deps]`：bundles 三级判定结果、dependencies 存在性、lockfile 一致性。
+   - `[logs]`：最近 guard/bisect/repair 的 phase 序列。
+   - `[state]`：safe、disabled 数、culprit、LKG 时间、probing。
+   - 退出码：任一 FAIL → 2；仅 WARN → 1。
+
+**验收标准**
+
+1. 插入 broken-plugin 后启动失败，`bisect` 退出 0，stdout 含 `culprit=insert:broken-fixture`，探测轮次 ≤ 候选数 + 1。
+2. 结束后该 insert 子项被移除、`disabled-entries/` 有记录；patch 可再次启动。
+3. 之后 `guard --detach` 退出 0。
+4. `doctor` 六节齐全。
+5. `package.json` 加 `"__nonexistent__": "1.0.0"` → `[deps]` FAIL、退出 2；移除恢复。
+6. 用 `--ids ui-chat` 限定范围时只探测该 id，轮次 = 1。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 5 步：自动定位与诊断】。承接第 4 步。按 AGENTS.md 第 3.3/3.6 节。
+实现 bisect（disabled 探测、--fast、--ids、总预算）与 doctor 六节。
+先 snapshot，再插入 broken-plugin 跑 bisect；跑完还原。逐条跑验收标准 1-6，输出表格。
+全 PASS 后另起一行：下一步：请保持或手动切换到 GPT-6.1 Sol，然后粘贴第 6 步提示词。我不会自动切换模型。
+任一 FAIL：停止并按提问规则报告。
+```
+
+### 第 6 步：一键修复链（repair）与长期守护
+
+**操作**
+
+1. `repair` 严格按序：
+
+   ```
+   取锁 → preflight + guard（内部调用）
+     ok → 写 LKG → 报告 → exit 0
+   失败 → resolveRollbackPoint → restore → guard
+     ok → 写 LKG → 报告 → exit 0
+   失败 → safe on → guard
+     失败 → doctor 入报告 → exit 3（环境级：exe/profileDir/杀软）
+     成功 → safe off（恢复原 patch）→ bisect
+               定位 → disable culprit → guard 验证 → ok：写 LKG → 报告 → exit 0
+               未定位 → safe on（重新进安全模式）→ 报告 → exit 2
+   ```
+
+2. `logs/repair-report-<ts>.md`：`failedPhase`、`restoredFrom`、`culprit`、`finalSnapshot`、`durationMs`、doctor 摘要、人工建议。
+3. `README.md`：日常流程、退出码表、故障决策树、日志位置、本机适配说明。
+
+**验收标准**
+
+1. 注入 bundle 名坏掉 → `repair` 退出 0，生成 `repair-report-*.md`。
+2. 报告含 `failedPhase`、`restoredFrom`、`culprit`、`finalSnapshot`、`durationMs`。
+3. 修复后 `status` 显示 `safe=false`、LKG 为本次、`ps` 退出 0。
+4. 插入 broken-plugin 后 `repair`：能定位并 disable，退出 0，`culprit=insert:broken-fixture`。
+5. `profileDir` 改名 → `repair` 退出 3，报告含 doctor FAIL 摘录与人工建议；改回恢复。
+6. `README.md` 含退出码表与决策树。
+
+**提示词**
+
+```text
+这是 DSH 守护套件【第 6 步：修复链与长期守护】。承接第 5 步。按 AGENTS.md 第 4 步第 6 节。
+实现 repair（顺序与退出码）、repair-report、README。
+按验收标准 1-6 验证，故障注入后必须还原，输出表格。全 PASS 后另起一行：下一步：无。套件就绪；我不会自动切换模型。
+任一 FAIL：停止并按提问规则报告。
+```
+
+---
+
+## 5. 故障决策树
+
+```
+DSH 客户端起不来
+├─ node bin/guardian.mjs doctor
+│   ├─ [FAIL] profileDir/desktop 不存在          → 人工修 config.json
+│   ├─ [FAIL] bundles 不可解析                   → 定位到 ~/.dsh/plugins/<pkg> 或 link 目标
+│   ├─ [FAIL] lockfile 与 package.json 不一致    → 先 pnpm install，再 guard
+│   └─ 其余 → 下一步
+├─ node bin/guardian.mjs preflight
+│   ├─ 0 → guard --detach
+│   └─ 2 → guard --detach --since before-<插件名>
+├─ guard --detach
+│   ├─ 0 → 已回滚到 verified 快照，结束
+│   ├─ 2（fail-no-lkg）→ repair
+│   └─ 2（fail-2）    → repair
+├─ repair
+│   ├─ 0 → 已定位并 disable 元凶，看 repair-report
+│   ├─ 2 → 仅进安全模式，按报告人工处理
+│   └─ 3 → 环境级故障，按报告人工
+├─ 只想撤销某插件配置 → revert <id>（不是 disable）
+├─ 只想停用某插件     → disable <id>
+└─ 仍不行 → 人工：restore verified 快照 / 检查客户端日志
+```
+
+---
+
+## 6. 日常使用
+
+- **装/改插件前**：`snapshot before-<插件名>`（"正确节点"的定义；在健康态拍才会标 verified）。
+- **每次启动**：`guard --detach` 代替双击客户端。
+- **改完插件后**：`preflight` → `restart`；失败直接 `repair`。
+- **插件不生效但客户端能起**：`disable <id>` 排除嫌疑，或 `revert <id>` 撤销配置。
+- **清理**：保留最近 10 个普通快照 + 所有 verified `before-*` + `keepLkg` 份 LKG；`unverified` 可删。
+- **日志**：`logs/guardian-*.log` 按天，`repair-report-*.md` 每次一份。
+- **不要在客户端运行时手改 profile 文件**；`guard` 的 kill-first 会终止运行中会话。
+
+---
+
+## 7. 本机适配与已知限制
+
+1. **desktop 只能由 Electron 托管**：`dsh --profile desktop` 被拒；guardian 只能 spawn exe，没有 `--dump-config` 可用。
+2. **版本固定 0.2.1-rc.2**：全局 `dsh` 是 0.1.5-rc.3，且 `_npx` 缓存会被 `createRequire` 优先命中——preflight 必须把 npx 缓存降为 WARN。
+3. **端口动态**：判据只能靠「进程树持有」；`GET /` 返回 401，必须接受任意状态码。
+4. **patch 是顶层数组**：以元素为单位处理；`- id:` 是覆盖行，禁用必须写 `disabled: true`。
+5. **bisect 只覆盖 patch 中出现过的 id**：bundle 内部行不可枚举；culprit 在 bundle 内时 bisect 会返回未定位，应走整体回滚。
+6. **`node_modules` 不进快照**：半装故障靠 package.json + lockfile 回滚，恢复后需人工 `pnpm install`；repair 不自动安装（避免网络与版本漂移）。
+7. **`file:` / `link:` 源码目录在 profileDir 之外**：已纳入 `trackedSourcePaths`；只回写、不删除。
+8. **Electron 单实例锁未实测**：`kill-first` 是设计选择，第 3 步验收 7 实测确认。
+9. **前端崩溃不在判据内**：端口在但页面白屏判 ok；如需覆盖需带凭据的健康端点。
+10. **快照体积**：`novel_assistance` 的 `.cache`（26.5MB）与 `.pnpm-store`（89.1MB）必须排除，否则每轮快照 >100MB；单快照上限 20MB。

@@ -1,0 +1,306 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1792306952578,
+      "cwd": "D:\\dsh_plugin\\dsh_guardian",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 434,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 434,
+        "val": "检查dsh_guardian插件缺漏"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 434,
+        "val": {
+          "first": {
+            "seq": 12,
+            "text": "dsh_guardian插件已完成，现在依照agents.md检查是否有缺漏，先检查，不修改"
+          },
+          "count": 7,
+          "lastSeq": 423
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 434,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 434,
+        "val": "danger-full-access"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 434,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 84947,
+            "outputTokens": 76266,
+            "cacheReadTokens": 5774208,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 6,
+            "step": 7,
+            "buckets": {
+              "uncachedInputTokens": 229,
+              "outputTokens": 678,
+              "cacheReadTokens": 167808,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 434,
+        "val": {
+          "surfaceTokens": 127961,
+          "contextWindow": 1048576,
+          "pressureTokens": 168037,
+          "sampledSurfaceTokens": 127554
+        }
+      },
+      "contextBreakdown": {
+        "ver": 6,
+        "seq": 434,
+        "val": {
+          "systems": [
+            {
+              "seq": 11,
+              "tokens": 3631
+            }
+          ],
+          "surfaceTokens": 127961,
+          "breakdown": {
+            "systemTokens": 3631,
+            "toolsTokens": 7580,
+            "messageTokens": 124330
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 430,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 432
+          },
+          "lastTurn": 6
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 434,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 434,
+        "val": {
+          "turns": 6,
+          "steps": 52,
+          "llmMs": 372350,
+          "toolMs": 145992,
+          "ttftMs": 53239,
+          "ttftSteps": 52,
+          "decodeMs": 319111,
+          "decodeTokens": 76266,
+          "lastTurn": 6,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 8,
+              "prompt": "dsh_guardian插件已完成，现在依照agents.md检查是否有缺漏，先检查，不修改",
+              "response": "检查完成。**未修改任何文件**（只运行了只读命令 `node --check`、`preflight`、`runtime-inventory`、`status`、`list`；inventory 输出写在 `%TEMP%`）。下面按 A…"
+            },
+            {
+              "turn": 2,
+              "seq": 171,
+              "prompt": "这是 DSH 守护器 P0 修复【组 1：清环境残留 + 建立手工基线】。当前模型 DeepSee…",
+              "response": "**B3 FAIL — 按指令停在此处，C/D 未执行。** 但清理本身已验证成功（两个文件与 snap-a 快照 blob 逐字节一致）。下面是完整报告。 --- ## 失败报告 **失败编号：4**（`runtime-inventor…"
+            },
+            {
+              "turn": 3,
+              "seq": 254,
+              "prompt": "组 1 续跑。B3 的预期值由我修正：客户端运行期间 digest 不可达 24e4232，原因是…",
+              "response": "**记录 1/6 — digest-at-client-running** ``` node bin/guardian.mjs runtime-inventory | Select-String '\"digest\"' \"digest\":…"
+            },
+            {
+              "turn": 4,
+              "seq": 273,
+              "prompt": "已退出",
+              "response": "**C1 阻塞：进程非空，按你的规则我不 kill，停在这里等你处置。** ``` Get-Process | ? ProcessName -like \"*DeepSeek*\" Id ProcessName StartTime 19684…"
+            },
+            {
+              "turn": 5,
+              "seq": 298,
+              "prompt": "A",
+              "response": "**方案 A 产物已就绪。** ## 1) D1 已落盘（提前做，不动 live profile） [SAFE-MODE.md](D:\\dsh_plugin\\dsh_guardian\\SAFE-MODE.md) —— 712 B / 11…"
+            },
+            {
+              "turn": 6,
+              "seq": 358,
+              "prompt": "PowerShell 7.6.7 PS C:\\Users\\28256> powershell -N…",
+              "response": "`powershell`（不带后缀）在 Windows 上会启动 **5.1**，它把无 BOM 的 UTF-8 当 GBK 解码，中文多字节吞掉了后面的 ASCII 符号，才在 136 行 `}` 和 here-string 处报错——…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 434,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "preset": "auto",
+          "sandbox": "danger-full-access",
+          "approval": "ask",
+          "seeded": true
+        }
+      },
+      "workingDirectory": {
+        "ver": 1,
+        "seq": 434,
+        "val": "D:\\dsh_plugin\\dsh_guardian"
+      },
+      "subagentCatalog": {
+        "ver": 6,
+        "seq": 434,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 434,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 434,
+        "val": {}
+      },
+      "timeContext": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "lastMessageTime": 1792308195828,
+          "lastInjectionTime": 1792307645051,
+          "lastTurnInjectionTime": null
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 434,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 434,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 434,
+        "val": null
+      },
+      "harnessDevLegacyPrompt": {
+        "ver": 1,
+        "seq": 434,
+        "val": {
+          "source": null,
+          "web": null
+        }
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 434,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-account",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 434,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1792308187663
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 434,
+        "val": null
+      }
+    }
+  }
+}

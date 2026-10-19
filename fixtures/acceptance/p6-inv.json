@@ -1,0 +1,384 @@
+{
+  "profile": "desktop",
+  "profileDir": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop",
+  "mode": "exact",
+  "storage": "content-addressed-hardlink",
+  "digest": "f287607bca5a9ea738f78efd7564d7d0e41b245cd505ee166b89ccf533a3e003",
+  "entryCount": 41,
+  "missing": [
+    "dshHome/settings.yaml"
+  ],
+  "dependencies": {
+    "file": [
+      {
+        "name": "dsh-infinite-gen-2",
+        "spec": "file:../../plugins/dsh-infinite-gen-2",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/plugins/dsh-infinite-gen-2",
+        "exists": true
+      },
+      {
+        "name": "p6-alpha",
+        "spec": "file:node_modules/p6-alpha",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-alpha",
+        "exists": true
+      },
+      {
+        "name": "p6-beta",
+        "spec": "file:node_modules/p6-beta",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-beta",
+        "exists": true
+      },
+      {
+        "name": "p6-culprit",
+        "spec": "file:node_modules/p6-culprit",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-culprit",
+        "exists": true
+      },
+      {
+        "name": "p6-delta",
+        "spec": "file:node_modules/p6-delta",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-delta",
+        "exists": true
+      }
+    ],
+    "link": [
+      {
+        "name": "novel-agents-md",
+        "spec": "link:D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance",
+        "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance",
+        "linkExists": true,
+        "linkType": "junction",
+        "targetExists": true
+      }
+    ]
+  },
+  "runtime": {
+    "nodeVersion": "v24.19.0",
+    "pnpmVersion": "12.6.0",
+    "clientVersion": "24.19.0",
+    "clientAsarPath": "C:/Program Files/nodejs/resources/app.asar",
+    "clientAsarSha256": null,
+    "platform": "win32",
+    "arch": "x64",
+    "launchArgs": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\dsh_plugin\\dsh_guardian\\fixtures\\sandbox\\root\\mock-launcher.mjs",
+      "0"
+    ]
+  },
+  "entries": {
+    "profile/cordis.patch.yml": {
+      "kind": "file",
+      "size": 2532,
+      "sha256": "03891fac972beab1e3034306b16d4780176e137a112d57731991ba2612d8f84d"
+    },
+    "profile/package.json": {
+      "kind": "file",
+      "size": 955,
+      "sha256": "dd4e2e0864b4fa15f04c9c9e32f6ae1212fbc1bd3e232165a9cdfb2dba202cd8"
+    },
+    "profile/cordis.yml": {
+      "kind": "file",
+      "size": 223,
+      "sha256": "c300dcf2ebc5f02062d6591268d29d3db6fe45e0cb138f5467276fe2ba06076e"
+    },
+    "profile/pnpm-workspace.yaml": {
+      "kind": "file",
+      "size": 61,
+      "sha256": "ae7c5b68e2f157528e62885804e69e88583897b775e03c86fcbe52feaf498aba"
+    },
+    "profile/pnpm-lock.yaml": {
+      "kind": "file",
+      "size": 48833,
+      "sha256": "d1d3eb1521235856350e93975cec95e1c1a024344bb3431f4db04ab7658b27bf"
+    },
+    "profile/node_modules": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules",
+      "files": 8040,
+      "bytes": 67059619,
+      "listingSha256": "2d7d5b1fec62cc0139438ff822149a392b3ff476d82840304284e4d100f2f129"
+    },
+    "profile/.plugin-manager": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/.plugin-manager",
+      "files": 17,
+      "bytes": 52183,
+      "listingSha256": "140a64d26cb1ef041a3755505f4c41aceb07e48f6f1752b2ffde180972a9d25c"
+    },
+    "profile/.dsh-market": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/.dsh-market",
+      "files": 3,
+      "bytes": 56926,
+      "listingSha256": "476c20720f5e46740ae08a30c201e77b93a39ea4a230762920d74eba7c8ca989"
+    },
+    "file:dsh-infinite-gen-2": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/plugins/dsh-infinite-gen-2",
+      "files": 13,
+      "bytes": 127122,
+      "listingSha256": "7a8202b7d77c1f0a9b0e48f1d61984574555906bdfce7684a14ecaa31b7f365b",
+      "exists": true,
+      "packageName": "dsh-infinite-gen-2",
+      "packageVersion": "0.2.3",
+      "main": "index.js"
+    },
+    "profile/node_modules/dsh-infinite-gen-2": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/dsh-infinite-gen-2",
+      "files": 9,
+      "bytes": 115039,
+      "listingSha256": "e41fb12ed5145057a59e91ad03a9b31f0b45043bce528de9eb36d20e31a81706"
+    },
+    "link:novel-agents-md": {
+      "kind": "link",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance",
+      "files": 54,
+      "bytes": 311209,
+      "listingSha256": "98501065eef98f3052620b6c3dd02679fb8da137b88e27c68e88240a5e74b2af",
+      "targetExists": true,
+      "linkExists": true,
+      "linkType": "junction",
+      "linkTarget": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance"
+    },
+    "source:D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/sources/novel_assistance",
+      "files": 54,
+      "bytes": 311209,
+      "listingSha256": "98501065eef98f3052620b6c3dd02679fb8da137b88e27c68e88240a5e74b2af"
+    },
+    "file:p6-alpha": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-alpha",
+      "files": 2,
+      "bytes": 89,
+      "listingSha256": "523b9e86d90b63f5f72eccb3fd3fedd0df445dd948fd723c016b4b91f410bf72",
+      "exists": true,
+      "packageName": "p6-alpha",
+      "packageVersion": "1.0.0",
+      "main": "index.js"
+    },
+    "profile/node_modules/p6-alpha": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-alpha",
+      "files": 2,
+      "bytes": 89,
+      "listingSha256": "523b9e86d90b63f5f72eccb3fd3fedd0df445dd948fd723c016b4b91f410bf72"
+    },
+    "file:p6-beta": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-beta",
+      "files": 2,
+      "bytes": 88,
+      "listingSha256": "540663c47286fdd045926bf7c381f106fc585315d019fc856723aeaf67d49bd4",
+      "exists": true,
+      "packageName": "p6-beta",
+      "packageVersion": "1.0.0",
+      "main": "index.js"
+    },
+    "profile/node_modules/p6-beta": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-beta",
+      "files": 2,
+      "bytes": 88,
+      "listingSha256": "540663c47286fdd045926bf7c381f106fc585315d019fc856723aeaf67d49bd4"
+    },
+    "file:p6-culprit": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-culprit",
+      "files": 2,
+      "bytes": 116,
+      "listingSha256": "0951009c90f92017050b9da6db11ade92daa800cfa3c080980257b370cbab511",
+      "exists": true,
+      "packageName": "p6-culprit",
+      "packageVersion": "1.0.0",
+      "main": "index.js"
+    },
+    "profile/node_modules/p6-culprit": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-culprit",
+      "files": 2,
+      "bytes": 116,
+      "listingSha256": "0951009c90f92017050b9da6db11ade92daa800cfa3c080980257b370cbab511"
+    },
+    "file:p6-delta": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-delta",
+      "files": 2,
+      "bytes": 89,
+      "listingSha256": "930200739ad29de4101417a650db021976abb0cc6fdd3dacc75f1b2bdaccc08d",
+      "exists": true,
+      "packageName": "p6-delta",
+      "packageVersion": "1.0.0",
+      "main": "index.js"
+    },
+    "profile/node_modules/p6-delta": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/desktop/node_modules/p6-delta",
+      "files": 2,
+      "bytes": 89,
+      "listingSha256": "930200739ad29de4101417a650db021976abb0cc6fdd3dacc75f1b2bdaccc08d"
+    },
+    "patch:ui-settings-account": {
+      "kind": "patch-ref",
+      "id": "ui-settings-account",
+      "name": "@deepseek-ai/dsh-client-ui-settings-account",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:ui-chat": {
+      "kind": "patch-ref",
+      "id": "ui-chat",
+      "name": "@deepseek-ai/dsh-client-ui-chat",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:ui-settings": {
+      "kind": "patch-ref",
+      "id": "ui-settings",
+      "name": "@deepseek-ai/dsh-client-ui-settings",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:llm-pi-ai": {
+      "kind": "patch-ref",
+      "id": "llm-pi-ai",
+      "name": "@deepseek-ai/dsh-llm-pi-ai",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:session-log-deepseek": {
+      "kind": "patch-ref",
+      "id": "session-log-deepseek",
+      "name": "@deepseek-ai/dsh-session-log-deepseek",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:agent-default-model": {
+      "kind": "patch-ref",
+      "id": "agent-default-model",
+      "name": "@deepseek-ai/dsh-agent-default-model",
+      "declared": "row",
+      "resolvable": false,
+      "builtin": true
+    },
+    "patch:p6-alpha": {
+      "kind": "patch-ref",
+      "id": "p6-alpha",
+      "name": "p6-alpha",
+      "declared": "row",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch:p6-beta": {
+      "kind": "patch-ref",
+      "id": "p6-beta",
+      "name": "p6-beta",
+      "declared": "row",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch:p6-culprit": {
+      "kind": "patch-ref",
+      "id": "p6-culprit",
+      "name": "p6-culprit",
+      "declared": "row",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch:p6-delta": {
+      "kind": "patch-ref",
+      "id": "p6-delta",
+      "name": "p6-delta",
+      "declared": "row",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch-insert:p6-alpha": {
+      "kind": "patch-insert",
+      "name": "p6-alpha",
+      "declared": "insert",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch-insert:p6-beta": {
+      "kind": "patch-insert",
+      "name": "p6-beta",
+      "declared": "insert",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch-insert:p6-culprit": {
+      "kind": "patch-insert",
+      "name": "p6-culprit",
+      "declared": "insert",
+      "resolvable": true,
+      "builtin": false
+    },
+    "patch-insert:p6-delta": {
+      "kind": "patch-insert",
+      "name": "p6-delta",
+      "declared": "insert",
+      "resolvable": true,
+      "builtin": false
+    },
+    "dshHome/mcp": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/mcp",
+      "files": 38,
+      "bytes": 3176993,
+      "listingSha256": "9081c1efde270043d49d46764253d76144fa8cb45335f63b3e9da9e7f0441bbf"
+    },
+    "dshHome/storages": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/storages",
+      "files": 60,
+      "bytes": 1865721,
+      "listingSha256": "18dc26235eda96478df719bae3a779523e5909e1f7723692ad2c5804ff8c2cc9",
+      "volatileFiles": 44,
+      "stableFiles": 16,
+      "stableBytes": 605382,
+      "stableListingSha256": "d76dcb817f71cff18e96b50808601d6f7bee57213257df916f60331b54215481"
+    },
+    "dshHome/.agent-presets": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/.agent-presets",
+      "files": 3,
+      "bytes": 36263,
+      "listingSha256": "3cafcc28d910d58eec3bbffabb0429fa7f40ed26401b0ba741aa8bc4a654e99b"
+    },
+    "dshHome/settings.yaml": {
+      "kind": "missing",
+      "exists": false,
+      "optional": true
+    },
+    "dshHome/settings.yaml.imported": {
+      "kind": "file",
+      "size": 52,
+      "sha256": "ea141b86779c2c88208af7b032bfb8ad0e53069e83b42693598042269c884baf"
+    },
+    "shared/@acme/shared-alpha": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/node_modules/@acme/shared-alpha",
+      "owners": [
+        "unowned"
+      ],
+      "version": "0.0.1-sandbox"
+    },
+    "shared/shared-beta": {
+      "kind": "directory",
+      "target": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/home/profiles/node_modules/shared-beta",
+      "owners": [
+        "unowned"
+      ],
+      "version": "0.0.1-sandbox"
+    }
+  }
+}

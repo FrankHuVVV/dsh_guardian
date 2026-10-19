@@ -1,0 +1,19 @@
+{
+  "status": "not-locatable",
+  "reason": "id-not-visible-in-patch",
+  "invisible": [
+    "bundle-internal-row"
+  ],
+  "visible": [
+    "ui-settings-account",
+    "ui-chat",
+    "ui-settings",
+    "llm-pi-ai",
+    "session-log-deepseek",
+    "agent-default-model",
+    "p6-alpha",
+    "p6-beta",
+    "p6-culprit",
+    "p6-delta"
+  ]
+}

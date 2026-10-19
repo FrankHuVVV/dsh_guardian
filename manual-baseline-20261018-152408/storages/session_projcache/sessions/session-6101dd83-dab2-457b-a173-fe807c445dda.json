@@ -1,0 +1,275 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1792220289119,
+      "cwd": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 24,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 24,
+        "val": "你好"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 24,
+        "val": {
+          "first": {
+            "seq": 13,
+            "text": "你好"
+          },
+          "count": 1,
+          "lastSeq": 13
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 24,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 24,
+        "val": "danger-full-access"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 24,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 52722,
+            "outputTokens": 13,
+            "cacheReadTokens": 0,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 1,
+            "step": 1,
+            "buckets": {
+              "uncachedInputTokens": 52722,
+              "outputTokens": 13,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 24,
+        "val": {
+          "surfaceTokens": 4571,
+          "contextWindow": 262144,
+          "pressureTokens": 52722,
+          "sampledSurfaceTokens": 4559
+        }
+      },
+      "contextBreakdown": {
+        "ver": 6,
+        "seq": 24,
+        "val": {
+          "systems": [
+            {
+              "seq": 12,
+              "tokens": 3863
+            }
+          ],
+          "surfaceTokens": 4571,
+          "breakdown": {
+            "systemTokens": 3863,
+            "toolsTokens": 53148,
+            "messageTokens": 708
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 11,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 22
+          },
+          "lastTurn": 1
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 24,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 24,
+        "val": {
+          "turns": 1,
+          "steps": 1,
+          "llmMs": 3185,
+          "toolMs": 0,
+          "ttftMs": 3106,
+          "ttftSteps": 1,
+          "decodeMs": 79,
+          "decodeTokens": 13,
+          "lastTurn": 1,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 9,
+              "prompt": "你好",
+              "response": "你好！有什么我可以帮你处理？"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 24,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "preset": "auto",
+          "sandbox": "danger-full-access",
+          "approval": "ask",
+          "seeded": false
+        }
+      },
+      "workingDirectory": {
+        "ver": 1,
+        "seq": 24,
+        "val": "C:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace"
+      },
+      "subagentCatalog": {
+        "ver": 6,
+        "seq": 24,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 24,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 24,
+        "val": {}
+      },
+      "timeContext": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "lastMessageTime": 1792220301265,
+          "lastInjectionTime": 1792220298081,
+          "lastTurnInjectionTime": null
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 24,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 24,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 24,
+        "val": null
+      },
+      "harnessDevLegacyPrompt": {
+        "ver": 1,
+        "seq": 24,
+        "val": {
+          "source": null,
+          "web": null
+        }
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 24,
+        "val": {
+          "lastUsed": {
+            "provider": "openasi",
+            "model": "gpt-6.1-sol"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 24,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1792220298081
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 24,
+        "val": null
+      }
+    }
+  }
+}

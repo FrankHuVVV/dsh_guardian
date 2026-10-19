@@ -1,0 +1,9 @@
+{
+  "status": "clean",
+  "digest": "3caf049dcdf327f5adb7adeb802996a4583bda84a0ca02fd52cb7d368ec0bdf4",
+  "lastCommittedDigest": "3caf049dcdf327f5adb7adeb802996a4583bda84a0ca02fd52cb7d368ec0bdf4",
+  "baseline": "D:/dsh_plugin/dsh_guardian/fixtures/sandbox/root/backups/sandbox-a",
+  "addedPaths": [],
+  "changedPaths": [],
+  "removedPaths": []
+}

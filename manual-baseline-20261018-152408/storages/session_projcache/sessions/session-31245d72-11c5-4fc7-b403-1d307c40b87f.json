@@ -1,0 +1,634 @@
+{
+  "version": 7,
+  "record": {
+    "identity": {
+      "formatVersion": 4,
+      "createdAt": 1790687591575,
+      "cwd": "D:\\DSH Workspace\\3",
+      "isSeeded": false,
+      "inheritedEventCount": 0
+    },
+    "rows": {
+      "armor": {
+        "ver": 1,
+        "seq": 196,
+        "val": {
+          "running": false,
+          "verdict": "pass",
+          "words": []
+        }
+      },
+      "title": {
+        "ver": 1,
+        "seq": 196,
+        "val": "读取 DSH 会话文件位置"
+      },
+      "titleInput": {
+        "ver": 3,
+        "seq": 196,
+        "val": {
+          "first": {
+            "seq": 8,
+            "text": "读取会话内容：会话 ID：session-d159485d-e4f9-48a3-b70a-f7f4953683ac（$env:DSH_SESSION_ID，DSH_HOME = C:\\Users\\28256\\.dsh）\r\n\r\n① 对话正文（真身，追加式事件流）\r\n\r\n<code>C:\\Users\\28256.dsh\\sessions--D-DSH~0020Workspace-3--\\session-d159485d-e4f9-48a3-b70a-f7f4953683ac\\session.v4.jsonl.zstd</code>\r\n\r\n663,567 字节，最后写入 2026/9/29 21:11:21\r\n目录名里的 --D-DSH~0020Workspace-3-- 是工作目录 D:\\DSH Workspace\\3 的转义（空格 → ~0020），所以每个 cwd 一个会话根目录\r\n格式：zstd 压缩的 JSONL（v4），每行一个事件。实测是多帧 zstd，共 500 帧、830 条可解析事件，类型分布：\r\n代码块\r\n\r\n\r\nturn/start 16 · user/message 19 · assistant/message 124 · tool/call 118 · tool/result 117\r\nstep/start 124 · step/end 123 · turn/end 15 · deliverables/presented 4 · permission/preset 2 · approval/policy 2\r\n② 派生投影缓存（标题、token 用量、轮次大纲、权限、上下文占用等）\r\n\r\n<code>C:\\Users\\28256.dsh\\storages\\session_projcache\\sessions\\session-d159485d-e4f9-48a3-b70a-f7f4953683ac.json</code>\r\n\r\n43,456 字节，可直接当 JSON 读。里面存了 title、turnOutline（16 轮问答摘要）、tokenUsage、contextBreakdown、permissions、sandboxMode 等。\r\n\r\n③ 会话里引用过的图片（你发的参考图 + DSH 归一化副本）\r\n\r\nC:\\Users\\28256\\.dsh\\attachments\\v1\\objects\\ —— 当前共 42 个文件，按 sha256 分桶存放。\r\n\r\n④ 出图产物（不属于会话状态，但本轮交付物都在这）\r\n\r\nC:\\Users\\28256\\Documents\\deepseek-harness\\default-workspace\\comfy-out\\\r\n\r\n⑤ 不在这里：D:\\DSH Workspace\\3 只是 cwd，没有会话副本（该目录里只有 AGENTS.md 等项目文件）。"
+          },
+          "count": 1,
+          "lastSeq": 8
+        }
+      },
+      "llmRetry": {
+        "ver": 1,
+        "seq": 196,
+        "val": {}
+      },
+      "sandboxMode": {
+        "ver": 1,
+        "seq": 196,
+        "val": "workspace-write"
+      },
+      "goal": {
+        "ver": 6,
+        "seq": 196,
+        "val": {
+          "current": null,
+          "seenGoalIds": [],
+          "failure": null
+        }
+      },
+      "tokenUsage": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "totals": {
+            "uncachedInputTokens": 55617,
+            "outputTokens": 17801,
+            "cacheReadTokens": 1474816,
+            "cacheWriteTokens": 0
+          },
+          "last": {
+            "turn": 1,
+            "step": 33,
+            "buckets": {
+              "uncachedInputTokens": 787,
+              "outputTokens": 100,
+              "cacheReadTokens": 71680,
+              "cacheWriteTokens": 0
+            }
+          }
+        }
+      },
+      "contextPressure": {
+        "ver": 5,
+        "seq": 196,
+        "val": {
+          "surfaceTokens": 45033,
+          "contextWindow": 1000000,
+          "pressureTokens": 72467,
+          "sampledSurfaceTokens": 44985
+        }
+      },
+      "contextBreakdown": {
+        "ver": 5,
+        "seq": 196,
+        "val": {
+          "nodes": [
+            {
+              "seq": 7,
+              "heuristicTokens": 3836,
+              "system": true
+            },
+            {
+              "seq": 8,
+              "heuristicTokens": 316,
+              "system": false
+            },
+            {
+              "seq": 9,
+              "heuristicTokens": 126,
+              "system": false
+            },
+            {
+              "seq": 10,
+              "heuristicTokens": 124,
+              "system": false
+            },
+            {
+              "seq": 11,
+              "heuristicTokens": 556,
+              "system": false
+            },
+            {
+              "seq": 17,
+              "heuristicTokens": 475,
+              "system": false
+            },
+            {
+              "seq": 19,
+              "heuristicTokens": 118,
+              "system": false
+            },
+            {
+              "seq": 21,
+              "heuristicTokens": 112,
+              "system": false
+            },
+            {
+              "seq": 24,
+              "heuristicTokens": 272,
+              "system": false
+            },
+            {
+              "seq": 26,
+              "heuristicTokens": 247,
+              "system": false
+            },
+            {
+              "seq": 28,
+              "heuristicTokens": 15,
+              "system": false
+            },
+            {
+              "seq": 31,
+              "heuristicTokens": 252,
+              "system": false
+            },
+            {
+              "seq": 33,
+              "heuristicTokens": 318,
+              "system": false
+            },
+            {
+              "seq": 35,
+              "heuristicTokens": 186,
+              "system": false
+            },
+            {
+              "seq": 38,
+              "heuristicTokens": 166,
+              "system": false
+            },
+            {
+              "seq": 40,
+              "heuristicTokens": 132,
+              "system": false
+            },
+            {
+              "seq": 42,
+              "heuristicTokens": 1186,
+              "system": false
+            },
+            {
+              "seq": 45,
+              "heuristicTokens": 310,
+              "system": false
+            },
+            {
+              "seq": 47,
+              "heuristicTokens": 145,
+              "system": false
+            },
+            {
+              "seq": 49,
+              "heuristicTokens": 70,
+              "system": false
+            },
+            {
+              "seq": 52,
+              "heuristicTokens": 1387,
+              "system": false
+            },
+            {
+              "seq": 54,
+              "heuristicTokens": 36,
+              "system": false
+            },
+            {
+              "seq": 57,
+              "heuristicTokens": 94,
+              "system": false
+            },
+            {
+              "seq": 59,
+              "heuristicTokens": 68,
+              "system": false
+            },
+            {
+              "seq": 62,
+              "heuristicTokens": 302,
+              "system": false
+            },
+            {
+              "seq": 64,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 67,
+              "heuristicTokens": 94,
+              "system": false
+            },
+            {
+              "seq": 69,
+              "heuristicTokens": 223,
+              "system": false
+            },
+            {
+              "seq": 72,
+              "heuristicTokens": 247,
+              "system": false
+            },
+            {
+              "seq": 74,
+              "heuristicTokens": 1828,
+              "system": false
+            },
+            {
+              "seq": 77,
+              "heuristicTokens": 237,
+              "system": false
+            },
+            {
+              "seq": 79,
+              "heuristicTokens": 12985,
+              "system": false
+            },
+            {
+              "seq": 82,
+              "heuristicTokens": 2533,
+              "system": false
+            },
+            {
+              "seq": 84,
+              "heuristicTokens": 36,
+              "system": false
+            },
+            {
+              "seq": 87,
+              "heuristicTokens": 76,
+              "system": false
+            },
+            {
+              "seq": 89,
+              "heuristicTokens": 198,
+              "system": false
+            },
+            {
+              "seq": 92,
+              "heuristicTokens": 234,
+              "system": false
+            },
+            {
+              "seq": 94,
+              "heuristicTokens": 2403,
+              "system": false
+            },
+            {
+              "seq": 96,
+              "heuristicTokens": 763,
+              "system": false
+            },
+            {
+              "seq": 99,
+              "heuristicTokens": 534,
+              "system": false
+            },
+            {
+              "seq": 101,
+              "heuristicTokens": 1221,
+              "system": false
+            },
+            {
+              "seq": 104,
+              "heuristicTokens": 847,
+              "system": false
+            },
+            {
+              "seq": 106,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 109,
+              "heuristicTokens": 79,
+              "system": false
+            },
+            {
+              "seq": 111,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 114,
+              "heuristicTokens": 356,
+              "system": false
+            },
+            {
+              "seq": 116,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 119,
+              "heuristicTokens": 321,
+              "system": false
+            },
+            {
+              "seq": 121,
+              "heuristicTokens": 198,
+              "system": false
+            },
+            {
+              "seq": 124,
+              "heuristicTokens": 111,
+              "system": false
+            },
+            {
+              "seq": 126,
+              "heuristicTokens": 1048,
+              "system": false
+            },
+            {
+              "seq": 128,
+              "heuristicTokens": 815,
+              "system": false
+            },
+            {
+              "seq": 131,
+              "heuristicTokens": 550,
+              "system": false
+            },
+            {
+              "seq": 133,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 136,
+              "heuristicTokens": 95,
+              "system": false
+            },
+            {
+              "seq": 138,
+              "heuristicTokens": 21,
+              "system": false
+            },
+            {
+              "seq": 141,
+              "heuristicTokens": 62,
+              "system": false
+            },
+            {
+              "seq": 143,
+              "heuristicTokens": 1390,
+              "system": false
+            },
+            {
+              "seq": 146,
+              "heuristicTokens": 920,
+              "system": false
+            },
+            {
+              "seq": 148,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 151,
+              "heuristicTokens": 294,
+              "system": false
+            },
+            {
+              "seq": 153,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 156,
+              "heuristicTokens": 214,
+              "system": false
+            },
+            {
+              "seq": 158,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 161,
+              "heuristicTokens": 121,
+              "system": false
+            },
+            {
+              "seq": 163,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 166,
+              "heuristicTokens": 225,
+              "system": false
+            },
+            {
+              "seq": 168,
+              "heuristicTokens": 30,
+              "system": false
+            },
+            {
+              "seq": 171,
+              "heuristicTokens": 106,
+              "system": false
+            },
+            {
+              "seq": 173,
+              "heuristicTokens": 86,
+              "system": false
+            },
+            {
+              "seq": 176,
+              "heuristicTokens": 132,
+              "system": false
+            },
+            {
+              "seq": 178,
+              "heuristicTokens": 312,
+              "system": false
+            },
+            {
+              "seq": 181,
+              "heuristicTokens": 788,
+              "system": false
+            },
+            {
+              "seq": 183,
+              "heuristicTokens": 23,
+              "system": false
+            },
+            {
+              "seq": 186,
+              "heuristicTokens": 1059,
+              "system": false
+            },
+            {
+              "seq": 189,
+              "heuristicTokens": 51,
+              "system": false
+            },
+            {
+              "seq": 192,
+              "heuristicTokens": 48,
+              "system": false
+            }
+          ],
+          "breakdown": {
+            "systemTokens": 3836,
+            "toolsTokens": 7333,
+            "messageTokens": 41197
+          }
+        }
+      },
+      "turnBoundary": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "openTurnStartSeq": null,
+          "lastStepStartSeq": 191,
+          "lastStepBoundary": {
+            "kind": "end",
+            "seq": 193
+          },
+          "lastTurn": 1
+        }
+      },
+      "inbox": {
+        "ver": 1,
+        "seq": 196,
+        "val": {
+          "next-turn": [],
+          "next-step": []
+        }
+      },
+      "sessionStats": {
+        "ver": 1,
+        "seq": 196,
+        "val": {
+          "turns": 1,
+          "steps": 33,
+          "llmMs": 86112,
+          "toolMs": 26676,
+          "ttftMs": 23925,
+          "ttftSteps": 33,
+          "decodeMs": 62187,
+          "decodeTokens": 17801,
+          "lastTurn": 1,
+          "openStep": null,
+          "pendingCalls": {}
+        }
+      },
+      "turnOutline": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "turns": [
+            {
+              "turn": 1,
+              "seq": 4,
+              "prompt": "读取会话内容：会话 ID：session-d159485d-e4f9-48a3-b70a-f7f4…",
+              "response": "会话已完整读取并还原成四份可读文档（原始 JSONL、转录、概览、草稿全文），另附两个可复用的解压/渲染脚本。与你的快照相比，源文件已增长到 720,031 字节 / 503 帧 / 836 事件，多出的是第 16 轮收尾与终选标题事件—…"
+            }
+          ],
+          "draft": ""
+        }
+      },
+      "agentPreset": {
+        "ver": 1,
+        "seq": 196,
+        "val": "standard"
+      },
+      "userQuestions": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "inheritedEventCount": 0,
+          "timed": false,
+          "questions": {
+            "active": [],
+            "settled": []
+          }
+        }
+      },
+      "subagentCatalog": {
+        "ver": 3,
+        "seq": 196,
+        "val": {
+          "inheritedEventCount": 0
+        }
+      },
+      "subagentTiming": {
+        "ver": 3,
+        "seq": 196,
+        "val": {
+          "descriptorSeen": false,
+          "settledMs": 0
+        }
+      },
+      "subagent": {
+        "ver": 2,
+        "seq": 196,
+        "val": {}
+      },
+      "permissions": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "preset": "workspace-write",
+          "sandbox": "workspace-write",
+          "approval": "ask",
+          "seeded": true
+        }
+      },
+      "todos": {
+        "ver": 2,
+        "seq": 196,
+        "val": null
+      },
+      "plan": {
+        "ver": 3,
+        "seq": 196,
+        "val": {
+          "active": false,
+          "wanted": null,
+          "running": null,
+          "activeAtLastHeader": false
+        }
+      },
+      "subagentModelSelectionPolicy": {
+        "ver": 1,
+        "seq": 196,
+        "val": null
+      },
+      "modelSelection": {
+        "ver": 2,
+        "seq": 196,
+        "val": {
+          "lastUsed": {
+            "provider": "deepseek-official",
+            "model": "deepseek-flash",
+            "reasoningEffort": "high"
+          },
+          "pending": null
+        }
+      },
+      "sessionListMetadata": {
+        "ver": 1,
+        "seq": 196,
+        "val": {
+          "blank": false,
+          "lastPromptAt": 1790687602339
+        }
+      },
+      "imageLimits": {
+        "ver": 1,
+        "seq": 196,
+        "val": null
+      }
+    }
+  }
+}
