@@ -16,6 +16,9 @@ prompts/
 
 # ---------- 备份、日志、截图、临时文件 ----------
 *.bak
+*.bak-*
+*.bak.*
+state.json.bak*
 *.log
 *.png
 .guardian.lock
