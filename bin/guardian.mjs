@@ -1673,7 +1673,9 @@ function startClient(config) {
 
   let child;
   try {
-    child = spawn(exe, launchArgs, { detached: true, stdio: 'ignore', windowsHide: true });
+    // windowsHide 必须是 false：Electron 是 GUI 子系统程序，windowsHide:true 会给它一个
+    // STARTF_USESHOWWINDOW=SW_HIDE 的启动信息，结果就是"端口通、HTTP 401、但没有窗口"的幽灵进程。
+    child = spawn(exe, launchArgs, { detached: true, stdio: 'ignore', windowsHide: false });
   } catch (error) {
     const existing = detectRunningInstance(config);
     if (existing) return adoptedInstanceResult('spawn-threw', existing);
@@ -3173,16 +3175,56 @@ function guardCommand(config, state, args) {
     const adoptedLabel = `adopted-${Date.now()}`;
     const adopted = createSnapshot(config, adoptedLabel, { dirName: adoptedLabel, state: 'verified', noStop: noStart });
     if (adopted.error) return 3;
-    writeLkg(adopted.meta, state, health, load, preflightResult);
+
+    // createSnapshot 会先停客户端再拍快照（exact 语义要求文件静止）。
+    // 采纳流程必须把它重新拉起来，否则「启动成功」的实例会在拍完快照后被自己杀掉——
+    // 表现正是：端口通、HTTP 401、进程随后消失、桌面没有窗口。
+    let effectiveHealth = health;
+    const clientStop = adopted.meta?.health?.clientStop || {};
+    const stoppedBySnapshot = !noStart && clientStop.stopped === true
+      && Array.isArray(clientStop.pids) && clientStop.pids.length > 0;
+    if (stoppedBySnapshot) {
+      log('INFO', 'adopted 快照停过客户端，正在重新启动', { stoppedPids: clientStop.pids });
+      effectiveHealth = startClient(config);
+      state.instance = {
+        rootPid: effectiveHealth.pid ?? null,
+        descendantPids: effectiveHealth.pid ? [...descendantPids(effectiveHealth.pid)] : [],
+        port: effectiveHealth.port ?? null,
+        httpStatus: effectiveHealth.httpStatus ?? null,
+        healthy: Boolean(effectiveHealth.stable === true && effectiveHealth.httpStatus !== null)
+      };
+      const restartOk = (effectiveHealth.restart === 'started' || effectiveHealth.restart === 'already-running')
+        && effectiveHealth.stable === true;
+      if (!restartOk) {
+        log('ERROR', 'adopted 快照后重新启动客户端失败', { health: effectiveHealth });
+        state.drift = { detected: true, digest: inventory.digest, lastCommittedDigest: adopted.meta.digest, ...diff };
+        saveState(state);
+        const pruned = autoPrune(config, state, 'guard-adopted-restart-failed');
+        printJson({
+          status: 'adopted-restart-failed',
+          drift: true,
+          adopted: toPosix(adopted.dir),
+          digest: adopted.meta.digest,
+          preflight: preflightResult,
+          loadVerification: load,
+          health: effectiveHealth,
+          hint: effectiveHealth.hint ?? null,
+          prune: pruneSummary(pruned)
+        });
+        return 2;
+      }
+    }
+
     state.drift = { detected: false, digest: adopted.meta.digest, lastCommittedDigest: adopted.meta.digest, addedPaths: [], changedPaths: [], removedPaths: [] };
+    const lkgWritten = writeLkg(adopted.meta, state, effectiveHealth, load, preflightResult);
     saveState(state);
-    if (!writeLkg(adopted.meta, state, health, load, preflightResult)) {
+    if (!lkgWritten) {
       const pruned = autoPrune(config, state, 'guard-lkg-gated');
-      printJson({ status: 'healthy-but-lkg-gated', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health, prune: pruneSummary(pruned) });
+      printJson({ status: 'healthy-but-lkg-gated', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health: effectiveHealth, prune: pruneSummary(pruned) });
       return 0;
     }
     const pruned = autoPrune(config, state, 'guard-adopted');
-    printJson({ status: 'adopted', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health, lkg: true, prune: pruneSummary(pruned) });
+    printJson({ status: 'adopted', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health: effectiveHealth, lkg: true, prune: pruneSummary(pruned) });
     return 0;
   }
   if (noStart && !healthy) {

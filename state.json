@@ -4,21 +4,24 @@
   "safe": false,
   "culprit": null,
   "instance": {
-    "rootPid": null,
-    "descendantPids": [],
-    "port": null,
-    "httpStatus": null,
-    "healthy": false
+    "rootPid": 5336,
+    "descendantPids": [
+      5336,
+      20580,
+      43400,
+      19836,
+      27000
+    ],
+    "port": 34624,
+    "httpStatus": 401,
+    "healthy": true
   },
   "drift": {
     "detected": false,
-    "digest": "6fb075b0c3b31578cfbad9bd28a390a59c9c73789b56054b74ae5d7a8e3211e7",
-    "lastCommittedDigest": "c4df09c1b36cfc90dafff416f02ebabf5fa11185ee48ff2cd59230fa860fc00a",
+    "digest": "7bc7a1c7c6455e47832458e08a609ef0e3916976469b8bfa956c40d910d46672",
+    "lastCommittedDigest": "7bc7a1c7c6455e47832458e08a609ef0e3916976469b8bfa956c40d910d46672",
     "addedPaths": [],
-    "changedPaths": [
-      "dshHome/storages",
-      "profile/.plugin-manager"
-    ],
+    "changedPaths": [],
     "removedPaths": []
   },
   "probing": false,
