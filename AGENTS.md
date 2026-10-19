@@ -272,7 +272,7 @@ Electron 安装本体
 | `snapshot <label>` | 手动 exact 快照（写入 `_store`） | 0 / 2 |
 | `list` | 快照与事务（含 drift、LKG 标记） | 0 |
 | `restore <label>` | 恢复快照，自动 pre-restore | 0 / 2 |
-| `prune [--dry-run] [--strict] [--keep <label>]` | 快照保留策略 + `_store` 孤儿 blob 物理回收 | 0 / 2 |
+| `prune [--dry-run] [--strict] [--keep <label>] [--vacuum]` | 快照保留策略 + `_store` 孤儿 blob 物理回收；`--vacuum` 连空分片一起清 | 0 / 2 |
 | `plugin-add <spec>` | 包安装事务 | 0 / 2 / 3 |
 | `plugin-link <path>` | 本地 link 事务 | 0 / 2 / 3 |
 | `plugin-insert <path\|name>` | 纯 patch 插入事务（无包安装） | 0 / 2 / 3 |
@@ -487,6 +487,20 @@ preflight 无 FAIL
 5) 仅当 exact 环境健康且故障明确属 patch 层，才进入 safe/bisect
 6) bisect 未定位 → 保持原环境或 safe，不覆盖任何 before/after
 ```
+
+### 5.4 store 自动维护
+
+```text
+doctor → 输出 store: { snapshots, blobs, totalMb, referencedBlobs, orphans, orphanMb, emptyShards, gcOnPrune }
+
+guard 成功（healthy / adopted / healthy-but-lkg-gated）
+  → 若 config.storeGcOnPrune = true
+      → 静默 pruneCore（保留策略 + 孤儿 blob GC），不打印、不弹输出
+      → guard 输出附 prune: { deleted, blobsDeleted, emptyShardsRemoved, freedMb }
+      → prune 失败只记 WARN，不改变 guard 退出码
+```
+
+prune 的 blob 引用集只由**保留下来的** `meta.json` 构成；`--strict` 忽略 `pruneKeepLabels`，未完成事务引用与 meta 不可读的快照始终保留。
 
 ---
 
