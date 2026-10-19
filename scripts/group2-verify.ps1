@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   组 2 动态验证：snapshot 停客户端 + health 实算。
 

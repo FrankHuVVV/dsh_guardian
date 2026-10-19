@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   沙箱内 prune → restore 完整性回归（绝不触碰生产 DSH 环境）。
 

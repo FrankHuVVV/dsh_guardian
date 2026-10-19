@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   DSH Guardian 组 1（步骤 3–5）一键执行脚本。
 

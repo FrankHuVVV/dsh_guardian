@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   组 4 动态验证：recover 处理 txid:null + startClient spawn 失败不崩溃。
 

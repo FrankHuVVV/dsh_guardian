@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   按需重建 fixtures 夹具目录（fixtures\sandbox\root 与 home），不入库。
 
