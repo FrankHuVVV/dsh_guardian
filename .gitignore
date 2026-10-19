@@ -24,3 +24,6 @@ state.json.bak*
 *.log
 *.png
 .guardian.lock
+
+# ---------- 发布产物（由 scripts/build-release.ps1 生成，不入库） ----------
+dsh_guardian-v*.zip

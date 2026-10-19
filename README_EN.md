@@ -14,6 +14,9 @@
 - License: [MIT](LICENSE) © 2026 FrankHuVVV
 - Docs: [AGENTS_EN.md](AGENTS_EN.md) (design spec) · [SAFE-MODE_EN.md](SAFE-MODE_EN.md) (real-machine constraints)
 
+> 🚀 **快速开始 / Quick Start (Windows)**
+> 去 [Releases](https://github.com/FrankHuVVV/dsh_guardian/releases/latest) 页面下载最新的 `dsh_guardian-v5.1.1.zip`，解压后**右键管理员运行 `install.bat`** 即可。
+
 ---
 
 ## 0. First step after cloning: configure your machine
