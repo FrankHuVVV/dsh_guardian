@@ -658,7 +658,8 @@ function doctor(config, state) {
     lockHeld: fs.existsSync(LOCK_PATH),
     stateVersion: state.version,
     activeOperation: state.activeOperation,
-    drift: state.drift
+    drift: state.drift,
+    store: { ...storeAudit(), gcOnPrune: config.storeGcOnPrune === true }
   };
   printJson(checks);
   const failed = !checks.profileDirExists || !checks.clientExeExists || !checks.configKeysComplete;
@@ -1910,22 +1911,61 @@ function removeReadonly(file) {
   fs.unlinkSync(file);
 }
 
-function pruneCommand(config, state, args) {
-  const dryRun = args.includes('--dry-run');
-  const strict = args.includes('--strict');
+/** _store 下内容为空的 2 位分片目录。 */
+function emptyShardDirs() {
+  const empty = [];
+  let shards = [];
+  try { shards = fs.readdirSync(STORE_DIR, { withFileTypes: true }); } catch { return empty; }
+  for (const shard of shards) {
+    if (!shard.isDirectory()) continue;
+    const shardDir = path.join(STORE_DIR, shard.name);
+    let entries = [];
+    try { entries = fs.readdirSync(shardDir); } catch { continue; }
+    if (entries.length === 0) empty.push(shardDir);
+  }
+  return empty;
+}
+
+/** 全库审计：blobs 数量 / 体积 / 孤儿 blob / 空分片 —— 供 doctor 与 prune 共用。 */
+function storeAudit() {
+  const rows = scanSnapshotDirs();
+  const refs = new Set();
+  for (const row of rows) collectBlobRefs(row.meta, refs);
+  const blobs = listStoreBlobs();
+  const orphans = refs.size === 0 && blobs.length > 0 ? [] : blobs.filter((blob) => !refs.has(blob.hash));
+  const totalBytes = blobs.reduce((sum, blob) => sum + blob.size, 0);
+  const orphanBytes = orphans.reduce((sum, blob) => sum + blob.size, 0);
+  return {
+    dir: toPosix(STORE_DIR),
+    snapshots: rows.length,
+    blobs: blobs.length,
+    totalMb: Number((totalBytes / 1048576).toFixed(2)),
+    totalBytes,
+    referencedBlobs: refs.size,
+    orphans: orphans.length,
+    orphanMb: Number((orphanBytes / 1048576).toFixed(2)),
+    orphanBytes,
+    emptyShards: emptyShardDirs().length
+  };
+}
+
+/**
+ * prune 核心逻辑：保留策略 → 删除快照目录 → 回收孤儿 blob。
+ * 不打印、不改 state，供 CLI（pruneCommand）与 guard 静默自动维护共用。
+ */
+function pruneCore(config, state, options = {}) {
+  const dryRun = options.dryRun === true;
+  const strict = options.strict === true;
+  const vacuum = options.vacuum === true;
   const keepTransactions = Number.isFinite(Number(config.keepTransactions)) ? Number(config.keepTransactions) : 20;
   const keepLkgCount = Number.isFinite(Number(config.keepLkg)) ? Number(config.keepLkg) : 3;
-  const keepArgs = [];
-  for (let index = 0; index < args.length; index += 1) {
-    if (args[index] === '--keep' && args[index + 1]) keepArgs.push(String(args[index + 1]));
-  }
+  const keepArgs = Array.isArray(options.keep) ? options.keep.map(String) : [];
   // --strict 时忽略配置保护名单，严格按保留规则执行。
   const keepList = new Set(strict ? keepArgs : [...(config.pruneKeepLabels || []).map(String), ...keepArgs]);
 
   const rows = scanSnapshotDirs();
   if (rows.length === 0) {
-    printJson({ status: 'nothing-to-prune', reason: 'no-snapshot-dirs', keepTransactions, keepLkg: keepLkgCount });
-    return 0;
+    return { status: 'nothing-to-prune', reason: 'no-snapshot-dirs', keepTransactions, keepLkg: keepLkgCount, kept: [], deleted: [], errors: [] };
   }
   const byNewest = [...rows].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const lkgMeta = readJsonSafe(path.join(LKG_DIR, 'meta.json'));
@@ -1978,14 +2018,16 @@ function pruneCommand(config, state, args) {
       try { removeReadonly(blob.full); }
       catch (error) { errors.push(`blob-delete-failed:${blob.hash}:${error.message}`); }
     }
-    // 回收空的 2 位分片目录
-    try {
-      for (const shard of fs.readdirSync(STORE_DIR, { withFileTypes: true })) {
-        if (!shard.isDirectory()) continue;
-        const shardDir = path.join(STORE_DIR, shard.name);
-        try { if (fs.readdirSync(shardDir).length === 0) fs.rmdirSync(shardDir); } catch { /* ignore */ }
-      }
-    } catch { /* store 不存在即无需清理 */ }
+  }
+
+  // 空分片目录：有删除动作时顺手清一次；--vacuum 即使没有删除也强制扫描清理
+  const emptyShardsBefore = emptyShardDirs();
+  let emptyShardsRemoved = 0;
+  if (!dryRun && (vacuum || doomed.length > 0 || orphans.length > 0)) {
+    for (const shardDir of emptyShardsBefore) {
+      try { fs.rmdirSync(shardDir); emptyShardsRemoved += 1; }
+      catch (error) { errors.push(`shard-rmdir-failed:${path.basename(shardDir)}:${error.message}`); }
+    }
   }
 
   const storeAfter = storeStats();
@@ -2010,6 +2052,11 @@ function pruneCommand(config, state, args) {
       mbBefore: Number((storeBefore.bytes / 1048576).toFixed(2)),
       mbAfter: Number((storeAfter.bytes / 1048576).toFixed(2))
     },
+    vacuum: {
+      requested: vacuum,
+      emptyShardsFound: emptyShardsBefore.length,
+      emptyShardsRemoved
+    },
     freed: {
       snapshotMb: Number(((dryRun ? doomedBytes : snapshotBytesBefore - snapshotBytesAfter) / 1048576).toFixed(2)),
       orphanBlobMb: Number((orphanBytes / 1048576).toFixed(2)),
@@ -2021,10 +2068,26 @@ function pruneCommand(config, state, args) {
   };
   log(errors.length ? 'WARN' : 'INFO', `prune ${dryRun ? 'dry-run' : '完成'}`, {
     kept: keptRows.length, deleted: doomed.length, blobRefs: refs.size, blobsDeleted: orphans.length,
-    freedMb: report.freed.totalMb, errors: errors.length
+    emptyShardsRemoved, freedMb: report.freed.totalMb, errors: errors.length
+  });
+  return report;
+}
+
+/** CLI 入口：解析参数 → pruneCore → 输出 JSON 报告。 */
+function pruneCommand(config, state, args) {
+  const keep = [];
+  for (let index = 0; index < args.length; index += 1) {
+    if (args[index] === '--keep' && args[index + 1]) keep.push(String(args[index + 1]));
+  }
+  const report = pruneCore(config, state, {
+    dryRun: args.includes('--dry-run'),
+    strict: args.includes('--strict'),
+    vacuum: args.includes('--vacuum'),
+    keep
   });
   printJson(report);
-  return errors.length === 0 ? 0 : 2;
+  if (report.status === 'nothing-to-prune') return 0;
+  return (report.errors || []).length === 0 ? 0 : 2;
 }
 
 // ---------------------------------------------------------------- plugin transactions
@@ -2915,6 +2978,38 @@ function driftCommand(config, args) {
   return drift ? 1 : 0;
 }
 
+/**
+ * guard 成功提交后的静默自动维护：storeGcOnPrune=true 时按保留策略回收快照与孤儿 blob。
+ * 任何异常都只记日志，绝不影响 guard 的成败判定（不打印 JSON）。
+ */function autoPrune(config, state, reason) {
+  if (config.storeGcOnPrune !== true) return null;
+  try {
+    const report = pruneCore(config, state, { dryRun: false, strict: false, vacuum: false });
+    log('INFO', 'guard 自动 prune', {
+      reason,
+      deleted: report.deleted?.length ?? 0,
+      blobsDeleted: report.store?.blobsDeleted ?? 0,
+      freedMb: report.freed?.totalMb ?? 0,
+      emptyShardsRemoved: report.vacuum?.emptyShardsRemoved ?? 0
+    });
+    return report;
+  } catch (error) {
+    log('WARN', 'guard 自动 prune 失败（已忽略，不影响 guard 结果）', { reason, error: error.message });
+    return null;
+  }
+}
+
+/** 把 prune 报告压缩成 guard 输出里的摘要字段。 */
+function pruneSummary(report) {
+  if (!report) return null;
+  return {
+    deleted: report.deleted?.length ?? 0,
+    blobsDeleted: report.store?.blobsDeleted ?? 0,
+    emptyShardsRemoved: report.vacuum?.emptyShardsRemoved ?? 0,
+    freedMb: report.freed?.totalMb ?? 0
+  };
+}
+
 function guardCommand(config, state, args) {
   const noStart = args.includes('--no-start');
   if (state.activeOperation) recoverTransaction(config, state);
@@ -2967,10 +3062,12 @@ function guardCommand(config, state, args) {
     state.drift = { detected: false, digest: adopted.meta.digest, lastCommittedDigest: adopted.meta.digest, addedPaths: [], changedPaths: [], removedPaths: [] };
     saveState(state);
     if (!writeLkg(adopted.meta, state, health, load, preflightResult)) {
-      printJson({ status: 'healthy-but-lkg-gated', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health });
+      const pruned = autoPrune(config, state, 'guard-lkg-gated');
+      printJson({ status: 'healthy-but-lkg-gated', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health, prune: pruneSummary(pruned) });
       return 0;
     }
-    printJson({ status: 'adopted', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health, lkg: true });
+    const pruned = autoPrune(config, state, 'guard-adopted');
+    printJson({ status: 'adopted', drift: true, adopted: toPosix(adopted.dir), digest: adopted.meta.digest, preflight: preflightResult, loadVerification: load, health, lkg: true, prune: pruneSummary(pruned) });
     return 0;
   }
   if (noStart && !healthy) {
@@ -2987,7 +3084,8 @@ function guardCommand(config, state, args) {
   }
   if (healthy) {
     if (inventory.digest === baseline.meta.digest) writeLkg(baseline.meta, state, health, load, preflightResult);
-    printJson({ status: 'healthy', digest: inventory.digest, preflight: preflightResult, loadVerification: load, health, lkg: true });
+    const pruned = autoPrune(config, state, 'guard-healthy');
+    printJson({ status: 'healthy', digest: inventory.digest, preflight: preflightResult, loadVerification: load, health, lkg: true, prune: pruneSummary(pruned) });
     return 0;
   }
   printJson({ status: 'unhealthy', digest: inventory.digest, preflight: preflightResult, loadVerification: load, health });

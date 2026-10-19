@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   组 2 动态验证：snapshot 停客户端 + health 实算。
 
@@ -25,6 +25,12 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+
+# 夹具按需重建（fixtures\sandbox\home 不入库，曾 69MB）；失败不阻塞主流程
+try {
+  $ensureFixture = Join-Path $PSScriptRoot 'ensure-fixture-home.ps1'
+  if (Test-Path -LiteralPath $ensureFixture) { & $ensureFixture -GuardianRoot $GuardianRoot | Out-Null }
+} catch { Write-Warning "[fixture] 自动重建失败: $($_.Exception.Message)" }
 
 $ts = Get-Date -Format 'yyyyMMdd-HHmmss'
 $LogDir = Join-Path $GuardianRoot 'logs'

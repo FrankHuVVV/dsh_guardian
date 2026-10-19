@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   DSH Guardian 组 1（步骤 3–5）一键执行脚本。
 
@@ -27,6 +27,12 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+
+# 夹具按需重建（fixtures\sandbox\home 不入库，曾 69MB）；失败不阻塞主流程
+try {
+  $ensureFixture = Join-Path $PSScriptRoot 'ensure-fixture-home.ps1'
+  if (Test-Path -LiteralPath $ensureFixture) { & $ensureFixture -GuardianRoot $GuardianRoot | Out-Null }
+} catch { Write-Warning "[fixture] 自动重建失败: $($_.Exception.Message)" }
 $startedAt = Get-Date
 
 $GuardianRoot = [IO.Path]::GetFullPath($GuardianRoot)
