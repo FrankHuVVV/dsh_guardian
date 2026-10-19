@@ -59,8 +59,31 @@ function loadConfig() {
   }
   return base;
 }
+// state.json 是本机运行时状态（.gitignore 排除）。缺失时从 state.template.json 生成，
+// 仓库内不再跟踪带 pid/端口的运行时文件，避免每次 guard 都产生只含 PID 的噪音提交。
+const STATE_TEMPLATE_PATH = path.join(ROOT, 'state.template.json');
+
+function defaultState() {
+  const base = readJsonSafe(STATE_TEMPLATE_PATH) || {};
+  return {
+    version: 5,
+    activeOperation: null,
+    safe: false,
+    culprit: null,
+    instance: { rootPid: null, descendantPids: [], port: null, httpStatus: null, healthy: false },
+    drift: { detected: false, digest: null, lastCommittedDigest: null, addedPaths: [], changedPaths: [], removedPaths: [] },
+    probing: false,
+    disabled: [],
+    ...base
+  };
+}
+
 function loadState() {
-  const state = loadJson(STATE_PATH);
+  let state = readJsonSafe(STATE_PATH);
+  if (!state) {
+    state = defaultState();
+    try { saveJson(STATE_PATH, state); } catch { /* 只读根目录时仅在内存中工作 */ }
+  }
   if (typeof state.safe !== 'boolean') state.safe = false;
   if (typeof state.probing !== 'boolean') state.probing = false;
   if (!Array.isArray(state.disabled)) state.disabled = [];

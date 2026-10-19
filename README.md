@@ -301,7 +301,8 @@ wscript ui\guardian-tray.vbs
 ├── bin\guardian.mjs            # 全部 CLI（doctor/preflight/snapshot/restore/prune/guard/...）
 ├── config.json                 # 配置模板（占位符，入库）
 ├── config.local.json           # 本机真实配置覆盖（.gitignore 排除，不入库）
-├── state.json                  # activeOperation / safe / drift / instance
+├── state.json                  # 本机运行时状态（.gitignore 排除，首次运行自动生成）
+├── state.template.json         # state.json 的模板（入库）
 ├── backups\
 │   ├── _store\<ab>\<sha256>    # 内容寻址 blob（只读，勿手删）
 │   ├── last-known-good\        # 最近良好快照
@@ -313,6 +314,8 @@ wscript ui\guardian-tray.vbs
 ├── fixtures\sandbox\root\      # KB 级可重建夹具（--root 用）
 └── scripts\                    # 验收脚本 / 沙箱 prune 回归 / 夹具重建
 ```
+
+> `state.json` 与 `config.local.json` 一样属于本机私有运行时文件，**不入库**；`loadState()` 在它缺失时会从 `state.template.json` 自动生成，所以新克隆的仓库直接跑 `doctor` / `guard` 即可，无需手工创建。
 
 快照/事务状态机（简版）：
 

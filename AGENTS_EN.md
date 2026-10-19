@@ -82,7 +82,8 @@ C installed (by any method) and failed or caused anomalies
 <GUARDIAN_ROOT>\
 ├── AGENTS.md
 ├── config.json
-├── state.json                  # version/activeOperation/safe/culprit/instance/drift
+├── state.json                  # local runtime state (untracked; auto-created from state.template.json)
+├── state.template.json         # tracked template: version/activeOperation/safe/culprit/instance/drift
 ├── .guardian.lock
 ├── bin\guardian.mjs
 ├── fixtures\broken-plugin\

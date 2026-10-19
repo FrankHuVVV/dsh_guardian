@@ -9,6 +9,8 @@ logs/*
 # ---------- 本机私有配置 / 快照 / 测试产物 ----------
 # config.json 入库（占位符模板）；真实路径写进 config.local.json，永不提交
 config.local.json
+# state.json 是本机运行时状态（pid/端口/digest 每次都变），首次运行由 state.template.json 自动生成
+state.json
 manual-baseline-*/
 fixtures/sandbox/
 fixtures/acceptance/

@@ -303,7 +303,8 @@ wscript ui\guardian-tray.vbs
 ├── bin\guardian.mjs            # the whole CLI (doctor/preflight/snapshot/restore/prune/guard/...)
 ├── config.json                 # configuration template (placeholders, tracked)
 ├── config.local.json           # real machine config overrides (.gitignore'd, not tracked)
-├── state.json                  # activeOperation / safe / drift / instance
+├── state.json                  # local runtime state (.gitignore'd, auto-created on first run)
+├── state.template.json         # template for state.json (tracked)
 ├── backups\
 │   ├── _store\<ab>\<sha256>    # content-addressed blobs (read-only, never delete by hand)
 │   ├── last-known-good\        # most recent healthy snapshot
@@ -315,6 +316,8 @@ wscript ui\guardian-tray.vbs
 ├── fixtures\sandbox\root\      # KB-sized regenerable fixture (for --root)
 └── scripts\                    # acceptance scripts / sandbox prune regression / fixture rebuild
 ```
+
+> `state.json` is a local runtime file like `config.local.json` and is **not tracked**; when it is missing, `loadState()` recreates it from `state.template.json`, so a fresh clone can run `doctor` / `guard` immediately without creating it by hand.
 
 Snapshot / transaction state machine (simplified):
 

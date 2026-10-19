@@ -81,7 +81,8 @@ C 安装（任意方式）失败或导致异常
 <GUARDIAN_ROOT>\
 ├── AGENTS.md
 ├── config.json
-├── state.json                  # version/activeOperation/safe/culprit/instance/drift
+├── state.json                  # 本机运行时状态（不入库；缺失时由 state.template.json 自动生成）
+├── state.template.json         # 入库模板：version/activeOperation/safe/culprit/instance/drift
 ├── .guardian.lock
 ├── bin\guardian.mjs
 ├── fixtures\broken-plugin\

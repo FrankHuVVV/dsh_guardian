@@ -1,0 +1,23 @@
+{
+  "version": 5,
+  "activeOperation": null,
+  "safe": false,
+  "culprit": null,
+  "instance": {
+    "rootPid": null,
+    "descendantPids": [],
+    "port": null,
+    "httpStatus": null,
+    "healthy": false
+  },
+  "drift": {
+    "detected": false,
+    "digest": null,
+    "lastCommittedDigest": null,
+    "addedPaths": [],
+    "changedPaths": [],
+    "removedPaths": []
+  },
+  "probing": false,
+  "disabled": []
+}
