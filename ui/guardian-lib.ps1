@@ -1,4 +1,4 @@
-# guardian-lib.ps1 — DSH Guardian UI 公共函数
+﻿# guardian-lib.ps1 — DSH Guardian UI 公共函数
 # 被 guardian-tray.ps1 / guardian-console.ps1 / guardian-start-backend.ps1 / guardian-setup.ps1 点源引用。
 
 $__guardianUiDir = $PSScriptRoot
@@ -200,11 +200,13 @@ function Format-GuardianShortDigest($digest) {
   return $s.Substring(0, 8) + '...' + $s.Substring($s.Length - 4)
 }
 
-# ---------------------------------------------------------------- 常驻维护：每日 03:00 prune
+# ---------------------------------------------------------------- 常驻维护：每天首次空闲时 prune（补跑模式）
 
-# 每日自动 prune 的窗口（03:00 起 10 分钟内尝试；托盘 5 秒一轮，撞车可下一轮重试）
-$script:PruneWindowHour = 3
-$script:PruneWindowMinutes = 10
+# 不绑定钟点：只要「今天还没成功清理过」就算到期，机器几点开机都能补上。
+# 失败/出错后 30 分钟内不重试，避免 5 秒一轮把日志刷爆。
+$script:PruneRetryMinutes = 30
+$script:LastPruneAttempt = [datetime]::MinValue
+$script:LastBusyLogAt = [datetime]::MinValue
 
 function Write-PruneLog {
   param([string]$Message, [string]$Level = 'INFO')
@@ -223,13 +225,24 @@ function Get-PruneMarkerDate {
   } catch { return $null }
 }
 
-# 今天是否还没在窗口内跑过
+# 补跑模式：不判断钟点，只判断「今天是否还没成功清理过」
+#   .prune-last 缺失 / 解析失败 / 日期 < 今天  → $true（今天需要清理）
+#   .prune-last 已是今天                       → $false（今天已清理，不再跑）
 function Test-PruneDue {
   $now = Get-Date
-  if ($now.Hour -ne $script:PruneWindowHour) { return $false }
-  if ($now.Minute -gt $script:PruneWindowMinutes) { return $false }
-  if ((Get-PruneMarkerDate) -eq $now.ToString('yyyy-MM-dd')) { return $false }
-  return $true
+  $last = Get-PruneMarkerDate
+  if ([string]::IsNullOrWhiteSpace($last)) { return $true }
+
+  $lastDate = [datetime]::MinValue
+  $parsed = [datetime]::TryParseExact(
+    $last.Trim(),
+    'yyyy-MM-dd',
+    [System.Globalization.CultureInfo]::InvariantCulture,
+    [System.Globalization.DateTimeStyles]::None,
+    [ref]$lastDate)
+  if (-not $parsed) { return $true }          # 标记损坏 → 视为未清理
+
+  return ($lastDate.Date -lt $now.Date)       # 只有「今天已清理」才返回 $false
 }
 
 # 有正在进行的操作就跳过：显式锁 → activeOperation → 其它「会改环境」的 guardian 进程
@@ -288,48 +301,85 @@ function Invoke-GuardianPrune {
 
   if (-not $Manual -and -not (Test-PruneDue)) { return $null }
 
+  # 自动模式下失败后 30 分钟内不重试（手动不受限）
+  if (-not $Manual) {
+    if (((Get-Date) - $script:LastPruneAttempt).TotalMinutes -lt $script:PruneRetryMinutes) { return $null }
+  }
+
   $busy = Test-GuardianBusy
   if ($busy) {
-    Write-PruneLog ("SKIP 用户操作进行中（{0}），本轮不清理，等下一轮" -f $busy) 'SKIP'
-    return [pscustomobject]@{ status = 'skipped'; reason = $busy }
+    # 冲突不消耗重试配额：保持 5 秒一次的机会，但 DEFER 日志最多 5 分钟一条
+    if (((Get-Date) - $script:LastBusyLogAt).TotalMinutes -ge 5) {
+      $script:LastBusyLogAt = Get-Date
+      Write-PruneLog ("DEFER 用户操作进行中（{0}），本轮跳过，空闲后自动补跑" -f $busy) 'SKIP'
+    }
+    return [pscustomobject]@{ status = 'deferred'; reason = $busy }
   }
 
   $node = Get-GuardianNodeExe
   if (-not $node -or -not (Test-Path -LiteralPath $GuardianPaths.GuardianBin)) {
+    $script:LastPruneAttempt = Get-Date
     Write-PruneLog 'FAIL 找不到 node.exe 或 bin\guardian.mjs，跳过本次维护' 'ERROR'
     return [pscustomobject]@{ status = 'failed'; reason = 'node-or-guardian-missing' }
   }
 
+  $script:LastPruneAttempt = Get-Date
   $mode = 'scheduled'
   if ($Manual) { $mode = 'manual' }
   Write-PruneLog ("START prune --vacuum（root={0}, mode={1}）" -f $GuardianPaths.Root, $mode) 'INFO'
 
+  # guardian 的 JSON 报告含中文，powershell.exe(5.1) 默认按 OEM 代码页解码会破坏 JSON 转义，
+  # 这里临时把控制台解码切成 UTF-8，失败再走正则/目录计数的回退路径。
+  $backupDir = Join-Path $GuardianPaths.Root 'backups'
+  $countSnapshots = {
+    @(Get-ChildItem -LiteralPath $backupDir -Directory -ErrorAction SilentlyContinue |
+      Where-Object { $_.Name -ne '_store' -and $_.Name -ne 'disabled-entries' }).Count
+  }
+  $snapshotsBefore = & $countSnapshots
+
   $raw = $null
   $code = 1
+  $prevEncoding = $null
+  try { $prevEncoding = [Console]::OutputEncoding } catch { }
   try {
+    try { [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false) } catch { }
     $raw = & $node $GuardianPaths.GuardianBin 'prune' '--vacuum' 2>&1
     $code = $LASTEXITCODE
   } catch {
     Write-PruneLog ('FAIL prune 抛异常：' + $_.Exception.Message) 'ERROR'
     return [pscustomobject]@{ status = 'failed'; reason = 'exception' }
+  } finally {
+    if ($prevEncoding) { try { [Console]::OutputEncoding = $prevEncoding } catch { } }
   }
 
-  $text = ($raw | Out-String).Trim()
+  $text = ((@($raw) | ForEach-Object { [string]$_ }) -join "`n").Trim()
   if ($code -eq 0) {
-    $freed = 'n/a'; $deleted = 'n/a'; $blobs = 'n/a'; $shards = 'n/a'; $kept = 'n/a'
+    $freed = 'n/a'; $blobs = 'n/a'; $shards = 'n/a'; $kept = 'n/a'
+    $parsed = $false
     try {
       $j = $text | ConvertFrom-Json
-      $freed = [double]$j.freed.totalMb
-      $deleted = @($j.deleted).Count
-      $blobs = $j.store.blobsDeleted
-      $shards = $j.vacuum.emptyShardsRemoved
-      $kept = @($j.kept).Count
-    } catch { }
-    Write-PruneLog ("OK exit=0 kept={0} deleted={1} blobsDeleted={2} emptyShardsRemoved={3} freedMb={4}" -f $kept, $deleted, $blobs, $shards, $freed) 'INFO'
+      if ($j) {
+        $parsed = $true
+        $freed = [double]$j.freed.totalMb
+        $blobs = $j.store.blobsDeleted
+        $shards = $j.vacuum.emptyShardsRemoved
+        $kept = @($j.kept).Count
+      }
+    } catch { $parsed = $false }
+    if (-not $parsed) {
+      # 回退：正则抽取关键数字（编码异常时 JSON 可能已损坏）
+      if ($text -match '"totalMb"\s*:\s*([0-9.]+)') { $freed = $matches[1] }
+      if ($text -match '"blobsDeleted"\s*:\s*([0-9]+)') { $blobs = $matches[1] }
+      if ($text -match '"emptyShardsRemoved"\s*:\s*([0-9]+)') { $shards = $matches[1] }
+      if ($text -match '"kept"\s*:\s*\[') { $kept = 'see-json' }
+    }
+    $snapshotsAfter = & $countSnapshots
+    $deleted = $snapshotsBefore - $snapshotsAfter
+    Write-PruneLog ("OK exit=0 kept={0} deleted={1} blobsDeleted={2} emptyShardsRemoved={3} freedMb={4} json={5}" -f $kept, $deleted, $blobs, $shards, $freed, $parsed) 'INFO'
     if (-not $Manual) {
       try { Set-Content -LiteralPath $GuardianPaths.PruneMarker -Value ((Get-Date).ToString('yyyy-MM-dd')) -Encoding ASCII } catch { }
     }
-    return [pscustomobject]@{ status = 'ok'; deleted = $deleted; freedMb = $freed }
+    return [pscustomobject]@{ status = 'ok'; deleted = $deleted; freedMb = $freed; parsed = $parsed }
   }
 
   $snippet = $text.Replace("`r`n", ' | ').Replace("`n", ' | ')

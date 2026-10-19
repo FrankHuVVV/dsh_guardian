@@ -156,18 +156,21 @@ node bin/guardian.mjs repair      # 事务优先 → drift → 最近 verified �
 
 ## 7. 维护
 
-### 7.1 自动：每天 03:00 静默清理
+### 7.1 自动：每天首次开机后、无任务运行时静默清理（补跑模式）
 
-托盘（`ui\guardian-tray.ps1`）的 5 秒看护循环里带一个调度门控：
+托盘（`ui\guardian-tray.ps1`）的 5 秒看护循环里带一个调度门控，**不绑定钟点**，只看「今天是否已经成功清理过」：
 
 ```text
-每天 03:00–03:10 窗口内，且今天还没跑过
-  → 检查是否与用户操作冲突（.guardian.lock / state.activeOperation / 其它会改环境的 guardian 进程）
-      → 冲突：只写日志并跳过，5 秒后下一轮重试
-      → 空闲：执行 node bin\guardian.mjs prune --vacuum
-  → 结果只写 logs\prune-task.log（不弹窗）；成功才写 logs\.prune-last 标记今天已跑
+每 5 秒：
+  logs\.prune-last 缺失 / 日期早于今天（或内容损坏）→ 今天还没清理
+    → 检查是否与用户操作冲突（.guardian.lock / state.activeOperation / 其它会改环境的 guardian 进程）
+        → 冲突：只记一条 DEFER 日志（最多 5 分钟一条），下一轮继续试
+        → 空闲：执行 node bin\guardian.mjs prune --vacuum
+    → 成功：写 logs\.prune-last = 今天日期，当天不再执行
+    → 失败：记 ERROR，30 分钟后重试（不会每 5 秒刷屏）
 ```
 
+因为按「今天是否清理过」判断而不是按钟点，**不管几点开机都能补上**：早上 10:00 开机、托盘拉起的第一个空闲轮次就会在后台悄悄清理一次，清理完当天不再执行。
 只读命令（`status`/`list`/`drift`/`preflight`/…）**不算冲突**，所以 UI 页面开着也不会把清理饿死。
 
 ### 7.2 手动：UI 按钮 / 托盘菜单 / 命令行
@@ -202,6 +205,22 @@ node bin/guardian.mjs list        # 快照 / 事务 / LKG / store 体积
 ```
 
 `guard` 成功提交后，若 `config.storeGcOnPrune = true`，也会自动做一次同样的保留+回收（失败只记 WARN，不影响 guard 结果）。
+
+### 7.5 改完脚本之后（编码 + 重启托盘）
+
+所有 `.ps1` 必须保存为 **UTF-8 with BOM**：托盘由 `ui\guardian-tray.vbs` 用 `powershell.exe`（5.1）启动，它会把无 BOM 的 UTF-8 按 ANSI 解码——中文变乱码、某些字节还会吃掉引号，导致整脚本语法错误（表现为托盘静默不启动）。任何编辑器/批量改写都可能把 BOM 写丢，所以改完跑一次：
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-ps-encoding.ps1       # 只检查
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-ps-encoding.ps1 -Fix  # 补 BOM
+```
+
+托盘脚本改动后需要重启托盘才生效（后端不受影响）：
+
+```powershell
+Get-Process -Id (Get-Content logs\tray.pid -Raw).Trim() | Stop-Process -Force
+wscript ui\guardian-tray.vbs
+```
 
 ---
 

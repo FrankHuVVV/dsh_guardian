@@ -1,4 +1,4 @@
-# guardian-tray.ps1 — DSH Guardian 托盘宿主（无窗口）
+﻿# guardian-tray.ps1 — DSH Guardian 托盘宿主（无窗口）
 # 职责：启动/守护后端、托盘图标、右键菜单（打开界面 / 状态窗口 / 退出后端 / 开机自启）。
 # 由 guardian-tray.vbs 以隐藏窗口方式拉起；不依赖第三方组件。
 
@@ -245,8 +245,8 @@ $timer = New-Object System.Windows.Forms.Timer
 $timer.Interval = 5000
 $timer.add_Tick({
   Update-Tray
-  # 常驻维护：每天 03:00 起 10 分钟内静默 prune --vacuum。
-  # 与用户操作冲突时 Invoke-GuardianPrune 只写日志并跳过，下一轮（5 秒后）再试。
+  # 常驻维护：今天还没成功清理过就补跑一次 prune --vacuum（不绑钟点，几点开机都能补）。
+  # 与用户操作冲突时只记一条 DEFER 日志、不消耗重试配额，空闲后的下一轮（5 秒）自动执行。
   try { $null = Invoke-GuardianPrune } catch {
     try { Write-PruneLog ('ERROR tick: ' + $_.Exception.Message) 'ERROR' } catch { }
   }
