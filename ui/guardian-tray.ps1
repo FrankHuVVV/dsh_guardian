@@ -92,6 +92,7 @@ function Update-Tray {
       drift        = $driftText
       lkg          = $lkgText
       allowRestart = $script:AllowRestart
+      elevated     = (Test-GuardianElevated)
       tooltip      = $tip
       responseMs   = $health.Ms
       updatedAt    = (Get-Date).ToString('o')
@@ -132,13 +133,22 @@ function Stop-BackendKeepTray {
 }
 
 function Toggle-Startup {
+  # 自启 = 计划任务「DSH Guardian AutoStart」（登录时静默提权），不再是 Startup 快捷方式
   $want = -not (Test-GuardianStartup)
-  Set-GuardianStartup $want
+  try {
+    Set-GuardianStartup $want
+  } catch {
+    if ($script:Notify) {
+      $script:Notify.ShowBalloonTip(4000, 'DSH Guardian 开机自启', ('切换失败：' + $_.Exception.Message), [System.Windows.Forms.ToolTipIcon]::Warning)
+    }
+    if ($script:MenuStartup) { $script:MenuStartup.Checked = Test-GuardianStartup }
+    return
+  }
   if ($script:MenuStartup) { $script:MenuStartup.Checked = Test-GuardianStartup }
   if ($script:Notify) {
-    $msg = '已启用：登录后自动启动'
+    $msg = '已启用：登录时以管理员权限静默启动（计划任务）'
     if (-not $want) { $msg = '已关闭：登录后不再自动启动' }
-    $script:Notify.ShowBalloonTip(2000, 'DSH Guardian 开机自启', $msg, [System.Windows.Forms.ToolTipIcon]::Info)
+    $script:Notify.ShowBalloonTip(2500, 'DSH Guardian 开机自启', $msg, [System.Windows.Forms.ToolTipIcon]::Info)
   }
 }
 

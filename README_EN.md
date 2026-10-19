@@ -72,7 +72,7 @@ Additional conventions:
 |---|---|
 | Commands that launch the client | Elevated terminal required |
 | Read-only commands (`status` / `list` / `doctor` / `drift` / `preflight`) | Normal privileges are enough (`doctor` still takes the lock and writes state) |
-| Tray / auto-start at login | Create the shortcut elevated; the tray inherits that privilege when auto-started |
+| Tray / auto-start at login | Scheduled task `DSH Guardian AutoStart` with RunLevel **Highest**: silent elevation at logon, no UAC prompt |
 | Sandbox (3082) | Admin not required (the fake client is `notepad.exe`) |
 
 ---
@@ -99,6 +99,23 @@ node bin/guardian.mjs guard --no-start    # health-check the running instance on
 ```
 
 A startup counts as successful when "a `127.0.0.1` port held by the process tree answers any HTTP request (including 401) and stays stable for `settleMs`" — not merely when "the process is still alive".
+
+### 3.3 Auto-start at logon (silent elevation)
+
+The tray is registered as a **scheduled task**, so Task Scheduler launches it with a full administrator token at logon — **no UAC prompt**. Any legacy Startup shortcut is removed during registration: such shortcuts cannot elevate, and they are exactly where `EACCES` comes from.
+
+```powershell
+# register / inspect / verify / remove (registration needs admin; the script requests elevation itself)
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Status
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Verify
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Uninstall
+
+# trigger once by hand (the tray is single-instance: exit the running tray first, or the new instance exits immediately)
+Start-ScheduledTask -TaskName "DSH Guardian AutoStart"
+```
+
+Measured `-Status` output: task `DSH Guardian AutoStart`, `RunLevel Highest`, `LogonType Interactive`, action `wscript.exe "<GUARDIAN_ROOT>\ui\guardian-tray.vbs"`, allows battery start, keeps running when switching to battery, execution time limit `PT0S` (unlimited). The tray writes an `elevated` field into `logs\tray.state.json`, while `-Verify` reads the token directly through `GetTokenInformation(TokenElevation)` — two independent confirmations.
 
 ---
 

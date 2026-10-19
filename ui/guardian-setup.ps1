@@ -8,6 +8,16 @@ param(
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'guardian-lib.ps1')
 
+# 计划任务自启需要管理员权限：未提权时自动以管理员重启自身（UAC 一次）
+if (-not (Test-GuardianElevated)) {
+  $psExe = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+  $argList = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath)
+  if ($NoStart) { $argList += '-NoStart' }
+  Write-Host '需要管理员权限（DeepSeek Harness 带 RUNASADMIN），正在请求提权（UAC 一次）...' -ForegroundColor Yellow
+  Start-Process -FilePath $psExe -Verb RunAs -ArgumentList $argList | Out-Null
+  exit 0
+}
+
 Write-Host ''
 Write-Host '=== DSH Guardian 安装 ===' -ForegroundColor Cyan
 
@@ -36,9 +46,11 @@ $sc.WindowStyle = 1
 $sc.Save()
 Write-Host ('桌面快捷方式: ' + $lnkPath) -ForegroundColor Green
 
-# 3) 开机自启（登录时静默启动托盘 + 后端）
-Set-GuardianStartup $true
-Write-Host ('开机自启: ' + (Get-GuardianStartupShortcut)) -ForegroundColor Green
+# 3) 开机自启（计划任务 + RunLevel Highest：登录时静默提权，无 UAC 弹窗）
+$task = Install-GuardianAutostart
+if (-not $task) { throw '注册开机自启计划任务失败。' }
+Write-Host '开机自启: 计划任务 "DSH Guardian AutoStart"（RunLevel Highest，登录时静默提权）' -ForegroundColor Green
+Write-Host ('          动作: ' + @($task.Actions)[0].Execute + ' ' + @($task.Actions)[0].Arguments) -ForegroundColor DarkGray
 
 # 4) 启动托盘（托盘内部会拉起后端）
 if (-not $NoStart) {
@@ -73,5 +85,5 @@ Write-Host ''
 Write-Host '=== 完成 ===' -ForegroundColor Cyan
 Write-Host '  双击桌面「DSH Guardian」→ 黑色状态窗口；关闭窗口后端继续运行。' -ForegroundColor Gray
 Write-Host '  托盘图标右键 → 打开 Guardian UI / 打开状态窗口 / 重启后端 / 停止后端 / 退出后端 / 开机自启。' -ForegroundColor Gray
-Write-Host ('  开机自启项: ' + (Get-GuardianStartupShortcut)) -ForegroundColor DarkGray
+Write-Host '  开机自启项: 计划任务 "DSH Guardian AutoStart"（登录时静默提权；可在托盘菜单开关）' -ForegroundColor DarkGray
 Write-Host ''

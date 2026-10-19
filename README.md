@@ -72,7 +72,7 @@ node bin/guardian.mjs doctor
 |---|---|
 | 会拉起客户端的命令 | 必须管理员终端 |
 | 只读命令（`status` / `list` / `doctor` / `drift` / `preflight`） | 普通权限即可（`doctor` 仍会取锁写 state） |
-| 托盘 / 开机自启 | 快捷方式以管理员身份创建；自启后托盘继承权限 |
+| 托盘 / 开机自启 | 计划任务「DSH Guardian AutoStart」，RunLevel **Highest**，登录时静默提权（无 UAC 弹窗） |
 | 沙箱（3082） | 不需要管理员（假客户端是 notepad.exe） |
 
 ---
@@ -99,6 +99,23 @@ node bin/guardian.mjs guard --no-start    # 只体检当前实例，不启动/�
 ```
 
 启动成功的判定是「进程树持有的 127.0.0.1 端口 + 任意 HTTP 响应（含 401）+ settleMs 内保持稳定」，而不是「进程还在」。
+
+### 3.3 开机自启（登录时静默提权）
+
+托盘注册为**计划任务**，登录时由 Task Scheduler 用完整管理员令牌启动，**没有 UAC 弹窗**。Startup 目录里的旧快捷方式会在注册时被自动清理——那种快捷方式无法提权，正是 `EACCES` 的来源。
+
+```powershell
+# 注册 / 查看 / 卸载（注册需要管理员权限，脚本会自动请求提权）
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Status
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Verify
+powershell -NoProfile -ExecutionPolicy Bypass -File ui\install-autostart.ps1 -Uninstall
+
+# 手动触发一次（托盘是单实例的，先退出正在运行的托盘，否则新实例会立即退出）
+Start-ScheduledTask -TaskName "DSH Guardian AutoStart"
+```
+
+`-Status` 实测输出：任务名 `DSH Guardian AutoStart`、`RunLevel Highest`、`LogonType Interactive`、动作 `wscript.exe "<GUARDIAN_ROOT>\ui\guardian-tray.vbs"`、允许电池启动、不因切换电池而停止、执行时长上限 `PT0S`（无限制）。托盘自己在 `logs\tray.state.json` 里写入 `elevated` 字段，`-Verify` 则用 `GetTokenInformation(TokenElevation)` 直接读令牌，两条路互相印证。
 
 ---
 

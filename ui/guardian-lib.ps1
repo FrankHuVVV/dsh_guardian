@@ -150,6 +150,14 @@ function Start-GuardianBackendDetached {
   Start-Process -FilePath $wscript -ArgumentList ('"' + $GuardianPaths.StartVbs + '"') -WindowStyle Hidden | Out-Null
 }
 
+# ---------------------------------------------------------------- 开机自启（计划任务 + 静默提权）
+
+# DSH 客户端带 RUNASADMIN，后端非管理员拉起会 EACCES。
+# Startup 目录快捷方式无法提权，因此自启改为「登录时触发、RunLevel Highest」的计划任务：
+# 由 Task Scheduler 直接以完整令牌启动 wscript → guardian-tray.vbs，无 UAC 弹窗。
+$script:GuardianAutostartTask = 'DSH Guardian AutoStart'
+
+# 历史实现（Startup 目录快捷方式），仅用于清理旧自启项
 function Get-GuardianStartupShortcut {
   $startup = [Environment]::GetFolderPath('Startup')
   if (-not $startup) {
@@ -158,26 +166,78 @@ function Get-GuardianStartupShortcut {
   return (Join-Path $startup 'DSH Guardian.lnk')
 }
 
+function Test-GuardianElevated {
+  try {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($identity)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+  } catch {
+    return $false
+  }
+}
+
+function Get-GuardianAutostartTask {
+  try { return (Get-ScheduledTask -TaskName $script:GuardianAutostartTask -ErrorAction Stop) }
+  catch { return $null }
+}
+
+# 是否已配置开机自启（以计划任务为准）
 function Test-GuardianStartup {
-  return (Test-Path -LiteralPath (Get-GuardianStartupShortcut))
+  return [bool](Get-GuardianAutostartTask)
+}
+
+function Install-GuardianAutostart {
+  if (-not (Test-GuardianElevated)) {
+    throw '注册开机自启需要管理员权限：请以管理员身份运行 ui\install-autostart.ps1 或 guardian-setup.ps1。'
+  }
+  $wscript = Join-Path $env:SystemRoot 'System32\wscript.exe'
+  $action = New-ScheduledTaskAction `
+    -Execute $wscript `
+    -Argument ('"' + $GuardianPaths.TrayVbs + '"') `
+    -WorkingDirectory $GuardianPaths.Root
+  $trigger = New-ScheduledTaskTrigger -AtLogOn -User ([Security.Principal.WindowsIdentity]::GetCurrent().Name)
+  $principal = New-ScheduledTaskPrincipal `
+    -UserId ([Security.Principal.WindowsIdentity]::GetCurrent().Name) `
+    -LogonType Interactive `
+    -RunLevel Highest
+  $settings = New-ScheduledTaskSettingsSet `
+    -AllowStartIfOnBatteries `
+    -DontStopIfGoingOnBatteries `
+    -StartWhenAvailable `
+    -ExecutionTimeLimit ([TimeSpan]::Zero) `
+    -MultipleInstances IgnoreNew
+  Register-ScheduledTask `
+    -TaskName $script:GuardianAutostartTask `
+    -Action $action `
+    -Trigger $trigger `
+    -Principal $principal `
+    -Settings $settings `
+    -Description 'DSH Guardian 托盘：登录时静默提权启动（RUNASADMIN 客户端需要管理员令牌）' `
+    -Force | Out-Null
+
+  # 清理历史 Startup 快捷方式，避免登录时双开
+  $lnk = Get-GuardianStartupShortcut
+  if (Test-Path -LiteralPath $lnk) { Remove-Item -LiteralPath $lnk -Force -ErrorAction SilentlyContinue }
+  return (Get-GuardianAutostartTask)
+}
+
+function Uninstall-GuardianAutostart {
+  if (-not (Test-GuardianElevated)) {
+    throw '删除开机自启需要管理员权限。'
+  }
+  if (-not (Get-GuardianAutostartTask)) { return $false }
+  Unregister-ScheduledTask -TaskName $script:GuardianAutostartTask -Confirm:$false
+  return $true
 }
 
 function Set-GuardianStartup([bool]$Enabled) {
-  $lnk = Get-GuardianStartupShortcut
-  if (-not $Enabled) {
-    if (Test-Path -LiteralPath $lnk) { Remove-Item -LiteralPath $lnk -Force }
-    return
+  if ($Enabled) {
+    Install-GuardianAutostart | Out-Null
+  } else {
+    Uninstall-GuardianAutostart | Out-Null
+    $lnk = Get-GuardianStartupShortcut
+    if (Test-Path -LiteralPath $lnk) { Remove-Item -LiteralPath $lnk -Force -ErrorAction SilentlyContinue }
   }
-  $wscript = Join-Path $env:SystemRoot 'System32\wscript.exe'
-  $shell = New-Object -ComObject WScript.Shell
-  $sc = $shell.CreateShortcut($lnk)
-  $sc.TargetPath = $wscript
-  $sc.Arguments = '"' + $GuardianPaths.TrayVbs + '"'
-  $sc.WorkingDirectory = $GuardianPaths.Root
-  $sc.IconLocation = $GuardianPaths.Icon + ',0'
-  $sc.Description = 'DSH Guardian 后端：登录时自动启动并常驻托盘'
-  $sc.WindowStyle = 7
-  $sc.Save()
 }
 
 function Format-GuardianBytes($bytes) {
